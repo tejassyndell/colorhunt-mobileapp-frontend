@@ -878,9 +878,13 @@ const Dashboard = (props) => {
             <div className='pricerangsection row'>
               <p>Price Range</p>
             </div>
+            <div className='filters-Submit'>
+              <button>Reset</button>
+              <button>Apply</button>
             </div>
-            <Reange/>
-
+            </div>
+            {/* <Reange/> */}
+           
             </div>
           
           </div>
