@@ -4,11 +4,11 @@ const mysql = require('mysql')
 //for local connections
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'colorvm3_webservice',
-  password : '',
-})
+  host: "localhost",
+  user: "root",
+  database: "colorvm3_stagingwebservice",
+  password: "",
+});
     
 
 // const connection = mysql.createConnection({

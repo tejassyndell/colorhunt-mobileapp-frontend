@@ -2,7 +2,7 @@
 const express = require('express')
 const Routes = express.Router()
 const {
-  getProductName
+  getProductName, getArticles, getCategory
 } = require('../controller/controllerM2.js')
 
 
@@ -11,7 +11,8 @@ const {
 
 // //for dashboard
 // //---------------------new change 28-----------------------
-Routes.get('/getProductName',getProductName);
+Routes.get('/getArticles', getArticles);
+Routes.get('/getCategory', getCategory);
 
 // //---------------------new change 28-----------------------
 
