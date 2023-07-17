@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState,useEffect } from 'react'
+import { CFooter } from '@coreui/react'
 import homeicon from 'src/assets/Colorhuntimg/loginimg/sliderscreen/Vector (32).svg'
 import ordericon from 'src/assets/Colorhuntimg/Sidebaricon/Order History.svg'
 import carticon from 'src/assets/Colorhuntimg/Sidebaricon/cart.svg'

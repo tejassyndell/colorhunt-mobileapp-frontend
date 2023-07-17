@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName,getCategories } from '../api/api'
+import { Addinwishlist, getCategory, getDataOfProduct, getProductData, getProductName, serachProduct, unlinkproductdashboard } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -27,31 +27,17 @@ const Dashboard = (props) => {
 
 
   const [nameData, setNameData] = useState([]);
-  const [categoriesData, setCategoriesData] = useState([]);
   useEffect(() => {
     getproductname();
-    getCategoriesitem();
   }, [])
   const getproductname = async () => {
     const result = await getProductName().then((res) => {
       if (res.status === 200) {
-        // console.log(res.data);
         setNameData(res.data)
       }
     })
 
   }
-  
-  const getCategoriesitem = async () => {
-    const result = await getCategories().then((res) => {
-      if (res.status === 200) {
-        // console.log(res.data);
-        setCategoriesData(res.data)
-      }
-    })
-
-  }
-  console.log(nameData);
 
   useEffect(() => {
     // getwishlistitem();
@@ -192,9 +178,9 @@ const Dashboard = (props) => {
     // setOlddata(ProductData)
   }, [ProductData])
   const getProductcetagory = async () => {
-    // const result = await getCategory();
+    const result = await getCategory();
     // console.log(new Set(result.data));
-    // seCetegory(new Set(result.data));
+    seCetegory(new Set(result.data));
   }
 
   //serarch bar logic..............
@@ -229,14 +215,14 @@ const Dashboard = (props) => {
     //   // console.log("done");
     // }
     // console.log(e.item.value);
-    // const result = await serachProduct(e.toString().toLowerCase()).then((res) => {
-    //   if (res.status === 200) {
-    //     setFilterProduct(res.data)
-    //     setLoading(false);
-    //     setOldstatus(true);
-    //     setResults([]);
-    //   }
-    // })
+    const result = await serachProduct(e.toString().toLowerCase()).then((res) => {
+      if (res.status === 200) {
+        setFilterProduct(res.data)
+        setLoading(false);
+        setOldstatus(true);
+        setResults([]);
+      }
+    })
 
     // }
 
@@ -376,47 +362,47 @@ const Dashboard = (props) => {
   // }
 
   // selectedprd.length > 0 ? console.log(selectedprd) : ''
-  // const addProductWishlist = async (i) => {
-  //   // console.log('a')
-  //   let data = {
-  //     userid: UserData[0].id,
-  //     prdprice: i.list_price,
-  //     prdid: i.id
-  //   };
-  //   // console.log(data);
-  //   try {
-  //     await Addinwishlist(data).then((res) => {
-  //       if (res.status === 200) {
-  //         // getwishlistitem();
-  //       }
-  //     })
-  //     // toggleHeart(i.id);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const addProductWishlist = async (i) => {
+    // console.log('a')
+    let data = {
+      userid: UserData[0].id,
+      prdprice: i.list_price,
+      prdid: i.id
+    };
+    // console.log(data);
+    try {
+      await Addinwishlist(data).then((res) => {
+        if (res.status === 200) {
+          // getwishlistitem();
+        }
+      })
+      // toggleHeart(i.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const rmvProductWishlist = async (i) => {
-  //   // console.log('r')
-  //   let data = {
-  //     userid: UserData[0].id,
-  //     productid: i.id,
-  //   };
+  const rmvProductWishlist = async (i) => {
+    // console.log('r')
+    let data = {
+      userid: UserData[0].id,
+      productid: i.id,
+    };
 
-  //   try {
-  //     const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
-  //     setSelectprd(arr1);
-  //     await unlinkproductdashboard(data).then((res) => {
-  //       if (res.status === 200) {
-  //         // console.log(res);
+    try {
+      const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
+      setSelectprd(arr1);
+      await unlinkproductdashboard(data).then((res) => {
+        if (res.status === 200) {
+          // console.log(res);
 
-  //       }
-  //     })
-  //     // setSelectprd(arr1);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+        }
+      })
+      // setSelectprd(arr1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [heartStates, setHeartStates] = useState({});
   const toggleHeart = (itemId) => {
@@ -558,22 +544,6 @@ const Dashboard = (props) => {
       }
     });
   };
-  //// cloth filters value  add
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const handleCategoryChange = (event) => {
-    const { value } = event.target;
-    // Check if the category is already selected
-    if (selectedCategories.includes(value)) {
-      setSelectedCategories(selectedCategories.filter(category => category !== value));
-    } else {
-      setSelectedCategories([...selectedCategories, value]);
-    }
-  };
-
-
-
-
-
 
   // console.log(nameData)
   const setActiveBox = () => {
@@ -610,35 +580,15 @@ const Dashboard = (props) => {
     setInput(value);
     setSerchtext(value);
   };
-  const getLimitedProducts = (products, n) => {
-    const uniqueCategories = new Set();
-    const limitedProducts = [];
-
-    for (const product of products) {
-      if (!uniqueCategories.has(product.Category)) {
-        limitedProducts.push(product);
-        uniqueCategories.add(product.Category);
-
-        if (limitedProducts.length === n) {
-          break;
-        }
-      }
-    }
-
-    return limitedProducts;
-  };
-
-  const limitedNameData = getLimitedProducts(nameData, 15);
-  const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
   return (
 
+ 
 
-
-    <motion.div initial={{ translateX: '100%' }}
+      <motion.div initial={{ translateX: '100%' }}
       animate={{ opacity: 1, translateX: 0 }}
-      transition={{ duration: 0.5 }} style={{ height: '100vh', padding: '0px 10px' }} onClick={() => { sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : "" }}>
-      {activeFilterDiv === true ? <AppHeader UserData={UserData} /> : (isProductDetails === true ? '' : <AppHeader UserData={UserData} />)}
-      <div className='filterssectionandheader'>
+      transition={{ duration: 0.5 }} style={{ height: '100vh' }} onClick={() => { sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : "" }}>
+        {activeFilterDiv === true ? <AppHeader UserData={UserData} /> : (isProductDetails === true ? '' : <AppHeader UserData={UserData} />)}
+        <div className='filterssectionandheader'>
         <div className="dashboardDiv">
           <div className='searchbar_text_container'>
             <div className="haddercontent">Welcome</div>
@@ -669,191 +619,281 @@ const Dashboard = (props) => {
             </div>
 
           </div>
-          <div style={{ padding: '0px 10px' }}>
-            <div>
+          <div style={{  padding: '0px 10px' }}>
+          <div>
+          
+          
+          </div>
+        </div>
+
+        </div>
+        </div>
+        
 
 
+        <div className='allProduct-section maincontentsection' >
+            <div className='product-hed-sec'>
+              <p>All</p>
+              <p>View All</p>
             </div>
-          </div>
-
-        </div>
-      </div>
-
-
-
-      <div className='allProduct-section maincontentsection' >
-        <div className='product-hed-sec'>
-          <p>All</p>
-          <p>View All</p>
-        </div>
-        <div>
-          <Swiper
-            slidesPerView={2.5}
-            spaceBetween={30}
-            freeMode={true}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[FreeMode, Pagination]}
-            className="mySwiper"
-          >
-            {limitedNameData.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div className='sildercontentprice'>
-                  <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
-                  <div>
-                    <p>{item.ArticleNumber}<br /><span>{item.Category}</span><br />₹  {item.ArticleRate}</p>
-                  </div>
-                </div></SwiperSlide>
-            ))}
-
-
-
-          </Swiper>
-        </div>
-        <div className='allProduct-section mt-4'>
-          <div className='product-hed-sec'>
-            <p>Kids T-Shirts</p>
-            <p>View All</p>
-          </div>
-          <div>
-            <Swiper
-              slidesPerView={2.5}
-              spaceBetween={30}
-              freeMode={true}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[FreeMode, Pagination]}
-              className="mySwiper"
-            >
-              <SwiperSlide>
-                <div className='sildercontentprice'>
-                  <img src={tshartimg} />
-                  <div>
-                    <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
-                  </div>
-                </div></SwiperSlide>
-              <SwiperSlide>
-                <div className='sildercontentprice'>
-                  <img src={tshartimg1} />
-                  <div>
-                    <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
-                  </div>
-                </div>
-
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='sildercontentprice'>
-                  <img src={tshartimg2} />
-                  <div>
-                    <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='sildercontentprice'>
-                  <img src={tshartimg} />
-                  <div>
-                    <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={tshartimg1} />
-                  <div className='sildercontentprice'>
-                    <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-
-      {Filterstatus === true ? <div>
-        <div className='categories'>
-          <div className='categoriestagsection'>
-            <p>categories</p>
-            <p onClick={() => setFilterstatus(false)}>X</p>
-          </div>
-          <div>
             <div>
-              <div className='selectcategories row'>
-                <>
-                {categoriesData.map((category) => (
-                  <div className='col-6' key={category.id}>
-                    <div className='innerfilter px-3 bg-light'>
-                      <label htmlFor={category.name}>{category.name}</label>
-                      <input
-                        type='checkbox'
-                        id={category.name}
-                        name='category'
-                        value={category.name}
-                        checked={selectedCategories.includes(category.name)}
-                        onChange={handleCategoryChange}
-                      />
+              <Swiper
+                slidesPerView={2.5}
+                spaceBetween={30}
+                freeMode={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[FreeMode, Pagination]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div></SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg1} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
                     </div>
                   </div>
-                ))}
-                </>
-               
 
-              <div>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Category Name</th>
-                      {/* Add more table headers for other data properties */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {categoriesData.map((category) => (
-                      <tr key={category.id}>
-                        <td>{category.id}</td>
-                        <td>{category.name}</td>
-                        {/* Add more table cells for other data properties */}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg2} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <img src={tshartimg1} />
+                    <div className='sildercontentprice'>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+            <div className='allProduct-section mt-4'>
+            <div className='product-hed-sec'>
+              <p>Kids T-Shirts</p>
+              <p>View All</p>
+            </div>
+            <div>
+              <Swiper
+                slidesPerView={2.5}
+                spaceBetween={30}
+                freeMode={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[FreeMode, Pagination]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div></SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg1} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg2} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className='sildercontentprice'>
+                    <img src={tshartimg} />
+                    <div>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <img src={tshartimg1} />
+                    <div className='sildercontentprice'>
+                      <p>33178-9<br /><span>T-Shirt</span><br />₹195.00</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
 
 
+          </div>     
+
           </div>
-          <div className='pricerange'>
+
+
+       
+        {Filterstatus === true ? <div>
+          <div className='categories'>
+            <div className='categoriestagsection'>
+              <p>categories</p>
+              <p onClick={() => setFilterstatus(false)}>X</p>
+            </div>
+            <div>
+              <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">T-SHIRT</label>
+                <input type="radio" id="html" name="fav_language" value="T-SHIRT" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">DENIM JEANS</label>
+                <input type="radio" id="html" name="fav_language" value="DENIM JEANS" />
+                </div>
+              </div>
+
+           
+            </div>
+             <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">COTTON TROUSER</label>
+                <input type="radio" id="html" name="fav_language" value="COTTON TROUSER" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">SHIRTS</label>
+                <input type="radio" id="html" name="fav_language" value="SHIRTS" />
+                </div>
+              </div>
+
+           
+            </div>
+             <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">SHORTS</label>
+                <input type="radio" id="html" name="fav_language" value="SHORTS" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">TRACK PANTS</label>
+                <input type="radio" id="html" name="fav_language" value="TRACK PANTS" />
+                </div>
+              </div>
+
+           
+            </div>
+             <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">ASSORTED</label>
+                <input type="radio" id="html" name="fav_language" value="ASSORTED" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">REJECTION</label>
+                <input type="radio" id="html" name="fav_language" value="REJECTION" />
+                </div>
+              </div>
+
+           
+            </div>
+             <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">KNITTED</label>
+                <input type="radio" id="html" name="fav_language" value="KNITTED" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">KURTA</label>
+                <input type="radio" id="html" name="fav_language" value="KURTA" />
+                </div>
+              </div>
+
+           
+            </div> 
+            <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">JACKET</label>
+                <input type="radio" id="html" name="fav_language" value="JACKET" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">LOUNGEWEAR</label>
+                <input type="radio" id="html" name="fav_language" value="LOUNGEWEAR" />
+                </div>
+              </div>
+
+           
+            </div>
+            <div className='selectcategories row'>
+              <div className='col-6'>
+                <div className='innerfilter px-3 bg-light'>
+                <label for="html">WOMENS T-SHIRT</label>
+                <input type="radio" id="html" name="fav_language" value="WOMENS T-SHIRT" />
+                </div>
+              </div>
+              <div className='col-6'>
+              <div className='innerfilter  px-3 bg-light'>
+                <label for="html">WOMENS LEGGINGS </label>
+                <input type="radio" id="html" name="fav_language" value="WOMENS LEGGINGS" />
+                </div>
+              </div>
+
+           
+            </div>
+            <div className='pricerange'>
             <div className='pricerangsection row'>
               <p>Price Range</p>
             </div>
-            <div className='filters-Submit'>
-              <button>Reset</button>
-              <button>Apply</button>
             </div>
+            <Reange/>
+
+            </div>
+          
           </div>
-          {/* <Reange/> */}
 
-        </div>
-
+        </div> : null}
+        <div className='footer-section w-100'>
+        <AppFooter />
       </div>
 
-      </div> : null
-}
-<div className='footer-section w-100'>
-  <AppFooter />
-</div>
 
 
-
-    </motion.div >
-
+      </motion.div>
+     
 
 
 

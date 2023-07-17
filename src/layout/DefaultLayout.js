@@ -15,7 +15,7 @@ const DefaultLayout = (props) => {
     // console.log(id,"data clled")
     const result = await UserDetails(id)
     // console.log(result.data,"result.data")
-    // setUserData(result.data)
+    setUserData(result.data)
 
   }
   
