@@ -43,7 +43,7 @@ body{
   .swiper-slide img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 180px;
     object-fit: cover;
     box-shadow: 1px 2px 7px -1px;
     border-radius: 10px;
@@ -82,14 +82,15 @@ body{
 }
 .categories{
     width: 100%;
-    height: 50vh;
+    height: auto;
     background: #ffffff;
     position: absolute;
     z-index: 100;
+    right: 0%;
     border-radius: 10px 10px 0px 0px;
     bottom: 0px;
     box-shadow: 0px 1px 16px -3px;
-    padding-left: 21px;
+    padding-left: 12px;
 }
 .categoriestagsection{
     display: flex;
@@ -118,7 +119,7 @@ body{
     overflow: auto;
 }
 .innerfilter label{
-    font-size: 15px;
+    font-size: 13px;
     color: #0a0a0a;
     font-weight: 600;
 }
@@ -135,3 +136,44 @@ body{
 .selectcategories .col-6:nth-child(2){
     padding-right: 0px;
 }
+
+
+/* styles.css */
+/* Hide the default checkbox appearance */
+input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a circular checkbox appearance using pseudo-element */
+  .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+  }
+  
+  /* Customize the appearance when the checkbox is checked */
+  input[type='checkbox']:checked + .checkmark {
+    background-color: #2196f3; /* Change to your desired color */
+  }
+  
+  /* Add the inner circle for the checked state */
+  input[type='checkbox']:checked + .checkmark::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .selectedCategory{
+    background-color: black;
+    color: white !important;
+  }

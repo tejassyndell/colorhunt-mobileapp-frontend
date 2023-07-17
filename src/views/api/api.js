@@ -1,7 +1,7 @@
 /* eslint-disable */
 import axios from 'axios'
-// const url = 'http://localhost:8020'
-const url = 'https://garment-backend.sincprojects.com'
+const url = 'http://localhost:4000'
+// const url = 'https://garment-backend.sincprojects.com'
 
 export const loginAuth = async (user) => {
   try {
@@ -14,10 +14,21 @@ export const loginAuth = async (user) => {
 //---------------------new change 28-----------------------
 export const getProductName = async ()=>{
   try{
-    return await axios.post(`${url}/getProductName`)
+    return await axios.get(`${url}/getProductName`)
   }
  catch(error){
-    console.log(err, 'err in react api')
+    console.log(error, 'err in react api')
+ }
+}
+
+
+//////////////////////getCategories
+export const getCategories = async ()=>{
+  try{
+    return await axios.get(`${url}/getCategories`)
+  }
+ catch(error){
+    console.log(error, 'err in react api')
  }
 }
 
