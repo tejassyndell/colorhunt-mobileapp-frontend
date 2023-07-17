@@ -1,0 +1,30 @@
+.range-slider {
+    position: relative;
+    width: 300px;
+  }
+  
+  .slider-input {
+    width: 100%;
+  }
+  
+  .slider-output {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+  .custom-slider-thumb {
+    /* Add your custom styling for the thumb here */
+    /* Example styles for a circular thumb */
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: calc((100% * var(--value)) - 12px);
+    pointer-events: none;
+  }
+  

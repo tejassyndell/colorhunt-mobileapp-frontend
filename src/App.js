@@ -60,7 +60,7 @@ function App() {
 
   const LoadAllProductData = async () => {
     const result = await getDataOfProduct().then((res) => {
-      if (res?.status === 200) {
+      if (res ?.status === 200) {
         setAllProductData(res.data)
       }
     })

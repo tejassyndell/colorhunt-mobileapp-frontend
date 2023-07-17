@@ -43,7 +43,7 @@ body{
   .swiper-slide img {
     display: block;
     width: 100%;
-    height: 175px;
+    height: 180px;
     object-fit: cover;
     box-shadow: 1px 2px 7px -1px;
     border-radius: 10px;
@@ -84,13 +84,13 @@ body{
     width: 100%;
     height: auto;
     background: #ffffff;
-    right: 0px;
     position: absolute;
     z-index: 100;
+    right: 0%;
     border-radius: 10px 10px 0px 0px;
     bottom: 0px;
     box-shadow: 0px 1px 16px -3px;
-    padding-left: 21px;
+    padding-left: 12px;
 }
 .categoriestagsection{
     display: flex;
@@ -103,7 +103,7 @@ body{
 }
 .innerfilter{
     display: flex;
-    padding: 5px 6px !important;
+    padding: 5px 10px;
     justify-content: space-between;
     background: transparent!important;
     border: 2px solid #f1f1f1;
@@ -119,7 +119,7 @@ body{
     overflow: auto;
 }
 .innerfilter label{
-    font-size: 15px;
+    font-size: 13px;
     color: #0a0a0a;
     font-weight: 600;
 }
@@ -136,30 +136,44 @@ body{
 .selectcategories .col-6:nth-child(2){
     padding-right: 0px;
 }
-.filters-Submit{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 13px;
-    margin-bottom: 14px;
-}
-.filters-Submit button:nth-child(1){
-    padding: 3px 10px;
-    background-color: #f1f1f1;
-    color:rgba(33, 33, 33, 1);
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-    font-weight: 600;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-    
-}
 
-.filters-Submit button:nth-child(2){
-    padding: 3px 10px;
-    background-color: rgba(33, 33, 33, 1);
-    color:rgba(255, 255, 255, 1);
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-    font-weight: 600;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-    
-}
+
+/* styles.css */
+/* Hide the default checkbox appearance */
+input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a circular checkbox appearance using pseudo-element */
+  .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+  }
+  
+  /* Customize the appearance when the checkbox is checked */
+  input[type='checkbox']:checked + .checkmark {
+    background-color: #2196f3; /* Change to your desired color */
+  }
+  
+  /* Add the inner circle for the checked state */
+  input[type='checkbox']:checked + .checkmark::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .selectedCategory{
+    background-color: black;
+    color: white !important;
+  }

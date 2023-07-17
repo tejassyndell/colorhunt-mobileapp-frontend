@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName,getCategories } from '../api/api'
+import { getProductName, getCategories } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -28,30 +28,91 @@ const Dashboard = (props) => {
 
   const [nameData, setNameData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
   useEffect(() => {
     getproductname();
-    getCategoriesitem();
+    getCategoriesname()
   }, [])
+
+  ////////////// product get api 
   const getproductname = async () => {
     const result = await getProductName().then((res) => {
       if (res.status === 200) {
-        // console.log(res.data);
         setNameData(res.data)
       }
     })
 
   }
-  
-  const getCategoriesitem = async () => {
+  //////////////////
+  const getCategoriesname = async () => {
     const result = await getCategories().then((res) => {
+
       if (res.status === 200) {
-        // console.log(res.data);
+        console.log(res.data);
         setCategoriesData(res.data)
       }
     })
 
   }
-  console.log(nameData);
+
+  //// show fiucsion 
+  const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
+
+  const getLimitedProducts = (products, n) => {
+    const uniqueCategories = new Set();
+    const limitedProducts = [];
+
+    for (const product of products) {
+      if (!uniqueCategories.has(product.Category)) {
+        limitedProducts.push(product);
+        uniqueCategories.add(product.Category);
+
+        if (limitedProducts.length === n) {
+          break;
+        }
+      }
+    }
+
+    return limitedProducts;
+  };
+
+  const limitedNameData = getLimitedProducts(nameData, 15);
+
+  // Function to handle category selection
+  const handleCategoryChange = (event) => {
+    const categoryValue = event.target.value;
+    if (selectedCategories.includes(categoryValue)) {
+      // If the category is already selected, remove it from the array
+      setSelectedCategories(selectedCategories.filter((category) => category !== categoryValue));
+    } else {
+      // If the category is not selected, add it to the array
+      setSelectedCategories([...selectedCategories, categoryValue]);
+    }
+  };
+
+  // Function to fetch data for the selected categories from the API
+  const fetchDataForSelectedCategories = async () => {
+    try {
+      // Replace 'API_ENDPOINT' with your actual API endpoint URL
+      const response = await fetch('API_ENDPOINT');
+      if (!response.ok) {
+        throw new Error('Failed to fetch data from the API');
+      }
+      const data = await response.json();
+      // Filter the data based on selectedCategories
+      const filteredData = data.filter((category) => selectedCategories.includes(category.name));
+      setCategoryData(filteredData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Call the fetchDataForSelectedCategories function whenever the selectedCategories change
+  useEffect(() => {
+    fetchDataForSelectedCategories();
+  }, [selectedCategories]);
+
 
   useEffect(() => {
     // getwishlistitem();
@@ -396,27 +457,27 @@ const Dashboard = (props) => {
   //   }
   // };
 
-  // const rmvProductWishlist = async (i) => {
-  //   // console.log('r')
-  //   let data = {
-  //     userid: UserData[0].id,
-  //     productid: i.id,
-  //   };
+  const rmvProductWishlist = async (i) => {
+    // console.log('r')
+    let data = {
+      userid: UserData[0].id,
+      productid: i.id,
+    };
 
-  //   try {
-  //     const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
-  //     setSelectprd(arr1);
-  //     await unlinkproductdashboard(data).then((res) => {
-  //       if (res.status === 200) {
-  //         // console.log(res);
+    try {
+      const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
+      setSelectprd(arr1);
+      await unlinkproductdashboard(data).then((res) => {
+        if (res.status === 200) {
+          // console.log(res);
 
-  //       }
-  //     })
-  //     // setSelectprd(arr1);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+        }
+      })
+      // setSelectprd(arr1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [heartStates, setHeartStates] = useState({});
   const toggleHeart = (itemId) => {
@@ -455,41 +516,7 @@ const Dashboard = (props) => {
       // console.log(sdPrds);
     }
     if (checked.length > 0) {
-      // console.log(checked);
-      // sdPrds = sdPrds.filter((product) => {
-      // let array1=()=> {for (let i = 0; i <checked.length; i++) {
-      //     switch (checked[i]) {
-      //       case 'Relevance':
-      //         sdPrds = sdPrds.sort((a, b) => {
-      //           // Perform your relevance calculation here
-      //           // Adjust the conditions based on your relevance logic
-      //           if (a.sale_ok === b.sale_ok) {
-      //             // If sale_ok is the same, sort by write_date in descending order
-      //             return new Date(b.write_date) - new Date(a.write_date);
-      //           } else {
-      //             // Sort by sale_ok in ascending order
-      //             return a.sale_ok ? -1 : 1;
-      //           }
-      //         });
-      //         // Set the sorted products in state
-      //         break;
-      //       case 'New Arrivals':
-      //         sdPrds = sdPrds.sort((a, b) => new Date(a.__last_update) - new Date(b.__last_update));
-      //         break;
-      //       case 'Price (High to Low)':
-      //         sdPrds = sdPrds.sort((a, b) => b.list_price - a.list_price);
-      //         break;
-      //       case 'Price (Low to High)':
-      //         sdPrds = sdPrds.sort((a, b) => a.list_price - b.list_price);
-      //         break;
-      //       default:
-      //       // console.log("not selected");
-      //     }
-      //   }
-      //   return sdPrds
-      // }
-      //   return array1();
-      //   });
+
       checked.forEach(item => {
         switch (item) {
           case 'Relevance':
@@ -558,22 +585,6 @@ const Dashboard = (props) => {
       }
     });
   };
-  //// cloth filters value  add
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const handleCategoryChange = (event) => {
-    const { value } = event.target;
-    // Check if the category is already selected
-    if (selectedCategories.includes(value)) {
-      setSelectedCategories(selectedCategories.filter(category => category !== value));
-    } else {
-      setSelectedCategories([...selectedCategories, value]);
-    }
-  };
-
-
-
-
-
 
   // console.log(nameData)
   const setActiveBox = () => {
@@ -610,33 +621,13 @@ const Dashboard = (props) => {
     setInput(value);
     setSerchtext(value);
   };
-  const getLimitedProducts = (products, n) => {
-    const uniqueCategories = new Set();
-    const limitedProducts = [];
-
-    for (const product of products) {
-      if (!uniqueCategories.has(product.Category)) {
-        limitedProducts.push(product);
-        uniqueCategories.add(product.Category);
-
-        if (limitedProducts.length === n) {
-          break;
-        }
-      }
-    }
-
-    return limitedProducts;
-  };
-
-  const limitedNameData = getLimitedProducts(nameData, 15);
-  const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
   return (
 
 
 
-    <motion.div initial={{ translateX: '100%' }}
+    <motion.div initial={{ translateX: '100%', padding: '0px 5px' }}
       animate={{ opacity: 1, translateX: 0 }}
-      transition={{ duration: 0.5 }} style={{ height: '100vh', padding: '0px 10px' }} onClick={() => { sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : "" }}>
+      transition={{ duration: 0.5 }} style={{ height: '100vh' }} onClick={() => { sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : "" }}>
       {activeFilterDiv === true ? <AppHeader UserData={UserData} /> : (isProductDetails === true ? '' : <AppHeader UserData={UserData} />)}
       <div className='filterssectionandheader'>
         <div className="dashboardDiv">
@@ -702,12 +693,15 @@ const Dashboard = (props) => {
                 <div className='sildercontentprice'>
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
                   <div>
-                    <p>{item.ArticleNumber}<br /><span>{item.Category}</span><br />₹  {item.ArticleRate}</p>
+                    <p>
+                      {item.ArticleNumber}<br />
+                      <span>{item.Category}</span><br />
+                      ₹ {item.ArticleRate}
+                    </p>
                   </div>
-                </div></SwiperSlide>
+                </div>
+              </SwiperSlide>
             ))}
-
-
 
           </Swiper>
         </div>
@@ -784,75 +778,74 @@ const Dashboard = (props) => {
             <p onClick={() => setFilterstatus(false)}>X</p>
           </div>
           <div>
-            <div>
-              <div className='selectcategories row'>
-                <>
-                {categoriesData.map((category) => (
-                  <div className='col-6' key={category.id}>
-                    <div className='innerfilter px-3 bg-light'>
-                      <label htmlFor={category.name}>{category.name}</label>
-                      <input
-                        type='checkbox'
-                        id={category.name}
-                        name='category'
-                        value={category.name}
-                        checked={selectedCategories.includes(category.name)}
-                        onChange={handleCategoryChange}
-                      />
-                    </div>
+            <div className='selectcategories row'>
+              {categoriesData.map((category) => (
+                <div className='col-6' key={category.id}>
+                  <div className='innerfilter px-3 bg-light'>
+                    {/* <label htmlFor={category.name}>{category.Category}</label>
+                    <input
+                      type='checkbox'
+                      id={category.Category}
+                      name='category'
+                      value={category.Category}
+                      checked={selectedCategories.includes(category.Category)}
+                      onChange={handleCategoryChange}
+                      multiple
+                    /> */}
+                    <label htmlFor={category.Category}>{category.Category}</label>
+                    <input
+                      type='checkbox'
+                      id={category.Category}
+                      name='category'
+                      value={category.Category}
+                      checked={selectedCategories.includes(category.Category)}
+                      onChange={handleCategoryChange}
+                    />
+                    <span className='checkmark'></span> {/* Custom checkbox style using CSS */}
                   </div>
-                ))}
-                </>
-               
+                </div>
+              ))}
+            </div>
 
-              <div>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Category Name</th>
-                      {/* Add more table headers for other data properties */}
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category Name</th>
+                    {/* Add more table headers for other data properties */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {categoriesData.map((category) => (
+                    <tr key={category.id}>
+                      <td>{category.id}</td>
+                      <td>{category.name}</td>
+                      {/* Add more table cells for other data properties */}
                     </tr>
-                  </thead>
-                  <tbody>
-                    {categoriesData.map((category) => (
-                      <tr key={category.id}>
-                        <td>{category.id}</td>
-                        <td>{category.name}</td>
-                        {/* Add more table cells for other data properties */}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className='pricerange'>
+              <div className='pricerangsection row'>
+                <p>Price Range</p>
               </div>
             </div>
-
+            {/* <Reange/> */}
 
           </div>
-          <div className='pricerange'>
-            <div className='pricerangsection row'>
-              <p>Price Range</p>
-            </div>
-            <div className='filters-Submit'>
-              <button>Reset</button>
-              <button>Apply</button>
-            </div>
-          </div>
-          {/* <Reange/> */}
 
         </div>
 
+      </div> : null}
+      <div className='footer-section w-100'>
+        <AppFooter />
       </div>
 
-      </div> : null
-}
-<div className='footer-section w-100'>
-  <AppFooter />
-</div>
 
 
-
-    </motion.div >
+    </motion.div>
 
 
 

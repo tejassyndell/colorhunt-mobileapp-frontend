@@ -17,19 +17,20 @@ export const getProductName = async ()=>{
     return await axios.get(`${url}/getProductName`)
   }
  catch(error){
-    console.log(err, 'err in react api')
+    console.log(error, 'err in react api')
  }
 }
 
+
+//////////////////////getCategories
 export const getCategories = async ()=>{
   try{
     return await axios.get(`${url}/getCategories`)
   }
  catch(error){
-    console.log(err, 'err in react api')
+    console.log(error, 'err in react api')
  }
 }
-
 
 
 export const getNewImage = async (id)=>{
