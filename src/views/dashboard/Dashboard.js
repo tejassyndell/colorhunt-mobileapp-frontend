@@ -441,41 +441,7 @@ const Dashboard = (props) => {
       // console.log(sdPrds);
     }
     if (checked.length > 0) {
-      // console.log(checked);
-      // sdPrds = sdPrds.filter((product) => {
-      // let array1=()=> {for (let i = 0; i <checked.length; i++) {
-      //     switch (checked[i]) {
-      //       case 'Relevance':
-      //         sdPrds = sdPrds.sort((a, b) => {
-      //           // Perform your relevance calculation here
-      //           // Adjust the conditions based on your relevance logic
-      //           if (a.sale_ok === b.sale_ok) {
-      //             // If sale_ok is the same, sort by write_date in descending order
-      //             return new Date(b.write_date) - new Date(a.write_date);
-      //           } else {
-      //             // Sort by sale_ok in ascending order
-      //             return a.sale_ok ? -1 : 1;
-      //           }
-      //         });
-      //         // Set the sorted products in state
-      //         break;
-      //       case 'New Arrivals':
-      //         sdPrds = sdPrds.sort((a, b) => new Date(a.__last_update) - new Date(b.__last_update));
-      //         break;
-      //       case 'Price (High to Low)':
-      //         sdPrds = sdPrds.sort((a, b) => b.list_price - a.list_price);
-      //         break;
-      //       case 'Price (Low to High)':
-      //         sdPrds = sdPrds.sort((a, b) => a.list_price - b.list_price);
-      //         break;
-      //       default:
-      //       // console.log("not selected");
-      //     }
-      //   }
-      //   return sdPrds
-      // }
-      //   return array1();
-      //   });
+    
       checked.forEach(item => {
         switch (item) {
           case 'Relevance':
