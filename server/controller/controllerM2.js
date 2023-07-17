@@ -22,3 +22,15 @@
     });
   };
   
+exports.getCategories = async(req,res) =>{
+    app.get("/getcategory", (req, res) => {
+        const query = "SELECT Title as Category from category";
+        connection.query(query, (error, results) => {
+          if (error) {
+            res.status(210).json("error")
+          }else{
+            res.status(200).json(results)
+          }
+        });
+      });
+}
