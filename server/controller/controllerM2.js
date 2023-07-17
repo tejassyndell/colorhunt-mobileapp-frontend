@@ -12,7 +12,7 @@
   
     connection.query(query, (error, productData) => {
       if (error) {
-        console.log("Error executing query:", error);
+        console.log("Error executing query:", err);
         res.status(210).json("error")
         return;
       }else{
