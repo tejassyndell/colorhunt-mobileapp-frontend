@@ -25,7 +25,7 @@ import Reange from 'src/components/range'
 const Dashboard = (props) => {
   const { ProductData, UserData, allData } = props
 
-
+  const [FilterproductsData, setFilterproductsData] = useState([])
   const [nameData, setNameData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -51,12 +51,21 @@ const Dashboard = (props) => {
       if (res.status === 200) {
         console.log(res.data);
         setCategoriesData(res.data)
+        setFilterproductsData(res.data)
       }
     })
 
   }
 
-  //// show fiucsion 
+///// search fuctionality 
+
+
+
+
+
+
+  //// show search fuctionality 
+ 
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
   const getLimitedProducts = (products, n) => {
@@ -77,19 +86,25 @@ const Dashboard = (props) => {
     return limitedProducts;
   };
 
-  const limitedNameData = getLimitedProducts(nameData, 15);
+  const limitedNameData = getLimitedProducts(nameData);
 
   // Function to handle category selection
   const handleCategoryChange = (event) => {
     const categoryValue = event.target.value;
-    if (selectedCategories.includes(categoryValue)) {
-      // If the category is already selected, remove it from the array
-      setSelectedCategories(selectedCategories.filter((category) => category !== categoryValue));
-    } else {
-      // If the category is not selected, add it to the array
-      setSelectedCategories([...selectedCategories, categoryValue]);
-    }
+  
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(categoryValue)) {
+        // If the category is already selected, remove it from the array
+        return prevSelectedCategories.filter((category) => category !== categoryValue);
+      } else {
+        // If the category is not selected, add it to the array
+        return [...prevSelectedCategories, categoryValue];
+      }
+    });
   };
+  useEffect(() =>{
+    console.log(selectedCategories);
+  },[selectedCategories])
 
   // Function to fetch data for the selected categories from the API
   const fetchDataForSelectedCategories = async () => {
@@ -104,7 +119,7 @@ const Dashboard = (props) => {
       const filteredData = data.filter((category) => selectedCategories.includes(category.name));
       setCategoryData(filteredData);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -131,7 +146,6 @@ const Dashboard = (props) => {
   const [FilterProduct, setFilterProduct] = useState([])
   // console.log(FilterProduct, 'filterdata')
   const [ProductsData, setProductData] = useState([])
-  const [FilterproductsData, setFilterproductsData] = useState([])
   const [isProductDetails, setIsProductDetails] = useState(false)
   const [otp, setOtp] = useState(false)
   const navigate = useNavigate()
@@ -621,6 +635,17 @@ const Dashboard = (props) => {
     setInput(value);
     setSerchtext(value);
   };
+
+  const catagoryHandler =(e)=>{
+    if(selectedCategories.includes(e.target.name)){
+     setSelectedCategories(
+      selectedCategories.filter((category) => category !== e.target.name)
+     )
+
+    }else{
+      setSelectedCategories([...selectedCategories,e.target.name])
+    }
+  } 
   return (
 
 
@@ -780,19 +805,9 @@ const Dashboard = (props) => {
           <div>
             <div className='selectcategories row'>
               {categoriesData.map((category) => (
-                <div className='col-6' key={category.id}>
-                  <div className='innerfilter px-3 bg-light'>
-                    {/* <label htmlFor={category.name}>{category.Category}</label>
-                    <input
-                      type='checkbox'
-                      id={category.Category}
-                      name='category'
-                      value={category.Category}
-                      checked={selectedCategories.includes(category.Category)}
-                      onChange={handleCategoryChange}
-                      multiple
-                    /> */}
-                    <label htmlFor={category.Category}>{category.Category}</label>
+                <div className='col-6' key={category.id} onClick={catagoryHandler}>
+                  <div className={`innerfilter px-3 bg-light ${selectedCategories.includes(category.Category) ? 'selectedCategory' : ''}`} name={category.Category}  >
+                    <label className={selectedCategories.includes(category.Category) ? 'selectedCategoryLable' : ''} htmlFor={category.Category}>{category.Category}</label>
                     <input
                       type='checkbox'
                       id={category.Category}
@@ -801,7 +816,7 @@ const Dashboard = (props) => {
                       checked={selectedCategories.includes(category.Category)}
                       onChange={handleCategoryChange}
                     />
-                    <span className='checkmark'></span> {/* Custom checkbox style using CSS */}
+                    <span className={`checkmark ${selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''}`}></span> {/* Custom checkbox style using CSS */}
                   </div>
                 </div>
               ))}
@@ -832,6 +847,32 @@ const Dashboard = (props) => {
                 <p>Price Range</p>
               </div>
             </div>
+            {activeTab === 'price' && (
+                            <div style={{ width: '100%' }}>
+                              <p className="dashboard_filter_list_body_data_price"> Selected Price Range</p>
+                              <p className="dashboard_filter_list_body_data_price_range">
+                                ₹ {values[0]} - ₹ {values[1]}
+                              </p>
+                              <MultiRangeSlider
+                                valueLabelDisplay="auto"
+                                onChange={setValues}
+                                onInput={(e) => setValues([e.minValue, e.maxValue])}
+                                minValue={values[0]}
+                                maxValue={values[1]}
+                                min={Min}
+                                max={Max}
+                                label={false}
+                                ruler={false}
+                                step={1}
+                                style={{ border: "none", boxShadow: "none", padding: "15px 20px 15px 10px" }}
+                                barLeftColor="lightgrey"
+                                barInnerColor="rgb(223 10 31)"
+                                barRightColor="lightgrey"
+                                thumbLeftColor="white"
+                                thumbRightColor="white"
+                              />
+                            </div>
+                          )}
             {/* <Reange/> */}
 
           </div>

@@ -122,7 +122,9 @@ body{
     font-size: 13px;
     color: #0a0a0a;
     font-weight: 600;
+    width: 100%;
 }
+
 .categoriestagsection p:nth-child(1){
     font-size: 19px;
     font-weight: 700;
@@ -150,30 +152,35 @@ input[type='checkbox'] {
   .checkmark {
     position: relative;
     display: inline-block;
-    width: 18px;
+    width: 21px;
     height: 18px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
+    border: 1px solid #000000;
+    border-radius: 50px;
   }
   
   /* Customize the appearance when the checkbox is checked */
-  input[type='checkbox']:checked + .checkmark {
-    background-color: #2196f3; /* Change to your desired color */
+ .selectedCheckmark {
+    border: 1px solid #ffffff;
+    background-color: #000000; /* Change to your desired color */
   }
   
   /* Add the inner circle for the checked state */
-  input[type='checkbox']:checked + .checkmark::before {
+  .selectedCheckmark::before {
     content: '';
     position: absolute;
     top: 2px;
     left: 2px;
     width: 12px;
     height: 12px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     border-radius: 50%;
   }
 
   .selectedCategory{
-    background-color: black;
+    background-color: black !important;
+    
+  }
+
+  .selectedCategoryLable{
     color: white !important;
   }
