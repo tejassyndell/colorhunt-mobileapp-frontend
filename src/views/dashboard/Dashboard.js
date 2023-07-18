@@ -26,6 +26,7 @@ const Dashboard = (props) => {
   const { ProductData, UserData, allData } = props
 
   const [FilterproductsData, setFilterproductsData] = useState([])
+  const [filterData, setFilterData] = useState([])
   const [nameData, setNameData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -40,6 +41,8 @@ const Dashboard = (props) => {
     const result = await getProductName().then((res) => {
       if (res.status === 200) {
         setNameData(res.data)
+        setFilterData(res.data)
+        console.log(res.data);
       }
     })
 
@@ -89,22 +92,7 @@ const Dashboard = (props) => {
   const limitedNameData = getLimitedProducts(nameData);
 
   // Function to handle category selection
-  const handleCategoryChange = (event) => {
-    const categoryValue = event.target.value;
-  
-    setSelectedCategories((prevSelectedCategories) => {
-      if (prevSelectedCategories.includes(categoryValue)) {
-        // If the category is already selected, remove it from the array
-        return prevSelectedCategories.filter((category) => category !== categoryValue);
-      } else {
-        // If the category is not selected, add it to the array
-        return [...prevSelectedCategories, categoryValue];
-      }
-    });
-  };
-  useEffect(() =>{
-    console.log(selectedCategories);
-  },[selectedCategories])
+
 
   // Function to fetch data for the selected categories from the API
   const fetchDataForSelectedCategories = async () => {
@@ -504,89 +492,13 @@ const Dashboard = (props) => {
 
   // ------- add product in wishlist end-------------
   // const [filterstatus, setFilterstatus] = useState(false);
-  const allFileter = () => {
-    // console.log(checked, 'ProductData.length')
-    let sdPrds = oldData.slice();
-    const min = parseFloat(values[0]);
-    const max = parseFloat(values[1]);
 
-    console.log(min, max, "tsets");
-    if (checkedcetagory.length > 0) {
-      sdPrds = sdPrds.filter(product => {
-        const category = product.categ_id[1];
-        return checkedcetagory.some(checkedCat => category.includes(checkedCat));
-      });
-      // console.log(sdPrds);
-    }
-    if (min > 0 || max < 500) {
-      // console.log("done");
-      sdPrds = sdPrds.filter(product => {
-        return product.list_price >= min && product.list_price <= max;
-      });
-      // console.log(sdPrds)
-      sdPrds = sdPrds.sort((a, b) => a.list_price - b.list_price);
-
-      // setFilterProduct(sdPrds);
-      // console.log(sdPrds);
-    }
-    if (checked.length > 0) {
-
-      checked.forEach(item => {
-        switch (item) {
-          case 'Relevance':
-            sdPrds = sdPrds.sort((a, b) => {
-              // Perform your relevance calculation here
-              // Adjust the conditions based on your relevance logic
-              if (a.sale_ok === b.sale_ok) {
-                // If sale_ok is the same, sort by write_date in descending order
-                return new Date(b.write_date) - new Date(a.write_date);
-              } else {
-                // Sort by sale_ok in ascending order
-                return a.sale_ok ? -1 : 1;
-              }
-            });
-            // Set the sorted products in state
-            break;
-          case 'New Arrivals':
-            sdPrds = sdPrds.sort((a, b) => new Date(b.__last_update) - new Date(a.__last_update));
-            console.log(sdPrds)
-            break;
-          case 'Price (High to Low)':
-            sdPrds = sdPrds.sort((a, b) => b.list_price - a.list_price);
-
-            break;
-          case 'Price (Low to High)':
-            sdPrds = sdPrds.sort((a, b) => a.list_price - b.list_price);
-            break;
-          default:
-          // console.log("not selected");
-        }
-      });
-      console.log(sdPrds);
-      setFilterProduct(sdPrds);
-      setOldstatus(true)
-    }
-    else {
-      setFilterProduct(oldData);
-      setOldstatus(true)
-    }
-    setFilterProduct(sdPrds);
-    setFilterstatus(true);
-  }
   const [checked1, setChecked1] = useState('');
   const unchecheck = (e) => {
     const value = e.target.value;
     setChecked1(value === checked1 ? '' : value);
   }
-  const clearfileds = (cal) => {
-    // setActiveFilterDiv(false);
-    setChecked([]);
-    setCheckedcetagory([]);
-    setValues([0, 500]);
-    setChecked1('');
-    // console.log(oldData);
-    cal === false ? "" : setFilterProduct(oldData);
-  }
+ 
   const [selectedProducts, setSelectedProducts] = useState([]);
   const toggleProductSelection = (productId) => {
     setSelectedProducts((prevSelectedProducts) => {
@@ -611,7 +523,8 @@ const Dashboard = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
   //----------------------------------------------------------------------------
   const [results, setResults] = useState([]);
-  const [hoverBack, seHoverBack] = useState(false);
+  const [ApplyStatushBack, setApplyStatushBack] = useState(true);
+  const [applyrData, setApplyData] = useState([]);
   const fetchData = (value) => {
     const filterResult = nameData.filter(
       (item) =>
@@ -635,16 +548,55 @@ const Dashboard = (props) => {
     setInput(value);
     setSerchtext(value);
   };
+  const clearfileds = (cal) => {
+    // setActiveFilterDiv(false);
+    setSelectedCategories([]);
+    // console.log(oldData);
+    setApplyStatushBack(true);
+//  setNameData(nameData);
+
+console.log(nameData);
+  }
+  const catagoryselect = () => {
+    // console.log(checked, 'ProductData.length')
+    let sdPrds = nameData.slice();
+  
+
+    if (selectedCategories.length > 0) {
+      sdPrds = sdPrds.filter(product => {
+        const category = product.Category;
+        return selectedCategories.some(checkedCat => category.includes(checkedCat));
+      });
+      setApplyData(sdPrds);
+      setApplyStatushBack(false);
+    }
+ 
+    else {
+      setNameData(sdPrds);
+      setOldstatus(true)
+    }
+  
+  }
+
+  useEffect(() =>{
+    console.log(selectedCategories);
+  },[selectedCategories])
 
   const catagoryHandler =(e)=>{
+    if (e.target.name !== undefined) {
     if(selectedCategories.includes(e.target.name)){
      setSelectedCategories(
       selectedCategories.filter((category) => category !== e.target.name)
      )
 
     }else{
+      if(e.target.name === undefined) {
+        setSelectedCategories([...selectedCategories])
+
+      }
       setSelectedCategories([...selectedCategories,e.target.name])
     }
+  }
   } 
   return (
 
@@ -713,7 +665,20 @@ const Dashboard = (props) => {
             modules={[FreeMode, Pagination]}
             className="mySwiper"
           >
-            {limitedNameData.map((item) => (
+            {ApplyStatushBack===true?nameData.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div className='sildercontentprice'>
+                  <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
+                  <div>
+                    <p>
+                      {item.ArticleNumber}<br />
+                      <span>{item.Category}</span><br />
+                      ₹ {item.ArticleRate}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            )):applyrData.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className='sildercontentprice'>
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
@@ -805,16 +770,17 @@ const Dashboard = (props) => {
           <div>
             <div className='selectcategories row'>
               {categoriesData.map((category) => (
-                <div className='col-6' key={category.id} onClick={catagoryHandler}>
+                <div className='col-6' key={category.id} onClick={catagoryHandler}  >
                   <div className={`innerfilter px-3 bg-light ${selectedCategories.includes(category.Category) ? 'selectedCategory' : ''}`} name={category.Category}  >
                     <label className={selectedCategories.includes(category.Category) ? 'selectedCategoryLable' : ''} htmlFor={category.Category}>{category.Category}</label>
                     <input
                       type='checkbox'
                       id={category.Category}
-                      name='category'
+                      // name='category'
+                      name={category.Category}
                       value={category.Category}
                       checked={selectedCategories.includes(category.Category)}
-                      onChange={handleCategoryChange}
+                      // onChange={handleCategoryChange}
                     />
                     <span className={`checkmark ${selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''}`}></span> {/* Custom checkbox style using CSS */}
                   </div>
@@ -822,26 +788,7 @@ const Dashboard = (props) => {
               ))}
             </div>
 
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Category Name</th>
-                    {/* Add more table headers for other data properties */}
-                  </tr>
-                </thead>
-                <tbody>
-                  {categoriesData.map((category) => (
-                    <tr key={category.id}>
-                      <td>{category.id}</td>
-                      <td>{category.name}</td>
-                      {/* Add more table cells for other data properties */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+           
             <div className='pricerange'>
               <div className='pricerangsection row'>
                 <p>Price Range</p>
@@ -875,6 +822,10 @@ const Dashboard = (props) => {
                           )}
             {/* <Reange/> */}
 
+          </div>
+          <div className='content-button'>
+          <button onClick={() => { clearfileds(); }}>Reset</button>
+          <button onClick={() => { catagoryselect() }}>Apply</button>
           </div>
 
         </div>
