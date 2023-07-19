@@ -145,7 +145,7 @@ const Dashboard = (props) => {
   }, [allData])
 
   const [FilterProduct, setFilterProduct] = useState([])
-  // console.log(FilterProduct, 'filterdata')
+  
   const [ProductsData, setProductData] = useState([])
   const [isProductDetails, setIsProductDetails] = useState(false)
   const [otp, setOtp] = useState(false)
@@ -178,7 +178,6 @@ const Dashboard = (props) => {
         setFilterProduct(ProductData)
       }
     }
-    // setOlddata(ProductData)
   }, [ProductData])
 
   useEffect(() => {
@@ -198,7 +197,6 @@ const Dashboard = (props) => {
 
   const showProductDetails = (item) => {
     if (click2 === true) {
-      // console.log(item, 'itrm')
       setClick2(false)
       setProductDataItem(item)
       setIsProductDetails(true)
@@ -664,7 +662,6 @@ const Dashboard = (props) => {
                 maxValue={values[1]}
                 min={Min}
                 max={Max}
-                // defaultValue={[minprice, maxprice]}
                 label={false}
                 ruler={false}
                 step={1}
