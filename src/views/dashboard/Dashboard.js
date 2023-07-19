@@ -614,8 +614,8 @@ const Dashboard = (props) => {
             </div>
             <div>
               <div className="selectcategories row">
-                {categoriesData.map((category) => (
-                  <div className="col-6" key={category.id} onClick={catagoryHandler}>
+                {categoriesData.map((category,index) => (
+                  <div className="col-6" key={index} onClick={catagoryHandler}>
                     <div
                       className={`innerfilter px-3 bg-light ${
                         selectedCategories.includes(category.Category) ? 'selectedCategory' : ''
