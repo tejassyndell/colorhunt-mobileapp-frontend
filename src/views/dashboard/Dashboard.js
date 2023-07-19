@@ -18,7 +18,7 @@ import AppFooter from 'src/components/AppFooter'
 import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.png'
 import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
 import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
-import MultiRangeSlider from "multi-range-slider-react"
+import MultiRangeSlider from 'multi-range-slider-react'
 
 const Dashboard = (props) => {
   const { ProductData, UserData, allData } = props
@@ -53,29 +53,20 @@ const Dashboard = (props) => {
     })
   }
 
-  const [maxprice, setMaxprice] = useState(200);
-  const [minprice, setMinprice] = useState(0);
+  const [maxprice, setMaxprice] = useState(200)
+  const [minprice, setMinprice] = useState(0)
   const [data, setData] = useState([...nameData])
-  
-  const handlerangechange = (value) => {
-    setMinprice(values[0]);
-    setMaxprice(values[1]);
-    
-    const fildata = nameData.filter(
-     
-       (nameData) => nameData.ArticleRate >= values[0] && nameData.ArticleRate <= values[1],
-     )
-    setData(fildata.length > 0 ? fildata : nameData)
-    
-    
-}
- 
-  
-  
-  
-  ///// search fuctionality
 
-  //// show search fuctionality
+  const handlerangechange = (value) => {
+    setMinprice(values[0])
+    setMaxprice(values[1])
+
+    const sdrpc = nameData.slice()
+    const fildata = sdrpc.filter(
+      (nameData) => nameData.ArticleRate >= values[0] && nameData.ArticleRate <= values[1],
+    )
+    setNameData(fildata.length > 0 ? fildata : sdrpc)
+  }
 
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
 
@@ -177,11 +168,7 @@ const Dashboard = (props) => {
   const [click2, setClick2] = useState(true)
 
   const [Filterstatus, setFilterstatus] = useState(false)
-  
-    
 
- 
-  
   useEffect(() => {
     if (serchtext) {
     } else {
@@ -193,7 +180,6 @@ const Dashboard = (props) => {
     }
     // setOlddata(ProductData)
   }, [ProductData])
- 
 
   useEffect(() => {
     if (serchtext) {
@@ -205,8 +191,6 @@ const Dashboard = (props) => {
       }
     }
   }, [serchtext])
-
-  
 
   const NEWPRODUCTDETAIL = () => {
     navigate('/productdetails')
@@ -277,7 +261,6 @@ const Dashboard = (props) => {
   // Return classes based on whether item is checked
   var isChecked = (item) => (checked.includes(item) ? 'checked-item' : 'not-checked-item')
 
-  
   const rmvProductWishlist = async (i) => {
     // console.log('r')
     let data = {
@@ -324,15 +307,14 @@ const Dashboard = (props) => {
       // console.log(sdPrds);
     }
     if (min > 0 || max < 500) {
-      // console.log("done");
+     
       sdPrds = sdPrds.filter((product) => {
         return product.list_price >= min && product.list_price <= max
       })
-      // console.log(sdPrds)
+     
       sdPrds = sdPrds.sort((a, b) => a.list_price - b.list_price)
 
-      // setFilterProduct(sdPrds);
-      // console.log(sdPrds);
+     
     }
     if (checked.length > 0) {
       checked.forEach((item) => {
@@ -443,11 +425,7 @@ const Dashboard = (props) => {
       setSelectedCategories([...selectedCategories, e.target.name])
     }
   }
-  // const [priceRange, setPriceRange] = useState([ min, max ])
- 
 
-  
- 
   return (
     <motion.div
       initial={{ translateX: '100%', padding: '0px 5px' }}
@@ -489,13 +467,11 @@ const Dashboard = (props) => {
                     ></input>
                   </div>
                 </div>
-                {/* filtericon */}
               </div>
               <div className="autodivsecond">
                 <img
                   src={updateicon}
                   style={{ cursor: 'pointer' }}
-                  // onClick={() => { click1 === true ? setActiveBox() : "" }}
                   onClick={() => setFilterstatus(true)}
                 />
               </div>
@@ -523,7 +499,7 @@ const Dashboard = (props) => {
             modules={[FreeMode, Pagination]}
             className="mySwiper"
           >
-            {data.map((item) => (
+            {nameData.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className="sildercontentprice">
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
@@ -538,21 +514,6 @@ const Dashboard = (props) => {
                 </div>
               </SwiperSlide>
             ))}
-            {/* {filterdatabyrate.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div className="sildercontentprice">
-                  <img src={baseImageUrl + item.photos} alt={`Tshirt ${item.id}`} />
-                  <div>
-                    <p>
-                      {item.ArticleNumber}
-                      <br />
-                      <span>{item.Category}</span>
-                      <br />₹ {item.ArticleRate}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))} */}
           </Swiper>
         </div>
         <div className="allProduct-section mt-4">
@@ -699,11 +660,11 @@ const Dashboard = (props) => {
                 valueLabelDisplay="auto"
                 onChange={handlerangechange}
                 onInput={(e) => setValues([e.minValue, e.maxValue])}
-                 minValue={0}
-                 maxValue={1}
-                min={0}
-                max={500}
-                defaultValue={[minprice,maxprice]}
+                minValue={values[0]}
+                maxValue={values[1]}
+                min={Min}
+                max={Max}
+                // defaultValue={[minprice, maxprice]}
                 label={false}
                 ruler={false}
                 step={1}
@@ -737,33 +698,6 @@ const Dashboard = (props) => {
                   APPLY
                 </button>
               </div>
-              {/* {activeTab === 'price' && (
-                <div style={{ width: '100%' }}>
-                  <p className="dashboard_filter_list_body_data_price"> Selected Price Range</p>
-                  <p className="dashboard_filter_list_body_data_price_range">
-                    ₹ {values[0]} - ₹ {values[1]}
-                  </p>
-                  <MultiRangeSlider
-                    valueLabelDisplay="auto"
-                    onChange={setValues}
-                    onInput={(e) => setValues([e.minValue, e.maxValue])}
-                    minValue={values[0]}
-                    maxValue={values[1]}
-                    min={Min}
-                    max={Max}
-                    label={false}
-                    ruler={false}
-                    step={1}
-                    style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                    barLeftColor="lightgrey"
-                    barInnerColor="rgb(223 10 31)"
-                    barRightColor="lightgrey"
-                    thumbLeftColor="white"
-                    thumbRightColor="white"
-                  />
-                </div>
-              )} */}
-              {/* <Reange/> */}
             </div>
           </div>
         </div>
