@@ -2,26 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import {
-  CTable,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CCol,
-  CForm,
-  CButton,
-  CFormInput,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-  CHeader,
   CSidebar
 } from '@coreui/react'
-import updateicon from '../../assets/images/higrow/Group 3245.svg'
-import contentimages from '../../assets/images/higrow/contentimg/fabric_28 1.png'
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getWishlistItems, unlinkproductwishlist } from '../api/api'
@@ -29,7 +11,6 @@ import { productwishlist } from '../api/api'
 import noImages from '../../assets/image/noimage.png'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductDetail from '../dashboard/productdetails'
-import { faSlash } from '@fortawesome/free-solid-svg-icons'
 import "../../css/ipad.css";
 function wishlist(props) {
   // console.log(props.UserData[0].id);
@@ -49,33 +30,33 @@ function wishlist(props) {
     getwishlistitem();
   }, []);
 
-  const getwishlistitem = async () => {
-    setArrlist([]);
-    const result = await getWishlistItems(props.UserData[0].id).then((res)=>{
-      if(res.status===200){
-        if (res.data.length <= 0) {
-          setemptPrdlist(true);
-        }
-        else {
-          prddetails(res.data);
-        }
-      }
-    })
-    // console.log(result.data.length);
-  }
+  // const getwishlistitem = async () => {
+  //   setArrlist([]);
+  //   const result = await getWishlistItems(props.UserData[0].id).then((res)=>{
+  //     if(res.status===200){
+  //       if (res.data.length <= 0) {
+  //         setemptPrdlist(true);
+  //       }
+  //       else {
+  //         prddetails(res.data);
+  //       }
+  //     }
+  //   })
+  //   // console.log(result.data.length);
+  // }
   const navigate = useNavigate()
 
   const prddetails = (productlist) => {
 
-    productlist.map(async (i, key) => {
-      const result = await productwishlist(i.product_id[0]).then((res)=>{
-        if(res.status === 200 ){
-          // console.log(res);
-          setArrlist(prevArrlist => [...prevArrlist, { wid: i.id, ...res.data[0] }]);
-        }
-      })
+    // productlist.map(async (i, key) => {
+    //   const result = await productwishlist(i.product_id[0]).then((res)=>{
+    //     if(res.status === 200 ){
+    //       // console.log(res);
+    //       setArrlist(prevArrlist => [...prevArrlist, { wid: i.id, ...res.data[0] }]);
+    //     }
+    //   })
       
-    });
+    // });
     setLoading(false);
   }
 
@@ -90,18 +71,18 @@ function wishlist(props) {
     }
   }
 
-  const removeprdWishlist = async (wid) => {
+  // const removeprdWishlist = async (wid) => {
 
-    // console.log(wid);
-    const result = await unlinkproductwishlist(wid).then((res)=>{
-     if(res.status===200){
-      setArrlist([]);
-      getwishlistitem();
-     }
-    })
-    // console.log(result.data);
+  //   // console.log(wid);
+  //   const result = await unlinkproductwishlist(wid).then((res)=>{
+  //    if(res.status===200){
+  //     setArrlist([]);
+  //     getwishlistitem();
+  //    }
+  //   })
+  //   // console.log(result.data);
     
-  }
+  // }
 
   const showProductDetails = (item) => {
     // console.log(item, 'itrm')
@@ -131,31 +112,10 @@ function wishlist(props) {
         {isProductDetails === false ?
           <>
             <div className='tagdiv'><i className="fa fa-angle-left" onClick={routeChange} style={{ position: 'absolute' }} aria-hidden="true"></i> <div className='tagnames'><h5>Favourites</h5></div></div>
-            {/* { loading===true?
-        <div className="loader-container_profile">
-        <div className="loader_profile"></div>
-      </div>:""
-      } */}
-            {/* <div className='haddersearchcontenar'>
-        <CCol xs="auto">
-          <i className="fa fa-search searchicon" aria-hidden="true"></i>
-                     <CFormInput
-                       className="User_serch mainsearch"
-                       type="text"
-                       placeholder="Search "
-                       style={{paddingleft:32 }}
-                       // value={FilterValues}
-                       // onChange={handleFilter}
-                     />
-                   </CCol>
-             <img src={updateicon}/>
-        </div> */}
-            {/* content secrion */}
             <div className='cover_container'>
               <div className='garmentcontentrow wishlist_container'>
 
                 {/* Create code ----------------------- */}
-                {/* <p style={{textAlign:"center",border:"1px solid red"}}>Wishlist Empty</p> */}
                 {
                   emptproductlist === true ? <div className='order_empty_div empty-list' > Empty wishlist List</div> :
                     arrllist.length <= 0 ?

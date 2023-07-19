@@ -20,35 +20,35 @@ function App() {
   const [page, setPage] = useState(1);
   // const [loading, setLoading] = useState(false);
   const getAllData = async () => {
-    try {
-      const result = await getDataOfProduct().then((res) => {
-        if (res.status === 200) {
-          setAllData(res.data);
-        }
-      })
+    // try {
+    //   const result = await getDataOfProduct().then((res) => {
+    //     if (res.status === 200) {
+    //       setAllData(res.data);
+    //     }
+    //   })
 
-    } catch (err) {
-      console.log(err, "error in getProductData");
-    }
+    // } catch (err) {
+    //   console.log(err, "error in getProductData");
+    // }
   };
   useEffect(() => {
     getAllData()
   }, [])
-  const loadProductData = async () => {
-    try {
-      const result = await getProductData(page).then((res) => {
-        if (res.status === 200) {
-          setProductData((prev) => [...prev, ...res.data]);
-        }
-      })
+  // const loadProductData = async () => {
+  //   try {
+  //     const result = await getProductData(page).then((res) => {
+  //       if (res.status === 200) {
+  //         setProductData((prev) => [...prev, ...res.data]);
+  //       }
+  //     })
 
-      // setLoading(false);
-      // setProductData(res.data)
-      // console.log(res.data, "result.data");
-    } catch (err) {
-      console.log(err, "error in getProductData");
-    }
-  };
+  //     // setLoading(false);
+  //     // setProductData(res.data)
+  //     // console.log(res.data, "result.data");
+  //   } catch (err) {
+  //     console.log(err, "error in getProductData");
+  //   }
+  // };
 
   const LoadLoginSession = () => {
     const getSession = localStorage.getItem('userId');
@@ -59,16 +59,16 @@ function App() {
   }
 
   const LoadAllProductData = async () => {
-    const result = await getDataOfProduct().then((res) => {
-      if (res ?.status === 200) {
-        setAllProductData(res.data)
-      }
-    })
+    // const result = await getDataOfProduct().then((res) => {
+    //   if (res ?.status === 200) {
+    //     setAllProductData(res.data)
+    //   }
+    // })
 
   }
   //-----------------------new chnage------------------
   useEffect(() => {
-    loadProductData()
+    // loadProductData()
     LoadAllProductData()
     //LoadLoginSession()
   }, [page])

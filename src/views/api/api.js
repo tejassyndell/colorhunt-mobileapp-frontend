@@ -14,7 +14,7 @@ export const loginAuth = async (user) => {
 //---------------------new change 28-----------------------
 export const getProductName = async ()=>{
   try{
-    return await axios.get(`${url}/getProductName`)
+    return await axios.get(`${url}/grlAllArticles`)
   }
  catch(error){
     console.log(error, 'err in react api')
@@ -54,7 +54,6 @@ export const getDataOfProduct = async ()=>{
     return await axios.post(`${url}/getDataOfProduct`);
     // console.log(searchQuery);
   } catch (error) {
-    console.error(error);
   }
 }
 

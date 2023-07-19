@@ -8,6 +8,8 @@ body{
     display: flex;
     justify-content: space-between;
     padding: 0px 4px;
+    height: 17px;
+  
 }
 .header{
     padding: 0px 10px !important;
@@ -258,7 +260,49 @@ input[type='checkbox'] {
     align-items: center;
     padding: 0px 0px 0px 3px;
 }
+.stage{
+  display: grid;
+    align-items: center;
+    justify-items: end;
+    position: relative;
+    left: 29px;
+}
 
+.heartss {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  
+  &.is-active {
+    transition-duration: 1s;
+    background-position: -2800px 0;
+  }
+}
+.producticones{
+  display: flex;
+    width: 94%;
+    justify-content: flex-end;
+    position: relative;
+    top: 32px;
+}
+
+    /* .producticones {
+        top: 8px;
+        text-align: end;
+        position: relative;
+        margin-bottom: -30px;
+        right: 16px;
+        width: 25%;
+        color: white;
+        font-size: 20px;
+        float: right;
+        margin-right: 5px;
+        margin-top: 6px;
+    } */
   @media (max-width: 768px) {
     .mySwiper {
       /* Change the slidesPerView value for tablets */

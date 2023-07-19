@@ -29,7 +29,6 @@ const Dashboard = (props) => {
     const { ProductData, UserData, allData } = props
 
     const [FilterproductsData, setFilterproductsData] = useState([])
-    const [filterData, setFilterData] = useState([])
     const [nameData, setNameData] = useState([]);
     const [categoriesData, setCategoriesData] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -46,7 +45,7 @@ const Dashboard = (props) => {
         const result = await getProductName().then((res) => {
             if (res.status === 200) {
                 setNameData(res.data)
-                setFilterData(res.data)
+                setFilterDataSearch(res.data)
                 console.log(res.data);
             }
         })
@@ -282,26 +281,46 @@ const Dashboard = (props) => {
    
 
     const rmvProductWishlist = async (i) => {
-        // console.log('r')
-        let data = {
-            userid: UserData[0].id,
-            productid: i.id,
-        };
+        console.log('r')
+        // let data = {
+        //     userid: UserData[0].id,
+        //     productid: i.id,
+        // };
 
-        try {
-            const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
-            setSelectprd(arr1);
-            await unlinkproductdashboard(data).then((res) => {
-                if (res.status === 200) {
-                    // console.log(res);
+        // try {
+        //     const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
+        //     setSelectprd(arr1);
+        //     await unlinkproductdashboard(data).then((res) => {
+        //         if (res.status === 200) {
+        //             // console.log(res);
 
-                }
-            })
-            // setSelectprd(arr1);
-        } catch (error) {
-            console.log(error);
-        }
+        //         }
+        //     })
+        //     // setSelectprd(arr1);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
+
+    const addProductWishlist = async (i) => {
+        console.log('a')
+        // let data = {
+        //   userid: UserData[0].id,
+        //   prdprice: i.list_price,
+        //   prdid: i.id
+        // };
+        // // console.log(data);
+        // try {
+        //   await Addinwishlist(data).then((res) => {
+        //     if (res.status === 200) {
+        //       getwishlistitem();
+        //     }
+        //   })
+        //   // toggleHeart(i.id);
+        // } catch (error) {
+        //   console.log(error);
+        // }
+      };
 
     const [heartStates, setHeartStates] = useState({});
     const toggleHeart = (itemId) => {
@@ -349,22 +368,27 @@ const Dashboard = (props) => {
     const [ApplyStatushBack, setApplyStatushBack] = useState(true);
     const [ApplyStatushSearch, setApplyStatushSearch] = useState(true);
     const [applyrData, setApplyData] = useState([]);
-    const fetchData = (value) => {
-        if(value === null){
-            console.log('Done');
+    const [filterDataSearch, setFilterDataSearch] = useState([])
 
-        }
-        var srchdata = nameData.slice();
-        const filterResult = srchdata.filter(
-            (item) => item.ArticleNumber.toString().includes(value.toString() || item.Category.toLowerCase().includes(value.toLowerCase()) || item.ArticleRate.toString().includes(value.toString()) || item.StyleDescription.toLowerCase().includes(value.toLowerCase())|| item.Subcategory.toLowerCase().includes(value.toLowerCase()))
+    // const fetchData = (value) => {
+    //     if(value === null){
+    //         console.log('Done');
 
-        )
-        console.log(filterResult)
-        setResults(filterResult)
-        setApplyStatushBack(false)
-
-        // console.log(filterResult);
-    };
+    //     }
+    //     const filterResult = filterDataSearch.filter((item) =>
+    //     item.ArticleNumber.toString().includes(value.toString()) ||
+    //     item.Category.toLowerCase().includes(value.toLowerCase()) ||
+    //     item.ArticleRate.toString().includes(value.toString()) ||
+    //     item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
+    //     item.Subcategory.toLowerCase().includes(value.toLowerCase())
+    //   );
+      
+    //   console.log(filterResult);
+    //   setNameData(filterResult);
+    //     // setApplyStatushBack(false)
+    //     // setApplyStatushSearch(false)    
+    //     // console.log(filterResult);
+    // };
 
     const [input, setInput] = useState("");
     const handleChange = (e) => {
@@ -372,14 +396,25 @@ const Dashboard = (props) => {
         if (e.target.value === '') {
             console.log(nameData);
             setNameData(nameData)
-            // setApplyStatushBack(true)
-            setResults([])
-
+            // setApplyStatushSearch(true)
+            
+        }else{
+            const filterResult = filterDataSearch.filter((item) =>
+            item.ArticleNumber.toString().includes(value.toString()) ||
+            item.Category.toLowerCase().includes(value.toLowerCase()) ||
+            item.ArticleRate.toString().includes(value.toString()) ||
+            item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
+            item.Subcategory.toLowerCase().includes(value.toLowerCase())
+      );
+      console.log(filterResult);
+      setNameData(filterResult);
+      setApplyData(filterResult)
         }
-        else {
-            setInput(value);
-            fetchData(value)
-        }
+        // else {
+        //     // setResults([])
+        //     setInput(value);
+        //     fetchData(value)
+        // }
         setInput(value);
         setSerchtext(value);
     };
@@ -512,7 +547,15 @@ const Dashboard = (props) => {
                         {ApplyStatushBack === true ? (
                             nameData.map((item) => (
                                 <div className='box-items' key={item.id}>
-                                    <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
+                                    <div id={item.id} className="producticones" style={{ top:10 }}>
+                                    {
+                                      selectedprd.some(i => i.product_id[0] === item.id) ?
+                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
+                                        <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
+                                    }
+                        
+                                  </div>
+                                    <img src={baseImageUrl + item.Photos} style={{ padding:2 }} alt={`T-Shirt ${item.id}`} />
                                     <div className='sildercontentprice'>
                                         <p>
                                             {item.ArticleNumber}
@@ -539,7 +582,7 @@ const Dashboard = (props) => {
                                     </div>
                                 </div>
                             ))
-                        )}
+                        ) }
 
                     </div>
 
