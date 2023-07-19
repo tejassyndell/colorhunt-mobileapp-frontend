@@ -152,11 +152,13 @@ input[type='checkbox'] {
   /* Create a circular checkbox appearance using pseudo-element */
   .checkmark {
     position: relative;
-    display: inline-block;
-    width: 21px;
+    display: grid;
+    width: 20px;
     height: 18px;
     border: 1px solid #000000;
     border-radius: 50px;
+    justify-items: center;
+    align-items: center;
   }
   
   /* Customize the appearance when the checkbox is checked */
@@ -168,9 +170,7 @@ input[type='checkbox'] {
   /* Add the inner circle for the checked state */
   .selectedCheckmark::before {
     content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
+    position: relative;
     width: 12px;
     height: 12px;
     background-color: rgb(250, 250, 250);
@@ -189,4 +189,80 @@ input[type='checkbox'] {
     display: flex;
     padding: 10px 12px 9px 4px;
     justify-content: space-between;
+  }
+  .content-button button:nth-child(2){
+    background-color: rgba(33, 33, 33, 1);
+    border: 1px solid rgba(33, 33, 33, 1);
+    padding: 3px 26px;
+    color: #fff;
+    border-radius: 8px;
+  }
+  .content-button button:nth-child(1){
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(33, 33, 33, 1);
+    padding: 3px 26px;
+    border-radius: 8px;
+    color: rgba(33, 33, 33, 1);
+  }
+.allproduct_section{
+    height: 100vh;
+    background: white;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+}
+.content-box{
+    width: 100%;
+    text-align: center;
+    overflow-x: auto;
+    height: 73vh;
+    position: relative;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+}
+.haddingproduct{
+    margin-top: 120px;
+    display: flex;
+    padding: 0px 10px;
+    justify-content: space-between;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 900;
+}
+.box-items{
+    width: 44%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.1);
+    margin: 10px 10px;
+    border-radius: 10px;
+}
+.box-items img{
+    width: 100%;
+    height: 23vh;
+    padding: 10px;
+    
+}
+.haddersilder{
+    width: 100%;
+    height: 51px;
+    position: absolute;
+    top: 4px;
+    background: #fff;
+    left: 2px;
+    display: flex;
+    z-index: 10;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 0px 3px;
+}
+
+  @media (max-width: 768px) {
+    .mySwiper {
+      /* Change the slidesPerView value for tablets */
+      /* You can adjust this value based on your preference */
+      --tablet-slides-per-view: 2.0;
+    }
   }

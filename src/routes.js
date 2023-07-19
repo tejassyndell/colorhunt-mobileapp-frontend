@@ -16,10 +16,12 @@ const Cart = React.lazy(() => import('./views/cart/notification'))
 const HomePage = React.lazy(() => import('./views/pages/homepage/Homepage'))
 const cart_list = React.lazy(() => import('./views/cart/cart_list'))
 const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
+const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  { path: '/allarticles', name: 'allarticles', element: AllArticles },
   { path: '/About-us', name: 'Profile', element: Profile },
   { path: '/notification', name: 'Cart', element: Cart },
   { path: '/wishlist', name: 'Users / Edit User', element: Wishlist },

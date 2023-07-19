@@ -30,6 +30,7 @@ const Dashboard = (props) => {
   const [nameData, setNameData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  
 
   useEffect(() => {
     getproductname();
@@ -60,7 +61,7 @@ const Dashboard = (props) => {
 
   }
 
-///// search fuctionality 
+  ///// search fuctionality 
 
 
 
@@ -68,7 +69,7 @@ const Dashboard = (props) => {
 
 
   //// show search fuctionality 
- 
+
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
   const getLimitedProducts = (products, n) => {
@@ -498,7 +499,7 @@ const Dashboard = (props) => {
     const value = e.target.value;
     setChecked1(value === checked1 ? '' : value);
   }
- 
+
   const [selectedProducts, setSelectedProducts] = useState([]);
   const toggleProductSelection = (productId) => {
     setSelectedProducts((prevSelectedProducts) => {
@@ -526,13 +527,16 @@ const Dashboard = (props) => {
   const [ApplyStatushBack, setApplyStatushBack] = useState(true);
   const [applyrData, setApplyData] = useState([]);
   const fetchData = (value) => {
-    const filterResult = nameData.filter(
-      (item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
+
+    var srchdata = nameData;
+    const filterResult = srchdata.filter(
+      (item) => item.ArticleNumber.toString().includes(value.toString() || item.Category.toLowerCase().includes(value.toLowerCase()))
 
     )
+    setNameData(filterResult)
+
+
     // console.log(filterResult);
-    setResults(filterResult);
   };
 
   const [input, setInput] = useState("");
@@ -549,18 +553,18 @@ const Dashboard = (props) => {
     setSerchtext(value);
   };
   const clearfileds = (cal) => {
-    // setActiveFilterDiv(false);
+    setActiveFilterDiv(false);
     setSelectedCategories([]);
     // console.log(oldData);
     setApplyStatushBack(true);
-//  setNameData(nameData);
+    //  setNameData(nameData);
 
-console.log(nameData);
+    console.log(nameData);
   }
   const catagoryselect = () => {
     // console.log(checked, 'ProductData.length')
     let sdPrds = nameData.slice();
-  
+
 
     if (selectedCategories.length > 0) {
       sdPrds = sdPrds.filter(product => {
@@ -569,35 +573,50 @@ console.log(nameData);
       });
       setApplyData(sdPrds);
       setApplyStatushBack(false);
+      setFilterstatus(false)
     }
- 
+
     else {
       setNameData(sdPrds);
       setOldstatus(true)
     }
-  
+
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log(selectedCategories);
-  },[selectedCategories])
+  }, [selectedCategories])
 
-  const catagoryHandler =(e)=>{
+  const catagoryHandler = (e) => {
     if (e.target.name !== undefined) {
-    if(selectedCategories.includes(e.target.name)){
-     setSelectedCategories(
-      selectedCategories.filter((category) => category !== e.target.name)
-     )
+      if (selectedCategories.includes(e.target.name)) {
+        setSelectedCategories(
+          selectedCategories.filter((category) => category !== e.target.name)
+        )
 
-    }else{
-      if(e.target.name === undefined) {
-        setSelectedCategories([...selectedCategories])
+      } else {
+        if (e.target.name === undefined) {
+          setSelectedCategories([...selectedCategories])
 
+        }
+        setSelectedCategories([...selectedCategories, e.target.name])
       }
-      setSelectedCategories([...selectedCategories,e.target.name])
     }
   }
-  } 
+  ////////  media query add box contentimg
+  // Define the breakpoint value for tablets in pixels
+  const tabletBreakpoint = 768;
+
+  // Function to calculate the appropriate slidesPerView value based on the window width
+  const getSlidesPerView = () => {
+    const windowWidth = window.innerWidth;
+    const tabletSlidesPerView = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue('--tablet-slides-per-view')
+    );
+
+    // Use different slidesPerView value for tablets, and a default value for other screen sizes
+    return windowWidth <= tabletBreakpoint ? tabletSlidesPerView : 2.5;
+  };
   return (
 
 
@@ -652,7 +671,7 @@ console.log(nameData);
       <div className='allProduct-section maincontentsection' >
         <div className='product-hed-sec'>
           <p>All</p>
-          <p>View All</p>
+          <p onClick={() =>{navigate('/allarticles')}}>View All</p>
         </div>
         <div>
           <Swiper
@@ -665,7 +684,7 @@ console.log(nameData);
             modules={[FreeMode, Pagination]}
             className="mySwiper"
           >
-            {ApplyStatushBack===true?nameData.map((item) => (
+            {ApplyStatushBack === true ? nameData.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className='sildercontentprice'>
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
@@ -678,7 +697,7 @@ console.log(nameData);
                   </div>
                 </div>
               </SwiperSlide>
-            )):applyrData.map((item) => (
+            )) : applyrData.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className='sildercontentprice'>
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
@@ -780,7 +799,7 @@ console.log(nameData);
                       name={category.Category}
                       value={category.Category}
                       checked={selectedCategories.includes(category.Category)}
-                      // onChange={handleCategoryChange}
+                    // onChange={handleCategoryChange}
                     />
                     <span className={`checkmark ${selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''}`}></span> {/* Custom checkbox style using CSS */}
                   </div>
@@ -788,44 +807,44 @@ console.log(nameData);
               ))}
             </div>
 
-           
+
             <div className='pricerange'>
               <div className='pricerangsection row'>
                 <p>Price Range</p>
               </div>
             </div>
             {activeTab === 'price' && (
-                            <div style={{ width: '100%' }}>
-                              <p className="dashboard_filter_list_body_data_price"> Selected Price Range</p>
-                              <p className="dashboard_filter_list_body_data_price_range">
-                                ₹ {values[0]} - ₹ {values[1]}
-                              </p>
-                              <MultiRangeSlider
-                                valueLabelDisplay="auto"
-                                onChange={setValues}
-                                onInput={(e) => setValues([e.minValue, e.maxValue])}
-                                minValue={values[0]}
-                                maxValue={values[1]}
-                                min={Min}
-                                max={Max}
-                                label={false}
-                                ruler={false}
-                                step={1}
-                                style={{ border: "none", boxShadow: "none", padding: "15px 20px 15px 10px" }}
-                                barLeftColor="lightgrey"
-                                barInnerColor="rgb(223 10 31)"
-                                barRightColor="lightgrey"
-                                thumbLeftColor="white"
-                                thumbRightColor="white"
-                              />
-                            </div>
-                          )}
+              <div style={{ width: '100%' }}>
+                <p className="dashboard_filter_list_body_data_price"> Selected Price Range</p>
+                <p className="dashboard_filter_list_body_data_price_range">
+                  ₹ {values[0]} - ₹ {values[1]}
+                </p>
+                <MultiRangeSlider
+                  valueLabelDisplay="auto"
+                  onChange={setValues}
+                  onInput={(e) => setValues([e.minValue, e.maxValue])}
+                  minValue={values[0]}
+                  maxValue={values[1]}
+                  min={Min}
+                  max={Max}
+                  label={false}
+                  ruler={false}
+                  step={1}
+                  style={{ border: "none", boxShadow: "none", padding: "15px 20px 15px 10px" }}
+                  barLeftColor="lightgrey"
+                  barInnerColor="rgb(223 10 31)"
+                  barRightColor="lightgrey"
+                  thumbLeftColor="white"
+                  thumbRightColor="white"
+                />
+              </div>
+            )}
             {/* <Reange/> */}
 
           </div>
           <div className='content-button'>
-          <button onClick={() => { clearfileds(); }}>Reset</button>
-          <button onClick={() => { catagoryselect() }}>Apply</button>
+            <button onClick={() => { clearfileds(); }}>Reset</button>
+            <button onClick={() => { catagoryselect() }}>Apply</button>
           </div>
 
         </div>
@@ -834,6 +853,7 @@ console.log(nameData);
       <div className='footer-section w-100'>
         <AppFooter />
       </div>
+      
 
 
 
