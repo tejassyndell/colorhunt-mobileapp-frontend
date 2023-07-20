@@ -86,12 +86,12 @@
   height: 100%;
   top: 0;
   bottom: 0;
-  left: calc(50% - 195px);
+  left: calc(50% - 187px);
   border-radius: 10px;
   background-color: var(--color-gray-100);
   box-shadow: 0-2px 7px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(30px);
-  width: 390px;
+  width: 376px;
 }
 .download-1-1 {
   position: absolute;
