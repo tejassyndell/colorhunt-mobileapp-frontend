@@ -373,9 +373,8 @@ const Dashboard = (props) => {
   const clearfileds = (cal) => {
     setActiveFilterDiv(false)
     setSelectedCategories([])
-    // console.log(oldData);
     setApplyStatushBack(true)
-    //  setNameData(nameData);
+    
 
     console.log(nameData)
   }
