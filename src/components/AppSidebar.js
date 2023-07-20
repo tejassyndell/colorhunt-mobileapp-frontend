@@ -15,7 +15,6 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import navigationUser from '../_navuser'
 
-
 const AppSidebar = (props) => {
   const { UserData } = props
   // console.log(UserData, "userdata")
@@ -24,7 +23,7 @@ const AppSidebar = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   //Get RoleId
-  const [roleid, setroleid] = useState("")
+  const [roleid, setroleid] = useState('')
   // console.log('roleid',roleid)
   useEffect(() => {
     const storedData = localStorage.getItem('roleId')
@@ -33,7 +32,7 @@ const AppSidebar = (props) => {
     }
   }, [])
   //LogOut Functionality
-  const Navigate = useNavigate();
+  const Navigate = useNavigate()
   // const logout = () => {
   //   // // localStorage.clear(roleAuth)
   //   localStorage. removeItem('roleAuth')
@@ -41,13 +40,12 @@ const AppSidebar = (props) => {
   //   console.log("Asdassfddddddddddddddddddddd");
   // }
 
-
   const testFunc = () => {
-    console.log("clicked");
+    console.log('clicked')
     localStorage.removeItem('userId')
     Navigate('/')
   }
-  console.log(sidebarShow);
+  console.log(sidebarShow)
   return (
     <CSidebar
       position="fixed"
@@ -56,13 +54,20 @@ const AppSidebar = (props) => {
       onVisibleChange={(visible) => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
-      className='sidebar'
+      className="sidebar"
     >
       <CSidebarBrand className="d-none d-md-flex" style={{ padding: '14px 8px' }} to="/">
-        <div className='sidebar-idcontent'>
-        <img src={userimages} style={{ width:25 }} onClick={() => { sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : "" }} /><span style={{ marginLeft: '-49px' }}>NIRAV SIR</span>
-        
-        <img src={closemanuicon} style={{ width:45 }} />
+        <div className="sidebar-idcontent">
+          <img
+            src={userimages}
+            style={{ width: 25 }}
+            onClick={() => {
+              sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : ''
+            }}
+          />
+          <span style={{ marginLeft: '-49px' }}>NIRAV SIR</span>
+
+          <img src={closemanuicon} style={{ width: 45 }} />
         </div>
         {/* {UserData.length > 0 ? (
           <>
@@ -97,27 +102,34 @@ const AppSidebar = (props) => {
         ) : (
           <></>
         )} */}
-
-        
       </CSidebarBrand>
 
       <CSidebarNav>
-        <SimpleBar >
+        <SimpleBar>
           <AppSidebarNav items={navigationUser} UserData={UserData} />
-          <li class="nav-item">
-            <a class="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
+          <li className="nav-item">
+            <a
+              className="nav-link mt-4"
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                testFunc()
+              }}
+            >
               <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
               {/* <CIcon icon={cilAccountLogout} customClassName="nav-icon" /> */}
               Log out
             </a>
           </li>
         </SimpleBar>
-        <CSidebarNav className='slidenavbar' >
-          <div className='sidebarlogoconte'>
-
+        <CSidebarNav className="slidenavbar">
+          <div className="sidebarlogoconte">
             {/* <img src={sidebarlogo} style={{ height: 91, width: 201, padding: '4px 9px' }} /> */}
           </div>
-          <img src={sidebottummenu} className='imagescontentback' style={{ width: '50%', height: 200,right:60 ,bottom:8 }} />
+          <img
+            src={sidebottummenu}
+            className="imagescontentback"
+            style={{ width: '50%', height: 200, right: 60, bottom: 8 }}
+          />
           <p>Design By SYNDELL Inc.</p>
         </CSidebarNav>
       </CSidebarNav>

@@ -14,7 +14,7 @@ export const loginAuth = async (user) => {
 //---------------------new change 28-----------------------
 export const getProductName = async ()=>{
   try{
-    return await axios.get(`${url}/grlAllArticles`)
+    return await axios.get(`${url}/getAllArticles`)
   }
  catch(error){
     console.log(error, 'err in react api')

@@ -17,7 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { UserDetails } from '../api/api'
 import { CSidebar } from '@coreui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import noImages from "../../assets/image/noimage.png"
+import noImages from '../../assets/image/noimage.png'
 function profile(props) {
   const { UserData } = props
   const navigate = useNavigate()
@@ -37,17 +37,17 @@ function profile(props) {
   return (
     <div className="dashboardDiv profile_contan_space" style={{ width: '100%' }}>
       <CSidebar
-  position="fixed"
-  unfoldable={unfoldable}
-  visible={false} // Set visible to false to hide the sidebar
-  onVisibleChange={(visible) => {
-    dispatch({ type: 'set', sidebarShow: visible })
-  }}
-  className='sidebar'
->
-  {/* Sidebar content */}
-</CSidebar>
-      <div class="loader"></div>
+        position="fixed"
+        unfoldable={unfoldable}
+        visible={false} // Set visible to false to hide the sidebar
+        onVisibleChange={(visible) => {
+          dispatch({ type: 'set', sidebarShow: visible })
+        }}
+        className="sidebar"
+      >
+        {/* Sidebar content */}
+      </CSidebar>
+      <div className="loader"></div>
       <div className="tagdiv profile_tagdiv">
         <i
           className="fa fa-angle-left"
@@ -64,16 +64,20 @@ function profile(props) {
           <div className="profilecontenar">
             <div className="profileApp mb-3">
               {/* <input type="file" onChange={handleChange} /> */}
-              <img src={`data:image/jpeg;base64,${UserData[0].avatar_1024}`} className='profile_user_image' onError={(e) => {
-                      e.target.src = noImages; 
-                    }}/>
+              <img
+                src={`data:image/jpeg;base64,${UserData[0].avatar_1024}`}
+                className="profile_user_image"
+                onError={(e) => {
+                  e.target.src = noImages
+                }}
+              />
               {/* <span className="camraicon">
-                <i class="fa fa-camera"></i>
+                <i className="fa fa-camera"></i>
               </span> */}
               <h6>{UserData[0].name}</h6>
               <p>{UserData[0].email}</p>
 
-              {/* <button onClick={profileeditform}><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;Edit Profile</button> */}
+              {/* <button onClick={profileeditform}><i className="fa fa-pencil" aria-hidden="true"></i> &nbsp;Edit Profile</button> */}
             </div>
             {/* <img src={linecontent} style={{ width:'100%',marginTop:10 }}/> */}
             <div className="formprofile">
@@ -150,9 +154,9 @@ function profile(props) {
       )}
 
       <div>
-        {/* <div class="ball-box">
+        {/* <div className="ball-box">
 
-<ul class="white-ball">
+<ul className="white-ball">
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
@@ -166,7 +170,7 @@ function profile(props) {
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
 </ul>
-<ul class="red-ball">
+<ul className="red-ball">
     <li></li>
     <li></li>
     <li></li>
