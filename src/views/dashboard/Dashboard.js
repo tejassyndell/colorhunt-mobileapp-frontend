@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories,getAddWishlistgetWishlistData } from '../api/api'
+import { getProductName, getCategories,getAddWishlist,getWishlistData } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
