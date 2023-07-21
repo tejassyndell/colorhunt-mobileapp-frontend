@@ -102,10 +102,10 @@ const Dashboard = (props) => {
     const fetchDataForSelectedCategories = async () => {
         try {
             // Replace 'API_ENDPOINT' with your actual API endpoint URL
-            const response = await fetch('API_ENDPOINT');
-            if (!response.ok) {
-                throw new Error('Failed to fetch data from the API');
-            }
+            // const response = await fetch('API_ENDPOINT');
+            // if (!response.ok) {
+            //     throw new Error('Failed to fetch data from the API');
+            // }
             const data = await response.json();
             // Filter the data based on selectedCategories
             const filteredData = data.filter((category) => selectedCategories.includes(category.name));

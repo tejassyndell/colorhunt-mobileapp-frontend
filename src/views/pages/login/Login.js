@@ -91,27 +91,27 @@ const Login = () => {
     // Navigate('/dashboard')
   }
 
-  const LoadOdooData = async () => {
-    const userID = { phone: phoneNumber, formate: formattedNumber }
-    const logAuth = await loginAuth(userID)
-    if (logAuth.status === 200) {
-      setUserIds(logAuth.data[0])
-      //localStorage.setItem('userId', logAuth.data[0]);
-      setOtp(true)
-      //  Navigate('/dashboard')
-    }
-    else {
-      console.log("fail")
-      setisUser(true)
-    }
-  }
+  // const LoadOdooData = async () => {
+  //   const userID = { phone: phoneNumber, formate: formattedNumber }
+  //   const logAuth = await loginAuth(userID)
+  //   if (logAuth.status === 200) {
+  //     setUserIds(logAuth.data[0])
+  //     //localStorage.setItem('userId', logAuth.data[0]);
+  //     setOtp(true)
+  //     //  Navigate('/dashboard')
+  //   }
+  //   else {
+  //     console.log("fail")
+  //     setisUser(true)
+  //   }
+  // }
 
-  const LoadSendOtp = async () => {
-    const result = await sendOtp(phoneNumber)
-      .then((res) => {
-        console.log(res, "otp res")
-      })
-  }
+  // const LoadSendOtp = async () => {
+  //   const result = await sendOtp(phoneNumber)
+  //     .then((res) => {
+  //       console.log(res, "otp res")
+  //     })
+  // }
 
   const inputFocus = (event) => {
     const { key, target } = event;

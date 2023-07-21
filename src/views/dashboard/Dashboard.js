@@ -101,11 +101,6 @@ const Dashboard = (props) => {
   // Function to fetch data for the selected categories from the API
   const fetchDataForSelectedCategories = async () => {
     try {
-      // Replace 'API_ENDPOINT' with your actual API endpoint URL
-      const response = await fetch('API_ENDPOINT');
-      if (!response.ok) {
-        throw new Error('Failed to fetch data from the API');
-      }
       const data = await response.json();
       // Filter the data based on selectedCategories
       const filteredData = data.filter((category) => selectedCategories.includes(category.name));
@@ -338,10 +333,11 @@ const Dashboard = (props) => {
 
   const rmvProductWishlist = async (i) => {
     console.log( i,'r')
-    // let data = {
-    //   userid: UserData[0].id,
-    //   productid: i.id,
-    // };
+    let data = {
+      userid: 197,
+      article_id: i.id,
+    };
+    console.log(data);
 
     // try {
     //   const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);

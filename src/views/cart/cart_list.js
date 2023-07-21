@@ -24,7 +24,7 @@ import contentimages from '../../assets/images/higrow/contentimg/fabric_28 1.png
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 // import { getWishlistItems, unlinkproductwishlist } from '../api/api'
-import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
+// import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
 import noImages from '../../assets/image/noimage.png'
 import ProductDetail from '../dashboard/productdetails'
 import './Cart.css'
