@@ -1,9 +1,7 @@
 /* eslint-disable */
 
 import React, { useEffect, useState } from 'react'
-import {
-  CSidebar
-} from '@coreui/react'
+import { CSidebar } from '@coreui/react'
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getWishlistData, unlinkproductwishlist } from '../api/api'
@@ -33,8 +31,8 @@ function wishlist(props) {
     const sidebarShow = useSelector((state) => state.sidebarShow)
 
   useEffect(() => {
-    getwishlistitem();
-  }, []);
+    getwishlistitem()
+  }, [])
 
   const getwishlistitem = async () => {
     // setArrlist([]);
@@ -72,10 +70,8 @@ function wishlist(props) {
 
   // arrllist.length<0?"":console.log(arrllist);
 
-
-
   const routeChange = () => {
-    if(click===true){
+    if (click === true) {
       setClick(false)
       navigate('/dashboard')
     }
@@ -105,7 +101,7 @@ function wishlist(props) {
     getwishlistitem()
   }
   return (
-    <div className='dashboardDiv mandivdashboarddiv'>
+    <div className="dashboardDiv mandivdashboarddiv">
       <CSidebar
         position="fixed"
         unfoldable={unfoldable}
@@ -113,13 +109,13 @@ function wishlist(props) {
         onVisibleChange={(visible) => {
           dispatch({ type: 'set', sidebarShow: visible })
         }}
-        className='sidebar'
+        className="sidebar"
       >
         {/* Sidebar content */}
       </CSidebar>
 
       <>
-        {isProductDetails === false ?
+        {isProductDetails === false ? (
           <>
             <div className='tagdiv'>
             <img src={navbaricon} onClick={() => { navigate('/dashboard') }} /><div className='tagnames'><h5>Wishlist</h5></div></div>
@@ -148,7 +144,65 @@ function wishlist(props) {
               <AppFooter />
 
             </div>
-          </> : <>
+            <div className="cover_container">
+              <div className="garmentcontentrow wishlist_container">
+                {/* Create code ----------------------- */}
+                {emptproductlist === true ? (
+                  <div className="order_empty_div empty-list"> Empty wishlist List</div>
+                ) : arrllist.length <= 0 ? (
+                  <div className="loader-container_profile empty-list">
+                    <div className="loader_profile"></div>
+                  </div>
+                ) : (
+                  arrllist.map((item, key) => (
+                    <div
+                      className="productcoumen"
+                      key={key}
+                      style={{ cursor: 'pointer', paddingTop: 5 }}
+                    >
+                      <div className="producticones ipad_producticones">
+                        <i className="fa fa-heart" onClick={() => removeprdWishlist(item.wid)}></i>
+                      </div>
+                      {item.image_128 !== false ? (
+                        <img
+                          src={`data:image/jpeg;base64,${item.image_128}`}
+                          className="dashboard_card_image kapadimages imgcss"
+                          onError={(e) => {
+                            e.target.src = noImages
+                          }}
+                          onClick={() => {
+                            showProductDetails(item)
+                          }}
+                        />
+                      ) : (
+                        <>
+                          <img
+                            src={noImages}
+                            className="dashboard_card_image kapadimages nunimg"
+                            onClick={() => {
+                              showProductDetails(item)
+                            }}
+                          />
+                        </>
+                      )}
+                      <div
+                        onClick={() => {
+                          showProductDetails(item)
+                        }}
+                      >
+                        <h4>{item.name}</h4>
+                        <p>{item.categ_id}</p>
+                        <img src={Rssimbol} style={{ marginLeft: 10 }} />
+                        <span style={{ fontWight: 600, marginLeft: 5 }}>{item.list_price}</span>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
             <ProductDetail
               ProductDatailItem={ProductDatailItem}
               UserData={props.UserData}
@@ -157,12 +211,11 @@ function wishlist(props) {
               statusForHart={false}
             />
           </>
-        }
+        )}
       </>
-
     </div>
    
   );
 }
 
-export default wishlist;
+export default wishlist

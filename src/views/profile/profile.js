@@ -14,10 +14,10 @@ import webicon from '../../assets/images/higrow/contentimg/Vector (9).svg'
 import addressicon from '../../assets/images/higrow/contentimg/Vector (10).svg'
 import collctimg from '../../assets/images/higrow/image 73.svg'
 import { useNavigate, useParams } from 'react-router-dom'
-// import { UserDetails } from '../api/api'
+import { UserDetails } from '../api/api'
 import { CSidebar } from '@coreui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import noImages from "../../assets/image/noimage.png"
+import noImages from '../../assets/image/noimage.png'
 function profile(props) {
   const { UserData } = props
   const navigate = useNavigate()
@@ -37,16 +37,16 @@ function profile(props) {
   return (
     <div className="dashboardDiv profile_contan_space" style={{ width: '100%' }}>
       <CSidebar
-  position="fixed"
-  unfoldable={unfoldable}
-  visible={false} // Set visible to false to hide the sidebar
-  onVisibleChange={(visible) => {
-    dispatch({ type: 'set', sidebarShow: visible })
-  }}
-  className='sidebar'
->
-  {/* Sidebar content */}
-</CSidebar>
+        position="fixed"
+        unfoldable={unfoldable}
+        visible={false} // Set visible to false to hide the sidebar
+        onVisibleChange={(visible) => {
+          dispatch({ type: 'set', sidebarShow: visible })
+        }}
+        className="sidebar"
+      >
+        {/* Sidebar content */}
+      </CSidebar>
       <div className="loader"></div>
       <div className="tagdiv profile_tagdiv">
         <i
@@ -64,9 +64,13 @@ function profile(props) {
           <div className="profilecontenar">
             <div className="profileApp mb-3">
               {/* <input type="file" onChange={handleChange} /> */}
-              <img src={`data:image/jpeg;base64,${UserData[0].avatar_1024}`} className='profile_user_image' onError={(e) => {
-                      e.target.src = noImages; 
-                    }}/>
+              <img
+                src={`data:image/jpeg;base64,${UserData[0].avatar_1024}`}
+                className="profile_user_image"
+                onError={(e) => {
+                  e.target.src = noImages
+                }}
+              />
               {/* <span className="camraicon">
                 <i className="fa fa-camera"></i>
               </span> */}
