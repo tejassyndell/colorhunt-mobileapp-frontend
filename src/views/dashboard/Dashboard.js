@@ -666,11 +666,11 @@ const Dashboard = (props) => {
                 ruler={false}
                 step={1}
                 style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                barLeftColor="lightgrey"
-                barInnerColor="rgb(223 10 31)"
-                barRightColor="lightgrey"
-                thumbLeftColor="white"
-                thumbRightColor="white"
+                barLeftColor="black"
+                barInnerColor="black"
+                barRightColor="black"
+                thumbLeftColor="black"
+                thumbRightColor="black"
               />
               <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <button

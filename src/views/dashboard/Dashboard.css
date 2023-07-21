@@ -186,4 +186,9 @@ input[type='checkbox'] {
   }
 
   /* //harshil css */
-  
+ .multi-range-slider .bar-inner{
+    height: 2px;
+ } 
+ .multi-range-slider .thumb::before{
+    
+ }

@@ -7,18 +7,34 @@ import axios from 'axios'
 
 function profile(props) {
 
-  const inputref = useRef()
-  const [image, setImage] = useState('')
+  // const inputref = useRef()
+  // const [image, setImage] = useState('')
+  const [file, setFile] = useState(null)
 
-  const handleimagechange = (e) => {
-    const file = e.target.files[0]
-    console.log(e.target.files[0])
-    setImage(e.target.files[0])
+  const handlefilechange = (e) => {
+    // const file = e.target.files[0]
+    // console.log(e.target.files[0])
+    // setImage(e.target.files[0])
+    setFile(e.target.files[0])
+    console.log(file)
   }
-
-  const handleImageClick = () => {
-    inputref.current.click()
+  const onsave = async(e) => {
+    try {
+      const formdata = new FormData()
+      formdata.append('file', file)
+    
+      await axios.post('http://localhost:4000/uploadimage', formdata, {
+        headers:{'Content-Type':'multipart/form-data'}
+      })
+      console.log("File uploaded Successfully");
+    }
+    catch (error) {
+      console.log('Error uploading File',error)
+    }
   }
+//  const handleImageClick = () => {
+//     inputref.current.click()
+//   }
 
   const navigate = useNavigate()
   const routeChange = () => {
@@ -45,14 +61,14 @@ function profile(props) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Glory:wght@600;700&display=swap"
       />
-  <div className="profile">
+      <div className="profile">
         <div className="profile-child"></div>
-        <img className="menu-bar-icon" alt="" src="./menu bar.png" onClick={routeChange}/>
+        <img className="menu-bar-icon" alt="" src="./menu bar.png" onClick={routeChange} />
 
         <div className="frame-parent">
           <div className="rectangle-wrapper">
-            {image ? (
-              <img className="frame-child" alt="" src={URL.createObjectURL(image)} />
+            {file ? (
+              <img className="frame-child" alt="" src={URL.createObjectURL(file)} />
             ) : (
               <img className="frame-child" alt="" src="/profile.png" />
             )}
@@ -65,7 +81,8 @@ function profile(props) {
                 height="30"
                 viewBox="0 0 30 30"
                 fill="none"
-                onClick={handleImageClick}
+                // onClick={handleImageClick}
+                onClick={handlefilechange}
               >
                 <rect width="30" height="30" rx="5" fill="white" />
                 <path
@@ -73,12 +90,7 @@ function profile(props) {
                   fill="black"
                 />
               </svg>
-              <input
-                type="file"
-                ref={inputref}
-                onChange={handleimagechange}
-                style={{ display: 'none' }}
-              ></input>
+              <input type="file" style={{ display: 'none' }}></input>
             </div>
           </div>
         </div>
@@ -152,7 +164,9 @@ function profile(props) {
           </div>
         ))}
 
-        <div className="save" >SAVE</div>
+        <div className="save" onClick={onsave}>
+          SAVE
+        </div>
       </div>
     </>
   )
