@@ -252,7 +252,7 @@ function cart_list(props) {
                             {/* <div className='productcoumen cart_man' key={key} style={{ cursor: 'pointer', paddingTop: 5 }} > */}
                             {/* <div className='producticones'>
 
-                        <i class="fa fa-heart" onClick={() => removeprdWishlist(item.wid)} ></i>
+                        <i className="fa fa-heart" onClick={() => removeprdWishlist(item.wid)} ></i>
                       </div> */}
 
                             <div className='cart_img_head'>
@@ -274,7 +274,7 @@ function cart_list(props) {
                                   <p>{subitem.colorname}</p>
                                 </div>
                                 <div className='tag_2'>
-                                  <i class="fa fa-trash" style={{ color: "#AE0617" }} onClick={() => { removeitemfromcart(subitem) }}></i>
+                                  <i className="fa fa-trash" style={{ color: "#AE0617" }} onClick={() => { removeitemfromcart(subitem) }}></i>
                                 </div>
                               </div>
                               <div className='cart_rate_container'>
@@ -328,7 +328,7 @@ function cart_list(props) {
                       <p>T-shirt</p>
                     </div>
                     <div className='tag_2'>
-                      <i class="fa fa-trash-o" onClick={() => { removeitemfromcart() }}></i>
+                      <i className="fa fa-trash-o" onClick={() => { removeitemfromcart() }}></i>
                     </div>
                   </div>
                   <div className='cart_rate_container'>

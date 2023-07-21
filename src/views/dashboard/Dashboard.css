@@ -40,11 +40,12 @@ body{
     justify-content: center;
     align-items: center;
     margin-right: 15px !important;
+    width: 40% !important;
   }
   
   .swiper-slide img {
     display: block;
-    width: 130px;
+    width: 100%;
     padding: 5px;
     height: 180px;
     object-fit: cover;
@@ -119,7 +120,11 @@ body{
 .maincontentsection{
     padding-top: 151px;
     height: 89vh;
-    overflow: auto;
+    overflow: scroll;
+}
+.example {
+  scrollbar-width: none;
+  overflow: -moz-scrollbars-none; /* Firefox */
 }
 .innerfilter label{
     font-size: 13px;
@@ -240,9 +245,10 @@ input[type='checkbox'] {
     box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.1);
     margin: 10px 10px;
     border-radius: 10px;
+    height: 34vh;
 }
 .box-items img{
-    width: 100%;
+    width: 93%;
     height: 23vh;
     padding: 10px;
     
@@ -288,6 +294,13 @@ input[type='checkbox'] {
     justify-content: flex-end;
     position: relative;
     top: 32px;
+}
+.box-items img{
+  padding: 5px !important;
+  box-shadow: 1px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin-top: -8px;
+  margin-bottom: 11px;
 }
 
     /* .producticones {

@@ -113,7 +113,7 @@ function orderhistory(props) {
                   ))}
                 </CTable>
             </div>
-            <div className='callsubmitbutton'><button className='callorder'><i class="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now</button></div>
+            <div className='callsubmitbutton'><button className='callorder'><i className="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now</button></div>
              
         </div>
     );

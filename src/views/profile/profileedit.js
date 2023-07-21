@@ -60,7 +60,7 @@ function profileedit(props) {
             <div className='profilecontenar'>
             <div className="profileApp">
             {/* <input type="file" onChange={handleChange} /> */}
-            <img src={collctimg} /><span className='camraicon'><i class="fa fa-camera"></i></span>
+            <img src={collctimg} /><span className='camraicon'><i className="fa fa-camera"></i></span>
             <h6>Sourabh Srivastav</h6>
             <p>sourabhsrivastav@gmail.com</p>
   

@@ -249,7 +249,7 @@ function productdetails(props) {
               <div className="productlikecontent">
                 <h4>{ProductDatailItem.name}</h4>
 
-                <div><i class={heartstatus === false ? 'fa fa-heart-o' : 'fa fa-heart'} onClick={() => { heartstatus === false ? addProductWishlist(ProductDatailItem) : rmvProductWishlist(ProductDatailItem) }} aria-hidden="true"></i> Add to Wishlist</div>
+                <div><i className={heartstatus === false ? 'fa fa-heart-o' : 'fa fa-heart'} onClick={() => { heartstatus === false ? addProductWishlist(ProductDatailItem) : rmvProductWishlist(ProductDatailItem) }} aria-hidden="true"></i> Add to Wishlist</div>
 
               </div>
               {/* <Provider apiKey="acc0dbccce8e557db5ebbe6d605aaa">
@@ -302,7 +302,7 @@ function productdetails(props) {
                 <div className='qunt_count'>{count}</div>
                 <button className='qunt_btn2' onClick={incrementCount}>+</button>
               </div>
-              <button className={btnstatse === false ? 'cart_button1 cart_buttn_bgcolor_deactive' : 'cart_button1 cart_buttn_bgcolor_active'} onClick={() => { radiostatus === true ? addproductCart(ProductDatailItem, UserData) : console.log("not done"); }}><i class="fa fa-shopping-cart"></i> Add to cart</button>
+              <button className={btnstatse === false ? 'cart_button1 cart_buttn_bgcolor_deactive' : 'cart_button1 cart_buttn_bgcolor_active'} onClick={() => { radiostatus === true ? addproductCart(ProductDatailItem, UserData) : console.log("not done"); }}><i className="fa fa-shopping-cart"></i> Add to cart</button>
             </span>
 
 

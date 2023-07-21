@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories } from '../api/api'
+import { getProductName, getCategories, getAddWishlist,getWishlistData } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -120,10 +120,33 @@ const Dashboard = (props) => {
         fetchDataForSelectedCategories();
     }, [selectedCategories]);
 
+    const getWishlist = async () => {
+        // if (UserData.length > 0) {
+          // console.log("done");
+          const data = {
+            party_id : 197
+          }
+          const result = await getWishlistData(data).then((res) => {
+            console.log(res.data);
+            setSelectprd(res.data);
+            // if (res.status == 200) {
+            //     console.log(res.data);
+            // //   setSelectprd(res.data);
+            // }
+    
+          })
+          // console.log(result.data);
+    
+        // }
+        // else {
+        //   ""
+        // }
+    
+      }
 
     useEffect(() => {
-        // getwishlistitem();
-    }, [UserData]);
+        getWishlist();
+    }, []);
 
     useEffect(() => {
         try {
@@ -189,6 +212,21 @@ const Dashboard = (props) => {
 
     }
     //---------------------new change 28-----------------------
+      const loadProductData = async () => {
+    try {
+      const result = await getProductData(page).then((res) => {
+        if (res.status === 200) {
+          setProductData((prev) => [...prev, ...res.data]);
+        }
+      })
+
+      // setLoading(false);
+      // setProductData(res.data)
+      // console.log(res.data, "result.data");
+    } catch (err) {
+      console.log(err, "error in getProductData");
+    }
+  };
 
     // useEffect(() => {
     //   // loadProductData()
@@ -303,23 +341,25 @@ const Dashboard = (props) => {
     };
 
     const addProductWishlist = async (i) => {
-        console.log('a')
-        // let data = {
-        //   userid: UserData[0].id,
-        //   prdprice: i.list_price,
-        //   prdid: i.id
-        // };
-        // // console.log(data);
-        // try {
-        //   await Addinwishlist(data).then((res) => {
-        //     if (res.status === 200) {
-        //       getwishlistitem();
-        //     }
-        //   })
-        //   // toggleHeart(i.id);
-        // } catch (error) {
-        //   console.log(error);
-        // }
+        // console.log(i,'a')
+        let data = {
+            user_id: 197,
+            article_id: i.id,
+        };
+            
+          
+          console.log(data);
+        try {
+          await getAddWishlist(data).then((res) => {
+              console.log('...........');
+              getWishlist();
+            // if (res.status === 200) {
+            // }
+          })
+          // toggleHeart(i.id);
+        } catch (error) {
+          console.log(error);
+        }
       };
 
     const [heartStates, setHeartStates] = useState({});
@@ -370,26 +410,6 @@ const Dashboard = (props) => {
     const [applyrData, setApplyData] = useState([]);
     const [filterDataSearch, setFilterDataSearch] = useState([])
 
-    // const fetchData = (value) => {
-    //     if(value === null){
-    //         console.log('Done');
-
-    //     }
-    //     const filterResult = filterDataSearch.filter((item) =>
-    //     item.ArticleNumber.toString().includes(value.toString()) ||
-    //     item.Category.toLowerCase().includes(value.toLowerCase()) ||
-    //     item.ArticleRate.toString().includes(value.toString()) ||
-    //     item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
-    //     item.Subcategory.toLowerCase().includes(value.toLowerCase())
-    //   );
-      
-    //   console.log(filterResult);
-    //   setNameData(filterResult);
-    //     // setApplyStatushBack(false)
-    //     // setApplyStatushSearch(false)    
-    //     // console.log(filterResult);
-    // };
-
     const [input, setInput] = useState("");
     const handleChange = (e) => {
         const value = e.target.value;
@@ -410,11 +430,7 @@ const Dashboard = (props) => {
       setNameData(filterResult);
       setApplyData(filterResult)
         }
-        // else {
-        //     // setResults([])
-        //     setInput(value);
-        //     fetchData(value)
-        // }
+     
         setInput(value);
         setSerchtext(value);
     };
@@ -549,7 +565,7 @@ const Dashboard = (props) => {
                                 <div className='box-items' key={item.id}>
                                     <div id={item.id} className="producticones" style={{ top:10 }}>
                                     {
-                                      selectedprd.some(i => i.product_id[0] === item.id) ?
+                                      selectedprd.some(i => i.Id === item.id) ?
                                         <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
                                         <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
                                     }
@@ -570,6 +586,7 @@ const Dashboard = (props) => {
                         ) : (
                             applyrData.map((item) => (
                                 <div className='box-items' key={item.id}>
+                                    
                                     <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
                                     <div className='sildercontentprice'>
                                         <p>

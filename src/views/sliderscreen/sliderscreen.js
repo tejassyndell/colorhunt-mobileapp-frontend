@@ -30,9 +30,9 @@ function sliderscreen(props) {
         animate={{opacity:1, translateX : 0}}
         transition={{ duration: 0.5 }}>
             {/* <!-- Carousel wrapper --> */}
-            <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+            <div id="carouselBasicExample" className="carousel slide carousel-fade" data-mdb-ride="carousel">
                 {/* <!-- Indicators --> */}
-                <div class="carousel-indicators">
+                <div className="carousel-indicators">
                     <button
                         type="button"
                         data-mdb-target="#carouselBasicExample"
@@ -66,11 +66,11 @@ function sliderscreen(props) {
 
 
                 {/* <!-- Inner --> */}
-                <div class="carousel-inner">
+                <div className="carousel-inner">
                     {/* <!-- Single item --> */}
-                    <div class="carousel-item active">
-                        <img src={slider1} class="d-block w-100" style={{ height: '100vh' }} alt="Sunset Over the City" />
-                        <div class="carousel-caption1 d-none d-md-block">
+                    <div className="carousel-item active">
+                        <img src={slider1} className="d-block w-100" style={{ height: '100vh' }} alt="Sunset Over the City" />
+                        <div className="carousel-caption1 d-none d-md-block">
                             <img src={logo1} style={{ width: 120, height: 120 }} />
                             <p className='bestpack' style={{ color: 'rgba(255, 255, 255, 1)' }}>SMART  <br />
                                 FORMALS</p>
@@ -81,9 +81,9 @@ function sliderscreen(props) {
                     </div>
 
                     {/* <!-- Single item --> */}
-                    <div class="carousel-item">
-                        <img src={slider2} class="d-block w-100 " style={{ height: '100vh' }} alt="Canyon at Nigh" />
-                        <div class="carousel-caption1 d-none d-md-block" style={{ top:'30%' }}>
+                    <div className="carousel-item">
+                        <img src={slider2} className="d-block w-100 " style={{ height: '100vh' }} alt="Canyon at Nigh" />
+                        <div className="carousel-caption1 d-none d-md-block" style={{ top:'30%' }}>
                             <img src={logo} style={{ width: 120, height: 120 }} />
                             <p className='discounts3'>FLAT <br />
                                40-50% OFF*</p>
@@ -92,9 +92,9 @@ function sliderscreen(props) {
                     </div>
 
                     {/* <!-- Single item --> */}
-                    <div class="carousel-item">
-                        <img src={slider3} class="d-block w-100 " style={{ height: '100vh' }} alt="Cliff Above a Stormy Sea" />
-                        <div class="carousel-caption d-none d-md-block">
+                    <div className="carousel-item">
+                        <img src={slider3} className="d-block w-100 " style={{ height: '100vh' }} alt="Cliff Above a Stormy Sea" />
+                        <div className="carousel-caption d-none d-md-block">
                             <img src={logo} style={{ width: 120, height: 120 }} />
                             <p className='bestpack'>BEST<br />
                                 PICKS</p>
@@ -104,9 +104,9 @@ function sliderscreen(props) {
                         </div>
                     </div>
 
-                    <div class="carousel-item">
-                        <img src={slider4} class="d-block w-100 " style={{ height: '100vh' }} alt="Cliff Above a Stormy Sea" />
-                        <div class="carousel-caption1 d-none d-md-block" style={{ top:40 }}>
+                    <div className="carousel-item">
+                        <img src={slider4} className="d-block w-100 " style={{ height: '100vh' }} alt="Cliff Above a Stormy Sea" />
+                        <div className="carousel-caption1 d-none d-md-block" style={{ top:40 }}>
                             <img src={logo} style={{ width: 120, height: 120 }} />
                             <p className='discounts3'>FLAT <br />
                                20-40% OFF*</p>

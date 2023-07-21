@@ -14,7 +14,7 @@ import webicon from '../../assets/images/higrow/contentimg/Vector (9).svg'
 import addressicon from '../../assets/images/higrow/contentimg/Vector (10).svg'
 import collctimg from '../../assets/images/higrow/image 73.svg'
 import { useNavigate, useParams } from 'react-router-dom'
-import { UserDetails } from '../api/api'
+// import { UserDetails } from '../api/api'
 import { CSidebar } from '@coreui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import noImages from "../../assets/image/noimage.png"
@@ -47,7 +47,7 @@ function profile(props) {
 >
   {/* Sidebar content */}
 </CSidebar>
-      <div class="loader"></div>
+      <div className="loader"></div>
       <div className="tagdiv profile_tagdiv">
         <i
           className="fa fa-angle-left"
@@ -68,12 +68,12 @@ function profile(props) {
                       e.target.src = noImages; 
                     }}/>
               {/* <span className="camraicon">
-                <i class="fa fa-camera"></i>
+                <i className="fa fa-camera"></i>
               </span> */}
               <h6>{UserData[0].name}</h6>
               <p>{UserData[0].email}</p>
 
-              {/* <button onClick={profileeditform}><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;Edit Profile</button> */}
+              {/* <button onClick={profileeditform}><i className="fa fa-pencil" aria-hidden="true"></i> &nbsp;Edit Profile</button> */}
             </div>
             {/* <img src={linecontent} style={{ width:'100%',marginTop:10 }}/> */}
             <div className="formprofile">
@@ -150,9 +150,9 @@ function profile(props) {
       )}
 
       <div>
-        {/* <div class="ball-box">
+        {/* <div className="ball-box">
 
-<ul class="white-ball">
+<ul className="white-ball">
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
@@ -166,7 +166,7 @@ function profile(props) {
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
     <li style={{ background:'rgba(174, 6, 23, 1)' }}></li>
 </ul>
-<ul class="red-ball">
+<ul className="red-ball">
     <li></li>
     <li></li>
     <li></li>

@@ -14,7 +14,7 @@ export const loginAuth = async (user) => {
 //---------------------new change 28-----------------------
 export const getProductName = async ()=>{
   try{
-    return await axios.get(`${url}/grlAllArticles`)
+    return await axios.get(`${url}/gatAllArticles`)
   }
  catch(error){
     console.log(error, 'err in react api')
@@ -31,6 +31,32 @@ export const getCategories = async ()=>{
     console.log(error, 'err in react api')
  }
 }
+
+// getAddWishlist/////
+
+export const getAddWishlist = async (data)=>{
+console.log(data);
+  try{
+    return await axios.post(`${url}/AddWishlist`,data)
+  }
+ catch(error){
+  console.log(error, 'err in react api')
+ }
+}
+
+export const getWishlistData = async (data)=>{
+  try{
+    return await axios.post(`${url}/getWishlist`,data)
+  }
+ catch(error){
+    console.log(error, 'err in react api')
+ }
+}
+
+
+
+
+
 
 
 export const getNewImage = async (id)=>{

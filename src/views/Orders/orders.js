@@ -244,7 +244,7 @@ function orders(props) {
                   ))}
                 </CTable>
               </div>
-              <div className='callsubmitbutton'><button className='callorder'><i class="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now</button></div>
+              <div className='callsubmitbutton'><button className='callorder'><i className="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now</button></div>
 
             </div>
           </> : <>
@@ -259,7 +259,7 @@ function orders(props) {
                 <h5>Order History</h5>
 
               </div>
-              {/* <i class='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
+              {/* <i className='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
 
               <svg className='OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}  width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -316,7 +316,7 @@ function orders(props) {
                 <h5>Order History</h5>
 
               </div>
-              {/* <i class='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
+              {/* <i className='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
 
               {/* <svg className='OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}  width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

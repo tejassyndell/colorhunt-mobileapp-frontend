@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories } from '../api/api'
+import { getProductName, getCategories,getAddWishlist,getWishlistData } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -121,9 +121,6 @@ const Dashboard = (props) => {
   }, [selectedCategories]);
 
 
-  useEffect(() => {
-    // getwishlistitem();
-  }, [UserData]);
 
   useEffect(() => {
     try {
@@ -161,52 +158,6 @@ const Dashboard = (props) => {
   const [Filterstatus, setFilterstatus] = useState(false)
 
 
-  // const loadProductData = async () => {
-  //   try {
-  //     const res = await getDataOfProduct();
-
-  //     setProductData(res.data);
-  //     setOlddata(res.data);
-  //     // setFilterProduct(res.data);
-
-
-  //     setLoading(false);
-  //     // setFilterProduct((prev) => [...prev, ...res.data]);
-  //     // console.log(res.data, "result.data");
-  //   } catch (err) {
-  //     console.log(err, "error in getProductData");
-  //   }
-  // };
-
-
-
-  // useEffect(() => {
-  //   loadProductData()
-  //   //LoadLoginSession()
-  // }, [])
-
-  //  const handleScroll = () => {
-  //   console.log(window.innerHeight);
-  //   console.log(document.documentElement.scrollTop);
-  //   console.log(document.documentElement.scrollHeight);
-  //   try {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop + 1 >=
-  //       document.documentElement.scrollHeight
-  //     ) {
-  //       // alert(page);
-  //       setPage((prev) => prev + 1);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  //  useEffect(() => {
-  //   window.addEventListener('scroll',handleScroll)
-  //   return ()=> window.removeEventListener('scroll',handleScroll)
-  //   // $("#scrl1").on('scroll',handleScroll)
-  //   // return () => $('#scrl1').off('scroll', handleScroll);
-  // }, []);
 
 
 
@@ -219,37 +170,7 @@ const Dashboard = (props) => {
 
 
 
-
-  // useEffect(() => {
-  //   // Apply scrolling functionality to the element with the "dashboard_scroll" class
-  //   $('.dashboard_scroll').on('scroll', function() {
-  //     console.log('Scroll event detected');
-  //     // Your scroll event handling logic here
-  //   });
-  // }, []);
-
-
-
-  // const HandleFilterFunctions = () => {
-  //   const min = parseFloat(values[0]);
-  //   const max = parseFloat(values[1]);
-  //   console.log(min, max);
-  //   if (min > 0 || max < 500) {
-  //     // Filter the products based on the price range
-  //     const filteredProducts = ProductData.filter(product => {
-  //       return product.list_price >= min && product.list_price <= max;
-  //     });
-
-  //     // Sort the filtered products by price
-  //     const sortedProducts = filteredProducts.sort((a, b) => a.list_price - b.list_price);
-
-  //     // Update the state or do something with the sorted products
-  //     setFilterProduct(sortedProducts);
-  //   }
-  //   else{
-  //     console.log("not change")
-  //   }
-  // }
+ 
   useEffect(() => {
     getProductcetagory();
   }, [])
@@ -275,45 +196,10 @@ const Dashboard = (props) => {
     }
   }, [serchtext])
 
-  const handleFilter = async (e) => {
-    // if (oldData.length >= 0) {
-    //   const filterResult = oldData.filter(
-    //     (item) =>
-    //       item.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-    //       item.categ_id[1].toString().toLowerCase().includes(e.target.value.toString().toLowerCase()) ||
-    //       item.list_price.toString().toLowerCase().includes(e.target.value.toString().toLowerCase())
-
-    //   )
-    //   setFilterProduct(filterResult)
-    //   // console.log(e.target.value.toString().toLowerCase());
-    // }
-    // else {
-
-    // if (serchtext) {
-    //   const result = await serachProduct(serchtext.toString().toLowerCase())
-    //   // console.log(result);
-    //   setFilterProduct(result.data)
-    //   // console.log("done");
-    // }
-    // console.log(e.item.value);
-    // const result = await serachProduct(e.toString().toLowerCase()).then((res) => {
-    //   if (res.status === 200) {
-    //     setFilterProduct(res.data)
-    //     setLoading(false);
-    //     setOldstatus(true);
-    //     setResults([]);
-    //   }
-    // })
-
-    // }
-
-  }
+  
   //---------------------new change 28-----------------------
 
-  // useEffect(() => {
-  //   // loadProductData()
-  //   setLoading(true)
-  // }, [])
+
 
   const handleSubmit = async (event) => {
     setOtp(true)
@@ -382,32 +268,7 @@ const Dashboard = (props) => {
 
   }
 
-  // const filterData = (item, e) => {
-  //   console.log("done");
-  //   let sdPrds = oldData.slice();
-  //   if (e.target.checked) {
-  //     if (item === "Price (High to Low)") {
-  //       sdPrds = sdPrds.slice().sort((a, b) => b.list_price - a.list_price);
-  //       console.log(sdPrds);
-  //       setFilterProduct(sdPrds);
-  //     }
-  //     if (item === "Price (Low to High)") {
-  //       sdPrds = sdPrds.slice().sort((a, b) => a.list_price - b.list_price);
-  //       console.log(sdPrds);
-  //       setFilterProduct(sdPrds);
-  //     }
-  //     if (item === "cotton") {
-  //       // let catagarfilter = ProductData.filter
-  //       // let catagarfilter = ProductData.filter((item) =>
-  //       // item.categ_id[1].toLowerCase().includes(e.target.value.toLowerCase()))
-  //       console.log("done");
-  //     }
-  //   }
-  //   else {
-  //     setFilterProduct(ProductData);
-  //   }
-
-  // }
+ 
   // Generate string of checked items
   const checkedItems = checked.length
     ? checked.reduce((total, item) => {
@@ -424,44 +285,56 @@ const Dashboard = (props) => {
 
   // ------- add product in wishlist start-------------
   const [selectedprd, setSelectprd] = useState([]);
-  const getwishlistitem = async () => {
-    if (UserData.length > 0) {
+  const getWishlist = async () => {
+    // if (UserData.length > 0) {
       // console.log("done");
-      const result = await getWishlistItems(UserData[0].id).then((res) => {
-        if (res.status === 200) {
-          setSelectprd(res.data);
-        }
+      const data = {
+        party_id : 197
+      }
+      const result = await getWishlistData(data).then((res) => {
+        console.log(res.data);
+        setSelectprd(res.data);
+        // if (res.status == 200) {
+        //     console.log(res.data);
+        // //   setSelectprd(res.data);
+        // }
 
       })
       // console.log(result.data);
 
-    }
-    else {
-      ""
-    }
+    // }
+    // else {
+    //   ""
+    // }
 
   }
 
   // selectedprd.length > 0 ? console.log(selectedprd) : ''
   const addProductWishlist = async (i) => {
-    console.log(i,'a')
-    // let data = {
-    //   userid: UserData[0].id,
-    //   prdprice: i.list_price,
-    //   prdid: i.id
-    // };
-    // console.log(data);
-    // try {
-    //   await Addinwishlist(data).then((res) => {
-    //     if (res.status === 200) {
-    //       // getwishlistitem();
-    //     }
-    //   })
-    //   // toggleHeart(i.id);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    // console.log(i,'a')
+    let data = {
+        user_id: 197,
+        article_id: i.id,
+    };
+        
+      
+      console.log(data);
+    try {
+      await getAddWishlist(data).then((res) => {
+          console.log('...........');
+          getWishlist();
+        // if (res.status === 200) {
+        // }
+      })
+      // toggleHeart(i.id);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  
+  useEffect(() => {
+    getWishlist();
+  }, []);
 
   const rmvProductWishlist = async (i) => {
     console.log( i,'r')
@@ -712,8 +585,8 @@ const Dashboard = (props) => {
                 <div className='sildercontentprice'>
                 <div id={item.id} className="producticones">
                                     {
-                                      selectedprd.some(i => i.product_id[0] === item.id) ?
-                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item.id) }}></i> :
+                                      selectedprd.some(i => i.Id === item.id) ?
+                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
                                         <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
                                     }
                         
