@@ -14,18 +14,6 @@ const Login = React.lazy(() => import('./views/pages/login/Login'))
 function App() {
   
   
-
-  
-
-  
-  //-----------------------new chnage------------------
-
-
-
-
- 
-
-  //-------------------------new change---------------
   return (
 
     <BrowserRouter>
