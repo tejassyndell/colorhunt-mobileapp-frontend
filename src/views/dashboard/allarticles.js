@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories, getAddWishlist,getWishlistData } from '../api/api'
+import { getProductName, getCategories, getAddWishlist,getWishlistData,DeleteWishlist } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -319,26 +319,24 @@ const Dashboard = (props) => {
    
 
     const rmvProductWishlist = async (i) => {
-        console.log('r')
-        // let data = {
-        //     userid: UserData[0].id,
-        //     productid: i.id,
-        // };
-
-        // try {
-        //     const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
-        //     setSelectprd(arr1);
-        //     await unlinkproductdashboard(data).then((res) => {
-        //         if (res.status === 200) {
-        //             // console.log(res);
-
-        //         }
-        //     })
-        //     // setSelectprd(arr1);
-        // } catch (error) {
-        //     console.log(error);
-        // }
-    };
+        console.log( i,'r')
+        let data = {
+          party_id : 197,
+          article_id: i.id,
+        };
+        console.log(data);
+    
+        try {
+          await DeleteWishlist(data).then((res) => {
+            if (res.status === 200) {
+              getWishlist()
+            }
+          })
+          // setSelectprd(arr1);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const addProductWishlist = async (i) => {
         // console.log(i,'a')
@@ -563,7 +561,7 @@ const Dashboard = (props) => {
                         {ApplyStatushBack === true ? (
                             nameData.map((item) => (
                                 <div className='box-items' key={item.id}>
-                                    <div id={item.id} className="producticones" style={{ top:10 }}>
+                                    <div id={item.id} className="producticones producticonesiped" style={{ top:10 }}>
                                     {
                                       selectedprd.some(i => i.Id === item.id) ?
                                         <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
@@ -586,6 +584,14 @@ const Dashboard = (props) => {
                         ) : (
                             applyrData.map((item) => (
                                 <div className='box-items' key={item.id}>
+                                      <div id={item.id} className="producticones producticonesiped" style={{ top:10 }}>
+                                    {
+                                      selectedprd.some(i => i.Id === item.id) ?
+                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
+                                        <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
+                                    }
+                        
+                                  </div>
                                     
                                     <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
                                     <div className='sildercontentprice'>

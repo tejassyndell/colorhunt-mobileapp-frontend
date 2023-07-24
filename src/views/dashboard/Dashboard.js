@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories,getAddWishlist,getWishlistData } from '../api/api'
+import { getProductName, getCategories,getAddWishlist,getWishlistData,DeleteWishlist } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 
 import './Dashboard.css'
@@ -25,16 +25,40 @@ import Reange from 'src/components/range'
 const Dashboard = (props) => {
   const { ProductData, UserData, allData } = props
 
-  const [FilterproductsData, setFilterproductsData] = useState([])
-  const [filterData, setFilterData] = useState([])
   const [nameData, setNameData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [FilterProduct, setFilterProduct] = useState([])
+  // console.log(FilterProduct, 'filterdata')
+  const [ProductsData, setProductData] = useState([])
+  const [isProductDetails, setIsProductDetails] = useState(false)
+  const [otp, setOtp] = useState(false)
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [ProductDatailItem, setProductDataItem] = useState([])
+  const [activeTab, setActiveTab] = useState('sort')
+  const [checked, setChecked] = useState([])
+  const [checkedcetagory, setCheckedcetagory] = useState([])
+  const [activeFilterDiv, setActiveFilterDiv] = useState(true)
+  const [oldData, setOlddata] = useState([]);
+  const Min = 0
+  const Max = 500
+  const [values, setValues] = useState([Min, Max])
+  const [cetaroy, seCetegory] = useState([]);
+  // const [page,setPage]=useState(1);
+  const [serchtext, setSerchtext] = useState();
+  const [oldstatus, setOldstatus] = useState(false);
+  const [click1, setClick1] = useState(true)
+  const [click2, setClick2] = useState(true)
+
+  const [Filterstatus, setFilterstatus] = useState(false)
 
 
   useEffect(() => {
     getproductname();
     getCategoriesname()
+    getProductcetagory();
+    getWishlist();
   }, [])
 
   ////////////// product get api 
@@ -42,7 +66,6 @@ const Dashboard = (props) => {
     const result = await getProductName().then((res) => {
       if (res.status === 200) {
         setNameData(res.data)
-        setFilterData(res.data)
         setFilterDataSearch(res.data)
         setSlidesData(res.data)
         console.log(res.data);
@@ -57,8 +80,6 @@ const Dashboard = (props) => {
       if (res.status === 200) {
         console.log(res.data);
         setCategoriesData(res.data)
-        setFilterproductsData(res.data)
-        setFilterproductsData(res.data)
       }
     })
 
@@ -117,40 +138,9 @@ const Dashboard = (props) => {
 
 
 
-  useEffect(() => {
-    try {
-      setProductData(allData);
-      setOlddata(allData);
-      setLoading(false);
-    } catch (err) {
-      console.log(err, "error in getProductData");
-    }
-  }, [allData])
 
-  const [FilterProduct, setFilterProduct] = useState([])
-  // console.log(FilterProduct, 'filterdata')
-  const [ProductsData, setProductData] = useState([])
-  const [isProductDetails, setIsProductDetails] = useState(false)
-  const [otp, setOtp] = useState(false)
-  const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
-  const [ProductDatailItem, setProductDataItem] = useState([])
-  const [activeTab, setActiveTab] = useState('sort')
-  const [checked, setChecked] = useState([])
-  const [checkedcetagory, setCheckedcetagory] = useState([])
-  const [activeFilterDiv, setActiveFilterDiv] = useState(true)
-  const [oldData, setOlddata] = useState([]);
-  const Min = 0
-  const Max = 500
-  const [values, setValues] = useState([Min, Max])
-  const [cetaroy, seCetegory] = useState([]);
-  // const [page,setPage]=useState(1);
-  const [serchtext, setSerchtext] = useState();
-  const [oldstatus, setOldstatus] = useState(false);
-  const [click1, setClick1] = useState(true)
-  const [click2, setClick2] = useState(true)
 
-  const [Filterstatus, setFilterstatus] = useState(false)
+  
 
 
 
@@ -166,14 +156,8 @@ const Dashboard = (props) => {
 
 
  
-  useEffect(() => {
-    getProductcetagory();
-  }, [])
-  useEffect(() => {
-    if (serchtext) { }
-    else { if (oldData.length > 0) { setFilterProduct(oldData) } else { setFilterProduct(ProductData) } }
-    // setOlddata(ProductData)
-  }, [ProductData])
+  
+
   const getProductcetagory = async () => {
     // const result = await getCategory();
     // console.log(new Set(result.data));
@@ -184,12 +168,7 @@ const Dashboard = (props) => {
 
   //---------------------new change 28-----------------------
 
-  useEffect(() => {
-    if (serchtext) { }
-    else {
-      if (oldData.length > 0) { setFilterProduct(oldData) } else { setFilterProduct(ProductData) }
-    }
-  }, [serchtext])
+ 
 
   
   //---------------------new change 28-----------------------
@@ -327,31 +306,26 @@ const Dashboard = (props) => {
     }
   };
   
-  useEffect(() => {
-    getWishlist();
-  }, []);
+
 
   const rmvProductWishlist = async (i) => {
     console.log( i,'r')
     let data = {
-      userid: 197,
+      party_id : 197,
       article_id: i.id,
     };
     console.log(data);
 
-    // try {
-    //   const arr1 = selectedprd.filter(obj => obj.product_id[0] !== i.id);
-    //   setSelectprd(arr1);
-    //   await unlinkproductdashboard(data).then((res) => {
-    //     if (res.status === 200) {
-    //       // console.log(res);
-
-    //     }
-    //   })
+    try {
+      await DeleteWishlist(data).then((res) => {
+        if (res.status === 200) {
+          getWishlist()
+        }
+      })
       // setSelectprd(arr1);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [heartStates, setHeartStates] = useState({});
@@ -473,7 +447,6 @@ const Dashboard = (props) => {
   }
 
   useEffect(() => {
-    console.log(selectedCategories);
   }, [selectedCategories])
 
   const catagoryHandler = (e) => {

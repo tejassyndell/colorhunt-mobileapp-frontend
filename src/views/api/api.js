@@ -53,6 +53,16 @@ export const getWishlistData = async (data)=>{
  }
 }
 
+export const DeleteWishlist = async (data)=>{
+  console.log(data);
+  try{
+    return await axios.post(`${url}/deletewishlist`,data)
+  }
+ catch(error){
+    console.log(error, 'err in react api')
+ }
+}
+
 
 
 

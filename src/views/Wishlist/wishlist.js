@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { CSidebar } from '@coreui/react'
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getWishlistData} from '../api/api'
-import { productwishlist } from '../api/api'
+import { getWishlistData,DeleteWishlist} from '../api/api'
 import AppFooter from 'src/components/AppFooter'
 import noImages from '../../assets/image/noimage.png'
 import { useSelector, useDispatch } from 'react-redux'
@@ -76,17 +75,48 @@ function wishlist(props) {
       navigate('/dashboard')
     }
   }
+  const getWishlist = async () => {
+    // if (UserData.length > 0) {
+      // console.log("done");
+      const data = {
+        party_id : 197
+      }
+      const result = await getWishlistData(data).then((res) => {
+        console.log(res.data);
+        setprddetails(res.data);
+        // if (res.status == 200) {
+        //     console.log(res.data);
+        // //   setSelectprd(res.data);
+        // }
 
-  const removeprdWishlist = async (wid) => {
+      })
+      // console.log(result.data);
 
-    // console.log(wid);
-    // const result = await unlinkproductwishlist(wid).then((res)=>{
-    //  if(res.status===200){
-    //   setArrlist([]);
-    //   getwishlistitem();
-    //  }
-    // })
-    // console.log(result.data);
+    // }
+    // else {
+    //   ""
+    // }
+
+  }
+
+  const removeprdWishlist = async (i) => {
+    console.log( i,'r')
+    let data = {
+      party_id : 197,
+      article_id: i.Id,
+    };
+    console.log(data);
+
+    try {
+      await DeleteWishlist(data).then((res) => {
+        if (res.status === 200) {
+          getWishlist()
+        }
+      })
+      // setSelectprd(arr1);
+    } catch (error) {
+      console.log(error);
+    }
     
   }
 
@@ -144,67 +174,8 @@ function wishlist(props) {
               <AppFooter />
 
             </div>
-            <div className="cover_container">
-              <div className="garmentcontentrow wishlist_container">
-                {/* Create code ----------------------- */}
-                  {arrllist.map((item, key) => (
-                    <div
-                      className="productcoumen"
-                      key={key}
-                      style={{ cursor: 'pointer', paddingTop: 5 }}
-                    >
-                      <div className="producticones ipad_producticones">
-                        <i className="fa fa-heart" onClick={() => removeprdWishlist(item.wid)}></i>
-                      </div>
-                      {item.image_128 !== false ? (
-                        <img
-                          src={`data:image/jpeg;base64,${item.image_128}`}
-                          className="dashboard_card_image kapadimages imgcss"
-                          onError={(e) => {
-                            e.target.src = noImages
-                          }}
-                          onClick={() => {
-                            showProductDetails(item)
-                          }}
-                        />
-                      ) : (
-                        <>
-                          <img
-                            src={noImages}
-                            className="dashboard_card_image kapadimages nunimg"
-                            onClick={() => {
-                              showProductDetails(item)
-                            }}
-                          />
-                        </>
-                      )}
-                      <div
-                        onClick={() => {
-                          showProductDetails(item)
-                        }}
-                      >
-                        <h4>{item.name}</h4>
-                        <p>{item.categ_id}</p>
-                        <img src={Rssimbol} style={{ marginLeft: 10 }} />
-                        <span style={{ fontWight: 600, marginLeft: 5 }}>{item.list_price}</span>
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
           </>
-        ) : (
-          <>
-            <ProductDetail
-              ProductDatailItem={ProductDatailItem}
-              UserData={props.UserData}
-              selectedprd={arrllist}
-              onPropPassed={() => onPropPassedChange()}
-              statusForHart={false}
-            />
-          </>
-        )}
+        ) : null}
       </>
     </div>
    

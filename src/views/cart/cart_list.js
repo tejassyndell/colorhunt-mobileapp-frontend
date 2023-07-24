@@ -41,27 +41,27 @@ function cart_list(props) {
   const [arrllist, setArrlist] = useState([])
   const [cartstatus, setCartstatus] = useState(true)
   const navigate1 = useNavigate()
-  useEffect(() => {
-    getcaritem()
-  }, [])
+  // useEffect(() => {
+  //   getcaritem()
+  // }, [])
 
-  const getcaritem = async () => {
-    let data = {
-      userId: props.UserData[0].id,
-    }
-    const result = await getCartData(data).then((res) => {
-      if (res.status === 200) {
-        if (res.data.length <= 0) {
-          setArrlist([])
-          setemptPrdlist(true)
-        } else {
-          setArrlist(res.data)
-          setLoading(false)
-        }
-      }
-    })
-    // console.log(result.data);
-  }
+  // const getcaritem = async () => {
+  //   let data = {
+  //     userId: props.UserData[0].id,
+  //   }
+  //   const result = await getCartData(data).then((res) => {
+  //     if (res.status === 200) {
+  //       if (res.data.length <= 0) {
+  //         setArrlist([])
+  //         setemptPrdlist(true)
+  //       } else {
+  //         setArrlist(res.data)
+  //         setLoading(false)
+  //       }
+  //     }
+  //   })
+  //   // console.log(result.data);
+  // }
   const navigate = useNavigate()
 
   //   const prddetails = (productlist) => {
