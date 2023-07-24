@@ -1,0 +1,213 @@
+/* Header Styles */
+.navbar {
+  max-width: 100%;
+  height: 10vh;
+  border-bottom: 2px solid #ccc;
+}
+.navbar-conatiner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 9vh;
+
+  width: 90%;
+  margin: auto;
+}
+
+.left-side img {
+  max-height: 100%;
+  max-width: 100%;
+}
+.right-side img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.center h1 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.below-header-container {
+  margin: 3% 5%;
+}
+
+/* Individual order styles */
+.order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 15px 15px 15px 15px;
+}
+
+.order img {
+  max-height: 100px;
+  max-width: 100px;
+  float: left;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20%;
+
+  border: none;
+}
+
+.order .order-details {
+  float: left;
+  margin-left: 10px;
+}
+
+.order .order-details p {
+  margin: 5px 0;
+}
+
+.order .left-side {
+  display: flex;
+  align-items: center;
+}
+
+.order .left-side img {
+  max-height: 80px;
+  max-width: 80px;
+  border-radius: 10px; /* Reduced border-radius for a simpler look */
+  margin-right: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.order .left-side .order-details {
+  margin-left: 10px;
+}
+
+.order .left-side .order-details p {
+  margin: 2px 0; /* Reduced margin for a more compact look */
+  font-size: 10px; /* Increased font size for h4-like appearance */
+}
+
+.order .left-side .order-details h4 {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.order .left-side .order-details span {
+  margin: 5px 0; /* Increased margin to separate from p tag */
+  font-size: 18px; /* Increased font size for a more prominent appearance */
+  font-weight: bold; /* Added font-weight for bold text */
+}
+
+.order .right-side {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  padding-bottom: 20%;
+}
+
+.order .right-side img {
+  margin-left: 10px;
+}
+
+/* Promocode input and button styles */
+.promo-code-container {
+  height: 48vh;
+}
+
+.promo-code-input {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.promo-code-input input {
+  padding: 15px 25px;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eeeeee;
+}
+
+.promo-code-container button {
+  padding: 10px 25px;
+  font-size: 14px;
+  font-weight: bold;
+  font-size: large;
+  background-color: #212121;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  bottom: 54px;
+  right: 2%;
+}
+
+/* Add More button styles */
+.add-more-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin: auto;
+}
+
+.add-more-container button {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: right;
+  float: right;
+  background-color: #212121;
+}
+
+/* Total item styles */
+.total-container {
+  width: 90%;
+  margin: auto;
+  margin-top: 15px;
+  height: 6vh;
+}
+
+.total-items {
+  font-size: 19px;
+  font-weight: bold;
+  float: left;
+}
+
+.total-price {
+  font-size: 12px;
+  float: right;
+}
+
+/* Proceed to Checkout button styles */
+.proceed-to-checkout-container {
+  width: 90%;
+  margin: auto;
+  margin: 10px 20px;
+}
+.proceed-to-check {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.proceed-to-checkout-container button {
+  padding: 13px 25px;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  color: white;
+  background-color: #212121;
+  width: 100%;
+}
+.placeOrder-icon {
+  float: right;
+}

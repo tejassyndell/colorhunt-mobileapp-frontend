@@ -1,0 +1,119 @@
+/* Add these styles to your existing CSS or Notification.css file */
+
+.notification {
+  max-width: 100%;
+  height: 10vh;
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-conatiner {
+  display: flex;
+  align-items: center;
+  height: 9vh;
+  width: 90%;
+  margin: auto;
+}
+
+.notification-left-side img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.notification-center {
+  flex: 1;
+  text-align: center;
+}
+
+.notification-center h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+/* Notification Body Styles */
+
+.notification-body {
+  margin: 20px;
+  justify-content: center;
+  height: 74vh;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.notification-item-image {
+  max-width: 60px;
+  height: 9vh;
+}
+
+.notification-item-image img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+}
+
+.notification-item-description {
+  flex: 2;
+  padding-left: 5px;
+}
+.notification-item-description p {
+    font-size: 12px;
+   justify-content: center;
+    font-weight: bold;
+    width: 90%;
+}
+
+.notification-item-time {
+  flex: 0.2;
+  text-align: right;
+}
+.notification-item-time p{
+    font-size: 10px;
+    font-weight: bold;
+
+}
+
+
+/* Add any additional styling as needed */
+
+/* short cart key of Navigation */
+
+.Navigation-bar{
+    max-width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Navigation-container{
+    display: flex;
+    align-items: center;
+    height: 9vh;
+    width: 90%;
+    margin: auto;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 25px 25px;
+        background-color: #212121;
+
+
+
+}
+
+
+.Navigation-container img{
+    margin-left: 11% ;
+    cursor: pointer;
+
+}
+
