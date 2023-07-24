@@ -10,7 +10,6 @@ const PrivacyPolicy = React.lazy(() => import('./views/PrivacyPolicy/Privacypoli
 const ContactUs = React.lazy(() => import('./views/Contact-Us/contact-us.js'))
 const Profiledetils = React.lazy(() => import('./views/profile/profile.js'))
 const profileeditform = React.lazy(() => import('./views/profile/profileedit.js'))
-const Productdetails = React.lazy(() => import('./views/dashboard/productdetails.js'))
 const OrderHistory = React.lazy(() => import('./views/Orders/orderhistory'))
 const Cart = React.lazy(() => import('./views/cart/notification'))
 const HomePage = React.lazy(() => import('./views/pages/homepage/Homepage'))
@@ -30,7 +29,6 @@ const routes = [
   { path: '/contact-us', name: 'Users / Edit User', element: ContactUs },
   { path: '/profile', name: 'Users / Edit User', element: Profiledetils },
   { path: '/profileedit', name: 'Users / Edit User', element: profileeditform },
-  { path: '/productdetails', name: 'Users / Edit User', element: Productdetails },
   { path: '/orderhistory', name: 'Users / Edit User', element: OrderHistory },
   { path: '/home-page', name: 'home Page ', element: HomePage },
   { path: '/cart', name: 'Cart', element: Cart },

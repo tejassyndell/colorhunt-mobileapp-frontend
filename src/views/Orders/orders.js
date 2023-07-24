@@ -26,7 +26,7 @@ import AppFooter from 'src/components/AppFooter'
 function orders(props) {
   const [OrderData, setOrderData] = useState([])
   const [FilterOrderData, setFilterOrderData] = useState([])
-  const [isOrderHistory, setIsOrderHistory] = useState(false)
+  const [isOrderHistory, setIsOrderHistory] = useState(true)
   const [OrderHistoryData, setOrderHistoryData] = useState()
   const [HistoryFilterData, setHistoryFilterData] = useState([])
   const [NoOrderList, setNoOrderList] = useState(false)
@@ -61,26 +61,26 @@ function orders(props) {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   // const LoadOrderDetails = async (id) => {
-  //   const result = await OrderDetails(id).then((res) => {
-  //     if (res.status === 200) {
-  //       setOrderData(res.data)
-  //       setFilterOrderData(res.data)
-  //       // console.log(res.data)
-  //       if (res.data == 0) {
-  //         setNoOrderList(true)
-  //       }
-  //     }
-  //   })
+  //   // const result = await OrderDetails(id).then((res) => {
+  //   //   if (res.status === 200) {
+  //   //     setOrderData(res.data)
+  //   //     setFilterOrderData(res.data)
+  //   //     // console.log(res.data)
+  //   //     if (res.data == 0) {
+  //   //       setNoOrderList(true)
+  //   //     }
+  //   //   }
+  //   // })
   // }
 
-  // const LoadOrderHistory = async (id) => {
-  //   const result = await OrderHistory(id).then((res) => {
-  //     if (res.status === 200) {
-  //       setOrderHistoryData(res.data)
-  //       // console.log(res.data, "history")
-  //     }
-  //   })
-  // }
+  // // const LoadOrderHistory = async (id) => {
+  // //   const result = await OrderHistory(id).then((res) => {
+  // //     if (res.status === 200) {
+  // //       setOrderHistoryData(res.data)
+  // //       // console.log(res.data, "history")
+  // //     }
+  // //   })
+  // // }
 
   const Navigate = useNavigate()
 
@@ -89,7 +89,8 @@ function orders(props) {
   }
 
   const routeChangeBack = () => {
-    setIsOrderHistory(false)
+    // setIsOrderHistory(false)
+    Navigate('/dashboard')
   }
 
   const orderHistory = (item) => {
@@ -98,11 +99,11 @@ function orders(props) {
     setHistoryFilterData(orderHistoryData)
   }
 
-  useEffect(() => {
-    const storedData = localStorage.getItem('userId')
-    LoadOrderDetails(storedData)
-    LoadOrderHistory(storedData)
-  }, [])
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem('userId')
+  //   LoadOrderDetails(storedData)
+  //   LoadOrderHistory(storedData)
+  // }, [])
 
   //for filter function
   const handleStartDateChange = (e) => {
@@ -168,318 +169,319 @@ function orders(props) {
   }
 
   return (
-    <div className="dashboardDiv order_title_header">
-      <CSidebar
-        position="fixed"
-        unfoldable={unfoldable}
-        visible={false} // Set visible to false to hide the sidebar
-        onVisibleChange={(visible) => {
-          dispatch({ type: 'set', sidebarShow: visible })
-        }}
-        className="sidebar"
-      >
-        {/* Sidebar content */}
-      </CSidebar>
+    // <div className="dashboardDiv order_title_header">
+    //   <CSidebar
+    //     position="fixed"
+    //     unfoldable={unfoldable}
+    //     visible={false} // Set visible to false to hide the sidebar
+    //     onVisibleChange={(visible) => {
+    //       dispatch({ type: 'set', sidebarShow: visible })
+    //     }}
+    //     className="sidebar"
+    //   >
+    //     {/* Sidebar content */}
+    //   </CSidebar>
 
-      {FilterOrderData.length > 0 ? (
-        <>
-          {isOrderHistory === true ? (
-            <>
-              {/* <AppHeaderPadding/> */}
+    //   {FilterOrderData.length > 0 ? (
+    //     <>
+    //       {isOrderHistory === true ? (
+    //         <>
+    //           {/* <AppHeaderPadding/> */}
 
-              <div className="tagdiv tagdiv_order mb-3 mt-3">
-                <i
-                  className="fa fa-angle-left"
-                  onClick={routeChangeBack}
-                  style={{ position: 'absolute' }}
-                  aria-hidden="true"
-                ></i>
-                <div className="tagnames tagname_ord_details">
-                  <h5>Order Detail</h5>
-                </div>
+    //           <div className="tagdiv tagdiv_order mb-3 mt-3">
+    //             <i
+    //               className="fa fa-angle-left"
+    //               onClick={routeChangeBack}
+    //               style={{ position: 'absolute' }}
+    //               aria-hidden="true"
+    //             ></i>
+    //             <div className="tagnames tagname_ord_details">
+    //               <h5>Order Detail</h5>
+    //             </div>
 
-                <div style={{ width: '100%', overflowX: 'auto' }}>
-                  <CTable
-                    className="alldriverTable"
-                    style={{ tableLayout: 'fixed', textAlign: 'center' }}
-                  >
-                    <CTableHead>
-                      <CTableRow style={{ verticalAlign: 'middel' }} className="tablehadeorder">
-                        <CTableHeaderCell className=" drivertablehadding " style={{ width: 30 }}>
-                          No
-                        </CTableHeaderCell>
+    //             <div style={{ width: '100%', overflowX: 'auto' }}>
+    //               <CTable
+    //                 className="alldriverTable"
+    //                 style={{ tableLayout: 'fixed', textAlign: 'center' }}
+    //               >F
+    //                 <CTableHead>
+    //                   <CTableRow style={{ verticalAlign: 'middel' }} className="tablehadeorder">
+    //                     <CTableHeaderCell className=" drivertablehadding " style={{ width: 30 }}>
+    //                       No
+    //                     </CTableHeaderCell>
 
-                        <CTableHeaderCell className=" drivertablehadding " style={{ width: 100 }}>
-                          Name
-                        </CTableHeaderCell>
-                        <CTableHeaderCell className=" drivertablehadding " style={{ width: 65 }}>
-                          Quantity
-                        </CTableHeaderCell>
-                        <CTableHeaderCell className=" drivertablehadding " style={{ width: 80 }}>
-                          Unit Price
-                        </CTableHeaderCell>
-                        <CTableHeaderCell className=" drivertablehadding " style={{ width: 85 }}>
-                          Sub Total
-                        </CTableHeaderCell>
-                      </CTableRow>
-                    </CTableHead>
-                    {HistoryFilterData.map((user, index) => (
-                      <CTableBody key={index}>
-                        <CTableRow
-                          style={{
-                            width: '100%',
-                            borderBottom: '1px solid #d8dbe0',
-                            borderTop: '1px solid #d8dbe0',
-                          }}
-                        >
-                          <CTableDataCell className="drivertablerows" style={{}}>
-                            {index + 1}
-                          </CTableDataCell>
+    //                     <CTableHeaderCell className=" drivertablehadding " style={{ width: 100 }}>
+    //                       Name
+    //                     </CTableHeaderCell>
+    //                     <CTableHeaderCell className=" drivertablehadding " style={{ width: 65 }}>
+    //                       Quantity
+    //                     </CTableHeaderCell>
+    //                     <CTableHeaderCell className=" drivertablehadding " style={{ width: 80 }}>
+    //                       Unit Price
+    //                     </CTableHeaderCell>
+    //                     <CTableHeaderCell className=" drivertablehadding " style={{ width: 85 }}>
+    //                       Sub Total
+    //                     </CTableHeaderCell>
+    //                   </CTableRow>
+    //                 </CTableHead>
+    //                 {HistoryFilterData.map((user, index) => (
+    //                   <CTableBody key={index}>
+    //                     <CTableRow
+    //                       style={{
+    //                         width: '100%',
+    //                         borderBottom: '1px solid #d8dbe0',
+    //                         borderTop: '1px solid #d8dbe0',
+    //                       }}
+    //                     >
+    //                       <CTableDataCell className="drivertablerows" style={{}}>
+    //                         {index + 1}
+    //                       </CTableDataCell>
 
-                          <CTableDataCell className="drivertablerows">{user.name}</CTableDataCell>
-                          <CTableDataCell className="drivertablerows">
-                            {user.product_uom_qty}
-                          </CTableDataCell>
-                          <CTableDataCell className="drivertablerows">
-                            {user.price_unit}
-                          </CTableDataCell>
-                          <CTableDataCell className="drivertablerows">
-                            ₹ &nbsp;{user.price_subtotal}
-                          </CTableDataCell>
-                        </CTableRow>
-                      </CTableBody>
-                    ))}
-                  </CTable>
-                </div>
-                <div className="callsubmitbutton">
-                  <button className="callorder">
-                    <i className="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="tagdiv mb-3 iph_hd">
-                <i
-                  className="fa fa-angle-left"
-                  onClick={routeChange}
-                  style={{ position: 'absolute' }}
-                  aria-hidden="true"
-                ></i>{' '}
-                <div className="tagnames">
-                  <h5>Order History</h5>
-                </div>
-                {/* <i className='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
-                <svg
-                  className="OrderFilter_Filter_icon"
-                  onClick={() => {
-                    setFilterDiv(true)
-                  }}
-                  width="23"
-                  height="22"
-                  viewBox="0 0 23 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+    //                       <CTableDataCell className="drivertablerows">{user.name}</CTableDataCell>
+    //                       <CTableDataCell className="drivertablerows">
+    //                         {user.product_uom_qty}
+    //                       </CTableDataCell>
+    //                       <CTableDataCell className="drivertablerows">
+    //                         {user.price_unit}
+    //                       </CTableDataCell>
+    //                       <CTableDataCell className="drivertablerows">
+    //                         ₹ &nbsp;{user.price_subtotal}
+    //                       </CTableDataCell>
+    //                     </CTableRow>
+    //                   </CTableBody>
+    //                 ))}
+    //               </CTable>
+    //             </div>
+    //             <div className="callsubmitbutton">
+    //               <button className="callorder">
+    //                 <i className="fa fa-phone orderhistoryphone" aria-hidden="true"></i>Call Us Now
+    //               </button>
+    //             </div>
+    //           </div>
+    //         </>
+    //       ) : (
+    //         <>
+    //           <div className="tagdiv mb-3 iph_hd">
+    //             <i
+    //               className="fa fa-angle-left"
+    //               onClick={routeChange}
+    //               style={{ position: 'absolute' }}
+    //               aria-hidden="true"
+    //             ></i>{' '}
+    //             <div className="tagnames">
+    //               <h5>Order History</h5>
+    //             </div>
+    //             {/* <i className='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
+    //             <svg
+    //               className="OrderFilter_Filter_icon"
+    //               onClick={() => {
+    //                 setFilterDiv(true)
+    //               }}
+    //               width="23"
+    //               height="22"
+    //               viewBox="0 0 23 22"
+    //               fill="none"
+    //               xmlns="http://www.w3.org/2000/svg"
+    //             >
+    //               <path
+    //                 fill-rule="evenodd"
+    //                 clip-rule="evenodd"
+    //                 d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z"
+    //                 stroke="black"
+    //                 stroke-width="2"
+    //                 stroke-linecap="round"
+    //                 stroke-linejoin="round"
+    //               />
+    //             </svg>
+    //           </div>
 
-              {FilterOrderData.map((item) => (
-                <div
-                  className="garmentcontentrow mt-3"
-                  style={{
-                    backgroundColor: 'rgba(242, 242, 242, 1)',
-                    borderRadius: 8,
-                    justifyContent: 'initial',
-                    paddingTop: 0,
-                  }}
-                >
-                  <div
-                    className="editicon"
-                    style={{ display: 'flex' }}
-                    onClick={() => {
-                      orderHistory(item.name)
-                    }}
-                  >
-                    <img src={contentimages} className="ordercontentimg" />
-                    <div>
-                      <h4>{item.name}</h4>
-                      <p>{moment(item.date_order).format('DD-MM-YYYY')}</p>
-                      <img src={Rssimbol} style={{ marginLeft: 10 }} />
-                      <span style={{ fontWeight: 600, marginLeft: 5 }}>{item.amount_total}</span>
-                    </div>
-                  </div>
-                  <div className="editicon lastcontent">
-                    <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          {NoOrderList === true ? (
-            <>
-              <div className="tagdiv mb-3">
-                <i
-                  className="fa fa-angle-left"
-                  onClick={routeChange}
-                  style={{ position: 'absolute' }}
-                  aria-hidden="true"
-                ></i>{' '}
-                <div className="tagnames">
-                  <h5>Order Detail</h5>
-                </div>
-                {/* <svg className='OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}  width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg> */}
-              </div>
-              <div className="order_empty_div" style={{ height: '80vh' }}>
-                {' '}
-                Empty Order List
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="loader-container_profile">
-                <div className="tagdiv mb-3 iph_hd">
-                  <i
-                    className="fa fa-angle-left"
-                    onClick={routeChange}
-                    style={{ position: 'absolute' }}
-                    aria-hidden="true"
-                  ></i>{' '}
-                  <div className="tagnames">
-                    <h5>Order History</h5>
-                  </div>
-                  {/* <i className='fa fa-filter OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}></i> */}
-                  {/* <svg className='OrderFilter_Filter_icon' onClick={() => { setFilterDiv(true) }}  width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4756 1.85821L1.48523 2.47986L9.77541 11.6866L9.97869 18.2235L14.0389 20.0982L13.7735 11.5623L21.4756 1.85821Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg> */}
-                </div>
+    //           {FilterOrderData.map((item) => (
+    //             <div
+    //               className="garmentcontentrow mt-3"
+    //               style={{
+    //                 backgroundColor: 'rgba(242, 242, 242, 1)',
+    //                 borderRadius: 8,
+    //                 justifyContent: 'initial',
+    //                 paddingTop: 0,
+    //               }}
+    //             >
+    //               <div
+    //                 className="editicon"
+    //                 style={{ display: 'flex' }}
+    //                 onClick={() => {
+    //                   orderHistory(item.name)
+    //                 }}
+    //               >
+    //                 <img src={contentimages} className="ordercontentimg" />
+    //                 <div>
+    //                   <h4>{item.name}</h4>
+    //                   <p>{moment(item.date_order).format('DD-MM-YYYY')}</p>
+    //                   <img src={Rssimbol} style={{ marginLeft: 10 }} />
+    //                   <span style={{ fontWeight: 600, marginLeft: 5 }}>{item.amount_total}</span>
+    //                 </div>
+    //               </div>
+    //               <div className="editicon lastcontent">
+    //                 <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+    //               </div>
+    //             </div>
+    //           ))}
+    //         </>
+    //       )}
+    //     </>
+    //   ) : (
+    //     <>
+    //       {NoOrderList === true ? (
+    //         <>
+    //           <div className="tagdiv mb-3">
+    //             <i
+    //               className="fa fa-angle-left"
+    //               onClick={routeChange}
+    //               style={{ position: 'absolute' }}
+    //               aria-hidden="true"
+    //             ></i>{' '}
+    //             <div className="tagnames">
+    //               <h5>Order Detail</h5>
+    //             </div>
 
-                <div className="loader_profile"></div>
-              </div>
-            </>
-          )}
-        </>
-      )}
+    //           </div>
+    //           <div className="order_empty_div" style={{ height: '80vh' }}>
+    //             {' '}
+    //             Empty Order List
+    //           </div>
+    //         </>
+    //       ) : (
+    //         <>
+    //           <div className="loader-container_profile">
+    //             <div className="tagdiv mb-3 iph_hd">
+    //               <i
+    //                 className="fa fa-angle-left"
+    //                 onClick={routeChange}
+    //                 style={{ position: 'absolute' }}
+    //                 aria-hidden="true"
+    //               ></i>{' '}
+    //               <div className="tagnames">
+    //                 <h5>Order History</h5>
+    //               </div>
 
-      {FilterDiv === true ? (
-        <>
-          <div className="OrderFilter_exteranal_div">
-            <div className="OrderFilter_main_div">
-              <p
-                className="OrderFilter_close_btn"
-                onClick={() => {
-                  setFilterDiv(false)
-                }}
-              >
-                X
-              </p>
-              <div className="OrderFilter_date_div">
-                <p className="OrderFilter_date_text_span">Search By Date</p>
-                <div className="d-flex">
-                  <input
-                    type="date"
-                    className="date_css"
-                    value={filter.startDate}
-                    onChange={(event) => handleDateFilterChange(event, 'startDate')}
-                  />
-                  <span className="OrderFilter_date_to">To</span>
-                  <input
-                    type="date"
-                    className="date_css"
-                    value={filter.endDate}
-                    onChange={(event) => handleDateFilterChange(event, 'endDate')}
-                  />
-                </div>
-              </div>
+    //             </div>
 
-              <div className="OrderFilter_radio_div">
-                <span className="OrderFilter_radio_span">Search By Status</span>
-                <div className="OrderFilter_radio_details">
-                  <label className="OrderFilter_radio_input">
-                    <input
-                      type="radio"
-                      className="OrderFilter_radio_input_dot"
-                      name="categoryFilter"
-                      value="all"
-                      checked={filter.delivery_status === 'all'}
-                      onChange={handleCategoryFilterChange}
-                    />
-                    &nbsp; All
-                  </label>
-                  <br />
+    //             <div className="loader_profile"></div>
+    //           </div>
+    //         </>
+    //       )}
+    //     </>
+    //   )}
 
-                  <label className="OrderFilter_radio_input">
-                    <input
-                      type="radio"
-                      name="categoryFilter"
-                      value="pending"
-                      className="OrderFilter_radio_input_dot"
-                      checked={filter.delivery_status === 'pending'}
-                      onChange={handleCategoryFilterChange}
-                    />
-                    &nbsp; Pending
-                  </label>
-                  <br />
+    //   {FilterDiv === true ? (
+    //     <>
+    //       <div className="OrderFilter_exteranal_div">
+    //         <div className="OrderFilter_main_div">
+    //           <p
+    //             className="OrderFilter_close_btn"
+    //             onClick={() => {
+    //               setFilterDiv(false)
+    //             }}
+    //           >
+    //             X
+    //           </p>
+    //           <div className="OrderFilter_date_div">
+    //             <p className="OrderFilter_date_text_span">Search By Date</p>
+    //             <div className="d-flex">
+    //               <input
+    //                 type="date"
+    //                 className="date_css"
+    //                 value={filter.startDate}
+    //                 onChange={(event) => handleDateFilterChange(event, 'startDate')}
+    //               />
+    //               <span className="OrderFilter_date_to">To</span>
+    //               <input
+    //                 type="date"
+    //                 className="date_css"
+    //                 value={filter.endDate}
+    //                 onChange={(event) => handleDateFilterChange(event, 'endDate')}
+    //               />
+    //             </div>
+    //           </div>
 
-                  {/* <label>
-                <input
-                  type="radio"
-                  name="categoryFilter"
-                  value="all"
-                  checked={filter.delivery_status === 'dispatched'}
-                  onChange={handleCategoryFilterChange}
-                />
-                Dispatched
-              </label> */}
+    //           <div className="OrderFilter_radio_div">
+    //             <span className="OrderFilter_radio_span">Search By Status</span>
+    //             <div className="OrderFilter_radio_details">
+    //               <label className="OrderFilter_radio_input">
+    //                 <input
+    //                   type="radio"
+    //                   className="OrderFilter_radio_input_dot"
+    //                   name="categoryFilter"
+    //                   value="all"
+    //                   checked={filter.delivery_status === 'all'}
+    //                   onChange={handleCategoryFilterChange}
+    //                 />
+    //                 &nbsp; All
+    //               </label>
+    //               <br />
 
-                  <label className="OrderFilter_radio_input">
-                    <input
-                      type="radio"
-                      name="categoryFilter"
-                      value="fullPartial"
-                      className="OrderFilter_radio_input_dot"
-                      checked={filter.delivery_status === 'fullPartial'}
-                      onChange={handleCategoryFilterChange}
-                    />
-                    &nbsp; Completed
-                  </label>
-                </div>
-              </div>
+    //               <label className="OrderFilter_radio_input">
+    //                 <input
+    //                   type="radio"
+    //                   name="categoryFilter"
+    //                   value="pending"
+    //                   className="OrderFilter_radio_input_dot"
+    //                   checked={filter.delivery_status === 'pending'}
+    //                   onChange={handleCategoryFilterChange}
+    //                 />
+    //                 &nbsp; Pending
+    //               </label>
+    //               <br />
 
-              <div>
-                <button
-                  className="OrderFilter_apply_btn"
-                  onClick={() => {
-                    FilterApplyBtn()
-                  }}
-                >
-                  Apply
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
-      <div className="footer-section w-100">
-        <AppFooter />
+
+
+    //               <label className="OrderFilter_radio_input">
+    //                 <input
+    //                   type="radio"
+    //                   name="categoryFilter"
+    //                   value="fullPartial"
+    //                   className="OrderFilter_radio_input_dot"
+    //                   checked={filter.delivery_status === 'fullPartial'}
+    //                   onChange={handleCategoryFilterChange}
+    //                 />
+    //                 &nbsp; Completed
+    //               </label>
+    //             </div>
+    //           </div>
+
+    //           <div>
+    //             <button
+    //               className="OrderFilter_apply_btn"
+    //               onClick={() => {
+    //                 FilterApplyBtn()
+    //               }}
+    //             >
+    //               Apply
+    //             </button>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </>
+    //   ) : (
+    //     <></>
+    //   )}
+    //   <div className="footer-section w-100">
+    //     <AppFooter />
+    //   </div>
+    // </div>
+
+    <div className="tagdiv tagdiv_order mb-3 mt-3">
+      <i
+        className="fa fa-angle-left"
+        onClick={routeChangeBack}
+        style={{ position: 'absolute' }}
+        aria-hidden="true"
+      ></i>
+      <div className="tagnames tagname_ord_details">
+        <h5>Order Detail</h5>
       </div>
+    <div className='screenview-panding'>
+      Coming Soon
+    </div>
     </div>
   )
 }

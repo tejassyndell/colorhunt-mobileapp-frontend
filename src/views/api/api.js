@@ -45,6 +45,7 @@ console.log(data);
 }
 
 export const getWishlistData = async (data)=>{
+  console.log(data);
   try{
     return await axios.post(`${url}/getWishlist`,data)
   }

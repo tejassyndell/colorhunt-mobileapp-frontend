@@ -1,8 +1,6 @@
 /* eslint-disable */
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense,   } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { CContainer, CSpinner } from '@coreui/react'
-import { useNavigate } from 'react-router-dom'
 
 // routes config
 import routes from '../routes'
@@ -12,20 +10,11 @@ const AppContent = (props) => {
 
   
 
-  // useEffect(() => {
-  //   if(auth==null)
-  //   {
-  //     // console.log("Redirect to login page")
-  //     // Navigate('/login')
-  //   }
-  //   else{
-  //     // console.log("Loggin In")
-  //   }
-  // }, [auth])
+
   
   return (
 
-      <Suspense /* fallback={<CSpinner color="secondary" />} */>
+      <Suspense>
 
         <Routes>
           {routes.map((route, idx) => {

@@ -53,15 +53,6 @@ const Login = () => {
 
 
 
-  // Odoo auth
-
-  const TestOdoo = async () => {
-
-    const combinedArray = [input1, input2, input3, input4];
-  }
-  const onValueChange = (event) => {
-
-  }
   // console.log(VerifyOtp,'otpconform');
   const handleChangePhone = (event) => {
     const inputNumber = event.target.value;
@@ -87,48 +78,10 @@ const Login = () => {
   const isEmailValid = user.phone.pattern == ' ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}';
   const isEMailEmpty = user.phone.length === 0;
 
-  const handelotp = () => {
-    // Navigate('/dashboard')
-  }
+ 
 
-  // const LoadOdooData = async () => {
-  //   const userID = { phone: phoneNumber, formate: formattedNumber }
-  //   const logAuth = await loginAuth(userID)
-  //   if (logAuth.status === 200) {
-  //     setUserIds(logAuth.data[0])
-  //     //localStorage.setItem('userId', logAuth.data[0]);
-  //     setOtp(true)
-  //     //  Navigate('/dashboard')
-  //   }
-  //   else {
-  //     console.log("fail")
-  //     setisUser(true)
-  //   }
-  // }
+  
 
-  // const LoadSendOtp = async () => {
-  //   const result = await sendOtp(phoneNumber)
-  //     .then((res) => {
-  //       console.log(res, "otp res")
-  //     })
-  // }
-
-  const inputFocus = (event) => {
-    const { key, target } = event;
-    if (key === "Delete" || key === "Backspace") {
-      const prev = target.tabIndex - 2;
-      if (prev > -1) {
-        const prevInput = document.querySelector(`input[tabIndex="${prev}"]`);
-        prevInput.focus();
-      }
-    } else {
-      const next = target.tabIndex;
-      if (next < 5) {
-        const nextInput = document.querySelector(`input[tabIndex="${next}"]`);
-        nextInput.focus();
-      }
-    }
-  };
 
   // timer count code
   const Ref = useRef(null);
@@ -185,19 +138,6 @@ const Login = () => {
     setWrongOtp(false)
     clearTimer(getDeadTime());
 
-    // const combinedArray = `${input1}${input2}${input3}${input4}`;
-    // let Otpdata = { phoneNumber: phoneNumber, combinedArray: combinedArray }
-    // const result = await ResendOTP(Otpdata).then((res) => {
-      // if(res.data === "success"){
-      //   console.log(res.data , 'success');
-      //  Navigate('/dashboard')
-      // }
-      // else{
-      //   setWrongOtp(true)
-      // }
-      // console.log(res, 'resendotp');
-    // })
-
   }
 
 
@@ -206,20 +146,6 @@ const Login = () => {
   const verifayotpsend = async () => {
     Navigate('/sliderscreen')
   
-      // const combinedArray = `${input1}${input2}${input3}${input4}`;
-      // let Otpdata = { phoneNumber: phoneNumber, combinedArray: combinedArray }
-      // setVerifayOtp(false)
-      // const result = await verifyOtp(Otpdata)
-        // .then((res) => {
-        //   if (res.data === "success") {
-        //     localStorage.setItem('userId', UserIds);
-        //     Navigate('/dashboard')
-        //   }
-        //   else {
-            
-        //     setWrongOtp(true)
-        //   }
-        // })
     
   }
   const handleSubmit = async (event) => {
@@ -228,13 +154,7 @@ const Login = () => {
     if (form.checkValidity() === true ) {
       setValidated(true)
       setOtp(true)
-      // Set isValid to true if the input value is not empty
-      // setIsValid(event.target.value !== '');
-      // event.preventDefault()
-      // // LoadOdooData()
-      // //LoadSendOtp()
-      // //setOtp(true)
-      // clearTimer(getDeadTime());
+   
     }
     event.preventDefault()
     event.stopPropagation()
@@ -254,13 +174,7 @@ const Login = () => {
     }
   };
 
-  const navigateDashboard = () => {
-    Navigate('/dashboard')
-  }
 
-  const invalidOtpFalseF = () => {
-    setWrongOtp(flase)
-  }
 
 
   const loginscreen = () => {

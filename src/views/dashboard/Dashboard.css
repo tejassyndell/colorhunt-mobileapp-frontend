@@ -342,20 +342,38 @@ input[type='checkbox'] {
   margin-top: -8px;
   margin-bottom: 11px;
 }
+.multi-range-slider{
+  margin-top: 10px;
+}
+/* Add tooltip styles */
+.tooltip {
+  position: absolute;
+  bottom: 20px; /* Adjust the value to position the tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0; /* Initially hide the tooltip */
+  pointer-events: none; /* Prevent the tooltip from affecting mouse interactions */
+  transition: opacity 0.3s ease-in-out;
+}
 
-/* .producticones {
-        top: 8px;
-        text-align: end;
-        position: relative;
-        margin-bottom: -30px;
-        right: 16px;
-        width: 25%;
-        color: white;
-        font-size: 20px;
-        float: right;
-        margin-right: 5px;
-        margin-top: 6px;
-    } */
+/* Show the tooltip when hovering over the handle */
+.multi-range-slider .thumb::before:hover .tooltip {
+  opacity: 1;
+}
+
+
+.multi-range-slider .bar-right{
+  
+    padding: 0px 0px !important;
+}
+.multi-range-slider .bar-left{
+   padding: 0px 0px !important;
+}
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .swiper-slide {
     width: 20% !important;

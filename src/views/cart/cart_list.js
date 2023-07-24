@@ -1,32 +1,11 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from 'react'
-import {
-  CTable,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CCol,
-  CForm,
-  CButton,
-  CFormInput,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-  CHeader,
-} from '@coreui/react'
-import updateicon from '../../assets/images/higrow/Group 3245.svg'
-import contentimages from '../../assets/images/higrow/contentimg/fabric_28 1.png'
-import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+
+import { useNavigate } from 'react-router-dom'
 // import { getWishlistItems, unlinkproductwishlist } from '../api/api'
 // import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
 import noImages from '../../assets/image/noimage.png'
-import ProductDetail from '../dashboard/productdetails'
 import './Cart.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,40 +20,10 @@ function cart_list(props) {
   const [arrllist, setArrlist] = useState([])
   const [cartstatus, setCartstatus] = useState(true)
   const navigate1 = useNavigate()
-  // useEffect(() => {
-  //   getcaritem()
-  // }, [])
-
-  // const getcaritem = async () => {
-  //   let data = {
-  //     userId: props.UserData[0].id,
-  //   }
-  //   const result = await getCartData(data).then((res) => {
-  //     if (res.status === 200) {
-  //       if (res.data.length <= 0) {
-  //         setArrlist([])
-  //         setemptPrdlist(true)
-  //       } else {
-  //         setArrlist(res.data)
-  //         setLoading(false)
-  //       }
-  //     }
-  //   })
-  //   // console.log(result.data);
-  // }
+  
   const navigate = useNavigate()
 
-  //   const prddetails = (productlist) => {
-
-  //     productlist.map(async (i, key) => {
-  //       const result = await productwishlist(i.product_id[0])
-  //       console.log(result);
-  //       setArrlist(prevArrlist => [...prevArrlist, { wid: i.id, ...result.data[0] }]);
-  //     });
-  //     setLoading(false);
-  //   }
-
-  // arrllist.length<0?"":console.log(arrllist);
+  
 
   const [click, setClick] = useState(true)
 
@@ -84,15 +33,7 @@ function cart_list(props) {
       navigate('/dashboard')
     }
   }
-  // arrllist.length > 0 ? console.log(arrllist) : "";
-  //   const removeprdWishlist = async (wid) => {
-
-  //     console.log(wid);
-  //     const result = await unlinkproductwishlist(wid);
-  //     console.log(result.data);
-  //     setArrlist([]);
-  //     getwishlistitem();
-  //   }
+  
 
   const showProductDetails = (item) => {
     // console.log(item, 'itrm')
@@ -217,26 +158,7 @@ function cart_list(props) {
               </div>
             </div>
 
-            {/* { loading===true?
-        <div className="loader-container_profile">
-        <div className="loader_profile"></div>
-      </div>:""
-      } */}
-            {/* <div className='haddersearchcontenar'>
-        <CCol xs="auto">
-          <i className="fa fa-search searchicon" aria-hidden="true"></i>
-                     <CFormInput
-                       className="User_serch mainsearch"
-                       type="text"
-                       placeholder="Search "
-                       style={{paddingleft:32 }}
-                       // value={FilterValues}
-                       // onChange={handleFilter}
-                     />
-                   </CCol>
-             <img src={updateicon}/>
-        </div> */}
-            {/* content secrion */}
+           
 
             <div className="cover_container">
               <div className="garmentcontentrow cart_container">
@@ -329,49 +251,7 @@ function cart_list(props) {
                 )}
               </div>
 
-              {/* <div className='cart_man_container'>
-                <div className='cart_img_head'>
-                  {item.image_128 !== false ? (
-                              <img
-                                src={`data:image/jpeg;base64,${item.image_128}`}
-                                className="img_cart_item"
-                              />
-                            ) : (
-                              <>
-                                <img src={noImages} className="img_cart_item" />
-                              </>
-                            )}
-                </div>
-                <div className='cart_details_container'>
-                  <div className='cart_tag_container'>
-                    <div className='tag_1'>
-                      <h4>{item.name}</h4>
-                      <p>T-shirt</p>
-                    </div>
-                    <div className='tag_2'>
-                      <i className="fa fa-trash-o" onClick={() => { removeitemfromcart() }}></i>
-                    </div>
-                  </div>
-                  <div className='cart_rate_container'>
-                    <div className='cart_tag_container'>
-                      <div className='tag_1'>
-                        <p>Rate</p>
-                        <h4><img src={Rssimbol} /><span style={{ fontWight: 600, marginLeft: 5 }}>{item.list_price}</span></h4>
-                      </div>
-                      <div className='tag_2'>
-                        <span className='update_btn_grp'>
-                          <div className="update_quntatity_header">
-
-                            <button className='update_qunt_btn1' onClick={() => decrementCount(item.id, item.product_uom_qty)}>-</button>
-                            <div className='update_qunt_count'>{count[item.id] || item.product_uom_qty}</div>
-                            <button className='update_qunt_btn2' onClick={() => incrementCount(item.id)}>+</button>
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+            
             </div>
           </>
         ) : (

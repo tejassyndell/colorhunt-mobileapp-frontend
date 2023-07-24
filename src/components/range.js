@@ -10,8 +10,7 @@ function valuetext(value) {
 const CustomSliderThumb = () => {
   return (
     <div className="custom-slider-thumb">
-      {/* Add your custom icon or image here */}
-      {/* Example with a custom icon */}
+     
       <img src={handleicon} alt="Custom Icon" />
     </div>
   );

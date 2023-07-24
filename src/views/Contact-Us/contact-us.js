@@ -109,19 +109,11 @@ function contactus(props) {
                 <CForm noValidate validated={validated} onSubmit={handleSubmit} className='login-form'>
 
                         <CInputGroup className="mb-4 contact_us">
-                            {/* <img src={EmailIcon} className='login-input-icon email-icon'/> */}
                             <CFormInput
                                 type='text'
-                                //   feedbackInvalid={
-                                //     isEMailEmpty
-                                //     ? 'Please Enter Email.'
-                                //     : isEmailValid
-                                //     ? null
-                                //     : 'Please Enter Valid Email'
-                                //   }
+                               
                                 feedbackInvalid="Please enter your name."
                                 placeholder="Name "
-                                // autoComplete="email" 
                                 name='username'
                                 onChange={(e) => { setUserName(e.target.value) }}
                                 className='contect-form'
@@ -131,19 +123,11 @@ function contactus(props) {
 
                         </CInputGroup>
                         <CInputGroup className="mb-4 contact_us">
-                            {/* <img src={EmailIcon} className='login-input-icon email-icon'/> */}
                             <CFormInput
                                 type='email'
-                                //   feedbackInvalid={
-                                //     isEMailEmpty
-                                //     ? 'Please Enter Email.'
-                                //     : isEmailValid
-                                //     ? null
-                                //     : 'Please Enter Valid Email'
-                                //   }
+                                
                                 feedbackInvalid="Please enter your email."
                                 placeholder="Email"
-                                // autoComplete="email" 
                                 name='email'
                                 onChange={(e) => { setEmail(e.target.value) }}
                                 className='contect-form'
@@ -153,19 +137,11 @@ function contactus(props) {
 
                         </CInputGroup>
                         <CInputGroup className="mb-4 contact_us">
-                            {/* <img src={EmailIcon} className='login-input-icon email-icon'/> */}
                             <CFormInput
                                 type='text'
-                                //   feedbackInvalid={
-                                //     isEMailEmpty
-                                //     ? 'Please Enter Email.'
-                                //     : isEmailValid
-                                //     ? null
-                                //     : 'Please Enter Valid Email'
-                                //   }
+                               
                                 feedbackInvalid="Please enter subject here."
                                 placeholder="Subject"
-                                // autoComplete="email" 
                                 name='subject'
                                 onChange={(e) => { setSubject(e.target.value) }}
                                 className='contect-form'
@@ -175,20 +151,12 @@ function contactus(props) {
 
                         </CInputGroup>
                         <CInputGroup className="mb-4 contact_us">
-                            {/* <img src={EmailIcon} className='login-input-icon email-icon'/> */}
                             <textarea
                                 rows="4" cols="50"
                                 type='text'
-                                //   feedbackInvalid={
-                                //     isEMailEmpty
-                                //     ? 'Please Enter Email.'
-                                //     : isEmailValid
-                                //     ? null
-                                //     : 'Please Enter Valid Email'
-                                //   }
+                           
                                 feedbackInvalid="Please enter your massage here."
                                 placeholder="Message"
-                                // autoComplete="email" 
                                 name='message'
                                 onChange={(e) => { setMessage(e.target.value) }}
                                 className='contect-form'
@@ -214,7 +182,6 @@ function contactus(props) {
 
 
 
-                        {/* otppopup */}
 
 
 

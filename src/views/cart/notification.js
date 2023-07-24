@@ -4,7 +4,6 @@ import { useNavigate  } from 'react-router-dom'
 import tshartimag from '../../assets/images/avatars/Instagram post - 1.png'
 import tshartimag1 from '../../assets/images/avatars/Group 12357.png'
 import tshartimag2 from '../../assets/images/avatars/Group 12359.png'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
 
 
 const cart = () => {
