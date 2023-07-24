@@ -68,6 +68,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-html-table-to-excel": "^2.0.0",
+    "react-icons": "^4.10.1",
     "react-image-magnify": "^2.7.4",
     "react-json-to-table": "^0.1.7",
     "react-native": "^0.71.8",
