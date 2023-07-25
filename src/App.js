@@ -6,7 +6,7 @@ import './css/main.css'
 import './css/Rohit.css'
 import './css/ipad.css'
 import { getProductData, getDataOfProduct } from './views/api/api'
-import Detailsofproduct from './views/Product-details/details-of-product'
+// import Detailsofproduct from './views/Product-details/details-of-product'
 
 
 
@@ -112,28 +112,28 @@ function App() {
   //-------------------------new change---------------
   return (
 
-    <>
-    <Detailsofproduct/>
-    </>
-    // <BrowserRouter>
-    //   <Suspense>
-    //     <Routes>
-    //       {/* <Route exact path="/*" name="Login Page" element={<Login />} /> */}
+    // <>
+    // <Detailsofproduct/>
+    // </>
+    <BrowserRouter>
+      <Suspense>
+        <Routes>
+          {/* <Route exact path="/*" name="Login Page" element={<Login />} /> */}
 
 
-    //       <Route exact path="/" name="Login Page" element={<Login />} />
+          <Route exact path="/" name="Login Page" element={<Login />} />
 
-    //       {/* <Route exact path="/" name="Login Page" element={<Login />} />      */}
-    //       <Route path="/*" name="Home" element={<DefaultLayout ProductData={ProductData} allData={allData} />} />
+          {/* <Route exact path="/" name="Login Page" element={<Login />} />      */}
+          <Route path="/*" name="Home" element={<DefaultLayout ProductData={ProductData} allData={allData} />} />
           
-    //     </Routes>
-    //   </Suspense>
-    //   {/* {
-    //     loading === true ? <div className="loader-container_profile">
-    //       <div className="loader_profile"></div>
-    //     </div> : ""
-    //   } */}
-    // </BrowserRouter>
+        </Routes>
+      </Suspense>
+      {/* {
+        loading === true ? <div className="loader-container_profile">
+          <div className="loader_profile"></div>
+        </div> : ""
+      } */}
+    </BrowserRouter>
    
   )
 }

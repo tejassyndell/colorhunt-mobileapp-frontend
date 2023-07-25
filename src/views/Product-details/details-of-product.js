@@ -9,7 +9,7 @@ import Menubar from 'src/assets/Colorhuntimg/product-img/menubar.png'
 import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
 import MinusImg from 'src/assets/Colorhuntimg/product-img/Group 8932.png'
 import PlusImg from 'src/assets/Colorhuntimg/product-img/Group 8931.png'
-import { useNavigate } from 'react-router-dom';
+
 
 export default function Detailsofproduct() {
   const [selectedSize, setSelectedSize] = useState('')
@@ -67,10 +67,7 @@ export default function Detailsofproduct() {
     return `₹${value.toFixed(2)}`;
   };
 
-  const navigate = useNavigate();
-
-  
-
+ 
   return (
     <div className="app-container">
       {/* <div className="reactangle"></div> */}
