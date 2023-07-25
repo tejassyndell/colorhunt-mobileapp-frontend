@@ -49,12 +49,12 @@ const AppFooter = () => {
         <img
           src={carticon}
           style={activeIcon === 'cart' ? iconStyle : {}}
-          onClick={() => { handleIconClick('cart'); Navigate('/cart') }}
+          onClick={() => { handleIconClick('cart'); Navigate('/orderplaced') }}
         />
         <img
           src={alurticon}
           style={activeIcon === 'alert' ? iconStyle : {}}
-          onClick={() => { handleIconClick('alert'); Navigate('/notification') }}
+          onClick={() => { handleIconClick('alert'); Navigate('/notifications') }}
         />
         <img
           src={profileicon}

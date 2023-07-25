@@ -12,11 +12,13 @@ const Profiledetils = React.lazy(() => import('./views/profile/profile.js'))
 const profileeditform = React.lazy(() => import('./views/profile/profileedit.js'))
 const Productdetails = React.lazy(() => import('./views/dashboard/productdetails.js'))
 const OrderHistory = React.lazy(() => import('./views/Orders/orderhistory'))
-const Cart = React.lazy(() => import('./views/cart/notification'))
+const Cart = React.lazy(() => import('./views/cart/notification')) 
 const HomePage = React.lazy(() => import('./views/pages/homepage/Homepage'))
 const cart_list = React.lazy(() => import('./views/cart/cart_list'))
 const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
 const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
+const Notifications = React.lazy(() => import('./views/notifications/PlacedOrderSuccessfull/Notification'));
+const OrderPlaced = React.lazy(()=> import('./views/Orders/OrderPlaced'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -35,7 +37,10 @@ const routes = [
   { path: '/home-page', name: 'home Page ', element: HomePage },
   { path: '/cart', name: 'Cart', element: Cart },
   { path: '/cart_list', name: 'Cart list', element: cart_list },
-  { path: '/sliderscreen', name: 'Cart list', element: Sliderimg }
+  { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
+  {path: '/notifications',name:'Notification list',element: Notifications},
+  {path:'/orderplaced',name:'Orderplaced list',element: OrderPlaced}
+
 
 ]
 

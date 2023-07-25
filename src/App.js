@@ -1,11 +1,13 @@
 /* eslint-disable */
 import React, { Component, Suspense, useState, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import './css/main.css'
 import './css/Rohit.css'
 import './css/ipad.css'
 import { getProductData, getDataOfProduct } from './views/api/api'
+
+
 
 
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
@@ -128,6 +130,7 @@ function App() {
         </div> : ""
       } */}
     </BrowserRouter>
+
 
   )
 }
