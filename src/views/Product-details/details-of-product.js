@@ -139,7 +139,8 @@ export default function Detailsofproduct() {
                 <div className="body">
       {data.map((item, index) => (
         <div className="row" key={index}>
-          <div className="color-box">{item.color}</div>
+          <div className="color-box">
+            <span className='color-data'>{item.color}</span></div>
           <div className="available-box">{item.available}</div>
           <div className="qty-box">
             <div className="top-row">

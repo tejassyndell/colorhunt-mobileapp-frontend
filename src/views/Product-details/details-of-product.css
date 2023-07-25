@@ -17,7 +17,6 @@
     height: 100%;
     /* object-fit: cover; */    
   }
-  
 
   h1 {
     font-size: 24px;
@@ -29,7 +28,7 @@
     margin-top: 20px; */
     position: relative;
     width: 420px;
-    height: 448px;
+    height: 500px;
     left: 0px;
     /* top: 49px; */
     background: #FFFFFF;
@@ -41,9 +40,9 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    /* padding: 10px; */
   }
 
   /* Styling for the images inside Swiper slides */
@@ -51,7 +50,7 @@
     width: 100%;
     height: 60%;
     object-fit: cover;
-    border-radius: 5px;
+    /* border-radius: 5px; */
   }
 
   .artical-name{
@@ -113,8 +112,14 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
   }
 
   .product-detail-sec {
-    margin-right: 10%;
+    /* margin-right: 10%; */
+    margin: auto;
   }
+  .product-detail-sec2 {
+    /* margin-right: 10%; */
+    margin: auto;
+  }
+
 
   .size-container1 {
     margin-left: 19px;
@@ -128,7 +133,7 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
   }
 
   .size-container2 {
-    margin-left: 5%;
+    /* margin-left: 5%; */
     width: 131px;
     height: 53px;
     border: 1px solid #ded6d6;
@@ -143,8 +148,8 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
     left: 25px;
     top: 319px;
     margin-top: 5%;
-    margin-left: 5%;
-    margin-bottom: 1%;
+    margin-left: 10%;
+    margin-bottom: 5%;
     font-family: 'Glory';
     font-style: normal;
     font-weight: 600;
@@ -187,9 +192,9 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
   }
   .m{
     position: absolute;
-    left: 13%;
+    left: 16.5%;
     /* right: 35.1%; */
-    top: 11.5%;
+    top: 13.5%;
     /* bottom: 27.5%; */
     font-family: 'Glory';
     font-style: normal;
@@ -200,9 +205,9 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
   }
   .l{
     position: absolute;
-    left: 27%;
+    left: 31%;
     /* right: 35.1%; */
-    top: 11.5%;
+    top: 13.5%;
     /* bottom: 27.5%; */
     font-family: 'Glory';
     font-style: normal;
@@ -213,9 +218,9 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
   }
   .xl{
     position: absolute;
-    left: 38.5%;
+    left: 42.7%;
     /* right: 35.1%; */
-    top: 11.5%;
+    top: 13.5%;
     /* bottom: 27.5%; */
     font-family: 'Glory';
     font-style: normal;
@@ -254,8 +259,12 @@ background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 25
     display: flex;
     align-items: center;
     position: relative;
-    max-height: 50px;
+    
   }
+.row{
+  margin: auto;
+  max-height: 50px;
+}
   
   .header {
 font-family: 'Glory';
@@ -263,7 +272,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 16px;
 line-height: 18px;
-margin-bottom: -25px;
+margin-bottom: -18px;
 /* identical to box height */
 
 color: #000000;
@@ -284,7 +293,7 @@ color: #000000;
     font-weight: 600;
     font-size: 16px;
     line-height: 18px;
-       
+    margin-left: auto;
     color: #000000;
   }
   
@@ -296,7 +305,7 @@ color: #000000;
     font-size: 16px;
     line-height: 18px;
     color: #000000;
-    margin-left: -30px;
+    /* margin-left: -30px; */
   }
   
 
@@ -356,6 +365,21 @@ color: #000000;
     border-radius: 10px;
     padding: 4px;
     text-align: center;
+  }
+  .color-data{
+    /* position: absolute; */
+left: 8.37%;
+right: 70.93%;
+top: 59.12%;
+bottom: 38.73%;
+
+font-family: 'Glory';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+
+color: #626262;
   }
   .available-box{
   flex: 1;
