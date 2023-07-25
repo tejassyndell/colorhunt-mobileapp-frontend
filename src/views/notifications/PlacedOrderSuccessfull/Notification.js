@@ -5,11 +5,6 @@ import backicon from '../../../assets/images/NavbarIcon/arrow.png'
 import itemImg from '../../../assets/images/higrow/Frame 1171274908 (1).png'
 import itemImg1 from '../../../assets/images/higrow/Frame 1171274908 (2).png'
 import itemImg2 from '../../../assets/images/higrow/Frame 1171274908.png'
-// import Navitem from '../../../assets/images/icons/Vector (3).png'
-// import Navitem1 from '../../../assets/images/icons/Order History (1).png'
-// import Navitem2 from '../../../assets/images/icons/Group 1000005772 (1).png'
-// import Navitem3 from '../../../assets/images/icons/Group 1000005785 (1).png'
-// import Navitem4 from '../../../assets/images/icons/Group 1000005783 (1).png'
 import AppFooter from 'src/components/AppFooter'
 import { useNavigate } from 'react-router-dom'
 
@@ -53,22 +48,7 @@ export default function Notification() {
   const handleGoBack = () => {
     navigate(-1)
   }
-    // Implement logic to navigate back
-  // }
-  // const handleHome = () => {
-  //   //implement to got ot navigation to home  page
-  // }
-  // const handleOrderHistory = () => {
-  //   //implement to got ot navigation to Order history page
-  // }
-  // const handleCart = () => {
-  // }
-  // const handleNotificationPage = () => {
-  //   //implement to got ot navigation to Notifications page
-  // }
-  // const handleUserID = () => {
-  //   //implement to got ot navigation to User pages
-  // }
+  const sortedNotifications = [...notifications].sort((a, b) => (a.seen === b.seen ? 0 : a.seen ? 1 : -1));
 
   return (
     <>
@@ -83,8 +63,11 @@ export default function Notification() {
         </div>
       </header>
       <div className="notification-body">
-        {notifications.map((notification) => (
-          <div className="notification-item" key={notification.id}>
+        {sortedNotifications.map((notification) => (
+          <div
+            className={`notification-item ${notification.seen ? 'seen' : 'unseen'}`}
+            key={notification.id}
+          >
             <div className="notification-item-image">
               <img src={notification.imageSrc} alt="Notification" />
             </div>

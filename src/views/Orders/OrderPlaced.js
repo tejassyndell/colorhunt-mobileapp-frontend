@@ -42,7 +42,7 @@ function OrderPlaced() {
   }
 
   const handleGoToOrderList = () => {
-    // Implement logic to navigate to the order list page
+   navigate('/orderplaced')
   }
 
   const handleDeleteOrder = (orderId) => {
@@ -60,14 +60,14 @@ function OrderPlaced() {
     <>
       <header className="navbar">
         <div className="navbar-conatiner">
-          <div className="left-side" onClick={handleGoBack}>
-            <img src={backicon} alt="Back" />
+          <div className="left-side" >
+            <img src={backicon} alt="Back" onClick={handleGoBack} />
           </div>
           <div className="center">
             <h1>Cart</h1>
           </div>
-          <div className="right-side" onClick={handleGoToOrderList}>
-            <img src={carticon} alt="Order List" />
+          <div className="right-side" >
+            <img src={carticon} alt="Order List" onClick={handleGoToOrderList}/>
           </div>
         </div>
       </header>
