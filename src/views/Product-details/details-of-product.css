@@ -53,6 +53,37 @@
     border-radius: 5px;
   }
 
+  .artical-name{
+    position: absolute;
+    width: 108px;
+    height: 29px;
+    left: 127px;
+    top: 368px;
+
+    font-family: 'Glory';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 29px;
+
+    color: #000000;
+  }
+  .artical-no{
+    position: absolute;
+width: 63px;
+height: 29px;
+left: 240px;
+top: 368px;
+
+font-family: 'Glory';
+font-style: normal;
+font-weight: 600;
+font-size: 26px;
+line-height: 29px;
+
+color: #000000;
+  }
+
   .main-product-detail {
    position: absolute;
     width: 430px;
@@ -212,7 +243,7 @@
   .box {
     flex: 1;
     position: relative;
-    height: 50px;
+    height: 40px;
     /* border: 1px solid #000; */
   }
   
@@ -272,6 +303,7 @@
   background: white;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  margin: 10px;
   
 }
   .row .qty-box span {

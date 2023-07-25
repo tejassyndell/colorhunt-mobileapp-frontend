@@ -6,7 +6,6 @@ import '../Product-details/details-of-product.css'
 import SliderImg1 from 'src/assets/Colorhuntimg/product-img/product1.png'
 import SliderImg2 from 'src/assets/Colorhuntimg/product-img/product2.png'
 import Menubar from 'src/assets/Colorhuntimg/product-img/menubar.png'
-import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
 
 export default function Detailsofproduct() {
@@ -69,6 +68,9 @@ export default function Detailsofproduct() {
           </SwiperSlide>
         </Swiper>
       
+        <span className='artical-name'>Artical</span>
+        <span className='artical-no'>33216</span>
+      
       {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
@@ -128,13 +130,13 @@ export default function Detailsofproduct() {
                               <span>{quantity}</span>
                             </div>
                           </div>
-        <div className="box">
-          <div className="inner-box">
-            <button onClick={handleIncrease}>+</button>
-          </div>
-        </div>
-      </div>
-    </div>
+                            <div className="box">
+                              <div className="inner-box">
+                                <button onClick={handleIncrease}>+</button>
+                              </div>
+                            </div>
+                          </div>
+                     </div>
                     </div>
                   ))}
                 </div>
