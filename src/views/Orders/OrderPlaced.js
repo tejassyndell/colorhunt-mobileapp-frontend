@@ -1,60 +1,60 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import backicon from '../../assets/images/NavbarIcon/arrow.png';
-import carticon from '../../assets/images/NavbarIcon/cart.png';
-import editOder from '../../assets/images/icons/edit (5) 1.png';
-import deletedOrder from '../../assets/images/icons/Vector.png';
-import PlacedOrderImg from '../../assets/images/higrow/image 133.png';
-import PlacedOrderIcon from '../../assets/images/icons/arrow (1).png';
-import './OrderPlaced.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import backicon from '../../assets/images/NavbarIcon/arrow.png'
+import carticon from '../../assets/images/NavbarIcon/cart.png'
+import editOder from '../../assets/images/icons/edit (5) 1.png'
+import deletedOrder from '../../assets/images/icons/Vector.png'
+import PlacedOrderImg from '../../assets/images/higrow/image 133.png'
+import PlacedOrderIcon from '../../assets/images/icons/arrow (1).png'
+import './OrderPlaced.css'
+import { useNavigate } from 'react-router-dom'
 
 function OrderPlaced() {
-  const navigate = useNavigate();
-  const [promoCode, setPromoCode] = useState('');
+  const navigate = useNavigate()
+  const [promoCode, setPromoCode] = useState('')
   const [orderItems, setOrderItems] = useState([
     {
-      id: 83748731,
-      productName: 'Product 1',
-      rate: 20,
+      id: 33216,
+      productName: 'Collar tees',
+      rate: 275.00,
     },
     // Add more items here
-  ]);
+  ])
 
   const handlePromoCodeChange = (event) => {
-    setPromoCode(event.target.value);
-  };
+    setPromoCode(event.target.value)
+  }
 
   const handleApplyPromoCode = () => {
     // Implement logic to apply the promo code here
-  };
+  }
 
   const handleAddMoreItems = () => {
-    navigate('/dashboard');
-  };
+    navigate('/dashboard')
+  }
 
   const handleProceedToCheckout = () => {
     // Implement logic to proceed to checkout
-  };
+  }
 
   const handleGoBack = () => {
-    navigate(-1);
-  };
+    navigate(-1)
+  }
 
   const handleGoToOrderList = () => {
     // Implement logic to navigate to the order list page
-  };
+  }
 
   const handleDeleteOrder = (orderId) => {
     // Implement logic to delete the order item with the given orderId
-    const updatedOrderItems = orderItems.filter((item) => item.id !== orderId);
-    setOrderItems(updatedOrderItems);
-  };
+    const updatedOrderItems = orderItems.filter((item) => item.id !== orderId)
+    setOrderItems(updatedOrderItems)
+  }
 
-  const totalItems = orderItems.length;
-  const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0);
+  const totalItems = orderItems.length
+  const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)
 
-  const cartIsEmpty = orderItems.length === 0;
+  const cartIsEmpty = orderItems.length === 0
 
   return (
     <>
@@ -84,12 +84,13 @@ function OrderPlaced() {
                   <div className="left-side" key={item.id}>
                     <img src={PlacedOrderImg} alt="Order" />
                     <div className="order-details">
-                      <h4>{item.id}</h4>
-                      <p>{item.productName}</p>
-                      <p>
+                      <h4>
+                        <span className="left-order-span">{item.id}</span> <br /> {item.productName}
+                      </h4>
+                      <h4>
                         Rate: <br />
-                        <span>₹{item.rate}</span>
-                      </p>
+                        <span className="left-order-span">₹{item.rate}</span>
+                      </h4>
                     </div>
                   </div>
                 ))}
@@ -104,28 +105,29 @@ function OrderPlaced() {
               </div>
             </div>
             <div className="promo-code-container">
-            <div className="promo-code-input">
-            <input
-              type="text"
-              value={promoCode}
-              onChange={handlePromoCodeChange}
-              placeholder="Promo Code"
-            />
-          </div>
-          <button onClick={handleApplyPromoCode}>Apply</button>
-        </div>
-      <div className="add-more-container">
-        <button onClick={handleAddMoreItems}>Add More</button>
-      </div>
-      <div className="total-container">
-        <div className="total-items">Total ({totalItems} item)</div>
-        <div className="total-price"> Total price {""} <br/> ₹ <span className='total-items'> {totalPrice} </span></div>
-
-      </div>
+              <div className="promo-code-input">
+                <input
+                  type="text"
+                  value={promoCode}
+                  onChange={handlePromoCodeChange}
+                  placeholder="Promo Code"
+                />
+              </div>
+              <button onClick={handleApplyPromoCode}>Apply</button>
+            </div>
+            <div className="add-more-container">
+              <button onClick={handleAddMoreItems}>Add More</button>
+            </div>
+            <div className="total-container">
+              <div className="total-items">Total ({totalItems} item) :</div>
+              <div className="total-price">
+                {' '}
+                Total price {''} <br />  <span className="total-item"> ₹ {totalPrice} </span>
+              </div>
+            </div>
           </>
         )}
       </div>
-      {/* ...Add more and total containers... */}
       <div className="proceed-to-checkout-container">
         {cartIsEmpty ? (
           <div className="proceed-to-createOrder">
@@ -143,7 +145,7 @@ function OrderPlaced() {
         )}
       </div>
     </>
-  );
+  )
 }
 
-export default OrderPlaced;
+export default OrderPlaced
