@@ -19,6 +19,7 @@ import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.
 import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
 import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
 import Reange from 'src/components/range'
+import Detailsofproduct from '../Product-details/details-of-product'
 
 const Dashboard = (props) => {
   const { ProductData, UserData, allData } = props
@@ -46,7 +47,8 @@ const Dashboard = (props) => {
       }
     })
   }
-  //////////////////
+  
+  ////////////////
   const getCategoriesname = async () => {
     const result = await getCategories().then((res) => {
       if (res.status === 200) {
@@ -57,7 +59,8 @@ const Dashboard = (props) => {
       }
     })
   }
-
+ 
+  
   ///// search fuctionality
 
   //// show search fuctionality
@@ -192,6 +195,7 @@ const Dashboard = (props) => {
   const NEWPRODUCTDETAIL = () => {
     navigate('/productdetails')
   }
+  
 
   const showProductDetails = (item) => {
     if (click2 === true) {
@@ -512,7 +516,7 @@ const Dashboard = (props) => {
           >
             {ApplyStatushBack === true
               ? nameData.map((item) => (
-                  <SwiperSlide key={item.id}>
+                  <SwiperSlide key={item.id} >
                     <div className="sildercontentprice">
                       <div id={item.id} className="producticones">
                         {selectedprd.some((i) => i.product_id[0] === item.id) ? (
@@ -531,9 +535,8 @@ const Dashboard = (props) => {
                           ></i>
                         )}
                       </div>
-
+                      
                       <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
-
                       <div>
                         <p>
                           {item.ArticleNumber}
@@ -548,7 +551,7 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
+                      <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`}/>
                       <div>
                         <p>
                           {item.ArticleNumber}
@@ -564,7 +567,7 @@ const Dashboard = (props) => {
         </div>
         <div className="allProduct-section mt-4">
           <div className="product-hed-sec">
-            <p>Kids T-Shirts</p>
+            <p >Kids T-Shirts</p>
             <p>View All</p>
           </div>
           <div>
@@ -580,7 +583,10 @@ const Dashboard = (props) => {
             >
               <SwiperSlide>
                 <div className="sildercontentprice">
-                  <img src={tshartimg} />
+                  <img src={tshartimg}   onClick={() => {
+                        console.log("Image clicked!"); 
+                        navigate('/detailsofproduct'); 
+                      }}/>
                   <div>
                     <p>
                       33178-9
@@ -594,7 +600,10 @@ const Dashboard = (props) => {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="sildercontentprice">
-                  <img src={tshartimg1} />
+                  <img src={tshartimg1} onClick={() => {
+                        console.log("Image clicked!"); 
+                        navigate('/detailsofproduct'); 
+                      }} />
                   <div>
                     <p>
                       33178-9
@@ -608,7 +617,10 @@ const Dashboard = (props) => {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="sildercontentprice">
-                  <img src={tshartimg2} />
+                  <img src={tshartimg2} onClick={() => {
+                        console.log("Image clicked!"); 
+                        navigate('/detailsofproduct'); 
+                      }}/>
                   <div>
                     <p>
                       33178-9
@@ -622,7 +634,10 @@ const Dashboard = (props) => {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="sildercontentprice">
-                  <img src={tshartimg} />
+                  <img src={tshartimg} onClick={() => {
+                        console.log("Image clicked!"); 
+                        navigate('/detailsofproduct'); 
+                      }}/>
                   <div>
                     <p>
                       33178-9
@@ -636,7 +651,10 @@ const Dashboard = (props) => {
               </SwiperSlide>
               <SwiperSlide>
                 <div>
-                  <img src={tshartimg1} />
+                  <img src={tshartimg1} onClick={() => {
+                        console.log("Image clicked!"); 
+                        navigate('/detailsofproduct'); 
+                      }}/>
                   <div className="sildercontentprice">
                     <p>
                       33178-9
