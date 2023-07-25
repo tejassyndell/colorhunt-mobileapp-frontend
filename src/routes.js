@@ -16,6 +16,7 @@ const HomePage = React.lazy(() => import('./views/pages/homepage/Homepage'))
 const cart_list = React.lazy(() => import('./views/cart/cart_list'))
 const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
 const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
+const DetailsOfArticles = React.lazy(() => import('./views/Articles-details/details-of-Articles'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -33,7 +34,8 @@ const routes = [
   { path: '/home-page', name: 'home Page ', element: HomePage },
   { path: '/cart', name: 'Cart', element: Cart },
   { path: '/cart_list', name: 'Cart list', element: cart_list },
-  { path: '/sliderscreen', name: 'Cart list', element: Sliderimg }
+  { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
+  { path: '/Articles-details/:id', name: 'Details Articles', element: DetailsOfArticles }
 
 ]
 

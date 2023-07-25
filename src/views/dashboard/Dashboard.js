@@ -169,9 +169,10 @@ const Dashboard = (props) => {
 
 // image single Article data
 
-const getSingaleartical = (item) =>{
-console.log(item.id);
-}
+const getSingaleartical = (item) => {
+  const ArticalId = item.id;
+  navigate(`/Articles-details/${ArticalId}`); // Pass the ArticalId as a URL parameter to /Articles-details screen
+};
 
   
   
