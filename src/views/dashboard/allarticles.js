@@ -1,27 +1,18 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
-
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
-import { getProductName, getCategories, getAddWishlist,getWishlistData,DeleteWishlist } from '../api/api'
+import { getProductName, getCategories, getAddWishlist, getWishlistData, DeleteWishlist } from '../api/api'
 import { useNavigate } from 'react-router-dom'
-
 import './Dashboard.css'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Pagination } from 'swiper/modules';
-import { AppHeader } from '../../components/index'
 import "./DroupDown.css";
 import "../../css/ipad.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { motion } from "framer-motion"
 import "./serachbar.css"
+import MultiRangeSlider from 'multi-range-slider-react'
 import AppFooter from 'src/components/AppFooter'
-import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.png'
-import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
-import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
 import navbaricon from 'src/assets/Colorhuntimg/navbaricon/menu bar.svg'
 import profileimg from 'src/assets/Colorhuntimg/navbaricon/Group 8919.svg'
-import Reange from 'src/components/range'
-import profile from '../profile/profile'
 
 
 
@@ -32,7 +23,8 @@ const Dashboard = (props) => {
     const [nameData, setNameData] = useState([]);
     const [categoriesData, setCategoriesData] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [showallproduct, setshowallproduct] = useState(true);
+    const [maxprice, setMaxprice] = useState(500)
+    const [minprice, setMinprice] = useState(0)
 
 
     useEffect(() => {
@@ -40,7 +32,7 @@ const Dashboard = (props) => {
         getCategoriesname()
     }, [])
 
-    ////////////// product get api 
+    ////////////// getAritical api 
     const getproductname = async () => {
         const result = await getProductName().then((res) => {
             if (res.status === 200) {
@@ -51,7 +43,7 @@ const Dashboard = (props) => {
         })
 
     }
-    //////////////////
+    //getCategoriesname
     const getCategoriesname = async () => {
         const result = await getCategories().then((res) => {
 
@@ -64,36 +56,11 @@ const Dashboard = (props) => {
 
     }
 
-    ///// search fuctionality 
-
-
-
-
-
-
-    //// show search fuctionality 
+    //// uploard url image 
 
     const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
-    const getLimitedProducts = (products, n) => {
-        const uniqueCategories = new Set();
-        const limitedProducts = [];
-
-        for (const product of products) {
-            if (!uniqueCategories.has(product.Category)) {
-                limitedProducts.push(product);
-                uniqueCategories.add(product.Category);
-
-                if (limitedProducts.length === n) {
-                    break;
-                }
-            }
-        }
-
-        return limitedProducts;
-    };
-
-    const limitedNameData = getLimitedProducts(nameData);
+   
 
     // Function to handle category selection
 
@@ -101,17 +68,11 @@ const Dashboard = (props) => {
     // Function to fetch data for the selected categories from the API
     const fetchDataForSelectedCategories = async () => {
         try {
-            // Replace 'API_ENDPOINT' with your actual API endpoint URL
-            // const response = await fetch('API_ENDPOINT');
-            // if (!response.ok) {
-            //     throw new Error('Failed to fetch data from the API');
-            // }
+
             const data = await response.json();
-            // Filter the data based on selectedCategories
             const filteredData = data.filter((category) => selectedCategories.includes(category.name));
             setCategoryData(filteredData);
         } catch (error) {
-            // console.error(error);
         }
     };
 
@@ -121,28 +82,29 @@ const Dashboard = (props) => {
     }, [selectedCategories]);
 
     const getWishlist = async () => {
-        // if (UserData.length > 0) {
-          // console.log("done");
-          const data = {
-            party_id : 197
-          }
-          const result = await getWishlistData(data).then((res) => {
+        const data = {
+            party_id: 197
+        }
+        const result = await getWishlistData(data).then((res) => {
             console.log(res.data);
             setSelectprd(res.data);
-            // if (res.status == 200) {
-            //     console.log(res.data);
-            // //   setSelectprd(res.data);
-            // }
-    
-          })
-          // console.log(result.data);
-    
-        // }
-        // else {
-        //   ""
-        // }
-    
-      }
+
+
+        })
+
+
+    }
+    // range Filters
+    const handlerangechange = (value) => {
+        setMinprice(values[0])
+        setMaxprice(values[1])
+
+        const sdrpc = nameData.slice()
+        const fildata = sdrpc.filter(
+            (nameData) => nameData.ArticleRate >= values[0] && nameData.ArticleRate <= values[1],
+        )
+        setNameData(fildata.length > 0 ? fildata : sdrpc)
+    }
 
     useEffect(() => {
         getWishlist();
@@ -159,10 +121,8 @@ const Dashboard = (props) => {
     }, [allData])
 
     const [FilterProduct, setFilterProduct] = useState([])
-    // console.log(FilterProduct, 'filterdata')
     const [ProductsData, setProductData] = useState([])
     const [isProductDetails, setIsProductDetails] = useState(false)
-    const [otp, setOtp] = useState(false)
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [ProductDatailItem, setProductDataItem] = useState([])
@@ -207,136 +167,64 @@ const Dashboard = (props) => {
     }, [serchtext])
 
     const handleFilter = async (e) => {
-       
+
         // }
 
     }
     //---------------------new change 28-----------------------
-      const loadProductData = async () => {
-    try {
-      const result = await getProductData(page).then((res) => {
-        if (res.status === 200) {
-          setProductData((prev) => [...prev, ...res.data]);
-        }
-      })
+    const loadProductData = async () => {
+        try {
+            const result = await getProductData(page).then((res) => {
+                if (res.status === 200) {
+                    setProductData((prev) => [...prev, ...res.data]);
+                }
+            })
 
-      // setLoading(false);
-      // setProductData(res.data)
-      // console.log(res.data, "result.data");
-    } catch (err) {
-      console.log(err, "error in getProductData");
-    }
-  };
+            // setLoading(false);
+            // setProductData(res.data)
+            // console.log(res.data, "result.data");
+        } catch (err) {
+            console.log(err, "error in getProductData");
+        }
+    };
 
     // useEffect(() => {
     //   // loadProductData()
     //   setLoading(true)
     // }, [])
 
-    const handleSubmit = async (event) => {
-        setOtp(true)
-    }
 
-    const NEWPRODUCTDETAIL = () => {
-        navigate('/productdetails')
-    }
+    
 
-    const showProductDetails = (item) => {
-        if (click2 === true) {
-            // console.log(item, 'itrm')
-            setClick2(false);
-            setProductDataItem(item)
-            setIsProductDetails(true)
-        }
-    }
-
-    const onPropPassedChange = (checkedcetagory, checked, min, max) => {
-        setClick2(true)
-        // getwishlistitem()
-        setInput("")
-        if (checkedcetagory.length > 0 || checked.length > 0 || min > 0 || max < 500) {
-            setCheckedcetagory(checkedcetagory)
-            setChecked(checked)
-            setValues([min, max])
-            allFileter();
-        } else {
-            console.log(checkedcetagory, checked);
-            setFilterProduct(oldData)
-        }
-
-        setIsProductDetails(false)
-        // console.log(val);
-    }
-
-
-    // filters nev bar 
-
-    const checkList = ['Relevance', 'New Arrivals', 'Price (High to Low)', 'Price (Low to High)']
-
-
-    // Add/Remove checked item from list
-    const handleCheck = (event) => {
-        var updatedList = [...checked]
-        if (event !== undefined) {
-            if (event.target.checked) {
-                updatedList = [...checked, event.target.value]
-            } else {
-                updatedList.splice(checked.indexOf(event.target.value), 1)
-            }
-        }
-        setChecked(updatedList)
-
-    }
-    const handleCheckcetagory = (event) => {
-        var updatedList = [...checkedcetagory]
-        if (event !== undefined) {
-            if (event.target.checked) {
-                updatedList = [...checkedcetagory, event.target.value]
-            } else {
-                updatedList.splice(checkedcetagory.indexOf(event.target.value), 1)
-            }
-        }
-        setCheckedcetagory(updatedList)
-
-    }
-
-    // Generate string of checked items
-    const checkedItems = checked.length
-        ? checked.reduce((total, item) => {
-            return total + ', ' + item
-        })
-        : ''
-
-    // Return classes based on whether item is checked
-    var isChecked = (item) => (checked.includes(item) ? 'checked-item' : 'not-checked-item')
+   
 
 
 
-    const [addremprd, setAddremprd] = useState(true);
+  
 
     // ------- add product in wishlist start-------------
     const [selectedprd, setSelectprd] = useState([]);
-   
+
 
     const rmvProductWishlist = async (i) => {
-        console.log( i,'r')
+        console.log(i, 'r')
         let data = {
-          party_id : 197,
-          article_id: i.id,
+            party_id: 197,
+            article_id: i.id,
         };
         console.log(data);
-    
+
         try {
-          await DeleteWishlist(data).then((res) => {
-            if (res.status === 200) {
-              getWishlist()
-            }
-          })
-          // setSelectprd(arr1);
+            await DeleteWishlist(data).then((res) => {
+                if (res.status === 200) {
+                    getWishlist()
+                }
+            })
+            // setSelectprd(arr1);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
+    };
 
     const addProductWishlist = async (i) => {
         // console.log(i,'a')
@@ -344,21 +232,21 @@ const Dashboard = (props) => {
             user_id: 197,
             article_id: i.id,
         };
-            
-          
-          console.log(data);
+
+
+        console.log(data);
         try {
-          await getAddWishlist(data).then((res) => {
-              console.log('...........');
-              getWishlist();
-            // if (res.status === 200) {
-            // }
-          })
-          // toggleHeart(i.id);
+            await getAddWishlist(data).then((res) => {
+                console.log('...........');
+                getWishlist();
+                // if (res.status === 200) {
+                // }
+            })
+            // toggleHeart(i.id);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
+    };
 
     const [heartStates, setHeartStates] = useState({});
     const toggleHeart = (itemId) => {
@@ -392,19 +280,10 @@ const Dashboard = (props) => {
     };
 
     // console.log(nameData)
-    const setActiveBox = () => {
-        setClick1(false)
-        setTimeout(setClick1(true), 20000);
-        console.log("done")
-        setOldstatus(true)
-    }
     
-    const dispatch = useDispatch()
-    const sidebarShow = useSelector((state) => state.sidebarShow)
+
     //----------------------------------------------------------------------------
-    const [results, setResults] = useState([]);
     const [ApplyStatushBack, setApplyStatushBack] = useState(true);
-    const [ApplyStatushSearch, setApplyStatushSearch] = useState(true);
     const [applyrData, setApplyData] = useState([]);
     const [filterDataSearch, setFilterDataSearch] = useState([])
 
@@ -414,35 +293,31 @@ const Dashboard = (props) => {
         if (e.target.value === '') {
             console.log(nameData);
             setNameData(nameData)
-            // setApplyStatushSearch(true)
-            
-        }else{
+
+        } else {
             const filterResult = filterDataSearch.filter((item) =>
-            item.ArticleNumber.toString().includes(value.toString()) ||
-            item.Category.toLowerCase().includes(value.toLowerCase()) ||
-            item.ArticleRate.toString().includes(value.toString()) ||
-            item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
-            item.Subcategory.toLowerCase().includes(value.toLowerCase())
-      );
-      console.log(filterResult);
-      setNameData(filterResult);
-      setApplyData(filterResult)
+                item.ArticleNumber.toString().includes(value.toString()) ||
+                item.Category.toLowerCase().includes(value.toLowerCase()) ||
+                item.ArticleRate.toString().includes(value.toString()) ||
+                item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
+                item.Subcategory.toLowerCase().includes(value.toLowerCase())
+            );
+            console.log(filterResult);
+            setNameData(filterResult);
+            setApplyData(filterResult)
         }
-     
+
         setInput(value);
         setSerchtext(value);
     };
     const clearfileds = (cal) => {
         setOldstatus(false);
         setSelectedCategories([]);
-        // console.log(oldData);
         setApplyStatushBack(true);
-        //  setNameData(nameData);
 
         console.log(nameData);
     }
     const catagoryselect = () => {
-        // console.log(checked, 'ProductData.length')
         let sdPrds = nameData.slice();
 
 
@@ -483,20 +358,8 @@ const Dashboard = (props) => {
             }
         }
     }
-    ////////  media query add box contentimg
-    // Define the breakpoint value for tablets in pixels
-    const tabletBreakpoint = 768;
 
-    // Function to calculate the appropriate slidesPerView value based on the window width
-    const getSlidesPerView = () => {
-        const windowWidth = window.innerWidth;
-        const tabletSlidesPerView = parseFloat(
-            getComputedStyle(document.documentElement).getPropertyValue('--tablet-slides-per-view')
-        );
-
-        // Use different slidesPerView value for tablets, and a default value for other screen sizes
-        return windowWidth <= tabletBreakpoint ? tabletSlidesPerView : 2.5;
-    };
+    
     return (
 
 
@@ -552,7 +415,7 @@ const Dashboard = (props) => {
 
 
             <div className='allProduct-section maincontentsection' >
-               <div className='allproduct_section'>
+                <div className='allproduct_section'>
                     <div className='haddingproduct'>
                         <p>ALL Articles</p>
                     </div>
@@ -561,15 +424,15 @@ const Dashboard = (props) => {
                         {ApplyStatushBack === true ? (
                             nameData.map((item) => (
                                 <div className='box-items' key={item.id}>
-                                    <div id={item.id} className="producticones producticonesiped" style={{ top:10 }}>
-                                    {
-                                      selectedprd.some(i => i.Id === item.id) ?
-                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
-                                        <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
-                                    }
-                        
-                                  </div>
-                                    <img src={baseImageUrl + item.Photos} style={{ padding:2 }} alt={`T-Shirt ${item.id}`} />
+                                    <div id={item.id} className="producticones producticonesiped" style={{ top: 10 }}>
+                                        {
+                                            selectedprd.some(i => i.Id === item.id) ?
+                                                <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
+                                                <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
+                                        }
+
+                                    </div>
+                                    <img src={baseImageUrl + item.Photos} style={{ padding: 2 }} alt={`T-Shirt ${item.id}`} />
                                     <div className='sildercontentprice'>
                                         <p>
                                             {item.ArticleNumber}
@@ -584,15 +447,15 @@ const Dashboard = (props) => {
                         ) : (
                             applyrData.map((item) => (
                                 <div className='box-items' key={item.id}>
-                                      <div id={item.id} className="producticones producticonesiped" style={{ top:10 }}>
-                                    {
-                                      selectedprd.some(i => i.Id === item.id) ?
-                                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
-                                        <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
-                                    }
-                        
-                                  </div>
-                                    
+                                    <div id={item.id} className="producticones producticonesiped" style={{ top: 10 }}>
+                                        {
+                                            selectedprd.some(i => i.Id === item.id) ?
+                                                <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
+                                                <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
+                                        }
+
+                                    </div>
+
                                     <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
                                     <div className='sildercontentprice'>
                                         <p>
@@ -605,12 +468,12 @@ const Dashboard = (props) => {
                                     </div>
                                 </div>
                             ))
-                        ) }
+                        )}
 
                     </div>
 
 
-                </div> 
+                </div>
 
 
             </div>
@@ -619,8 +482,8 @@ const Dashboard = (props) => {
 
             {Filterstatus === true ? <div>
                 <motion.div initial={{ translateY: '100%', padding: '0px 5px' }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ duration: 0.5 }} className='categories'>
+                    animate={{ opacity: 1, translateY: 0 }}
+                    transition={{ duration: 0.5 }} className='categories'>
                     <div className='categoriestagsection'>
                         <p>categories</p>
                         <p onClick={() => setFilterstatus(false)}>X</p>
@@ -649,34 +512,28 @@ const Dashboard = (props) => {
                             <div className='pricerangsection row'>
                                 <p>Price Range</p>
                             </div>
+                            <MultiRangeSlider
+                                valueLabelDisplay="auto"
+                                onChange={handlerangechange}
+                                onInput={(e) => setValues([e.minValue, e.maxValue])}
+                                minValue={values[0]}
+                                maxValue={values[1]}
+                                min={Min}
+                                max={Max}
+                                label={false}
+                                ruler={false}
+                                step={1}
+                                style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
+                                barLeftColor="black"
+                                barInnerColor="black"
+                                barRightColor="black"
+                                thumbLeftColor="black"
+                                thumbRightColor="black"
+                            />
+                            <div class="tooltip">{values[0]}</div>
+                            <div class="tooltip">{values[1]}</div>
                         </div>
-                        {activeTab === 'price' && (
-                            <div style={{ width: '100%' }}>
-                                <p className="dashboard_filter_list_body_data_price"> Selected Price Range</p>
-                                <p className="dashboard_filter_list_body_data_price_range">
-                                    ₹ {values[0]} - ₹ {values[1]}
-                                </p>
-                                <MultiRangeSlider
-                                    valueLabelDisplay="auto"
-                                    onChange={setValues}
-                                    onInput={(e) => setValues([e.minValue, e.maxValue])}
-                                    minValue={values[0]}
-                                    maxValue={values[1]}
-                                    min={Min}
-                                    max={Max}
-                                    label={false}
-                                    ruler={false}
-                                    step={1}
-                                    style={{ border: "none", boxShadow: "none", padding: "15px 20px 15px 10px" }}
-                                    barLeftColor="lightgrey"
-                                    barInnerColor="rgb(223 10 31)"
-                                    barRightColor="lightgrey"
-                                    thumbLeftColor="white"
-                                    thumbRightColor="white"
-                                />
-                            </div>
-                        )}
-                        {/* <Reange/> */}
+
 
                     </div>
                     <div className='content-button'>

@@ -167,12 +167,16 @@ const Dashboard = (props) => {
   }
 
 
+// image single Article data
 
+const getSingaleartical = (item) =>{
+console.log(item.id);
+}
 
+  
+  
+  
   // ------- add Article in wishlist end-------------
-
-
-
 
   const [input, setInput] = useState("");
   // search and filter functionality
@@ -322,7 +326,7 @@ const Dashboard = (props) => {
 
                   </div>
 
-                  <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
+                  <img src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} />
 
 
                   <div>
