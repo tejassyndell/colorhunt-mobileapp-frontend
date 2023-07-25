@@ -75,7 +75,7 @@ export default function Detailsofproduct() {
     <div className="app-container">
       {/* <div className="reactangle"></div> */}
       <div className="menu-bar">
-      <img src={Menubar} alt="" onClick={() => navigate(-1)} />
+      <img src={Menubar} alt="" />
       </div>
       
         <Swiper
