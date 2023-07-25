@@ -7,6 +7,9 @@ import SliderImg1 from 'src/assets/Colorhuntimg/product-img/product1.png'
 import SliderImg2 from 'src/assets/Colorhuntimg/product-img/product2.png'
 import Menubar from 'src/assets/Colorhuntimg/product-img/menubar.png'
 import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
+import MinusImg from 'src/assets/Colorhuntimg/product-img/Group 8932.png'
+import PlusImg from 'src/assets/Colorhuntimg/product-img/Group 8931.png'
+import { useNavigate } from 'react-router-dom';
 
 export default function Detailsofproduct() {
   const [selectedSize, setSelectedSize] = useState('')
@@ -16,23 +19,45 @@ export default function Detailsofproduct() {
     // Add any logic you need when a size is selected (e.g., update cart, trigger an action, etc.).
     // For this example, we are only updating the selected size state.
   }
-  const data = [
-    { color: '01-30 TO 36', available: 10 },
-    { color: '02-30 TO 36', available: 15 },
-    { color: '03-30 TO 36', available: 8 },
-    // Add more data for other rows
-  ]
+  const [data, setData] = useState([
+    { color: '01-30 TO 36', available: 10 , quantity:0},
+    { color: '02-30 TO 36', available: 15,  quantity:0 },
+    { color: '03-30 TO 36', available: 8, quantity:0 },
+    // Add more data objects as needed
+  ]);
 
   
     const [quantity, setQuantity] = useState(0);
   
-    const handleIncrease = () => {
-      setQuantity((prevQuantity) => prevQuantity + 1);
+    // const handleIncrease = () => {
+    //   setQuantity((prevQuantity) => prevQuantity + 1);
+    // };
+    
+
+    const handleIncrease = (index) => {
+      setData((prevData) => {
+        const newData = [...prevData];
+        if (newData[index].quantity < newData[index].available) {
+          newData[index].quantity++;
+        }
+        return newData;
+      });
     };
   
-    const handleDecrease = () => {
-      setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
+    const handleDecrease = (index) => {
+      setData((prevData) => {
+        const newData = [...prevData];
+        if (newData[index].quantity > 0) {
+          newData[index].quantity--;
+        }
+        return newData;
+      });
     };
+  
+  
+    // const handleDecrease = () => {
+    //   setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
+    // };
   
 
   const [price, setPrice] = useState(0);
@@ -42,13 +67,15 @@ export default function Detailsofproduct() {
     return `₹${value.toFixed(2)}`;
   };
 
+  const navigate = useNavigate();
+
   
 
   return (
     <div className="app-container">
-      <div className="reactangle"></div>
+      {/* <div className="reactangle"></div> */}
       <div className="menu-bar">
-        <img src={Menubar} alt="" />
+      <img src={Menubar} alt="" onClick={() => navigate(-1)} />
       </div>
       
         <Swiper
@@ -68,9 +95,9 @@ export default function Detailsofproduct() {
           </SwiperSlide>
         </Swiper>
       
-        <span className='artical-name'>Artical</span>
+        <span className='artical-name'>Artical No:</span>
         <span className='artical-no'>33216</span>
-      
+      <div className='shadow'></div>
       {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
@@ -80,16 +107,16 @@ export default function Detailsofproduct() {
               <div className="size-options">
                 <div className="size">
                   <a href="#" onClick={() => handleSizeClick('M')}>
-                    M
+                   <span className='m'>M</span> 
                   </a> </div>
                   <div className="size">
                     <a href="#" onClick={() => handleSizeClick('L')}>
-                      L
+                    <span className='l'>L</span> 
                     </a>
                   </div>
                   <div className="size">
                   <a href="#" onClick={() => handleSizeClick('XL')}>
-                    XL
+                  <span className='xl'>XL</span> 
                   </a>
                   </div>               
               </div>
@@ -99,7 +126,7 @@ export default function Detailsofproduct() {
             <div className="size-label">Category</div>
             <div className="size-container2">
               <div className="size-options">
-                <p>Collor Tees</p>
+                <p className='collor-tees-txt'>Collor Tees</p>
               </div>
             </div>
           </div>
@@ -113,6 +140,37 @@ export default function Detailsofproduct() {
                   <div className="qty-title">Add Qty.</div>
                 </div>
                 <div className="body">
+      {data.map((item, index) => (
+        <div className="row" key={index}>
+          <div className="color-box">{item.color}</div>
+          <div className="available-box">{item.available}</div>
+          <div className="qty-box">
+            <div className="top-row">
+              <div className="box">
+                <div className="inner-box">
+                  <button onClick={() => handleDecrease(index)}>
+                    <img src={MinusImg} alt="Minus" />
+                  </button>
+                </div>
+              </div>
+              <div className="box">
+                <div className="inner-box">
+                  <span>{item.quantity}</span>
+                </div>
+              </div>
+              <div className="box">
+                <div className="inner-box">
+                  <button onClick={() => handleIncrease(index)}>
+                    <img src={PlusImg} alt="Plus" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+                {/* <div className="body">
                   {data.map((item, index) => (
                     <div className="row" key={index}>
                       <div className="color-box">{item.color}</div>
@@ -122,7 +180,9 @@ export default function Detailsofproduct() {
                         <div className="top-row">
                           <div className="box">
                             <div className="inner-box">
-                              <button onClick={handleDecrease} >-</button>
+                              <button onClick={handleDecrease} >
+                                <img src={MinusImg}></img>
+                              </button>
                             </div>
                           </div>
                           <div className="box">
@@ -132,21 +192,23 @@ export default function Detailsofproduct() {
                           </div>
                             <div className="box">
                               <div className="inner-box">
-                                <button onClick={handleIncrease}>+</button>
+                                <button onClick={handleIncrease}>
+                                  <img src={PlusImg}></img>
+                                </button>
                               </div>
                             </div>
                           </div>
                      </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
           </div>
           <div className="article-ratio-container">
           <div className='artical-ration-title'>
             <span>Artical Ration</span>
           </div>
-        <div className="article-rate-content">
+        <div className="article-ratio-content">
           <span className="article-rate-text">01:01:01</span>
         </div>
     </div>
