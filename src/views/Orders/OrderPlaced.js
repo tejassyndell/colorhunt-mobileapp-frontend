@@ -135,12 +135,14 @@ function OrderPlaced() {
           </div>
         ) : (
           <div className="proceed-to-check">
+          <div className='procced-to-check-button'>
             <button onClick={handleProceedToCheckout}>
               Proceed to Checkout
               <span className="placeOrder-icon">
                 <img src={PlacedOrderIcon} alt="icon" />
               </span>
             </button>
+            </div>
           </div>
         )}
       </div>
