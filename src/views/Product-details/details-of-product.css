@@ -59,7 +59,7 @@
     width: 130px;
     height: 29px;
     left: 80px;
-    top: 30vh;
+    top: 28%;
     font-family: 'Glory';
     font-style: normal;
     font-weight: 600;
@@ -73,7 +73,7 @@
     width: 63px;
     height: 29px;
     left: 210px;
-    top: 30vh;
+    top: 28%;
     font-family: 'Glory';
     font-style: normal;
     font-weight: 600;
@@ -176,7 +176,7 @@
     line-height: 17.93px;
     margin-top: 5%;
     margin-bottom: 15%;
-    margin-left: 20%;
+    /* margin-left: 20%; */
     color: #000000;
 }
   .size-options {
@@ -270,14 +270,13 @@
 }
 
 .qty-title {
-  margin-right: 50px;
+  margin-right: 70px;
   font-family: 'Glory';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 18px;
   color: #000000;
-  /* margin-left: -30px; */
 }
 
 .header {

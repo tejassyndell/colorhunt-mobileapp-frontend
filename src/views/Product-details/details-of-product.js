@@ -100,7 +100,7 @@ export default function Detailsofproduct() {
           </SwiperSlide>
         </Swiper>
       
-        <span className='artical-name'>Artical No:</span>
+        <span className='artical-name'>Article No:</span>
         <span className='artical-no'>33216</span>
       <div className='shadow'></div>
       {/* Add more slides as needed */}
@@ -208,7 +208,7 @@ export default function Detailsofproduct() {
           </div>
           <div className="article-ratio-container">
           <div className='artical-ration-title'>
-            <span>Artical Ration</span>
+            <span>Article Ratio</span>
           </div>
         <div className="article-ratio-content">
           <span className="article-rate-text">01:01:01</span>
@@ -216,7 +216,7 @@ export default function Detailsofproduct() {
     </div>
     <div className="article-rate-container">
           <div className='artical-rate-title'>
-            <span>Artical Rate</span>
+            <span>Article Rate</span>
           </div>
         <div className="article-rate-content">
           <span className="article-rate-text">275</span>
