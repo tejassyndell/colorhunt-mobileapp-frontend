@@ -9,7 +9,7 @@ import Menubar from 'src/assets/Colorhuntimg/product-img/menubar.png'
 import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
 import MinusImg from 'src/assets/Colorhuntimg/product-img/Group 8932.png'
 import PlusImg from 'src/assets/Colorhuntimg/product-img/Group 8931.png'
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Detailsofproduct() {
   const [selectedSize, setSelectedSize] = useState('')
@@ -23,6 +23,7 @@ export default function Detailsofproduct() {
     { color: '01-30 TO 36', available: 10 , quantity:0},
     { color: '02-30 TO 36', available: 15,  quantity:0 },
     { color: '03-30 TO 36', available: 8, quantity:0 },
+    {color: '04-30 TO 36' , available: 10, quantity:0}
     // Add more data objects as needed
   ]);
 
@@ -66,13 +67,20 @@ export default function Detailsofproduct() {
   const formatPrice = (value) => {
     return `₹${value.toFixed(2)}`;
   };
+  const navigate = useNavigate();
 
+  // Function to handle clicking on the menu-bar image
+  const handleMenuBarClick = () => {
+    // Go back to the previous page
+    // navigate(-1);
+    navigate('/dashboard')
+  };
  
   return (
     <div className="app-container">
       {/* <div className="reactangle"></div> */}
       <div className="menu-bar">
-      <img src={Menubar} alt="" />
+      <img src={Menubar} alt="" onClick={handleMenuBarClick} />
       </div>
       
         <Swiper
@@ -120,7 +128,7 @@ export default function Detailsofproduct() {
             </div>
           </div>
           <div className="product-detail-sec2">
-            <div className="size-label">Category</div>
+            <div className="category-label">Category</div>
             <div className="size-container2">
               <div className="size-options">
                 <p className='collor-tees-txt'>Collor Tees</p>
@@ -145,22 +153,18 @@ export default function Detailsofproduct() {
           <div className="qty-box">
             <div className="top-row">
               <div className="box">
-                <div className="inner-box">
-                  <button onClick={() => handleDecrease(index)}>
-                    <img src={MinusImg} alt="Minus" />
-                  </button>
+                <div className="inner-box-minus">                  
+                    <img src={MinusImg} alt="Minus" onClick={() => handleDecrease(index)}/>               
                 </div>
               </div>
-              <div className="box">
-                <div className="inner-box">
+              
+                <div className="box">
                   <span>{item.quantity}</span>
-                </div>
+                
               </div>
               <div className="box">
-                <div className="inner-box">
-                  <button onClick={() => handleIncrease(index)}>
-                    <img src={PlusImg} alt="Plus" />
-                  </button>
+                <div className="inner-box-plus">
+                    <img src={PlusImg} alt="Plus" onClick={() => handleIncrease(index)} />
                 </div>
               </div>
             </div>
@@ -225,14 +229,13 @@ export default function Detailsofproduct() {
           <div>
             <span className="total-price-text">{formatPrice(price)}</span>
       </div>
-      <div className='add-to-card-container'>
+    </div>
+    <div className='add-to-card-container'>
     <button className="add-to-cart-button" onClick=''>
     <img src={CartIcon} className="cart-icon" alt="" />
       Add To Cart
     </button>
     </div>
-    </div>
-    
         </div>
        
     
