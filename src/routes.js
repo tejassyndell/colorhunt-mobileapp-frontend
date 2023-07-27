@@ -19,7 +19,7 @@ const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
 const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
 const Notifications = React.lazy(() => import('./views/notifications/PlacedOrderSuccessfull/Notification'));
 const OrderPlaced = React.lazy(()=> import('./views/Orders/OrderPlaced'))
-
+const OrderPurchase = React.lazy(()=> import('./views/Orders/OrderPurchase/OrderPurchase'));
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -39,8 +39,8 @@ const routes = [
   { path: '/cart_list', name: 'Cart list', element: cart_list },
   { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
   {path: '/notifications',name:'Notification list',element: Notifications},
-  {path:'/orderplaced',name:'Orderplaced list',element: OrderPlaced}
-
+  {path:'/orderplaced',name:'Orderplaced list',element: OrderPlaced},
+{path: '/orderpurchase',name:'Checkout list',element: OrderPurchase}
 
 ]
 
