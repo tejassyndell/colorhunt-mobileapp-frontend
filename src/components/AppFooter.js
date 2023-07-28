@@ -44,7 +44,7 @@ const AppFooter = () => {
         <img
           src={ordericon}
           style={activeIcon === 'order' ? iconStyle : {}}
-          onClick={() => { handleIconClick('order'); Navigate('/orders') }}
+          onClick={() => { handleIconClick('order'); Navigate('/orderhistory') }}
         />
         <img
           src={carticon}

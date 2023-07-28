@@ -18,6 +18,7 @@ const cart_list = React.lazy(() => import('./views/cart/cart_list'))
 const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
 const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
 const Detailsofproduct = React.lazy(() => import('./views/Product-details/details-of-product'))
+const Orderhistory = React.lazy(() => import('./views/Orders/orderhistory'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -36,7 +37,8 @@ const routes = [
   { path: '/cart', name: 'Cart', element: Cart },
   { path: '/cart_list', name: 'Cart list', element: cart_list },
   { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
-  {path: '/detailsofproduct' , name: 'Detail Of Product' , element: Detailsofproduct}
+  {path: '/detailsofproduct' , name: 'Detail Of Product' , element: Detailsofproduct},
+  {path: '/orderhistory' , name:'Order History' , element: Orderhistory}
 ]
 
 export default routes
