@@ -3,7 +3,6 @@
 body {
   font-family: 'Glory' !important;
 }
-
 .product-hed-sec {
   display: flex;
   justify-content: space-between;
@@ -345,35 +344,74 @@ input[type='checkbox'] {
 .multi-range-slider{
   margin-top: 10px;
 }
-/* Add tooltip styles */
-.tooltip {
-  position: absolute;
-  bottom: 20px; /* Adjust the value to position the tooltip */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 14px;
-  opacity: 0; /* Initially hide the tooltip */
-  pointer-events: none; /* Prevent the tooltip from affecting mouse interactions */
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Show the tooltip when hovering over the handle */
-.multi-range-slider .thumb::before:hover .tooltip {
-  opacity: 1;
-}
-
 
 .multi-range-slider .bar-right{
-  
-    padding: 0px 0px !important;
+  padding: 0px 0px !important;
 }
 .multi-range-slider .bar-left{
-   padding: 0px 0px !important;
+  padding: 0px 0px !important;
 }
+
+.tooltip {
+
+  color: black;
+  text-align: center;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.left-tooltip {
+  left: 0;
+}
+
+.right-tooltip {
+  right: 0;
+}
+
+/* Styles for tooltip before and after the thumbs */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.multi-range-slider-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.divOutput {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.divOutput > div {
+  width: 50%;
+}
+.divOutput > div:first-child {
+  text-align: right;
+  padding-right: 10px;
+}
+.divOutput > div:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.divOutput span {
+  margin: 10px;
+}
+
+
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .swiper-slide {
     width: 20% !important;
