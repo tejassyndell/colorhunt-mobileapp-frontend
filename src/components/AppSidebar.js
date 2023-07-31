@@ -108,13 +108,7 @@ const AppSidebar = (props) => {
         <SimpleBar>
           <AppSidebarNav items={navigationUser} UserData={UserData} />
           <li className="nav-item">
-            <a
-              className="nav-link mt-4"
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                testFunc()
-              }}
-            >
+            <a className="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
               <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
               {/* <CIcon icon={cilAccountLogout} customClassName="nav-icon" /> */}
               Log out

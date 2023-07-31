@@ -16,19 +16,19 @@ function App() {
   const [allData, setAllData] = useState([])
   const [page, setPage] = useState(1)
   // const [loading, setLoading] = useState(false);
-  const getAllData = async () => {
-    try {
-      const result = await getDataOfProduct().then((res) => {
-        if (res.status === 200) {
-          setAllData(res.data)
-        }
-      })
-    } catch (err) {
-      console.log(err, 'error in getProductData')
-    }
-  }
+  // const getAllData = async () => {
+  //   try {
+  //     const result = await getDataOfProduct().then((res) => {
+  //       if (res.status === 200) {
+  //         setAllData(res.data)
+  //       }
+  //     })
+  //   } catch (err) {
+  //     // console.log(err, 'error in getProductData')
+  //   }
+  // }
   useEffect(() => {
-    getAllData()
+    // getAllData()
   }, [])
   // const loadProductData = async () => {
   //   try {
@@ -54,18 +54,18 @@ function App() {
     }
   }
 
-  // const LoadAllProductData = async () => {
-  //   const result = await getDataOfProduct().then((res) => {
-  //     if (res ?.status === 200) {
-  //       setAllProductData(res.data)
-  //     }
-  //   })
+  const LoadAllProductData = async () => {
+    // const result = await getDataOfProduct().then((res) => {
+    //   if (res ?.status === 200) {
+    //     setAllProductData(res.data)
+    //   }
+    // })
 
   // }
   //-----------------------new chnage------------------
   useEffect(() => {
     // loadProductData()
-    // LoadAllProductData()
+    LoadAllProductData()
     //LoadLoginSession()
   }, [page])
 
@@ -129,6 +129,6 @@ function App() {
       } */}
     </BrowserRouter>
   )
-}
+}}
 
 export default App

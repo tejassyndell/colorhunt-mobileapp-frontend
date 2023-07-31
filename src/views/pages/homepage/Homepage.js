@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import  {getHomePgeData}  from 'src/views/api/api';
+// import  {getHomePgeData}  from 'src/views/api/api';
 import OdooContentComponent from './OdooContentComponent';
 
 const Homepage = () => {
@@ -8,7 +8,7 @@ const Homepage = () => {
 
   const loadHomePageData = async () => {
     try {
-      const response = await getHomePgeData();
+      // const response = await getHomePgeData();
       // console.log(response.data, "html home page");
       setHomePageData(response.data);
     } catch (error) {

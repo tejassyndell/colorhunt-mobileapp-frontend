@@ -14,7 +14,7 @@ import {
   CRow,
 } from '@coreui/react'
 import 'react-toastify/dist/ReactToastify.css';
-import { loginAuth, sendOtp, verifyOtp, ResendOTP } from 'src/views/api/api'
+import { loginAuth, sendOtp, } from 'src/views/api/api'
 import { event } from 'jquery';
 import flacescreen from 'src/assets/Colorhuntimg/loginimg/image 98.svg'
 import { motion } from "framer-motion"
@@ -39,6 +39,7 @@ const Login = () => {
   const [verifayOtp, setVerifayOtp] = useState(false)
   const [WrongOtp, setWrongOtp] = useState(false)
   const [loginScreenss, setLoginScreen] = useState(true)
+  const [nextbutton, setnextbutton] = useState(false)
   const [UserIds, setUserIds] = useState()
 
   const [input1, setInput1] = useState('');
@@ -53,10 +54,6 @@ const Login = () => {
 
 
   // Odoo auth
-  const url = 'https://techultra-mahadev-16.odoo.com';
-  const db = 'techultra-mahadev-16-production-7083629';
-  const username = 'app@shreemahadevtex.com';
-  const password = 'syndell@123';
 
   const TestOdoo = async () => {
 
@@ -68,6 +65,11 @@ const Login = () => {
   // console.log(VerifyOtp,'otpconform');
   const handleChangePhone = (event) => {
     const inputNumber = event.target.value;
+    if(inputNumber !== ''){
+      setnextbutton(true)
+    }else{
+      setnextbutton(false)
+    }
     setPhoneNumber(inputNumber);
     setFormattedNumber(formatPhoneNumber(inputNumber));
     setisUser(false)
@@ -89,27 +91,27 @@ const Login = () => {
     // Navigate('/dashboard')
   }
 
-  const LoadOdooData = async () => {
-    const userID = { phone: phoneNumber, formate: formattedNumber }
-    const logAuth = await loginAuth(userID)
-    if (logAuth.status === 200) {
-      setUserIds(logAuth.data[0])
-      //localStorage.setItem('userId', logAuth.data[0]);
-      setOtp(true)
-      //  Navigate('/dashboard')
-    }
-    else {
-      console.log("fail")
-      setisUser(true)
-    }
-  }
+  // const LoadOdooData = async () => {
+  //   const userID = { phone: phoneNumber, formate: formattedNumber }
+  //   const logAuth = await loginAuth(userID)
+  //   if (logAuth.status === 200) {
+  //     setUserIds(logAuth.data[0])
+  //     //localStorage.setItem('userId', logAuth.data[0]);
+  //     setOtp(true)
+  //     //  Navigate('/dashboard')
+  //   }
+  //   else {
+  //     console.log("fail")
+  //     setisUser(true)
+  //   }
+  // }
 
-  const LoadSendOtp = async () => {
-    const result = await sendOtp(phoneNumber)
-      .then((res) => {
-        console.log(res, "otp res")
-      })
-  }
+  // const LoadSendOtp = async () => {
+  //   const result = await sendOtp(phoneNumber)
+  //     .then((res) => {
+  //       console.log(res, "otp res")
+  //     })
+  // }
 
   const inputFocus = (event) => {
     const { key, target } = event;
@@ -321,12 +323,17 @@ const Login = () => {
                           </CInputGroup>
     
                           <CRow>
-                            {/* {handleChangePhone.event.target.value.length === ''} */}
-                            <CCol xs={12} style={{ display:'grid',justifyContent:'end' }}>
+                            {nextbutton === true ?  <CCol xs={12} style={{ display:'grid',justifyContent:'end' }}>
                               <button type="submit" className="login_page_btn" >
                                 Next
                               </button>
-                            </CCol>
+                            </CCol> : 
+                            <CCol xs={12} style={{ display:'grid',justifyContent:'end' }}>
+                              <button  className="login_page_btn" >
+                              Skip
+                              </button>
+                            </CCol>}
+                            
                           </CRow>
 
     

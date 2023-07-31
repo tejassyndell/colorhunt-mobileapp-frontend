@@ -21,7 +21,7 @@ import contectimg from '../../assets/images/avatars/Group 1000005660.png'
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 // import EmailIcon from '../../../assets/images/Email-icon.png'
 import { useNavigate, useParams } from 'react-router-dom'
-import { SendMail } from '../api/api';
+// import { SendMail } from '../api/api';
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -52,7 +52,7 @@ function contactus(props) {
             message: message,
         }
         // console.log(MsgData)
-        const result = await SendMail(MsgData)
+        // const result = await SendMail(MsgData)
             .then((res) => {
                 if (res.status === 200) {
                     setVisible(true)

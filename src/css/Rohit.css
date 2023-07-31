@@ -28,7 +28,7 @@ body {
 .order_empty_div {
     text-align: center;
     vertical-align: middle;
-    height: 76vh;
+    height: 85vh;
     display: grid;
     align-items: center;
 }
@@ -245,7 +245,7 @@ body {
     z-index: 20;
     margin-bottom: 5px;
     height: 70px;
-    border-bottom: 2px solid rgba(130, 130, 130, 1);
+    border-bottom: 1px solid rgba(130, 130, 130, 1);
 }
 
 .tagdiv_order {
@@ -287,6 +287,7 @@ body {
     color: #000000;
     font-size: 20px;
     margin: 0%;
+    padding-right: 1vh;
 
 }
 
@@ -1103,9 +1104,7 @@ editproductimgeditproductimg
     z-index: 20;
 }
 
-.producticones {
-    z-index: 10;
-}
+
 
 /* orderhistory screen end */
 
@@ -1248,20 +1247,7 @@ editproductimgeditproductimg
         /* margin: 0px !important; */
     }
 
-    .producticones {
-        top: 8px;
-        text-align: end;
-        position: relative;
-        margin-bottom: -30px;
-        right: 16px;
-        width: 25%;
-        color: white;
-        font-size: 20px;
-        float: right;
-        /* display: none; */
-        margin-right: 5px;
-        margin-top: 6px;
-    }
+
     .ipad_producticones{
         right: 25px !important;
     }
@@ -1459,19 +1445,7 @@ editproductimgeditproductimg
         padding: 0px 21px;
     }
 
-    .producticones {
-        top: 17px;
-        text-align: end;
-        position: relative;
-        /* z-index: 10; */
-        margin-bottom: -30px;
-        right: 16px;
-        width: 25%;
-        color: white;
-        font-size: 20px;
-        float: right;
-        /* display: none; */
-    }
+
 
     .fa-heart {
         color: #AE0617 !important;

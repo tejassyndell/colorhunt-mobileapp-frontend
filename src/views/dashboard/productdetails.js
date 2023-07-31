@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { ProductTagApi, ProductColor, createCartData, getNewImage } from '../api/api'
+import {} from '../api/api'
 import ReactImageMagnify from 'react-image-magnify'
 import noImages from '../../assets/image/noimage.png'
 import { Checkmark } from 'react-checkmark'
 import $ from 'jquery'
-import { Addinwishlist, unlinkproductdashboard } from '../api/api'
+// import { Addinwishlist, unlinkproductdashboard } from '../api/api'
 import '../../css/ipad.css'
 function productdetails(props) {
   const Navigate = useNavigate()
@@ -155,13 +155,13 @@ function productdetails(props) {
       prdprice: i.list_price,
       prdid: i.id,
     }
-    const result = await Addinwishlist(data).then((res) => {
-      if (res.status === 200) {
-        if (res.data !== undefined) {
-          setheart(true)
-        }
-      }
-    })
+    // const result = await Addinwishlist(data).then((res) => {
+    //   if (res.status === 200) {
+    //     if (res.data !== undefined) {
+    //       setheart(true)
+    //     }
+    //   }
+    // })
     // console.log(result);
   }
   const rmvProductWishlist = async (i) => {
@@ -170,15 +170,15 @@ function productdetails(props) {
       userid: UserData[0].id,
       productid: i.id,
     }
-    const result = await unlinkproductdashboard(data).then((res) => {
-      if (res.status === 200) {
-        if (res.data === true) {
-          setheart(false)
-        } else {
-          console.log(res)
-        }
-      }
-    })
+    // const result = await unlinkproductdashboard(data).then((res) => {
+    //   if (res.status === 200) {
+    //     if (res.data === true) {
+    //       setheart(false)
+    //     } else {
+    //       console.log(res)
+    //     }
+    //   }
+    // })
     // console.log(result);
   }
   return (
@@ -247,18 +247,8 @@ function productdetails(props) {
               <div className="productlikecontent">
                 <h4>{ProductDatailItem.name}</h4>
 
-                <div>
-                  <i
-                    className={heartstatus === false ? 'fa fa-heart-o' : 'fa fa-heart'}
-                    onClick={() => {
-                      heartstatus === false
-                        ? addProductWishlist(ProductDatailItem)
-                        : rmvProductWishlist(ProductDatailItem)
-                    }}
-                    aria-hidden="true"
-                  ></i>{' '}
-                  Add to Wishlist
-                </div>
+                <div><i className={heartstatus === false ? 'fa fa-heart-o' : 'fa fa-heart'} onClick={() => { heartstatus === false ? addProductWishlist(ProductDatailItem) : rmvProductWishlist(ProductDatailItem) }} aria-hidden="true"></i> Add to Wishlist</div>
+
               </div>
               {/* <Provider apiKey="acc0dbccce8e557db5ebbe6d605aaa">
 
@@ -316,20 +306,7 @@ function productdetails(props) {
                   +
                 </button>
               </div>
-              <button
-                className={
-                  btnstatse === false
-                    ? 'cart_button1 cart_buttn_bgcolor_deactive'
-                    : 'cart_button1 cart_buttn_bgcolor_active'
-                }
-                onClick={() => {
-                  radiostatus === true
-                    ? addproductCart(ProductDatailItem, UserData)
-                    : console.log('not done')
-                }}
-              >
-                <i className="fa fa-shopping-cart"></i> Add to cart
-              </button>
+              <button className={btnstatse === false ? 'cart_button1 cart_buttn_bgcolor_deactive' : 'cart_button1 cart_buttn_bgcolor_active'} onClick={() => { radiostatus === true ? addproductCart(ProductDatailItem, UserData) : console.log("not done"); }}><i className="fa fa-shopping-cart"></i> Add to cart</button>
             </span>
           </div>
 

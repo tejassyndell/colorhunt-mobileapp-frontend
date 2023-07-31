@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { UserDetails } from 'src/views/api/api'
+// import { UserDetails } from 'src/views/api/api'
 import  AppHeaderPadding  from '../components/header/AppHeaderPadding'
 
 
@@ -13,7 +13,7 @@ const DefaultLayout = (props) => {
 
   const LoadUserData = async(id) => {
     // console.log(id,"data clled")
-    const result = await UserDetails(id)
+    // const result = await UserDetails(id)
     // console.log(result.data,"result.data")
     // setUserData(result.data)
 

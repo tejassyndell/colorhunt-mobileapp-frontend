@@ -24,7 +24,7 @@ import contentimages from '../../assets/images/higrow/contentimg/fabric_28 1.png
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, useParams } from 'react-router-dom'
 // import { getWishlistItems, unlinkproductwishlist } from '../api/api'
-import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
+// import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
 import noImages from '../../assets/image/noimage.png'
 import ProductDetail from '../dashboard/productdetails'
 import './Cart.css'
@@ -41,27 +41,27 @@ function cart_list(props) {
   const [arrllist, setArrlist] = useState([])
   const [cartstatus, setCartstatus] = useState(true)
   const navigate1 = useNavigate()
-  useEffect(() => {
-    getcaritem()
-  }, [])
+  // useEffect(() => {
+  //   getcaritem()
+  // }, [])
 
-  const getcaritem = async () => {
-    let data = {
-      userId: props.UserData[0].id,
-    }
-    const result = await getCartData(data).then((res) => {
-      if (res.status === 200) {
-        if (res.data.length <= 0) {
-          setArrlist([])
-          setemptPrdlist(true)
-        } else {
-          setArrlist(res.data)
-          setLoading(false)
-        }
-      }
-    })
-    // console.log(result.data);
-  }
+  // const getcaritem = async () => {
+  //   let data = {
+  //     userId: props.UserData[0].id,
+  //   }
+  //   const result = await getCartData(data).then((res) => {
+  //     if (res.status === 200) {
+  //       if (res.data.length <= 0) {
+  //         setArrlist([])
+  //         setemptPrdlist(true)
+  //       } else {
+  //         setArrlist(res.data)
+  //         setLoading(false)
+  //       }
+  //     }
+  //   })
+  //   // console.log(result.data);
+  // }
   const navigate = useNavigate()
 
   //   const prddetails = (productlist) => {
@@ -276,26 +276,15 @@ function cart_list(props) {
                               <h4>{item.name}</h4>
                               <p>{subitem.colorname}</p>
                             </div>
-                            <div className="tag_2">
-                              <i
-                                className="fa fa-trash"
-                                style={{ color: '#AE0617' }}
-                                onClick={() => {
-                                  removeitemfromcart(subitem)
-                                }}
-                              ></i>
-                            </div>
-                          </div>
-                          <div className="cart_rate_container">
-                            <div className="cart_tag_container">
-                              <div className="tag_1">
-                                <p>Rate</p>
-                                <h4>
-                                  <img src={Rssimbol} />
-                                  <span style={{ fontWight: 600, marginLeft: 5 }}>
-                                    {subitem.total.toLocaleString()}
-                                  </span>
-                                </h4>
+                            <div className='cart_details_container'>
+                              <div className='cart_tag_container'>
+                                <div className='tag_1'>
+                                  <h4>{item.name}</h4>
+                                  <p>{subitem.colorname}</p>
+                                </div>
+                                <div className='tag_2'>
+                                  <i className="fa fa-trash" style={{ color: "#AE0617" }} onClick={() => { removeitemfromcart(subitem) }}></i>
+                                </div>
                               </div>
                               <div className="tag_2 tag_width">
                                 <span className="update_btn_grp">

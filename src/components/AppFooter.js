@@ -10,14 +10,15 @@ import { useNavigate } from 'react-router-dom'
 
 
 const AppFooter = () => {
-  const [activeIcon, setActiveIcon] = useState('');// Set the initial active icon
+  const [activeIcon, setActiveIcon] = useState('home');// Set the initial active icon
   const Navigate = useNavigate();
 
   const handleIconClick = (iconName) => {
     setActiveIcon(iconName);
     console.log(iconName);
   };
-  useEffect(() => {
+
+useEffect(() => {
     console.log(activeIcon);
   }, [activeIcon]);
  

@@ -175,7 +175,7 @@ const Profile = () => {
         <div className='aboutscontenet ipad_mt_aboutus'>
 
         
-     <h2 className='' style={{ textAlign: 'center' }}>Shree Mahadev TexFab</h2>
+     {/* <h2 className='' style={{ textAlign: 'center' }}>Shree Mahadev TexFab</h2>
       <p className='INNOVATION' style={{ textAlign: 'center' }}>INITIATION | INNOVATION | EXCELLENCE | INTEGRITY | PEOPLE</p>
       <p className='fulldetails' style={{ textAlign: 'center' }}>Shree Mahadev TexFab Pvt. Ltd. is a textile manufacturing company founded in 2008. It produces cotton and other fabrics that are supplied to some of the top apparel brands in India. Despite being a young company. It became a top player in the market within five years of starting operations, thanks to its innovative approach to designs, diligence towards quality and thoughtfulness regarding customer satisfaction. </p>
       <div className='aboutrow'>
@@ -230,7 +230,7 @@ const Profile = () => {
           </div>
         
         </div>
-      </div>
+      </div> */}
       </div>
       
     </div>

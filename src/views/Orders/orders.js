@@ -5,7 +5,7 @@ import contentimages from '../../assets/images/higrow/contentimg/fabric_3 1.png'
 import Rssimbol from '../../assets/images/higrow/contentimg/Group 1000005667.svg'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { OrderDetails, OrderHistory } from '../api/api'
+// import { OrderDetails, OrderHistory } from '../api/api'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment/moment'
 import './Order.css'
@@ -60,27 +60,27 @@ function orders(props) {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const LoadOrderDetails = async (id) => {
-    const result = await OrderDetails(id).then((res) => {
-      if (res.status === 200) {
-        setOrderData(res.data)
-        setFilterOrderData(res.data)
-        // console.log(res.data)
-        if (res.data == 0) {
-          setNoOrderList(true)
-        }
-      }
-    })
-  }
+  // const LoadOrderDetails = async (id) => {
+  //   const result = await OrderDetails(id).then((res) => {
+  //     if (res.status === 200) {
+  //       setOrderData(res.data)
+  //       setFilterOrderData(res.data)
+  //       // console.log(res.data)
+  //       if (res.data == 0) {
+  //         setNoOrderList(true)
+  //       }
+  //     }
+  //   })
+  // }
 
-  const LoadOrderHistory = async (id) => {
-    const result = await OrderHistory(id).then((res) => {
-      if (res.status === 200) {
-        setOrderHistoryData(res.data)
-        // console.log(res.data, "history")
-      }
-    })
-  }
+  // const LoadOrderHistory = async (id) => {
+  //   const result = await OrderHistory(id).then((res) => {
+  //     if (res.status === 200) {
+  //       setOrderHistoryData(res.data)
+  //       // console.log(res.data, "history")
+  //     }
+  //   })
+  // }
 
   const Navigate = useNavigate()
 
