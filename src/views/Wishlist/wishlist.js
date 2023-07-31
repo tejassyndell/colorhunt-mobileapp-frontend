@@ -37,6 +37,8 @@ function wishlist(props) {
   const navigate = useNavigate()
 
 
+  const isLoggedin = localStorage.getItem('isLoggedin') === 'true';
+
   // uploard image url
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
@@ -78,7 +80,7 @@ function wishlist(props) {
   const showProductDetails = (item) => {
     setIsProductDetails(true)
   }
-
+  const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font';
   
   return (
     <div className="dashboardDiv mandivdashboarddiv">
@@ -98,7 +100,10 @@ function wishlist(props) {
         {isProductDetails === false ? (
           <>
             <div className='tagdiv'>
-            <img src={navbaricon} onClick={() => { navigate('/dashboard') }} /><div className='tagnames'><h5>Wishlist</h5></div></div>
+              {isLoggedin === false ?(<img src={navbaricon} onClick={() => { navigate('/dashboard', { state: { isLoggedin: false } }) }} /> ): (<img src={navbaricon} onClick={() => { navigate('/dashboard') }} />)}
+            
+            
+            <div className='tagnames'><h5>Wishlist</h5></div></div>
             <div className='cover_container' style={{ height: '86vh' }} >
               <div className='garmentcontentrow wishlist_container'>
 
@@ -108,11 +113,12 @@ function wishlist(props) {
                         <div className='productcoumen' key={key} style={{ cursor: 'pointer', paddingTop: 5 }} >
                           <div className='producticones ipad_producticones'>
 
-                            <i className='fa fa-heart' onClick={() => removeprdWishlist(item)} ></i>
+                            <i className={`fa fa-heart ${isLoggedin === false ? "disabled-icon" :"" }`} onClick={() => removeprdWishlist(item)} ></i>
                           </div>
                           <img src={baseImageUrl + item.article_photos} alt={`T-Shirt ${item.id}`} className='articalimg' />
                           <div onClick={() => { showProductDetails(item) }}>
-                            <h4 className='contentname'>{item.ArticleNumber}<br/><span>{item.Title}</span><br/>₹ {item.ArticleRate}</h4>
+                            <h4 className='contentname'> {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
+                            <br/><span className={getFontSizeClass}>{item.Title}</span><br/>{` ${isLoggedin === false ? '' : "₹" + item.ArticleRate}`}</h4>
                            
                             {/* <img src={Rssimbol} style={{ marginLeft: 10 }} /><span style={{ fontWight: 600, marginLeft: 5 }}>{item.list_price}</span> */}
                           </div>
@@ -121,7 +127,8 @@ function wishlist(props) {
                       )
                 }
               </div>
-              <AppFooter />
+              {isLoggedin === false ? null : <AppFooter />}
+              
 
             </div>
           </>

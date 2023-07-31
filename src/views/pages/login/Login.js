@@ -78,7 +78,11 @@ const Login = () => {
   const isEmailValid = user.phone.pattern == ' ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}';
   const isEMailEmpty = user.phone.length === 0;
 
+ // skip event
+ const skipContent = () =>{
  
+  Navigate('/dashboard', { state: { isLoggedin: false } });
+ }
 
   
 
@@ -243,7 +247,7 @@ const Login = () => {
                               </button>
                             </CCol> : 
                             <CCol xs={12} style={{ display:'grid',justifyContent:'end' }}>
-                              <button  className="login_page_btn" >
+                              <button  className="login_page_btn" onClick={skipContent} >
                               Skip
                               </button>
                             </CCol>}

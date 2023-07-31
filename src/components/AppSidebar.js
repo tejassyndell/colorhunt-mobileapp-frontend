@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
 import noImages from '../assets/image/noimage.png'
 import { AppSidebarNav } from './AppSidebarNav'
@@ -13,6 +13,9 @@ import sidebottummenu from 'src/assets/Colorhuntimg/loginimg/sliderscreen/image 
 import sidebarlogo from 'src/assets/images/avatars/image_102-removebg-preview (1) 1.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
+
+// sidebar nav config
+import navigation from '../_nav'
 import navigationUser from '../_navuser'
 
 const AppSidebar = (props) => {
@@ -21,13 +24,18 @@ const AppSidebar = (props) => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const location = useLocation()
+  const isLoggedin = location.state?.isLoggedin;
+
 
   //Get RoleId
 
+
+
   //LogOut Functionality
-  
+
   const Navigate = useNavigate()
- 
+
 
   const testFunc = () => {
     console.log('clicked')
@@ -47,6 +55,7 @@ const AppSidebar = (props) => {
     >
       <CSidebarBrand className="d-none d-md-flex" style={{ padding: '14px 8px' }} to="/">
         <div className="sidebar-idcontent">
+          
           <img
             src={userimages}
             style={{ width: 25 }}
@@ -54,22 +63,35 @@ const AppSidebar = (props) => {
               sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : ''
             }}
           />
-          <span style={{ marginLeft: '-49px' }}>NIRAV SIR</span>
+          {isLoggedin === false ?  null:<span style={{ marginLeft: '-49px' }}>NIRAV SIR</span> }
+          {isLoggedin === false ?  null:<img src={closemanuicon} style={{ width: 45 }} /> }
+         
 
-          <img src={closemanuicon} style={{ width: 45 }} />
+          
         </div>
-        
+
       </CSidebarBrand>
 
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={navigationUser} UserData={UserData} />
-          <li className="nav-item">
+        {isLoggedin === false ?  <li className="nav-item">
+            <a className="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
+              <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
+              Sign up
+            </a>
+          </li>:null}
+          {isLoggedin === false ? (
+            <AppSidebarNav items={navigation} UserData={UserData} />
+          ) : (
+            <AppSidebarNav items={navigationUser} UserData={UserData} />
+          )}
+          {isLoggedin === false ? null :  <li className="nav-item">
             <a className="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
               <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
               Log out
             </a>
-          </li>
+          </li>}
+         
         </SimpleBar>
         <CSidebarNav className="slidenavbar">
           <div className="sidebarlogoconte">
@@ -82,7 +104,7 @@ const AppSidebar = (props) => {
           <p>Design By SYNDELL Inc.</p>
         </CSidebarNav>
       </CSidebarNav>
-     
+
     </CSidebar>
   )
 }

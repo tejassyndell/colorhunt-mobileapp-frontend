@@ -12,7 +12,7 @@
 
   .swiper-slide img {
     width: 100%;
-    height: 100%;
+    height: 45vh;
     /* object-fit: cover; */
   }
 
@@ -105,6 +105,7 @@
 
   }
   .size-container1 {
+    display: flex;
     margin-left: 5%;
     width: 178px;
     height: 53px;
@@ -181,7 +182,8 @@
     width: 35px;
     height: 35px;
     left: 20px;
-    top: 50px;
+    top: 35px;
+    z-index: 10;
   }
 
   .container {

@@ -1,28 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArticleDetails } from 'src/views/api/api';
 import './details-of-product.css'
-import SliderImg1 from 'src/assets/Colorhuntimg/product-img/image 126.png'
-import SliderImg2 from 'src/assets/Colorhuntimg/product-img/image 121.png'
-// import Menubar from 'src/assets/Colorhuntimg/product-img/menubar.png'
+import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 // import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
 import PropTypes from 'prop-types';
 
 
 const ArticlesCount = ({ item, quantities, setQuantities }) => {
   const [quantity, setQuantity] = useState(0);
-  const { id } = useParams();
-  console.log(id);
-
   useEffect(() => {
     // Set the quantity from the quantities array if it's available
     const matchingQuantity = quantities.find((q) => q.id === item.id);
     if (matchingQuantity) {
       setQuantity(matchingQuantity.quantity);
       console.log(matchingQuantity.quantity);
-      console.log(matchingQuantity.id);
     }
   }, [quantities, item.id]);
 
@@ -90,6 +85,8 @@ ArticlesCount.propTypes = {
 
 export default function Detailsofproduct() {
   const [selectedSize, setSelectedSize] = useState('')
+  const navigate = useNavigate()
+
 
   const handleSizeClick = (size) => {
     setSelectedSize(size)
@@ -103,7 +100,62 @@ export default function Detailsofproduct() {
     // Add more data for other rows
   ];
 
+  const { id } = useParams();
 
+  useEffect(() => {
+    ArticleDetailsData();
+  }, [])
+
+  const [articlePhotos, setArticlePhotos] = useState([])
+  const [articleCategory, setArticleCategory] = useState()
+  const [articleRatio, setArticleRatio] = useState()
+  const [articleRate, setArticleRate] = useState()
+  const [articleSize, setArticleSize] = useState()
+  const [articleColor, setArticleColor] = useState()
+  const [articleSizeData, setArticleSizeData] = useState()
+  const [articleColorver, setArticleColorver] = useState()
+
+
+  const ArticleDetailsData = async () => {
+
+    let data = {
+      ArticleId: id,
+      PartyId: 197,
+    }
+    try {
+      await ArticleDetails(data).then((res) => {
+        console.log(res.data);
+        setArticlePhotos(res.data.photos)
+        setArticleCategory(res.data.calculatedData[0].Category)
+        setArticleRatio(res.data.calculatedData[0].ArticleRatio)
+        setArticleRate(res.data.calculatedData[0].ArticleRate)
+        setArticleSize(res.data.calculatedData[0].ArticleSize)
+        setArticleColor(res.data.calculatedData[0].ArticleColor)
+        console.log(res.data.calculatedData[0].ArticleSize);
+        // setArticleColor(res.data.calculatedData.ArticleColor)
+
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  console.log(articleSize);
+  console.log(articleSizeData);
+
+  useEffect(() => {
+    console.log('articleSize in useEffect:', articleSize);
+    try {
+      const parsedArticleSize = JSON.parse(articleSize);
+      const ArticleColorData = JSON.parse(articleColor)
+      setArticleSizeData(parsedArticleSize);
+      setArticleColorver(ArticleColorData);
+    } catch (error) {
+    }
+  }, [articleSize,articleColor]);
+
+  console.log(articleColorver);
 
   const [quantities, setQuantities] = useState(data.map((item) => ({ id: item.id, quantity: 0 })));
 
@@ -114,13 +166,20 @@ export default function Detailsofproduct() {
     return `₹${value.toFixed(2)}`;
   };
 
+  // uploard url image
+  const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
+
+  const imageElements = articlePhotos.map((fileName, index) => (
+    <img src={baseImageUrl + fileName} alt={`Image ${index + 1}`} key={index} />
+  ));
+
 
 
   return (
     <div className="app-container">
       <div className="reactangle"></div>
       <div className="menu-bar">
-        {/* <img src={Menubar} alt="" /> */}
+        <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
 
       <Swiper
@@ -131,46 +190,40 @@ export default function Detailsofproduct() {
         onSwiper={(swiper) => console.log(swiper)}
         className="" // Add this class for styling
       >
-        <SwiperSlide>
-          <img src={SliderImg1} className="slider-img1" alt="" />
+      {imageElements.map((image, index) => (
+        <SwiperSlide key={index}>
+          <div className="image-container">{image}</div>
         </SwiperSlide>
-        <SwiperSlide>
-          <img src={SliderImg2} className="slider-img2" alt="" />
-        </SwiperSlide>
+      ))}
       </Swiper>
 
       <span className='artical-name'>Artical</span>
       <span className='artical-no'>33216</span>
-
       {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
             <h6 className="size-label">Size</h6>
             <div className="size-container1">
-              <div className="size-options">
-                <div className="size">
-                  <a href="#" onClick={() => handleSizeClick('M')}>
-                    M
-                  </a> </div>
-                <div className="size">
-                  <a href="#" onClick={() => handleSizeClick('L')}>
-                    L
-                  </a>
-                </div>
-                <div className="size">
-                  <a href="#" onClick={() => handleSizeClick('XL')}>
-                    XL
-                  </a>
-                </div>
-              </div>
+              {articleSizeData &&
+                articleSizeData.map((item, index) => (
+                  <div className="size-options" key={index}>
+                    {console.log(item.Name)}
+                    <div className="size">
+                      <a href="#" onClick={() => handleSizeClick(item.Name)}>
+                        {item.Name}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+
             </div>
           </div>
           <div className="product-detail-sec2">
             <div className="size-label">Category</div>
             <div className="size-container2">
               <div className="size-options">
-                <p>Collor Tees</p>
+                <p>{articleCategory}</p>
               </div>
             </div>
           </div>
@@ -184,38 +237,38 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-            {data.map((item, index) => {
-              return (
-                <ArticlesCount
-                  key={index}
-                  item={item}
-                  quantities={quantities}
-                  setQuantities={setQuantities}
-                />
-              );
-            })}
+              {data.map((item, index) => {
+                return (
+                  <ArticlesCount
+                    key={index}
+                    item={item}
+                    quantities={quantities}
+                    setQuantities={setQuantities}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
         <div className='article-ratio-Section'>
-        <div className="article-ratio-container">
-          <div className='artical-ration-title'>
-            <span>Artical Ration</span>
-            <div className="article-rate-content">
-            01:01:01
+          <div className="article-ratio-container">
+            <div className='artical-ration-title'>
+              <span>Artical Ration</span>
+              <div className="article-rate-content">
+                {articleRatio}
+              </div>
+            </div>
+
           </div>
+          <div className="article-rate-container">
+            <div className='artical-rate-title'>
+              <span>Artical Rate</span>
+              <div className="article-rate-content">{articleRate}
+              </div>
+            </div>
           </div>
-          
-        </div>
-        <div className="article-rate-container">
-          <div className='artical-rate-title'>
-            <span>Artical Rate</span>
-            <div className="article-rate-content">275
-          </div>
-          </div>
-        </div>
-       
-          
+
+
         </div>
         <div className="total-price-container">
           <div>
@@ -233,6 +286,8 @@ export default function Detailsofproduct() {
         </div>
 
       </div>
+
+
 
 
     </div>

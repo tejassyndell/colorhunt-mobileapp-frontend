@@ -41,6 +41,17 @@
     font-weight: 400 !important;
     text-align: center;
 }
+.disabled-icon {
+    pointer-events: none; /* This prevents clicks on the icon */
+    opacity: 0.8; /* You can adjust the opacity to make it look disabled */
+  }
+  
+  .large-font {
+    font-size: 20px !important;
+  }
+  .small-font {
+    font-size: 12px !important;
+  }
 
 
 .icon-section{

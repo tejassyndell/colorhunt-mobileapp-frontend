@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import updateicon from '../../assets/Colorhuntimg/dashboard/Group 8922.svg'
 import { getProductName, getCategories, getAddWishlist, getWishlistData, DeleteWishlist } from '../api/api'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from 'swiper/modules';
@@ -26,6 +26,8 @@ const Dashboard = (props) => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const navigate = useNavigate()
+  const location = useLocation()
+  const isLoggedin = location.state?.isLoggedin;
   const [activeFilterDiv, setActiveFilterDiv] = useState(true)
   const dispatch = useDispatch()
   const Min = 0
@@ -45,6 +47,8 @@ const Dashboard = (props) => {
     getproductname();
     getCategoriesname()
     getWishlist();
+
+
   }, [])
 
   // getAritical api
@@ -116,7 +120,7 @@ const Dashboard = (props) => {
   const addArticleWishlist = async (i) => {
     let data = {
       user_id: 197,
-      article_id: i.id,
+      article_id: i.Id,
     };
 
 
@@ -139,7 +143,7 @@ const Dashboard = (props) => {
     console.log(i, 'r')
     let data = {
       party_id: 197,
-      article_id: i.id,
+      article_id: i.Id,
     };
     console.log(data);
 
@@ -167,16 +171,16 @@ const Dashboard = (props) => {
   }
 
 
-// image single Article data
+  // image single Article data
 
-const getSingaleartical = (item) => {
-  const ArticalId = item.id;
-  navigate(`/Articles-details/${ArticalId}`); // Pass the ArticalId as a URL parameter to /Articles-details screen
-};
+  const getSingaleartical = (item) => {
+    const   ArticalId = item.Id;
+    navigate(`/Articles-details/${ArticalId}`); // Pass the ArticalId as a URL parameter to /Articles-details screen
+  };
 
-  
-  
-  
+
+
+
   // ------- add Article in wishlist end-------------
 
   const [input, setInput] = useState("");
@@ -249,6 +253,8 @@ const getSingaleartical = (item) => {
     }
   }
 
+  const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font';
+
   return (
 
 
@@ -302,7 +308,8 @@ const getSingaleartical = (item) => {
       <div className='allProduct-section maincontentsection' >
         <div className='product-hed-sec'>
           <p>All</p>
-          <p onClick={() => { navigate('/allarticles') }}>View All</p>
+          {isLoggedin === false ? (<p>View All</p>) : (<p onClick={() => { navigate('/allarticles') }} >View All</p>)}
+
         </div>
         <div>
           <Swiper
@@ -318,11 +325,20 @@ const getSingaleartical = (item) => {
             {ApplyStatushBack === true ? nameData.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className='sildercontentprice'>
+
                   <div id={item.id} className="producticones">
                     {
-                      selectedprd.some(i => i.Id === item.id) ?
-                        <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
-                        <i className={'fa fa-heart-o'} onClick={() => { addArticleWishlist(item) }}></i>
+                      selectedprd.some((i) => i.Id === item.Id) ? (
+                        <i
+                          className={`fa fa-heart ${isLoggedin === false ? "disabled-icon" :"" }`}
+                          onClick={() => { rmvProductWishlist(item) }}
+                        ></i>
+                      ) : (
+                        <i
+                          className={`fa fa-heart-o ${isLoggedin === false ? "disabled-icon" : ""}`}
+                          onClick={() => { addArticleWishlist(item) }}
+                        ></i>
+                      )
                     }
 
                   </div>
@@ -332,9 +348,10 @@ const getSingaleartical = (item) => {
 
                   <div>
                     <p>
-                      {item.ArticleNumber}<br />
-                      <span>{item.Category}</span><br />
-                      ₹ {item.ArticleRate}
+
+                      {` ${isLoggedin === false ? '' : item.ArticleNumber}`}<br />
+                      <span className={getFontSizeClass}>{item.Category}</span><br />
+                      {` ${isLoggedin === false ? '' : "₹" + item.ArticleRate}`}
                     </p>
                   </div>
                 </div>
@@ -345,9 +362,9 @@ const getSingaleartical = (item) => {
                   <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
                   <div>
                     <p>
-                      {item.ArticleNumber}<br />
+                      {` ${isLoggedin === false ? '' : item.ArticleNumber}`}<br />
                       <span>{item.Category}</span><br />
-                      ₹ {item.ArticleRate}
+                      {` ${isLoggedin === false ? '' : "₹" + item.ArticleRate}`}
                     </p>
                   </div>
                 </div>
@@ -483,9 +500,10 @@ const getSingaleartical = (item) => {
         </motion.div>
 
       </div> : null}
-      <div className='footer-section w-100'>
+      {isLoggedin === false ? null : <div className='footer-section w-100'>
         <AppFooter />
-      </div>
+      </div>}
+
 
 
 

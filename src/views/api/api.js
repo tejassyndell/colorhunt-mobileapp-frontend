@@ -43,7 +43,7 @@ console.log(data);
   console.log(error, 'err in react api')
  }
 }
-
+/////////getWishlistData
 export const getWishlistData = async (data)=>{
   console.log(data);
   try{
@@ -53,7 +53,7 @@ export const getWishlistData = async (data)=>{
     console.log(error, 'err in react api')
  }
 }
-
+//////DeleteWishlist
 export const DeleteWishlist = async (data)=>{
   console.log(data);
   try{
@@ -64,6 +64,17 @@ export const DeleteWishlist = async (data)=>{
  }
 }
 
+export const ArticleDetails = async (data)=>{
+  console.log(data.ArticleId);
+  console.log(data.PartyId);
+
+  try{
+    return await axios.post(`${url}/articledetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`)
+  }
+ catch(error){
+    console.log(error, 'err in react api')
+ }
+}
 
 
 

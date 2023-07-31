@@ -210,7 +210,7 @@ const Dashboard = (props) => {
         console.log(i, 'r')
         let data = {
             party_id: 197,
-            article_id: i.id,
+            article_id: i.Id,
         };
         console.log(data);
 
@@ -230,7 +230,7 @@ const Dashboard = (props) => {
         // console.log(i,'a')
         let data = {
             user_id: 197,
-            article_id: i.id,
+            article_id: i.Id,
         };
 
 
@@ -423,10 +423,10 @@ const Dashboard = (props) => {
 
                         {ApplyStatushBack === true ? (
                             nameData.map((item) => (
-                                <div className='box-items' key={item.id}>
-                                    <div id={item.id} className="producticones producticonesiped" style={{ top: 10 }}>
+                                <div className='box-items' key={item.Id}>
+                                    <div id={item.id} className="producticones producticonesiped" style={{ top: '3vh',paddingRight:10 }}>
                                         {
-                                            selectedprd.some(i => i.Id === item.id) ?
+                                            selectedprd.some(i => i.Id === item.Id) ?
                                                 <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
                                                 <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
                                         }
@@ -446,10 +446,10 @@ const Dashboard = (props) => {
                             ))
                         ) : (
                             applyrData.map((item) => (
-                                <div className='box-items' key={item.id}>
-                                    <div id={item.id} className="producticones producticonesiped" style={{ top: 10 }}>
+                                <div className='box-items' key={item.Id}>
+                                    <div id={item.id} className="producticones producticonesiped" style={{ top: '3vh',paddingRight:10 }}>
                                         {
-                                            selectedprd.some(i => i.Id === item.id) ?
+                                            selectedprd.some(i => i.Id === item.Id) ?
                                                 <i className="fa fa-heart" onClick={() => { rmvProductWishlist(item) }}></i> :
                                                 <i className={'fa fa-heart-o'} onClick={() => { addProductWishlist(item) }}></i>
                                         }
