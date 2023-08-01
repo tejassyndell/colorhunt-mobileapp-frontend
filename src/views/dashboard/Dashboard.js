@@ -182,6 +182,7 @@ const Dashboard = (props) => {
 
 
   // ------- add Article in wishlist end-------------
+  
 
   const [input, setInput] = useState("");
   // search and filter functionality
@@ -202,6 +203,7 @@ const Dashboard = (props) => {
       console.log(filterResult);
       setNameData(filterResult);
       setApplyData(filterResult)
+      console.log(filterResult);
     }
 
     setInput(value);
