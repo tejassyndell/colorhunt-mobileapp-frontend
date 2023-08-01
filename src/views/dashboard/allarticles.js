@@ -60,7 +60,7 @@ const Dashboard = (props) => {
 
     const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
-   
+
 
     // Function to handle category selection
 
@@ -530,8 +530,8 @@ const Dashboard = (props) => {
                                 thumbLeftColor="black"
                                 thumbRightColor="black"
                             />
-                            <div class="tooltip">{values[0]}</div>
-                            <div class="tooltip">{values[1]}</div>
+                            <div className="tooltip">{values[0]}</div>
+                            <div className="tooltip">{values[1]}</div>
                         </div>
 
 

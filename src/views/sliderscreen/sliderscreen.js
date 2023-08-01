@@ -4,12 +4,10 @@ import '../sliderscreen/sliderscreen.css'
 import slider1 from 'src/assets/Colorhuntimg/loginimg/sliderscreen/serious-young-man-standing-isolated-grey 1.png'
 import slider2 from 'src/assets/Colorhuntimg/loginimg/sliderscreen/low-angle-little-boy-posing 1 (1).png'
 import slider3 from 'src/assets/Colorhuntimg/loginimg/sliderscreen/handsome-confident-hipster-modelsexy-unshaven-man-dressed-summer-stylish-green-hoodie-jeans-clothes-fashion-male-with-curly-hairstyle-posing-studio-isolated-blue 1 (1).png'
-
 import slider4 from 'src/assets/Colorhuntimg/loginimg/sliderscreen/kid-studio-portrait-isolated 1.png'
 import logo from 'src/assets/Colorhuntimg/loginimg/sliderscreen/image 99 (1).svg'
 import logo1 from 'src/assets/Colorhuntimg/loginimg/sliderscreen/image 99.svg'
 import { motion } from 'framer-motion'
-import { Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 function sliderscreen(props) {

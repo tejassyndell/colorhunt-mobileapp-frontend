@@ -16,7 +16,7 @@ const ArticlesCount = ({ item, quantities, setQuantities }) => {
     const matchingQuantity = quantities.find((q) => q.id === item.id)
     if (matchingQuantity) {
       setQuantity(matchingQuantity.quantity)
-      console.log(matchingQuantity.quantity)
+      // console.log(matchingQuantity.quantity)
     }
   }, [quantities, item.id])
 
@@ -96,7 +96,7 @@ export default function Detailsofproduct() {
     { id: 3, color: '03-30 TO 36', available: 8 },
     // Add more data for other rows
   ]
-
+  
   const { id } = useParams()
 
   useEffect(() => {
@@ -111,6 +111,7 @@ export default function Detailsofproduct() {
   const [articleColor, setArticleColor] = useState()
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState()
+  const [articleNumber, setArticlenumber] = useState()
 
   const ArticleDetailsData = async () => {
     let data = {
@@ -126,18 +127,19 @@ export default function Detailsofproduct() {
         setArticleRate(res.data.calculatedData[0].ArticleRate)
         setArticleSize(res.data.calculatedData[0].ArticleSize)
         setArticleColor(res.data.calculatedData[0].ArticleColor)
-        console.log(res.data.calculatedData[0].ArticleSize)
+        setArticlenumber(res.data.calculatedData[0].ArticleNumber)
+        // console.log(res.data.calculatedData[0].ArticleSize)
         // setArticleColor(res.data.calculatedData.ArticleColor)
       })
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(articleSize)
-  console.log(articleSizeData)
-
+  console.log("article size",articleSize)
+  console.log("artilce size data",articleSizeData)
+  console.log("Article number",articleNumber)
+  console.log("article",articleColorver)
   useEffect(() => {
-    console.log('articleSize in useEffect:', articleSize)
     try {
       const parsedArticleSize = JSON.parse(articleSize)
       const ArticleColorData = JSON.parse(articleColor)
@@ -146,7 +148,7 @@ export default function Detailsofproduct() {
     } catch (error) {}
   }, [articleSize, articleColor])
 
-  console.log(articleColorver)
+  console.log("articlecolorver",articleColorver)
 
   const [quantities, setQuantities] = useState(data.map((item) => ({ id: item.id, quantity: 0 })))
 
@@ -187,8 +189,8 @@ export default function Detailsofproduct() {
         ))}
       </Swiper>
 
-      <span className="artical-name">Artical</span>
-      <span className="artical-no">33216</span>
+      <div className="artical-name">{articleNumber}</div>
+      
       {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
@@ -226,6 +228,7 @@ export default function Detailsofproduct() {
             </div>
             <div className="body">
               {data.map((item, index) => {
+                console.log(item)
                 return (
                   <ArticlesCount
                     key={index}

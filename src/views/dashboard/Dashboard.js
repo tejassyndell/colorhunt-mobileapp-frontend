@@ -26,27 +26,26 @@ import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1
 
 const Dashboard = (props) => {
   const { UserData } = props
+
+
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
-  const navigate = useNavigate()
-  const location = useLocation()
-  const isLoggedin = location.state?.isLoggedin
   const [activeFilterDiv, setActiveFilterDiv] = useState(true)
   const dispatch = useDispatch()
   const Min = 0
   const Max = 500
   const [values, setValues] = useState([Min, Max])
-  const [data, setData] = useState([...nameData])
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const [ApplyStatushBack, setApplyStatushBack] = useState(true)
   const [applyrData, setApplyData] = useState([])
   const [filterDataSearch, setFilterDataSearch] = useState([])
   const [Filterstatus, setFilterstatus] = useState(false)
-  const [filteredData, setFilteredData] = useState([])
   const [selectedprd, setSelectprd] = useState([])
   const [input, setInput] = useState('')
-
+  const navigate = useNavigate()
+  const location = useLocation()
+  const isLoggedin = location.state?.isLoggedin
   useEffect(() => {
     getproductname()
     getCategoriesname()
@@ -157,8 +156,8 @@ const Dashboard = (props) => {
   // image single Article data
 
   const getSingaleartical = (item) => {
-    console.log(ArticalId)
     const ArticalId = item.Id
+    console.log(ArticalId)
     navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
 
@@ -353,7 +352,7 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img src={baseImageUrl + item.Photos} alt={`T-Shirt ${item.id}`} />
+                      <img src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
                       <div>
                         <p>
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
