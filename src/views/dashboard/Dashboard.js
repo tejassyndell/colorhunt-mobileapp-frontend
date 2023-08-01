@@ -43,8 +43,9 @@ const Dashboard = (props) => {
   const [applyrData, setApplyData] = useState([])
   const [filterDataSearch, setFilterDataSearch] = useState([])
   const [Filterstatus, setFilterstatus] = useState(false)
-  const [fildata, setFildata] = useState([]);
-
+  const [filteredData, setFilteredData] = useState([])
+  const [selectedprd, setSelectprd] = useState([])
+  const [input, setInput] = useState('')
 
   useEffect(() => {
     getproductname()
@@ -92,7 +93,6 @@ const Dashboard = (props) => {
   }, [selectedCategories])
 
   // ------- add product in wishlist start-------------
-  const [selectedprd, setSelectprd] = useState([])
   const getWishlist = async () => {
     const data = {
       party_id: 197,
@@ -139,23 +139,20 @@ const Dashboard = (props) => {
 
   // range Filters
   const handlerangechange = (value) => {
+    // console.log([value.minValue, value.maxValue])
     setValues([value.minValue, value.maxValue])
-    // const sdrpc = nameData.slice()
-    console.log(values[0],values[1])
-    if (fildata.length === 0) {
-      // Apply the range filter directly to `nameData`
-      const filteredData = nameData.filter(
-        (item) => item.ArticleRate >= value.minValue && item.ArticleRate <= value.maxValue
-      );
-      setNameData(filteredData);
-    } else {
-      // Apply the range filter to `fildata`
-      const filteredData = fildata.filter(
-        (item) => item.ArticleRate >= value.minValue && item.ArticleRate <= value.maxValue
-      );
-      setNameData(filteredData);
-    }
+    console.log(values[0], values[1])
   }
+  useEffect(() => {
+    const sdPrds = nameData.slice()
+
+    const fildata = sdPrds.filter(
+      (item) => item.ArticleRate >= values[0] && item.ArticleRate <= values[1],
+    )
+    setApplyStatushBack(false)
+    setApplyData(fildata)
+    console.log(applyrData)
+  }, [nameData, values[0], values[1]])
 
   // image single Article data
 
@@ -166,7 +163,6 @@ const Dashboard = (props) => {
 
   // ------- add Article in wishlist end-------------
 
-  const [input, setInput] = useState('')
   // search and filter functionality
   const handleChange = (e) => {
     const value = e.target.value
@@ -229,7 +225,6 @@ const Dashboard = (props) => {
 
   const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font'
 
-  
   return (
     <motion.div
       initial={{ translateX: '100%', padding: '0px 5px' }}
@@ -520,7 +515,6 @@ const Dashboard = (props) => {
                 </div>
                 <MultiRangeSlider
                   valueLabelDisplay="auto"
-                  onChange={handlerangechange}
                   onInput={(e) => setValues([e.minValue, e.maxValue])}
                   minValue={values[0]}
                   maxValue={values[1]}
@@ -536,7 +530,6 @@ const Dashboard = (props) => {
                   thumbLeftColor="black"
                   thumbRightColor="black"
                 />
-              
               </div>
             </div>
             <div className="content-button">
