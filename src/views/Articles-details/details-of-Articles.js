@@ -170,7 +170,7 @@ export default function Detailsofproduct() {
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/';
 
   const imageElements = articlePhotos.map((fileName, index) => (
-    <img src={baseImageUrl + fileName} alt={`Image ${index + 1}`} key={index} />
+    <img src={baseImageUrl + fileName} alt={''} key={index} />
   ));
 
 
