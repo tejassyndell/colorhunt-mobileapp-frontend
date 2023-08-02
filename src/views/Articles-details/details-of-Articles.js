@@ -7,6 +7,7 @@ import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import PropTypes from 'prop-types'
+import { propTypes } from 'react-bootstrap/esm/Image'
 
 const ArticlesCount = ({ item, quantities, setQuantities }) => {
   const [quantity, setQuantity] = useState(0)
@@ -38,8 +39,8 @@ const ArticlesCount = ({ item, quantities, setQuantities }) => {
   return (
     <>
       <div className="row">
-        <div className="color-box">{item.color}</div>
-        <div className="available-box">{item.available}</div>
+        <div className="color-box">{item.Name}</div>
+        <div className="available-box">{item.salesnopacks}</div>
 
         <div className="qty-box">
           <div className="top-row">
@@ -70,6 +71,8 @@ ArticlesCount.propTypes = {
     id: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
     available: PropTypes.number.isRequired,
+    salesnopacks : PropTypes.number.isRequired,
+    Name:propTypes.number
   }).isRequired,
   quantities: PropTypes.arrayOf(
     PropTypes.shape({
@@ -234,9 +237,9 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-              {console.log(colordata)}
+              {/* {console.log(colordata)} */}
               {data.map((item, index) => {
-                // console.log(item)
+              // console.log(item)
                 return (
                   <ArticlesCount
                     key={index}
