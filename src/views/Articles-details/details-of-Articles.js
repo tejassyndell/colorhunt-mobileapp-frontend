@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
-// import CartIcon from 'src/assets/Colorhuntimg/product-img/icon.png'
 import PropTypes from 'prop-types'
 
 const ArticlesCount = ({ item, quantities, setQuantities }) => {
@@ -96,12 +95,12 @@ export default function Detailsofproduct() {
     { id: 3, color: '03-30 TO 36', available: 8 },
     // Add more data for other rows
   ]
-  
+
   const { id } = useParams()
 
   useEffect(() => {
     ArticleDetailsData()
-  },[])
+  }, [])
 
   const [articlePhotos, setArticlePhotos] = useState([])
   const [articleCategory, setArticleCategory] = useState()
@@ -112,6 +111,8 @@ export default function Detailsofproduct() {
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState()
   const [articleNumber, setArticlenumber] = useState()
+  const [salesnopacks, setSalesnopacks] = useState()
+  const [colordata, setColordata] = useState()
 
   const ArticleDetailsData = async () => {
     let data = {
@@ -128,17 +129,12 @@ export default function Detailsofproduct() {
         setArticleSize(res.data.calculatedData[0].ArticleSize)
         setArticleColor(res.data.calculatedData[0].ArticleColor)
         setArticlenumber(res.data.calculatedData[0].ArticleNumber)
-        // console.log(res.data.calculatedData[0].ArticleSize)
-        // setArticleColor(res.data.calculatedData.ArticleColor)
+        setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
       })
     } catch (error) {
       console.log(error)
     }
   }
-  console.log("article size",articleSize)
-  console.log("artilce size data",articleSizeData)
-  console.log("Article number",articleNumber)
-  console.log("article",articleColorver)
   useEffect(() => {
     try {
       const parsedArticleSize = JSON.parse(articleSize)
@@ -147,9 +143,22 @@ export default function Detailsofproduct() {
       setArticleColorver(ArticleColorData)
     } catch (error) {}
   }, [articleSize, articleColor])
-
-  console.log("articlecolorver",articleColorver)
-
+  useEffect(() => {
+    try {
+      // Combine articleColorver and salesnopacks into colordata
+      console.log('articlecolorver', articleColorver)
+      console.log('salesnopacks', salesnopacks)
+      const mergeddata = {
+        ...salesnopacks,
+        ...articleColorver,
+      }
+      console.log(mergeddata)
+      setColordata(mergeddata)
+    } catch (error) {}
+  }, [articleColorver, salesnopacks])
+  console.log('salesnopacks', salesnopacks)
+  console.log('articlecolorver', articleColorver)
+  console.log('colordata', colordata)
   const [quantities, setQuantities] = useState(data.map((item) => ({ id: item.id, quantity: 0 })))
 
   const [price, setPrice] = useState(0)
@@ -163,9 +172,7 @@ export default function Detailsofproduct() {
 
   const imageElements = articlePhotos.map((fileName, index) => (
     <img src={baseImageUrl + fileName} alt={''} key={index} />
-  ));
-
-
+  ))
 
   return (
     <div className="app-container">
@@ -190,7 +197,7 @@ export default function Detailsofproduct() {
       </Swiper>
 
       <div className="artical-name">{articleNumber}</div>
-      
+
       {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
@@ -200,7 +207,7 @@ export default function Detailsofproduct() {
               {articleSizeData &&
                 articleSizeData.map((item, index) => (
                   <div className="size-options" key={index}>
-                    {console.log(item.Name)}
+                    {/* {console.log(item.Name)} */}
                     <div className="size">
                       <a href="/" onClick={() => handleSizeClick(item.Name)}>
                         {item.Name}
@@ -227,8 +234,9 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
+              {console.log(colordata)}
               {data.map((item, index) => {
-                console.log(item)
+                // console.log(item)
                 return (
                   <ArticlesCount
                     key={index}
@@ -263,7 +271,7 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(price)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button" onClick="">
+            <button className="add-to-cart-button">
               {/* <img src={CartIcon} className="cart-icon" alt="" /> */}
               Add To Cart
             </button>
