@@ -5,61 +5,61 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
-const ArticlesCount = ({ item, quantities, setQuantities }) => {
-  const [quantity, setQuantity] = useState(0)
+// const ArticlesCount = ({ item, quantities, setQuantities }) => {
+//   const [quantity, setQuantity] = useState(0)
 
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
-  }
+//   const handleIncrease = () => {
+//     setQuantity((prevQuantity) => prevQuantity + 1)
+//   }
 
-  const handleDecrease = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-  }
+//   const handleDecrease = () => {
+//     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
+//   }
 
-  return (
-    <div className="row">
-      <div className="color-box">{item.color}</div>
-      <div className="available-box">{item.available}</div>
+//   return (
+//     <div className="row">
+//       <div className="color-box">{item.color}</div>
+//       <div className="available-box">{item.available}</div>
 
-      <div className="qty-box">
-        <div className="top-row">
-          <div className="box">
-            <div className="inner-box">
-              <button onClick={handleDecrease}>-</button>
-            </div>
-          </div>
-          <div className="box">
-            <div className="inner-box">
-              <span>{quantity}</span>
-            </div>
-          </div>
-          <div className="box">
-            <div className="inner-box">
-              <button onClick={handleIncrease}>+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+//       <div className="qty-box">
+//         <div className="top-row">
+//           <div className="box">
+//             <div className="inner-box">
+//               <button onClick={handleDecrease}>-</button>
+//             </div>
+//           </div>
+//           <div className="box">
+//             <div className="inner-box">
+//               <span>{quantity}</span>
+//             </div>
+//           </div>
+//           <div className="box">
+//             <div className="inner-box">
+//               <button onClick={handleIncrease}>+</button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 
-ArticlesCount.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired,
-    available: PropTypes.number.isRequired,
-  }).isRequired,
-  quantities: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  setQuantities: PropTypes.func.isRequired,
-}
+// ArticlesCount.propTypes = {
+//   item: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     color: PropTypes.string.isRequired,
+//     available: PropTypes.number.isRequired,
+//   }).isRequired,
+//   quantities: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       quantity: PropTypes.number.isRequired,
+//     }),
+//   ).isRequired,
+//   setQuantities: PropTypes.func.isRequired,
+// }
 
 export default function Detailsofproduct() {
   const updateQuantities = (itemId, newQuantity) => {
@@ -84,7 +84,7 @@ export default function Detailsofproduct() {
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
-  const [salesnopacks, setSalesnopacks] = useState()
+  const [salesnopacks, setSalesnopacks] = useState("")
 
   const ArticleDetailsData = async () => {
     let data = {
@@ -128,6 +128,9 @@ export default function Detailsofproduct() {
   const handleDecrease = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
   }
+
+  const salesnopackstoArray = salesnopacks.split(",")
+  console.log(salesnopackstoArray)
   return (
     <div className="app-container">
       <div className="reactangle"></div>
@@ -187,11 +190,12 @@ export default function Detailsofproduct() {
             </div>
             <div className="body">
               {console.log('Articlecolorverggg:', articleColorver)}
-              {articleColorver.map((item) => (
+              
+              {articleColorver.map((item,index) => (
                 <div key={item.Id}>
                   <div className="row">
                     <div className="color-box">{item.Name}</div>
-                    <div className="available-box">{salesnopacks}</div>
+                    <div className="available-box">{salesnopackstoArray[index]}</div>
                     <div className="qty-box">
                       <div className="top-row">
                         <div className="box">
