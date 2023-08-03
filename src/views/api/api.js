@@ -12,76 +12,61 @@ export const loginAuth = async (user) => {
 }
 
 //---------------------new change 28-----------------------
-export const getProductName = async ()=>{
-  try{
+export const getProductName = async () => {
+  try {
     return await axios.get(`${url}/getAllArticles`)
-  }
- catch(error){
+  } catch (error) {
     console.log(error, 'err in react api')
- }
+  }
 }
 
-
 //////////////////////getCategories
-export const getCategories = async ()=>{
-  try{
+export const getCategories = async () => {
+  try {
     return await axios.get(`${url}/getCategories`)
-  }
- catch(error){
+  } catch (error) {
     console.log(error, 'err in react api')
- }
+  }
 }
 
 // getAddWishlist/////
 
-export const getAddWishlist = async (data)=>{
-console.log(data);
-  try{
-    return await axios.post(`${url}/addwishlist`,data)
+export const getAddWishlist = async (data) => {
+  console.log(data)
+  try {
+    return await axios.post(`${url}/addwishlist`, data)
+  } catch (error) {
+    console.log(error, 'err in react api')
   }
- catch(error){
-  console.log(error, 'err in react api')
- }
 }
 /////////getWishlistData
-export const getWishlistData = async (data)=>{
-  console.log(data);
-  try{
-    return await axios.post(`${url}/getWishlist`,data)
-  }
- catch(error){
+export const getWishlistData = async (data) => {
+  console.log(data)
+  try {
+    return await axios.post(`${url}/getWishlist`, data)
+  } catch (error) {
     console.log(error, 'err in react api')
- }
+  }
 }
 //////DeleteWishlist
-export const DeleteWishlist = async (data)=>{
-  console.log(data);
-  try{
-    return await axios.post(`${url}/deletewishlist`,data)
-  }
- catch(error){
+export const DeleteWishlist = async (data) => {
+  console.log(data)
+  try {
+    return await axios.post(`${url}/deletewishlist`, data)
+  } catch (error) {
     console.log(error, 'err in react api')
- }
+  }
 }
 
-export const ArticleDetails = async (data)=>{
-  console.log(data.ArticleId);
-  console.log(data.PartyId);
+export const ArticleDetails = async (data) => {
+  console.log(data.ArticleId)
+  console.log(data.PartyId)
 
-  try{
-    return await axios.post(`${url}/articledetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`)
-  }
- catch(error){
+  try {
+    return await axios.post(
+      `${url}/articledetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`,
+    )
+  } catch (error) {
     console.log(error, 'err in react api')
- }
+  }
 }
-
-
-
-
-
-
-
-
-
-

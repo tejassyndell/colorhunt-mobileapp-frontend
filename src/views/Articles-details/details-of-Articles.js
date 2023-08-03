@@ -1,68 +1,48 @@
 /* eslint-disable prettier/prettier */
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import PropTypes from 'prop-types'
-import { propTypes } from 'react-bootstrap/esm/Image'
 
 const ArticlesCount = ({ item, quantities, setQuantities }) => {
   const [quantity, setQuantity] = useState(0)
-  useEffect(() => {
-    // Set the quantity from the quantities array if it's available
-    const matchingQuantity = quantities.find((q) => q.id === item.id)
-    if (matchingQuantity) {
-      setQuantity(matchingQuantity.quantity)
-      // console.log(matchingQuantity.quantity)
-    }
-  }, [quantities, item.id])
 
   const handleIncrease = () => {
     setQuantity((prevQuantity) => prevQuantity + 1)
-    updateQuantities(item.id, quantity + 1)
   }
 
   const handleDecrease = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-    updateQuantities(item.id, Math.max(quantity - 1, 0))
-  }
-
-  const updateQuantities = (itemId, newQuantity) => {
-    setQuantities((prevQuantities) => {
-      return prevQuantities.map((q) => (q.id === itemId ? { ...q, quantity: newQuantity } : q))
-    })
   }
 
   return (
-    <>
-      <div className="row">
-        <div className="color-box">{item.Name}</div>
-        <div className="available-box">{item.salesnopacks}</div>
+    <div className="row">
+      <div className="color-box">{item.color}</div>
+      <div className="available-box">{item.available}</div>
 
-        <div className="qty-box">
-          <div className="top-row">
-            <div className="box">
-              <div className="inner-box">
-                <button onClick={handleDecrease}>-</button>
-              </div>
+      <div className="qty-box">
+        <div className="top-row">
+          <div className="box">
+            <div className="inner-box">
+              <button onClick={handleDecrease}>-</button>
             </div>
-            <div className="box">
-              <div className="inner-box">
-                <span>{quantity}</span>
-              </div>
+          </div>
+          <div className="box">
+            <div className="inner-box">
+              <span>{quantity}</span>
             </div>
-            <div className="box">
-              <div className="inner-box">
-                <button onClick={handleIncrease}>+</button>
-              </div>
+          </div>
+          <div className="box">
+            <div className="inner-box">
+              <button onClick={handleIncrease}>+</button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -71,8 +51,6 @@ ArticlesCount.propTypes = {
     id: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
     available: PropTypes.number.isRequired,
-    salesnopacks : PropTypes.number.isRequired,
-    Name:propTypes.number
   }).isRequired,
   quantities: PropTypes.arrayOf(
     PropTypes.shape({
@@ -84,21 +62,15 @@ ArticlesCount.propTypes = {
 }
 
 export default function Detailsofproduct() {
-  // const [selectedSize, setSelectedSize] = useState('')
+  const updateQuantities = (itemId, newQuantity) => {
+    setQuantities((prevQuantities) => {
+      return prevQuantities.map((q) => (q.id === itemId ? { ...q, quantity: newQuantity } : q))
+    })
+  }
   const navigate = useNavigate()
 
-  const handleSizeClick = (size) => {
-    // setSelectedSize(size)
-    // Add any logic you need when a size is selected (e.g., update cart, trigger an action, etc.).
-    // For this example, we are only updating the selected size state.
-  }
-  const data = [
-    { id: 1, color: '01-30 TO 36', available: 10 },
-    { id: 2, color: '02-30 TO 36', available: 15 },
-    { id: 3, color: '03-30 TO 36', available: 8 },
-    // Add more data for other rows
-  ]
-
+  const handleSizeClick = (size) => {}
+  const [quantities, setQuantities] = useState([])
   const { id } = useParams()
 
   useEffect(() => {
@@ -109,13 +81,10 @@ export default function Detailsofproduct() {
   const [articleCategory, setArticleCategory] = useState()
   const [articleRatio, setArticleRatio] = useState()
   const [articleRate, setArticleRate] = useState()
-  const [articleSize, setArticleSize] = useState()
-  const [articleColor, setArticleColor] = useState()
   const [articleSizeData, setArticleSizeData] = useState()
-  const [articleColorver, setArticleColorver] = useState()
+  const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
   const [salesnopacks, setSalesnopacks] = useState()
-  const [colordata, setColordata] = useState()
 
   const ArticleDetailsData = async () => {
     let data = {
@@ -123,60 +92,42 @@ export default function Detailsofproduct() {
       PartyId: 197,
     }
     try {
-      await ArticleDetails(data).then((res) => {
-        console.log(res.data)
-        setArticlePhotos(res.data.photos)
-        setArticleCategory(res.data.calculatedData[0].Category)
-        setArticleRatio(res.data.calculatedData[0].ArticleRatio)
-        setArticleRate(res.data.calculatedData[0].ArticleRate)
-        setArticleSize(res.data.calculatedData[0].ArticleSize)
-        setArticleColor(res.data.calculatedData[0].ArticleColor)
-        setArticlenumber(res.data.calculatedData[0].ArticleNumber)
-        setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
-      })
+      const res = await ArticleDetails(data)
+      console.log('dd', res.data)
+      console.log('ressss:::', JSON.parse(res.data.calculatedData[0].ArticleColor))
+      setArticlePhotos(res.data.photos)
+      setArticleCategory(res.data.calculatedData[0].Category)
+      setArticleRatio(res.data.calculatedData[0].ArticleRatio)
+      setArticleRate(res.data.calculatedData[0].ArticleRate)
+      setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
+      setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
+      setArticlenumber(res.data.calculatedData[0].ArticleNumber)
+      setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
     } catch (error) {
       console.log(error)
     }
   }
-  useEffect(() => {
-    try {
-      const parsedArticleSize = JSON.parse(articleSize)
-      const ArticleColorData = JSON.parse(articleColor)
-      setArticleSizeData(parsedArticleSize)
-      setArticleColorver(ArticleColorData)
-    } catch (error) {}
-  }, [articleSize, articleColor])
-  useEffect(() => {
-    try {
-      // Combine articleColorver and salesnopacks into colordata
-      console.log('articlecolorver', articleColorver)
-      console.log('salesnopacks', salesnopacks)
-      const mergeddata = {
-        ...salesnopacks,
-        ...articleColorver,
-      }
-      console.log(mergeddata)
-      setColordata(mergeddata)
-    } catch (error) {}
-  }, [articleColorver, salesnopacks])
+
   console.log('salesnopacks', salesnopacks)
   console.log('articlecolorver', articleColorver)
-  console.log('colordata', colordata)
-  const [quantities, setQuantities] = useState(data.map((item) => ({ id: item.id, quantity: 0 })))
-
-  const [price, setPrice] = useState(0)
-  // Function to format the price to have two decimal places
+  const price = 0
   const formatPrice = (value) => {
     return `₹${value.toFixed(2)}`
   }
 
   // uploard url image
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
-
   const imageElements = articlePhotos.map((fileName, index) => (
     <img src={baseImageUrl + fileName} alt={''} key={index} />
   ))
 
+  const handleIncrease = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1)
+  }
+
+  const handleDecrease = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
+  }
   return (
     <div className="app-container">
       <div className="reactangle"></div>
@@ -185,12 +136,12 @@ export default function Detailsofproduct() {
       </div>
 
       <Swiper
-        spaceBetween={10} // Set the space between slides
-        slidesPerView={1} // Number of slides visible at once
-        loop={true} // Infinite loop
-        pagination={{ clickable: true }} // Show pagination dots
+        spaceBetween={10}
+        slidesPerView={1}
+        loop={true}
+        pagination={{ clickable: true }}
         onSwiper={(swiper) => console.log(swiper)}
-        className="" // Add this class for styling
+        className=""
       >
         {imageElements.map((image, index) => (
           <SwiperSlide key={index}>
@@ -201,7 +152,6 @@ export default function Detailsofproduct() {
 
       <div className="artical-name">{articleNumber}</div>
 
-      {/* Add more slides as needed */}
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
@@ -210,7 +160,6 @@ export default function Detailsofproduct() {
               {articleSizeData &&
                 articleSizeData.map((item, index) => (
                   <div className="size-options" key={index}>
-                    {/* {console.log(item.Name)} */}
                     <div className="size">
                       <a href="/" onClick={() => handleSizeClick(item.Name)}>
                         {item.Name}
@@ -237,18 +186,34 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-              {/* {console.log(colordata)} */}
-              {data.map((item, index) => {
-              // console.log(item)
-                return (
-                  <ArticlesCount
-                    key={index}
-                    item={item}
-                    quantities={quantities}
-                    setQuantities={setQuantities}
-                  />
-                )
-              })}
+              {console.log('Articlecolorverggg:', articleColorver)}
+              {articleColorver.map((item) => (
+                <div key={item.Id}>
+                  <div className="row">
+                    <div className="color-box">{item.Name}</div>
+                    <div className="available-box">{salesnopacks}</div>
+                    <div className="qty-box">
+                      <div className="top-row">
+                        <div className="box">
+                          <div className="inner-box">
+                            <button onClick={handleDecrease}>-</button>
+                          </div>
+                        </div>
+                        <div className="box">
+                          <div className="inner-box">
+                            <span>{0}</span>
+                          </div>
+                        </div>
+                        <div className="box">
+                          <div className="inner-box">
+                            <button onClick={handleIncrease}>+</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -274,10 +239,7 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(price)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button">
-              {/* <img src={CartIcon} className="cart-icon" alt="" /> */}
-              Add To Cart
-            </button>
+            <button className="add-to-cart-button">Add To Cart</button>
           </div>
         </div>
       </div>
