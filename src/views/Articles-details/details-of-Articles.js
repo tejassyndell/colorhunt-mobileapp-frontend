@@ -1,82 +1,22 @@
 /* eslint-disable prettier/prettier */
+
 import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
-// import PropTypes from 'prop-types'
-
-// const ArticlesCount = ({ item, quantities, setQuantities }) => {
-//   const [quantity, setQuantity] = useState(0)
-
-//   const handleIncrease = () => {
-//     setQuantity((prevQuantity) => prevQuantity + 1)
-//   }
-
-//   const handleDecrease = () => {
-//     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-//   }
-
-//   return (
-//     <div className="row">
-//       <div className="color-box">{item.color}</div>
-//       <div className="available-box">{item.available}</div>
-
-//       <div className="qty-box">
-//         <div className="top-row">
-//           <div className="box">
-//             <div className="inner-box">
-//               <button onClick={handleDecrease}>-</button>
-//             </div>
-//           </div>
-//           <div className="box">
-//             <div className="inner-box">
-//               <span>{quantity}</span>
-//             </div>
-//           </div>
-//           <div className="box">
-//             <div className="inner-box">
-//               <button onClick={handleIncrease}>+</button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// ArticlesCount.propTypes = {
-//   item: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     color: PropTypes.string.isRequired,
-//     available: PropTypes.number.isRequired,
-//   }).isRequired,
-//   quantities: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       quantity: PropTypes.number.isRequired,
-//     }),
-//   ).isRequired,
-//   setQuantities: PropTypes.func.isRequired,
-// }
-
 export default function Detailsofproduct() {
-  const updateQuantities = (itemId, newQuantity) => {
-    setQuantities((prevQuantities) => {
-      return prevQuantities.map((q) => (q.id === itemId ? { ...q, quantity: newQuantity } : q))
-    })
-  }
   const navigate = useNavigate()
 
   const handleSizeClick = (size) => {}
-  const [quantities, setQuantities] = useState([])
   const { id } = useParams()
 
   useEffect(() => {
     ArticleDetailsData()
   }, [])
-
+  const [availableStock, setAvailableStock] = useState([]);
+  const [quantities, setQuantities] = useState({})
   const [articlePhotos, setArticlePhotos] = useState([])
   const [articleCategory, setArticleCategory] = useState()
   const [articleRatio, setArticleRatio] = useState()
@@ -84,9 +24,16 @@ export default function Detailsofproduct() {
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
-  const [salesnopacks, setSalesnopacks] = useState("")
+  const [salesnopacks, setSalesnopacks] = useState('')
 
   const ArticleDetailsData = async () => {
+    const defaultQuantities = {}
+    articleColorver.forEach((item) => {
+      defaultQuantities[item.Id] = 0
+    })
+    setQuantities(defaultQuantities)
+  
+  
     let data = {
       ArticleId: id,
       PartyId: 197,
@@ -94,7 +41,6 @@ export default function Detailsofproduct() {
     try {
       const res = await ArticleDetails(data)
       console.log('dd', res.data)
-      console.log('ressss:::', JSON.parse(res.data.calculatedData[0].ArticleColor))
       setArticlePhotos(res.data.photos)
       setArticleCategory(res.data.calculatedData[0].Category)
       setArticleRatio(res.data.calculatedData[0].ArticleRatio)
@@ -103,10 +49,40 @@ export default function Detailsofproduct() {
       setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
+
+       // Assuming salesnopacks is a comma-separated string of available stock quantities
+      const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+      // const salesnopackstoArray = [1,2,3,4]
+      setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)));
+      console.log(availableStock)
+
     } catch (error) {
       console.log(error)
     }
   }
+
+  const colorwithindex = articleColorver.map((element,index)=>({
+    ...element,
+    index : index,
+  }))
+  console.log("cwi",colorwithindex)
+
+
+  console.log(availableStock)
+  const stockswithindex = availableStock.map((element,index)=>({
+    value: element,
+    index : index,
+  }))
+  console.log("swi",stockswithindex)
+
+  const combinedArray = colorwithindex.map((coloritem)=>{
+    const stockitem = stockswithindex.find((stockitem)=> stockitem.index === coloritem.index)
+    return{
+      ...coloritem,
+      value : stockitem ? stockitem.value : 0,
+    }
+  })
+  console.log("Combined Array",combinedArray)
 
   console.log('salesnopacks', salesnopacks)
   console.log('articlecolorver', articleColorver)
@@ -121,23 +97,34 @@ export default function Detailsofproduct() {
     <img src={baseImageUrl + fileName} alt={''} key={index} />
   ))
 
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
+  
+  const handleIncrease = (colorIndex) => {
+    console.log(quantities[colorIndex])
+    console.log(combinedArray[colorIndex])
+    if (quantities[colorIndex] < combinedArray[colorIndex]) {
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [colorIndex]: prevQuantities[colorIndex] + 1,
+      }));
+    }
+  };
+  ;
+
+  const handleDecrease = (colorIndex) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
+    }))
   }
 
-  const handleDecrease = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-  }
-
-  const salesnopackstoArray = salesnopacks.split(",")
-  console.log(salesnopackstoArray)
+  // const salesnopackstoArray = salesnopacks.split(',')
+  // console.log(salesnopackstoArray)
   return (
     <div className="app-container">
       <div className="reactangle"></div>
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
-
       <Swiper
         spaceBetween={10}
         slidesPerView={1}
@@ -152,9 +139,7 @@ export default function Detailsofproduct() {
           </SwiperSlide>
         ))}
       </Swiper>
-
       <div className="artical-name">{articleNumber}</div>
-
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
@@ -189,34 +174,59 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-              {console.log('Articlecolorverggg:', articleColorver)}
-              
-              {articleColorver.map((item,index) => (
+              {/* {articleColorver.map((item, index) => (
                 <div key={item.Id}>
                   <div className="row">
                     <div className="color-box">{item.Name}</div>
-                    <div className="available-box">{salesnopackstoArray[index]}</div>
+                    <div className="available-box">{availableStock[index]}</div>
                     <div className="qty-box">
                       <div className="top-row">
                         <div className="box">
                           <div className="inner-box">
-                            <button onClick={handleDecrease}>-</button>
+                            <button onClick={() => handleDecrease(item.Id)}>-</button>
                           </div>
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            <span>{0}</span>
+                            <span>{quantities[item.Id]}</span>
                           </div>
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            <button onClick={handleIncrease}>+</button>
+                            <button onClick={() => handleIncrease(item.Id)}>+</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              ))} */}
+              {combinedArray.map((item)=>(
+                <div key={item.Id}>
+                <div className="row">
+                  <div className="color-box">{item.Name}</div>
+                  <div className="available-box">{item.value}</div>
+                  <div className="qty-box">
+                    <div className="top-row">
+                      <div className="box">
+                        <div className="inner-box">
+                          <button onClick={() => handleDecrease(item.Id)}>-</button>
+                        </div>
+                      </div>
+                      <div className="box">
+                        <div className="inner-box">
+                          <span>{quantities[item.Id]}</span>
+                        </div>
+                      </div>
+                      <div className="box">
+                        <div className="inner-box">
+                          <button onClick={() => handleIncrease(item.Id)}>+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               ))}
             </div>
           </div>
@@ -224,7 +234,7 @@ export default function Detailsofproduct() {
         <div className="article-ratio-Section">
           <div className="article-ratio-container">
             <div className="artical-ration-title">
-              <span>Artical Ration</span>
+              <span>Artical Ratio</span>
               <div className="article-rate-content">{articleRatio}</div>
             </div>
           </div>
