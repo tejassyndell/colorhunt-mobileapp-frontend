@@ -51,8 +51,8 @@ export default function Detailsofproduct() {
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
-      const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      // const salesnopackstoArray = [1,2,3,4]
+      // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+      const salesnopackstoArray = [1,2,3,4]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)));
       console.log(availableStock)
 
@@ -171,7 +171,7 @@ export default function Detailsofproduct() {
                     <div className="top-row">
                       <div className="box">
                         <div className="inner-box">
-                          <button onClick={() => handleDecrease(item.index)}>-</button>
+                          <button onClick={() => handleDecrease(item.index)}  disabled={quantities[item.index] <= 0}>-</button>
                         </div>
                       </div>
                       <div className="box">
@@ -182,7 +182,10 @@ export default function Detailsofproduct() {
                       </div>
                       <div className="box">
                         <div className="inner-box">
-                          <button onClick={() => handleIncrease(item.index)}>+</button>
+                          {/* <button onClick={() => handleIncrease(item.index)}>+</button> */}
+                          <button onClick={() => handleIncrease(item.index)} disabled={quantities[item.index] >= item.available}>
+                        +
+                      </button>
                         </div>
                       </div>
                     </div>
