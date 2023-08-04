@@ -177,7 +177,7 @@ export default function Detailsofproduct() {
                       <div className="box">
                         <div className="inner-box">
                           {/* {console.log(quantities[item.index])} */}
-                          <span>{quantities[item.index]}</span>
+                          <span>{quantities[item.index] || 0}</span>
                         </div>
                       </div>
                       <div className="box">
