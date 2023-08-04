@@ -28,11 +28,12 @@ export default function Detailsofproduct() {
 
   const ArticleDetailsData = async () => {
     const defaultQuantities = {}
-    articleColorver.forEach((item) => {
-      defaultQuantities[item.Id] = 0
+    combinedArray.forEach((item) => {
+      defaultQuantities[item.index] = 0
     })
     setQuantities(defaultQuantities)
-  
+    console.log(combinedArray)
+    console.log(quantities)
   
     let data = {
       ArticleId: id,
@@ -50,7 +51,6 @@ export default function Detailsofproduct() {
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
-       // Assuming salesnopacks is a comma-separated string of available stock quantities
       const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
       // const salesnopackstoArray = [1,2,3,4]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)));
@@ -65,60 +65,48 @@ export default function Detailsofproduct() {
     ...element,
     index : index,
   }))
-  console.log("cwi",colorwithindex)
-
-
-  console.log(availableStock)
   const stockswithindex = availableStock.map((element,index)=>({
     value: element,
     index : index,
   }))
-  console.log("swi",stockswithindex)
-
   const combinedArray = colorwithindex.map((coloritem)=>{
     const stockitem = stockswithindex.find((stockitem)=> stockitem.index === coloritem.index)
     return{
       ...coloritem,
-      value : stockitem ? stockitem.value : 0,
+      available : stockitem ? stockitem.value : 0,
     }
   })
-  console.log("Combined Array",combinedArray)
-
-  console.log('salesnopacks', salesnopacks)
-  console.log('articlecolorver', articleColorver)
   const price = 0
   const formatPrice = (value) => {
     return `₹${value.toFixed(2)}`
   }
-
   // uploard url image
   const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
   const imageElements = articlePhotos.map((fileName, index) => (
     <img src={baseImageUrl + fileName} alt={''} key={index} />
   ))
-
-  
   const handleIncrease = (colorIndex) => {
-    console.log(quantities[colorIndex])
-    console.log(combinedArray[colorIndex])
-    if (quantities[colorIndex] < combinedArray[colorIndex]) {
+    if (!combinedArray || !combinedArray[colorIndex]) {
+      return;
+    }
+
+    if (quantities[colorIndex] < combinedArray[colorIndex].available) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [colorIndex]: prevQuantities[colorIndex] + 1,
       }));
     }
+    
   };
-  ;
-
   const handleDecrease = (colorIndex) => {
+    if (!combinedArray || !combinedArray[colorIndex]) {
+      return;
+    }
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
-
-  // const salesnopackstoArray = salesnopacks.split(',')
-  // console.log(salesnopackstoArray)
   return (
     <div className="app-container">
       <div className="reactangle"></div>
@@ -174,53 +162,27 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-              {/* {articleColorver.map((item, index) => (
-                <div key={item.Id}>
-                  <div className="row">
-                    <div className="color-box">{item.Name}</div>
-                    <div className="available-box">{availableStock[index]}</div>
-                    <div className="qty-box">
-                      <div className="top-row">
-                        <div className="box">
-                          <div className="inner-box">
-                            <button onClick={() => handleDecrease(item.Id)}>-</button>
-                          </div>
-                        </div>
-                        <div className="box">
-                          <div className="inner-box">
-                            <span>{quantities[item.Id]}</span>
-                          </div>
-                        </div>
-                        <div className="box">
-                          <div className="inner-box">
-                            <button onClick={() => handleIncrease(item.Id)}>+</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))} */}
               {combinedArray.map((item)=>(
                 <div key={item.Id}>
                 <div className="row">
                   <div className="color-box">{item.Name}</div>
-                  <div className="available-box">{item.value}</div>
+                  <div className="available-box">{item.available}</div>
                   <div className="qty-box">
                     <div className="top-row">
                       <div className="box">
                         <div className="inner-box">
-                          <button onClick={() => handleDecrease(item.Id)}>-</button>
+                          <button onClick={() => handleDecrease(item.index)}>-</button>
                         </div>
                       </div>
                       <div className="box">
                         <div className="inner-box">
-                          <span>{quantities[item.Id]}</span>
+                          {/* {console.log(quantities[item.index])} */}
+                          <span>{quantities[item.index]}</span>
                         </div>
                       </div>
                       <div className="box">
                         <div className="inner-box">
-                          <button onClick={() => handleIncrease(item.Id)}>+</button>
+                          <button onClick={() => handleIncrease(item.index)}>+</button>
                         </div>
                       </div>
                     </div>
