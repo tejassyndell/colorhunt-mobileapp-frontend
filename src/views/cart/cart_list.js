@@ -1,308 +1,159 @@
-/* eslint-disable */
+/* eslint-disable prettier/prettier */
+// OrderPlaced.js
+import React, { useState } from 'react';
+// import backicon from '../../assets/images/NavbarIcon/arrow.png';
+// import carticon from '../../assets/images/NavbarIcon/cart.png';
+// import editOder from '../../assets/images/icons/edit (5) 1.png';
+// import deletedOrder from '../../assets/images/icons/Vector.png';
+// import PlacedOrderImg from '../../assets/images/higrow/image 133.png';
+// import PlacedOrderIcon from '../../assets/images/icons/arrow (1).png';
+import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
+import bagicon from '../../assets/Colorhuntimg/bagicon.svg'
+import editicon from '../../assets/Colorhuntimg/edit.svg'
+import deleteicon from '../../assets/Colorhuntimg/delete.svg'
+import proceedicon from '../../assets/Colorhuntimg/proceed.svg'
+import './Cart.css';
+import { useNavigate } from 'react-router-dom';
 
-import React, { useState } from 'react'
+function OrderPlaced() {
+  const navigate = useNavigate();
+  const [promoCode, setPromoCode] = useState('');
+  const [orderItems, setOrderItems] = useState([
+    {
+      id: 33216,
+      productName: 'Collar tees',
+      rate: 275.00,
+    },
+    // Add more items here
+  ]);
 
-import { useNavigate } from 'react-router-dom'
-// import { getWishlistItems, unlinkproductwishlist } from '../api/api'
-// import { cartRemoveItem, getCartData, productwishlist, updateQty } from '../api/api'
-import noImages from '../../assets/image/noimage.png'
-import './Cart.css'
+  const handlePromoCodeChange = (event) => {
+    setPromoCode(event.target.value);
+  };
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  const handleApplyPromoCode = () => {
+    // Implement logic to apply the promo code here
+  };
 
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-function cart_list(props) {
-  // console.log(props.UserData[0].id);
-  const [emptproductlist, setemptPrdlist] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [ProductDatailItem, setProductDataItem] = useState([])
-  const [isProductDetails, setIsProductDetails] = useState(false)
-  const [arrllist, setArrlist] = useState([])
-  const [cartstatus, setCartstatus] = useState(true)
-  const navigate1 = useNavigate()
-  
-  const navigate = useNavigate()
+  const handleAddMoreItems = () => {
+    navigate('/dashboard');
+  };
 
-  
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
-  const [click, setClick] = useState(true)
+  const handleGoToOrderList = () => {
+    navigate('/orderplaced');
+  };
 
-  const routeChange = () => {
-    if (click === true) {
-      setClick(false)
-      navigate('/dashboard')
-    }
-  }
-  
+  const handleProceedToCheckout = () => {
+    navigate('/orderpurchase'); // Update the route path as per your routing setup
+  };
 
-  const showProductDetails = (item) => {
-    // console.log(item, 'itrm')
-    setProductDataItem(item)
-    setIsProductDetails(true)
-  }
+  const handleDeleteOrder = (orderId) => {
+    // Implement logic to delete the order item with the given orderId
+    const updatedOrderItems = orderItems.filter((item) => item.id !== orderId);
+    setOrderItems(updatedOrderItems);
+  };
 
-  const onPropPassedChange = () => {
-    setIsProductDetails(false)
-  }
+  const totalItems = orderItems.length;
+  const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0);
 
-  const removeitemfromcart = async (data) => {
-    // console.log(data);
-    let itemdetails = {
-      order_id: data.order_id,
-      saleorder: data.saleorder,
-    }
-    console.log(itemdetails)
-    setCartstatus(false)
-    setLoading(true)
-    const result = await cartRemoveItem(itemdetails).then((res) => {
-      if (res.status === 200) {
-        getcaritem()
-      }
-    })
-  }
-  const [count, setCount] = useState({})
-  function incrementCount(orderID, productQty, saleorder) {
-    setCount((prevCount) => {
-      const currentCount = prevCount[orderID] || productQty
-      const newCount = currentCount + 1
-      updatequntatity(newCount, saleorder)
-      return {
-        ...prevCount,
-        [orderID]: newCount,
-      }
-    })
-    setArrlist((prevArrlist) => {
-      const updatedArrlist = prevArrlist.map((item) => {
-        const updatedOrderLines = item.order_lines.map((subitem) => {
-          if (subitem.order_id === orderID) {
-            return {
-              ...subitem,
-              total: subitem.total + subitem.price_unit,
-            }
-          }
-          return subitem
-        })
-
-        return {
-          ...item,
-          order_lines: updatedOrderLines,
-        }
-      })
-
-      return updatedArrlist
-    })
-    // getcaritem();
-  }
-
-  function decrementCount(orderID, productQty, saleorder) {
-    setCount((prevCount) => {
-      const currentCount = prevCount[orderID] || productQty
-      const newCount = Math.max(currentCount - 1, 1)
-      updatequntatity(newCount, saleorder)
-      return {
-        ...prevCount,
-        [orderID]: newCount,
-      }
-    })
-    // console.log()
-
-    setArrlist((prevArrlist) => {
-      const updatedArrlist = prevArrlist.map((item) => {
-        const updatedOrderLines = item.order_lines.map((subitem) => {
-          if (subitem.order_id === orderID && subitem.total !== subitem.price_unit) {
-            return {
-              ...subitem,
-              total: subitem.total - subitem.price_unit,
-            }
-          } else {
-            return subitem
-          }
-        })
-
-        return {
-          ...item,
-          order_lines: updatedOrderLines,
-        }
-      })
-
-      return updatedArrlist
-    })
-
-    // getcaritem();
-  }
-
-  const updatequntatity = async (val, saleorder) => {
-    let data = {
-      id: saleorder,
-      product_uom_qty: val,
-    }
-    // console.log(data);
-    const result = updateQty(data)
-    // console.log(result);
-  }
+  const cartIsEmpty = orderItems.length === 0;
 
   return (
-    <div className="dashboardDiv mandivdashboarddiv">
-      <>
-        {isProductDetails === false ? (
-          <>
-            <div className="tagdiv">
-              <i
-                className="fa fa-angle-left"
-                onClick={routeChange}
-                style={{ position: 'absolute' }}
-                aria-hidden="true"
-              ></i>{' '}
-              <div className="tagnames">
-                <h5>My Cart</h5>
-              </div>
-            </div>
-
-           
-
-            <div className="cover_container">
-              <div className="garmentcontentrow cart_container">
-                {/* Create code ----------------------- */}
-                {/* <p style={{textAlign:"center",border:"1px solid red"}}>Wishlist Empty</p> */}
-                {emptproductlist === true ? (
-                  <div className="order_empty_div empty-list"> Empty Cart List</div>
-                ) : arrllist.length <= 0 || loading == true ? (
-                  <div className="loader-container_profile empty-list">
-                    <div className="loader_profile"></div>
-                  </div>
-                ) : (
-                  arrllist.map((item, key) =>
-                    item.order_lines.map((subitem, key) => (
-                      <div className="cart_man_container ">
-                        {/* <div className='productcoumen cart_man' key={key} style={{ cursor: 'pointer', paddingTop: 5 }} > */}
-                        {/* <div className='producticones'>
-
-                        <i className="fa fa-heart" onClick={() => removeprdWishlist(item.wid)} ></i>
-                      </div> */}
-
-                        <div className="cart_img_head">
-                          {item.image_128 !== false ? (
-                            <img
-                              src={`data:image/jpeg;base64,${item.image_128}`}
-                              className="img_cart_item"
-                            />
-                          ) : (
-                            <>
-                              <img src={noImages} className="img_cart_item" />
-                            </>
-                          )}
-                        </div>
-                        <div className="cart_details_container">
-                          <div className="cart_tag_container">
-                            <div className="tag_1">
-                              <h4>{item.name}</h4>
-                              <p>{subitem.colorname}</p>
-                            </div>
-                            <div className='cart_details_container'>
-                              <div className='cart_tag_container'>
-                                <div className='tag_1'>
-                                  <h4>{item.name}</h4>
-                                  <p>{subitem.colorname}</p>
-                                </div>
-                                <div className='tag_2'>
-                                  <i className="fa fa-trash" style={{ color: "#AE0617" }} onClick={() => { removeitemfromcart(subitem) }}></i>
-                                </div>
-                              </div>
-                              <div className="tag_2 tag_width">
-                                <span className="update_btn_grp">
-                                  <div className="update_quntatity_header">
-                                    <button
-                                      className="update_qunt_btn1"
-                                      onClick={() => {
-                                        decrementCount(
-                                          subitem.order_id,
-                                          subitem.product_uom_qty,
-                                          subitem.saleorder,
-                                        )
-                                        //  updatequntatity(newc,item.saleorder)
-                                      }}
-                                    >
-                                      -
-                                    </button>
-                                    <div className="update_qunt_count">
-                                      {count[subitem.order_id] || subitem.product_uom_qty}
-                                    </div>
-                                    <button
-                                      className="update_qunt_btn2"
-                                      onClick={() => {
-                                        incrementCount(
-                                          subitem.order_id,
-                                          subitem.product_uom_qty,
-                                          subitem.saleorder,
-                                        )
-                                      }}
-                                    >
-                                      +
-                                    </button>
-                                  </div>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )),
-                  )
-                )}
-              </div>
-
-            
-            </div>
-          </>
-        ) : (
-          <>
-            <ProductDetail
-              ProductDatailItem={ProductDatailItem}
-              UserData={props.UserData}
-              onPropPassed={() => onPropPassedChange()}
-            />
-          </>
-        )}
-      </>
-      <div className="continue_shoping_man_div">
-        <button
-          className="continue_shoping_btn"
-          onClick={() => {
-            navigate1('/dashboard')
-          }}
-        >
-          Continue shopping
-        </button>
-      </div>
-
-      <div className={cartstatus === false ? 'myCart_exteranal_div' : ''}>
-        <div
-          className={
-            cartstatus === true ? 'mycart_main_div unactiv_cart' : 'mycart_main_div activ_cart'
-          }
-        >
-          <div className="mycart_header">
-            <span
-              className="mycart_header_close"
-              onClick={() => {
-                setCartstatus(true)
-              }}
-            >
-              X
-            </span>
+    <>
+      <header className="navbar">
+        <div className="navbar-conatiner">
+          <div className="left-side">
+            <img src={menubar} alt="Back" onClick={handleGoBack} />
           </div>
-          <div className="mycart_checkmart_css">
-            {/* <Checkmark size={50} /> */}
-            {/* <FontAwesomeIcon icon={faCircleTrash} beatFade style={{ color: "#a60c0c" }} /> */}
-            <div className="mycart_icone">
-              <FontAwesomeIcon icon={faTrash} beatFade style={{ color: '#a60c0c' }} />
-            </div>
-            <h2 className="mycart_cart_text">Product is remove from your cart.</h2>
+          <div className="center">
+            <h1>Cart</h1>
+          </div>
+          <div className="right-side">
+            <img src={bagicon} style={{backgroundColor:"black"}} alt="Order List" onClick={handleGoToOrderList} />
           </div>
         </div>
+      </header>
+      <div className="below-header-container">
+        {cartIsEmpty ? (
+          <div className="empty-cart-message">
+            <p>Your Cart is Empty</p>
+          </div>
+        ) : (
+          <>
+            <div className="order-container">
+              <div className="order">
+                {orderItems.map((item) => (
+                  <div className="left-side" key={item.id}>
+                    <img src={""} alt="Order" />
+                    <div className="order-details">
+                      <h4>
+                        <span className="left-order-span">{item.id}</span> <br /> {item.productName}
+                      </h4>
+                      <h4>
+                        Rate: <br />
+                        <span className="left-order-span">₹{item.rate}</span>
+                      </h4>
+                    </div>
+                  </div>
+                ))}
+                <div className="right-side">
+                  <img src={editicon} alt="Edit" />
+                  <img
+                    src={deleteicon}
+                    alt="Delete"
+                    onClick={() => handleDeleteOrder(orderItems[0].id)} // For simplicity, deleting the first item when the delete icon is clicked
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="promo-code-container">
+              <div className="promo-code-input">
+                <input
+                  type="text"
+                  value={promoCode}
+                  onChange={handlePromoCodeChange}
+                  placeholder="Promo Code"
+                />
+              </div>
+              <button onClick={handleApplyPromoCode}>Apply</button>
+            </div>
+            <div className="add-more-container">
+              <button onClick={handleAddMoreItems}>Add More</button>
+            </div>
+            <div className="total-container">
+              <div className="total-items">Total ({totalItems} item) :</div>
+              <div className="total-price">
+                {' '}
+                Total price {''} <br /> <span className="total-item"> ₹ {totalPrice} </span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-    </div>
-  )
+      <div className="proceed-to-checkout-container">
+        {cartIsEmpty ? (
+          <div className="proceed-to-createOrder">
+            <button onClick={handleAddMoreItems}>Create Order</button>
+          </div>
+        ) : (
+          <>
+            <div className="proceed-to-check">
+              <button onClick={handleProceedToCheckout}>
+                Proceed to Checkout
+                <span className="placeOrder-icon">
+                  <img src={proceedicon} alt="icon" />
+                </span>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
 }
 
-export default cart_list
+export default OrderPlaced;
