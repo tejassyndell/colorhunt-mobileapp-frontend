@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
+
 export default function Detailsofproduct() {
   const navigate = useNavigate()
 
@@ -73,9 +74,13 @@ export default function Detailsofproduct() {
     return {
       ...coloritem,
       available: stockitem ? stockitem.value : 0,
+      Rate:articleRate
     }
   })
-  const price = 0
+  const totalPrice = Object.keys(quantities).reduce(
+    (total, colorIndex) => total + quantities[colorIndex] * combinedArray[colorIndex].Rate,
+    0
+  );
   const formatPrice = (value) => {
     return `₹${value.toFixed(2)}`
   }
@@ -221,7 +226,7 @@ export default function Detailsofproduct() {
             <span className="total-price-title">Total Price</span>
           </div>
           <div>
-            <span className="total-price-text">{formatPrice(price)}</span>
+            <span className="total-price-text">{formatPrice(totalPrice)}</span>
           </div>
           <div className="add-to-card-container">
             <button className="add-to-cart-button">Add To Cart</button>

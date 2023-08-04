@@ -1,12 +1,6 @@
 /* eslint-disable prettier/prettier */
-// OrderPlaced.js
+
 import React, { useState } from 'react';
-// import backicon from '../../assets/images/NavbarIcon/arrow.png';
-// import carticon from '../../assets/images/NavbarIcon/cart.png';
-// import editOder from '../../assets/images/icons/edit (5) 1.png';
-// import deletedOrder from '../../assets/images/icons/Vector.png';
-// import PlacedOrderImg from '../../assets/images/higrow/image 133.png';
-// import PlacedOrderIcon from '../../assets/images/icons/arrow (1).png';
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import bagicon from '../../assets/Colorhuntimg/bagicon.svg'
 import editicon from '../../assets/Colorhuntimg/edit.svg'
@@ -19,12 +13,12 @@ function OrderPlaced() {
   const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState('');
   const [orderItems, setOrderItems] = useState([
-    {
-      id: 33216,
-      productName: 'Collar tees',
-      rate: 275.00,
-    },
-    // Add more items here
+    // {
+    //   id: 33216,
+    //   productName: 'Collar tees',
+    //   rate: 275.00,
+    // },
+    // // Add more items here
   ]);
 
   const handlePromoCodeChange = (event) => {
