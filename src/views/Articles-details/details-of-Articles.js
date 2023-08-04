@@ -229,7 +229,7 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(totalPrice)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button">Add To Cart</button>
+            <button className="add-to-cart-button" onClick={() => navigate('/cart_list')}>Add To Cart</button>
           </div>
         </div>
       </div>
