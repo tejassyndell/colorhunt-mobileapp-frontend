@@ -15,7 +15,7 @@ export default function Detailsofproduct() {
   useEffect(() => {
     ArticleDetailsData()
   }, [])
-  const [availableStock, setAvailableStock] = useState([]);
+  const [availableStock, setAvailableStock] = useState([])
   const [quantities, setQuantities] = useState({})
   const [articlePhotos, setArticlePhotos] = useState([])
   const [articleCategory, setArticleCategory] = useState()
@@ -34,7 +34,7 @@ export default function Detailsofproduct() {
     setQuantities(defaultQuantities)
     console.log(combinedArray)
     console.log(quantities)
-  
+
     let data = {
       ArticleId: id,
       PartyId: 197,
@@ -52,28 +52,27 @@ export default function Detailsofproduct() {
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      const salesnopackstoArray = [1,2,3,4]
-      setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)));
+      const salesnopackstoArray = [1, 2, 3, 4]
+      setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
-
     } catch (error) {
       console.log(error)
     }
   }
 
-  const colorwithindex = articleColorver.map((element,index)=>({
+  const colorwithindex = articleColorver.map((element, index) => ({
     ...element,
-    index : index,
+    index: index,
   }))
-  const stockswithindex = availableStock.map((element,index)=>({
+  const stockswithindex = availableStock.map((element, index) => ({
     value: element,
-    index : index,
+    index: index,
   }))
-  const combinedArray = colorwithindex.map((coloritem)=>{
-    const stockitem = stockswithindex.find((stockitem)=> stockitem.index === coloritem.index)
-    return{
+  const combinedArray = colorwithindex.map((coloritem) => {
+    const stockitem = stockswithindex.find((stockitem) => stockitem.index === coloritem.index)
+    return {
       ...coloritem,
-      available : stockitem ? stockitem.value : 0,
+      available: stockitem ? stockitem.value : 0,
     }
   })
   const price = 0
@@ -87,20 +86,19 @@ export default function Detailsofproduct() {
   ))
   const handleIncrease = (colorIndex) => {
     if (!combinedArray || !combinedArray[colorIndex]) {
-      return;
+      return
     }
 
     if (quantities[colorIndex] < combinedArray[colorIndex].available) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [colorIndex]: prevQuantities[colorIndex] + 1,
-      }));
+      }))
     }
-    
-  };
+  }
   const handleDecrease = (colorIndex) => {
     if (!combinedArray || !combinedArray[colorIndex]) {
-      return;
+      return
     }
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -162,36 +160,44 @@ export default function Detailsofproduct() {
               <div className="qty-title">Add Qty.</div>
             </div>
             <div className="body">
-              {combinedArray.map((item)=>(
+              {combinedArray.map((item) => (
                 <div key={item.Id}>
-                <div className="row">
-                  <div className="color-box">{item.Name}</div>
-                  <div className="available-box">{item.available}</div>
-                  <div className="qty-box">
-                    <div className="top-row">
-                      <div className="box">
-                        <div className="inner-box">
-                          <button onClick={() => handleDecrease(item.index)}  disabled={quantities[item.index] <= 0}>-</button>
+                  <div className="row">
+                    <div className="color-box">{item.Name}</div>
+                    <div className="available-box">{item.available}</div>
+                    <div className="qty-box">
+                      <div className="top-row">
+                        <div className="box">
+                          <div className="inner-box">
+                            <button
+                              onClick={() => handleDecrease(item.index)}
+                              disabled={quantities[item.index] <= 0}
+                            >
+                              -
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="box">
-                        <div className="inner-box">
-                          {/* {console.log(quantities[item.index])} */}
-                          <span>{quantities[item.index] || 0}</span>
+                        <div className="box">
+                          <div className="inner-box">
+                            {/* {console.log(quantities[item.index])} */}
+                            <span>{quantities[item.index] || 0}</span>
+                          </div>
                         </div>
-                      </div>
-                      <div className="box">
-                        <div className="inner-box">
-                          {/* <button onClick={() => handleIncrease(item.index)}>+</button> */}
-                          <button onClick={() => handleIncrease(item.index)} disabled={quantities[item.index] >= item.available}>
-                        +
-                      </button>
+                        <div className="box">
+                          <div className="inner-box">
+                            {/* <button onClick={() => handleIncrease(item.index)}>+</button> */}
+                            <button
+                              onClick={() => handleIncrease(item.index)}
+                              disabled={quantities[item.index] >= item.available}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
               ))}
             </div>
           </div>
