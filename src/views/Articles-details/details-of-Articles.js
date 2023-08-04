@@ -51,8 +51,8 @@ export default function Detailsofproduct() {
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
-      // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      const salesnopackstoArray = [1, 2, 3, 4]
+      const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+      // const salesnopackstoArray = [1, 2, 3, 4]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
     } catch (error) {
