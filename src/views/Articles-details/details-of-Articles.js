@@ -62,7 +62,6 @@ export default function Detailsofproduct() {
       console.log(error)
     }
   }
-
   const colorwithindex = articleColorver.map((element, index) => ({
     ...element,
     index: index,
@@ -102,7 +101,7 @@ export default function Detailsofproduct() {
     } catch (error) {
         console.log("Error Adding to Cart:",error)
     }
-    navigate('/cart_list')
+    navigate('/cart_list',{ state: { totalPrice } })
   }
 
 
@@ -130,6 +129,7 @@ export default function Detailsofproduct() {
       }))
     }
   }
+
   const handleDecrease = (colorIndex) => {
     if (!combinedArray || !combinedArray[colorIndex]) {
       return

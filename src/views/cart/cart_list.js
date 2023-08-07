@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import bagicon from '../../assets/Colorhuntimg/bagicon.svg'
 import editicon from '../../assets/Colorhuntimg/edit.svg'
@@ -8,19 +8,31 @@ import deleteicon from '../../assets/Colorhuntimg/delete.svg'
 import proceedicon from '../../assets/Colorhuntimg/proceed.svg'
 import './Cart.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
+const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
 
 function OrderPlaced() {
   const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState('');
-  const [orderItems, setOrderItems] = useState([
-    // {
-    //   id: 33216,
-    //   productName: 'Collar tees',
-    //   rate: 275.00,
-    // },
-    // // Add more items here
-  ]);
+  const [orderItems, setOrderItems] = useState([])
 
+  const location = useLocation()
+  const { finalPrice } = location.state || {}
+
+  useEffect(() => {
+    axios
+      .post('http://localhost:4000/cartdetails', { party_id: 197 }) // Sending the party_id as data
+      .then((response) => {
+        console.log(response.data);
+        setOrderItems(response.data); // Assuming the response data is an array of order items
+      })
+      .catch((error) => {
+        console.log('Error fetching data:', error);
+      });
+  }, []);
+  console.log("orderItems",orderItems)
   const handlePromoCodeChange = (event) => {
     setPromoCode(event.target.value);
   };
@@ -82,14 +94,14 @@ function OrderPlaced() {
               <div className="order">
                 {orderItems.map((item) => (
                   <div className="left-side" key={item.id}>
-                    <img src={""} alt="Order" />
+                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" />
                     <div className="order-details">
                       <h4>
-                        <span className="left-order-span">{item.id}</span> <br /> {item.productName}
+                        <span className="left-order-span">{item.ArticleNumber}</span> <br /> {item.StyleDescription}
                       </h4>
                       <h4>
                         Rate: <br />
-                        <span className="left-order-span">₹{item.rate}</span>
+                        <span className="left-order-span">₹{item.articleRate}</span>
                       </h4>
                     </div>
                   </div>
@@ -122,7 +134,7 @@ function OrderPlaced() {
               <div className="total-items">Total ({totalItems} item) :</div>
               <div className="total-price">
                 {' '}
-                Total price {''} <br /> <span className="total-item"> ₹ {totalPrice} </span>
+                Total price {''} <br /> <span className="total-item"> ₹ {finalPrice} </span>
               </div>
             </div>
           </>
