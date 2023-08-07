@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
+import axios from 'axios'
 
 export default function Detailsofproduct() {
   const navigate = useNavigate()
@@ -52,8 +53,9 @@ export default function Detailsofproduct() {
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
-      const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      // const salesnopackstoArray = [1, 2, 3, 4]
+      // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+      const salesnopackstoArray = [1, 2, 3, 4]
+
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
     } catch (error) {
@@ -77,6 +79,33 @@ export default function Detailsofproduct() {
       Rate:articleRate
     }
   })
+
+  const addtocart =  async(PartyId, ArticleId) => {
+    if(!combinedArray){
+      console.log("undefined")
+      return;
+    }
+    console.log(combinedArray)
+    const colorwiseQuantities = combinedArray.map((coloritem)=>
+      quantities[coloritem.index],
+    )
+    console.log("colorwise quantity :",colorwiseQuantities)
+    const data = {
+      party_id : PartyId,
+      article_id : ArticleId,
+      Quantity: colorwiseQuantities,
+    }
+    
+    try {
+      const response = await axios.post('http://localhost:4000/addtocart',data);
+      console.log('APi Response:',response.data) 
+    } catch (error) {
+        console.log("Error Adding to Cart:",error)
+    }
+    navigate('/cart_list')
+  }
+
+
   const totalPrice = Object.keys(quantities).reduce(
     (total, colorIndex) => total + quantities[colorIndex] * combinedArray[colorIndex].Rate,
     0
@@ -185,7 +214,7 @@ export default function Detailsofproduct() {
                         <div className="box">
                           <div className="inner-box">
                             {/* {console.log(quantities[item.index])} */}
-                            <span>{quantities[item.index] || 0}</span>
+                            <span>{quantities[item.index] }</span>
                           </div>
                         </div>
                         <div className="box">
@@ -229,7 +258,7 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(totalPrice)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button" onClick={() => navigate('/cart_list')}>Add To Cart</button>
+            <button className="add-to-cart-button" onClick={()=> addtocart(197,id)}>Add To Cart</button>
           </div>
         </div>
       </div>
