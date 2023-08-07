@@ -34,8 +34,6 @@ export default function Detailsofproduct() {
       defaultQuantities[item.index] = 0
     })
     setQuantities(defaultQuantities)
-    console.log(combinedArray)
-    console.log(quantities)
 
     let data = {
       ArticleId: id,
@@ -75,40 +73,37 @@ export default function Detailsofproduct() {
     return {
       ...coloritem,
       available: stockitem ? stockitem.value : 0,
-      Rate:articleRate
+      Rate: articleRate,
     }
   })
 
-  const addtocart =  async(PartyId, ArticleId) => {
-    if(!combinedArray){
-      console.log("undefined")
-      return;
+  const addtocart = async (PartyId, ArticleId) => {
+    if (!combinedArray) {
+      console.log('undefined')
+      return
     }
     console.log(combinedArray)
-    const colorwiseQuantities = combinedArray.map((coloritem)=>
-      quantities[coloritem.index],
-    )
-    console.log("colorwise quantity :",colorwiseQuantities)
+    const colorwiseQuantities = combinedArray.map((coloritem) => quantities[coloritem.index])
+    console.log('colorwise quantity :', colorwiseQuantities)
     const data = {
-      party_id : PartyId,
-      article_id : ArticleId,
+      party_id: PartyId,
+      article_id: ArticleId,
       Quantity: colorwiseQuantities,
     }
-    
-    try {
-      const response = await axios.post('http://localhost:4000/addtocart',data);
-      console.log('APi Response:',response.data) 
-    } catch (error) {
-        console.log("Error Adding to Cart:",error)
-    }
-    navigate('/cart_list',{ state: { totalPrice } })
-  }
 
+    try {
+      const response = await axios.post('http://localhost:4000/addtocart', data)
+      console.log('APi Response:', response.data)
+    } catch (error) {
+      console.log('Error Adding to Cart:', error)
+    }
+    navigate('/cart_list', { state: { totalPrice } })
+  }
 
   const totalPrice = Object.keys(quantities).reduce(
     (total, colorIndex) => total + quantities[colorIndex] * combinedArray[colorIndex].Rate,
-    0
-  );
+    0,
+  )
   const formatPrice = (value) => {
     return `₹${value.toFixed(2)}`
   }
@@ -121,7 +116,6 @@ export default function Detailsofproduct() {
     if (!combinedArray || !combinedArray[colorIndex]) {
       return
     }
-
     if (quantities[colorIndex] < combinedArray[colorIndex].available) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
@@ -129,7 +123,6 @@ export default function Detailsofproduct() {
       }))
     }
   }
-
   const handleDecrease = (colorIndex) => {
     if (!combinedArray || !combinedArray[colorIndex]) {
       return
@@ -214,7 +207,7 @@ export default function Detailsofproduct() {
                         <div className="box">
                           <div className="inner-box">
                             {/* {console.log(quantities[item.index])} */}
-                            <span>{quantities[item.index] }</span>
+                            <span>{quantities[item.index]}</span>
                           </div>
                         </div>
                         <div className="box">
@@ -258,7 +251,9 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(totalPrice)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button" onClick={()=> addtocart(197,id)}>Add To Cart</button>
+            <button className="add-to-cart-button" onClick={() => addtocart(197, id)}>
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>
