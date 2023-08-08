@@ -110,3 +110,14 @@
     background-color: #fff !important;
     border-radius: 50%;
   } */
+
+  .screenview-panding{
+        width: 100%;
+    height: 90vh;
+    text-align: center;
+    display: grid;
+    align-items: center;
+  }
+  .tagdiv{
+    height: 48px !important;
+  }

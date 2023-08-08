@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useState,useEffect } from 'react'
-import { CFooter } from '@coreui/react'
 import homeicon from 'src/assets/Colorhuntimg/loginimg/sliderscreen/Vector (32).svg'
 import ordericon from 'src/assets/Colorhuntimg/Sidebaricon/Order History.svg'
 import carticon from 'src/assets/Colorhuntimg/Sidebaricon/cart.svg'
@@ -10,14 +9,15 @@ import { useNavigate } from 'react-router-dom'
 
 
 const AppFooter = () => {
-  const [activeIcon, setActiveIcon] = useState('');// Set the initial active icon
+  const [activeIcon, setActiveIcon] = useState('home');// Set the initial active icon
   const Navigate = useNavigate();
 
   const handleIconClick = (iconName) => {
     setActiveIcon(iconName);
     console.log(iconName);
   };
-  useEffect(() => {
+
+useEffect(() => {
     console.log(activeIcon);
   }, [activeIcon]);
  
@@ -29,7 +29,6 @@ const AppFooter = () => {
     padding: '14px',
     width: '50px',
     height: '50px',
-    // Add other styles as needed
   };
   
 

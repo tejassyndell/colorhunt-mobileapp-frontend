@@ -28,7 +28,7 @@ body {
 .order_empty_div {
     text-align: center;
     vertical-align: middle;
-    height: 76vh;
+    height: 85vh;
     display: grid;
     align-items: center;
 }
@@ -245,7 +245,7 @@ body {
     z-index: 20;
     margin-bottom: 5px;
     height: 70px;
-    border-bottom: 2px solid rgba(130, 130, 130, 1);
+    border-bottom: 1px solid rgba(130, 130, 130, 1);
 }
 
 .tagdiv_order {
@@ -287,6 +287,7 @@ body {
     color: #000000;
     font-size: 20px;
     margin: 0%;
+    padding-right: 1vh;
 
 }
 

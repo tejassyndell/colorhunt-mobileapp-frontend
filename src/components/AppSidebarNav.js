@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -11,11 +13,7 @@ export const AppSidebarNav = ({ items, UserData }) => {
       <>
         {icon && icon}
         {name && name}
-        {/* {badge && (
-          <CBadge color={badge.color} className="ms-auto">
-            {badge.text}
-          </CBadge>
-        )} */}
+       
       </>
     )
   }

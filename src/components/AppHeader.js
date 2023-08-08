@@ -6,7 +6,6 @@ import {
   CContainer,
   CHeader,
   CHeaderBrand,
-  CHeaderDivider,
   CHeaderNav,
   CHeaderToggler,
   CNavLink,
@@ -14,7 +13,6 @@ import {
   CDropdown,
   CDropdownToggle 
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import cilMenu from 'src/assets/Colorhuntimg/Sidebaricon/menu.svg'
 import noImages from '../assets/image/noimage.png'
 import { useState } from 'react'
@@ -30,9 +28,7 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const [click1, setClick1] = useState(true)
 
-const routerchangeProfile = () => {
-  navigate('/profile')
-}
+
 
 const routerChangeProfile = () => {
   if(click1===true){
@@ -45,16 +41,12 @@ const routerChangeProfile = () => {
     <CHeader position="sticky" className="mb-4 header_padding">
       <CContainer fluid>
         <CHeaderToggler
-          // className="ps-1"
           onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
         >
-          {/* <CIcon icon={cilMenu} size="lg" /> */}
         {sidebarShow === true ? null :<img src={cilMenu} width={25} alt="Logo" />}  
 
         </CHeaderToggler>
-        {/* <AppBreadcrumb /> */}
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          {/* <CIcon icon={cilMenu} height={48} alt="Logo" /> */}
 
          
         </CHeaderBrand>
@@ -62,9 +54,8 @@ const routerChangeProfile = () => {
         </CHeaderNav>
         <CHeaderNav >
           <CNavItem>
-            <CNavLink /* href="/notification" */>
+            <CNavLink >
               
-              {/* <img src={CartIcon} height={30} /> */}
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
@@ -87,10 +78,7 @@ const routerChangeProfile = () => {
    </CDropdown>
         </CHeaderNav>
       </CContainer>
-      {/* <CHeaderDivider /> */}
-      {/* <CContainer fluid>
-        <AppBreadcrumb />
-      </CContainer> */}
+      
     </CHeader>
   )
 }

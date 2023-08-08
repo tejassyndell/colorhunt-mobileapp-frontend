@@ -1,28 +1,12 @@
 /* eslint-disable */
-import React, { useState } from 'react'
-import CIcon from '@coreui/icons-react'
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-  cilUser
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import React from 'react'
+import { CNavItem } from '@coreui/react'
 import order from './assets/Colorhuntimg/Sidebaricon/Order History.svg'
 import Cart from './assets/Colorhuntimg/Sidebaricon/cart.svg'
 import Wishlist from './assets/Colorhuntimg/Sidebaricon/Wishlist.svg'
 import Notifications from './assets/Colorhuntimg/Sidebaricon/notification.svg'
 import Aboutus from './assets/Colorhuntimg/Sidebaricon/Group 1000005827.svg'
 import ContactUs from './assets/Colorhuntimg/Sidebaricon/Group 1000005828.svg'
-import Logout from './assets/Colorhuntimg/Sidebaricon/download (1) 1.svg'
 
 
 const _navuser = [
@@ -44,6 +28,9 @@ const _navuser = [
   name: 'Wishlist',
   to: '/wishlist',
   icon: <img src={Wishlist} height={15} style={{ width: 45 }} />,
+  onClick: () => {
+    localStorage.setItem('isLoggedin', true);
+  },
 },
 {
   component: CNavItem,

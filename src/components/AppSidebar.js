@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
 import noImages from '../assets/image/noimage.png'
 import { AppSidebarNav } from './AppSidebarNav'
@@ -13,6 +13,9 @@ import sidebottummenu from 'src/assets/Colorhuntimg/loginimg/sliderscreen/image 
 import sidebarlogo from 'src/assets/images/avatars/image_102-removebg-preview (1) 1.png'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
+
+// sidebar nav config
+import navigation from '../_nav'
 import navigationUser from '../_navuser'
 
 const AppSidebar = (props) => {
@@ -21,24 +24,18 @@ const AppSidebar = (props) => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const location = useLocation()
+  const isLoggedin = location.state?.isLoggedin;
+
 
   //Get RoleId
-  const [roleid, setroleid] = useState('')
-  // console.log('roleid',roleid)
-  useEffect(() => {
-    const storedData = localStorage.getItem('roleId')
-    if (storedData) {
-      setroleid(storedData)
-    }
-  }, [])
+
+
+
   //LogOut Functionality
+
   const Navigate = useNavigate()
-  // const logout = () => {
-  //   // // localStorage.clear(roleAuth)
-  //   localStorage. removeItem('roleAuth')
-  //   Navigate('/login')
-  //   console.log("Asdassfddddddddddddddddddddd");
-  // }
+
 
   const testFunc = () => {
     console.log('clicked')
@@ -58,6 +55,7 @@ const AppSidebar = (props) => {
     >
       <CSidebarBrand className="d-none d-md-flex" style={{ padding: '14px 8px' }} to="/">
         <div className="sidebar-idcontent">
+          
           <img
             src={userimages}
             style={{ width: 25 }}
@@ -65,65 +63,38 @@ const AppSidebar = (props) => {
               sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : ''
             }}
           />
-          <span style={{ marginLeft: '-49px' }}>NIRAV SIR</span>
+          {isLoggedin === false ?  null:<span style={{ marginLeft: '-49px' }}>NIRAV SIR</span> }
+          {isLoggedin === false ?  null:<img src={closemanuicon} style={{ width: 45 }} /> }
+         
 
-          <img src={closemanuicon} style={{ width: 45 }} />
+          
         </div>
-        {/* {UserData.length > 0 ? (
-          <>
-            {UserData[0].avatar_1024 !== false ? (
-              <>
-                <a className="logo">
-                  <img
-                    src={`data:image/jpeg;base64,${UserData[0].avatar_1024}`}
-                    className="sidebar-logo sidebar-brand-full"
-                    onError={(e) => {
-                      e.target.src = noImages; 
-                    }}
-                  />
-                </a>
-                <img
-                  src={smallLogo}
-                  height={40}
-                  width={40}
-                  className="sidebar-logo sidebar-brand-narrow"
-                />
-                <div className="sidebarimages">
-                  <h4>
-                    {UserData[0].name}
-                  </h4>
-                  <p>{UserData[0].email}</p>
-                </div>
-              </>
-            ) : (
-              <img src={noImages} className="sidebar-logo sidebar-brand-full" />
-            )}
-          </>
-        ) : (
-          <></>
-        )} */}
+
       </CSidebarBrand>
 
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={navigationUser} UserData={UserData} />
-          <li className="nav-item">
-            <a
-              className="nav-link mt-4"
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                testFunc()
-              }}
-            >
+        {isLoggedin === false ?  <li className="nav-item">
+            <a className="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
               <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
-              {/* <CIcon icon={cilAccountLogout} customClassName="nav-icon" /> */}
+              Sign up
+            </a>
+          </li>:null}
+          {isLoggedin === false ? (
+            <AppSidebarNav items={navigation} UserData={UserData} />
+          ) : (
+            <AppSidebarNav items={navigationUser} UserData={UserData} />
+          )}
+          {isLoggedin === false ? null :  <li className="nav-item">
+            <a className="nav-link mt-4" style={{ cursor: "pointer" }} onClick={() => { testFunc() }}>
+              <img src={logouticon} height={23} style={{ width: 45, marginLeft: 3 }} />
               Log out
             </a>
-          </li>
+          </li>}
+         
         </SimpleBar>
         <CSidebarNav className="slidenavbar">
           <div className="sidebarlogoconte">
-            {/* <img src={sidebarlogo} style={{ height: 91, width: 201, padding: '4px 9px' }} /> */}
           </div>
           <img
             src={sidebottummenu}
@@ -133,10 +104,7 @@ const AppSidebar = (props) => {
           <p>Design By SYNDELL Inc.</p>
         </CSidebarNav>
       </CSidebarNav>
-      {/* <CSidebarToggler
-        className="d-none d-lg-flex"
-        onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
-      /> */}
+
     </CSidebar>
   )
 }
