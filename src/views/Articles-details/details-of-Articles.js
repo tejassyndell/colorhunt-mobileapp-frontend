@@ -74,21 +74,21 @@ export default function Detailsofproduct() {
       Rate: articleRate,
     }
   })
-  
   const addtocart = async (PartyId, ArticleId) => {
     if (!combinedArray) {
       console.log('undefined')
       return
     }
-    console.log(combinedArray)
     const colorwiseQuantities = combinedArray.map((coloritem) => quantities[coloritem.index])
     console.log('colorwise quantity :', colorwiseQuantities)
     const colorwiseQuantitiesTOstring = colorwiseQuantities.join(',')
-    console.log("cqty to string ", colorwiseQuantitiesTOstring)
+    console.log('cqty to string ', colorwiseQuantitiesTOstring)
+    console.log(totalPrice)
     const data = {
       party_id: PartyId,
       article_id: ArticleId,
       Quantity: colorwiseQuantitiesTOstring,
+      rate: totalPrice,
     }
     try {
       const response = await axios.post('http://localhost:4000/addtocart', data)
@@ -205,13 +205,11 @@ export default function Detailsofproduct() {
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            {/* {console.log(quantities[item.index])} */}
                             <span>{quantities[item.index]}</span>
                           </div>
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            {/* <button onClick={() => handleIncrease(item.index)}>+</button> */}
                             <button
                               onClick={() => handleIncrease(item.index)}
                               disabled={quantities[item.index] >= item.available}
