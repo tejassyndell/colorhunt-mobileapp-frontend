@@ -17,7 +17,6 @@ function OrderPlaced() {
   const navigate = useNavigate()
   const [promoCode, setPromoCode] = useState('')
   const [orderItems, setOrderItems] = useState([])
-
   const location = useLocation()
   const { finalPrice } = location.state || {}
 
@@ -25,13 +24,20 @@ function OrderPlaced() {
     axios
       .post('http://localhost:4000/cartdetails', { party_id: 197 }) // Sending the party_id as data
       .then((response) => {
-        console.log(response.data)
-        setOrderItems(response.data) // Assuming the response data is an array of order items
+        console.log("Api response :",response.data)
+        const parsedOrderItems = response.data.map((item) => ({
+          ...item,
+          Quantity: JSON.parse(item.Quantity), // Parse the Quantity string into an array
+        }));
+        setOrderItems(parsedOrderItems);
+      
       })
       .catch((error) => {
         console.log('Error fetching data:', error)
       })
   }, [])
+
+
   console.log('orderItems', orderItems)
   const handlePromoCodeChange = (event) => {
     setPromoCode(event.target.value)
@@ -63,8 +69,16 @@ function OrderPlaced() {
     setOrderItems(updatedOrderItems)
   }
 
-  const totalItems = orderItems.length
-  const totalPrice = orderItems.reduce((total, item) => total + item.articleRate, 0)
+  const totalItems = orderItems.length;
+  const totalPrice = orderItems.reduce((total, item) => {
+    const totalQuantity = Array.isArray(item.Quantity)
+      ? item.Quantity.reduce((sum, qty) => sum + qty, 0)
+      : parseInt(item.Quantity);
+    return total + item.articleRate * totalQuantity;
+  }, 0);
+  
+
+
   const cartIsEmpty = orderItems.length === 0
 
   return (
@@ -106,7 +120,7 @@ function OrderPlaced() {
                       </h4>
                       <h4>
                         Rate: <br />
-                        <span className="left-order-span">₹{item.articleRate}</span>
+                        <span className="left-order-span">₹{item.articleRate * item.Quantity}</span>
                       </h4>
                     </div>
                   </div>
@@ -137,10 +151,14 @@ function OrderPlaced() {
             </div>
             <div className="total-container">
               <div className="total-items">Total ({totalItems} item) :</div>
-              <div className="total-price">
-                {' '}
-                Total price {''} <br /> <span className="total-item"> ₹ {totalPrice} </span>
-              </div>
+              
+                <div className="total-price" >
+                  {' '}
+                  Total price {''} <br />{' '}
+                  {/* <span className="total-item"> ₹ {item.articleRate * item.Quantity[0]} </span> */}
+                  <span className="total-item"> ₹ {totalPrice} </span>
+                </div>
+            
             </div>
           </>
         )}

@@ -34,7 +34,6 @@ export default function Detailsofproduct() {
       defaultQuantities[item.index] = 0
     })
     setQuantities(defaultQuantities)
-
     let data = {
       ArticleId: id,
       PartyId: 197,
@@ -53,7 +52,6 @@ export default function Detailsofproduct() {
 
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
       const salesnopackstoArray = [1, 2, 3, 4]
-
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
     } catch (error) {
@@ -76,7 +74,7 @@ export default function Detailsofproduct() {
       Rate: articleRate,
     }
   })
-
+  
   const addtocart = async (PartyId, ArticleId) => {
     if (!combinedArray) {
       console.log('undefined')
@@ -85,12 +83,13 @@ export default function Detailsofproduct() {
     console.log(combinedArray)
     const colorwiseQuantities = combinedArray.map((coloritem) => quantities[coloritem.index])
     console.log('colorwise quantity :', colorwiseQuantities)
+    const colorwiseQuantitiesTOstring = colorwiseQuantities.join(',')
+    console.log("cqty to string ", colorwiseQuantitiesTOstring)
     const data = {
       party_id: PartyId,
       article_id: ArticleId,
-      Quantity: colorwiseQuantities,
+      Quantity: colorwiseQuantitiesTOstring,
     }
-
     try {
       const response = await axios.post('http://localhost:4000/addtocart', data)
       console.log('APi Response:', response.data)
