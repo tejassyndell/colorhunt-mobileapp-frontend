@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArticleDetails } from 'src/views/api/api'
-import './details-of-product.css'
+import './editarticle.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import axios from 'axios'
 
@@ -37,16 +37,16 @@ export default function Detailsofproduct() {
       PartyId: 197,
     }
     try {
-      const res = await ArticleDetails(data)
-      console.log('dd', res.data)
-      setArticlePhotos(res.data.photos)
-      setArticleCategory(res.data.calculatedData[0].Category)
-      setArticleRatio(res.data.calculatedData[0].ArticleRatio)
-      setArticleRate(res.data.calculatedData[0].ArticleRate)
-      setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
-      setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
-      setArticlenumber(res.data.calculatedData[0].ArticleNumber)
-      setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
+    const res = await ArticleDetails(data)
+    console.log('dd', res.data)
+    setArticlePhotos(res.data.photos)
+    setArticleCategory(res.data.calculatedData[0].Category)
+    setArticleRatio(res.data.calculatedData[0].ArticleRatio)
+    setArticleRate(res.data.calculatedData[0].ArticleRate)
+    setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
+    setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
+    setArticlenumber(res.data.calculatedData[0].ArticleNumber)
+    setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
 
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
       const salesnopackstoArray = [1, 2, 3, 4]
