@@ -27,7 +27,6 @@ export default function Detailsofproduct() {
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
   const [salesnopacks, setSalesnopacks] = useState('')
-
   const ArticleDetailsData = async () => {
     const defaultQuantities = {}
     combinedArray.forEach((item) => {

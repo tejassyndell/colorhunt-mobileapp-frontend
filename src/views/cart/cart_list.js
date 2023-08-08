@@ -57,12 +57,20 @@ function OrderPlaced() {
     navigate('/orderpurchase') // Update the route path as per your routing setup
   }
 
-  const handleDeleteOrder = (orderId) => {
-    // Implement logic to delete the order item with the given orderId
-    const updatedOrderItems = orderItems.filter((item) => item.id !== orderId)
-    setOrderItems(updatedOrderItems)
+  const handleDeleteOrder =  async (article_id) => {
+    const data = {
+      party_id : 197,
+      article_id : article_id
+    }
+    try {
+      await axios.post('http://localhost:4000/deletecartitem',data)
+      const updatedcartitems = orderItems.filter((item)=> item.article_id !== article_id)
+      setOrderItems(updatedcartitems)
+    } catch (error) {
+        console.log("Erro deleting article:",error)
+    }
+  
   }
-
   const totalItems = orderItems.length
   const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)
   const cartIsEmpty = orderItems.length === 0
@@ -115,7 +123,7 @@ function OrderPlaced() {
                     <img
                       src={deleteicon}
                       alt="Delete"
-                      onClick={() => handleDeleteOrder(orderItems[0].id)}
+                      onClick={() => handleDeleteOrder(item.article_id)}
                     />
                   </div>
                 </div>

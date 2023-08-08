@@ -74,11 +74,6 @@
   width: 15.2px;
   height: 18.2px;
 }
-
-.promo-code-container {
-  /* height: 55vh; */
-}
-
 .promo-code-input {
   display: flex;
   align-items: center;
@@ -128,16 +123,19 @@
   font-weight: 600;
   color: #fff;
   border-radius: 8px;
-  justify-content: right;
   float: right;
   background-color: #212121;
+  position: absolute;
+  bottom: 120px;
 }
 
 .total-container {
-  width: 380px;
+  width: 95%;
   height: 34px;
-  margin: auto;
+  margin-bottom: 5px;
   margin-top: 12px;
+  position: absolute;
+  bottom: 68px;
   color: #585656;
 }
 
@@ -150,7 +148,7 @@
   margin-top: 10px;
 }
 .total-item {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -170,7 +168,7 @@
   align-items: center;
 }
 .proceed-to-check button {
-  width: 100%;
+  width: 96%;
   height: 50px;
   font-size: 18px;
   font-weight: 700;
@@ -180,6 +178,9 @@
   color: #ffffff;
   background-color: #212121;
   padding-left: 20px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 7px;
 }
 .placeOrder-icon {
   float: right;
