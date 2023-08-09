@@ -37,7 +37,7 @@ const routes = [
   { path: '/cart_list', name: 'Cart list', element: cart_list },
   { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
   { path: '/Articles-details/:id', name: 'Details Articles', element: DetailsOfArticles },
-  { path: '/editarticledetails', name:'Edit Article', element:editarticle}
+  { path: '/editarticledetails/:id', name:'Edit Article', element:editarticle}
 ]
 
 export default routes

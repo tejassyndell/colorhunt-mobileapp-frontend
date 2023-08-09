@@ -2,19 +2,19 @@
 import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArticleDetails } from 'src/views/api/api'
+import { ArticleDetails, editarticledetails } from 'src/views/api/api'
 import './editarticle.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import axios from 'axios'
 
-export default function Detailsofproduct() {
+export default function Editarticledetails() {
   const navigate = useNavigate()
 
   const handleSizeClick = (size) => {}
   const { id } = useParams()
 
   useEffect(() => {
-    ArticleDetailsData()
+    editarticledetailsdata()
   }, [])
   const [availableStock, setAvailableStock] = useState([])
   const [quantities, setQuantities] = useState({})
@@ -25,8 +25,9 @@ export default function Detailsofproduct() {
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
-  const [salesnopacks, setSalesnopacks] = useState('')
-  const ArticleDetailsData = async () => {
+  // const [salesnopacks, setSalesnopacks] = useState('')
+  // const [quantity, setQuantity] = useState({})
+  const editarticledetailsdata = async () => {
     const defaultQuantities = {}
     combinedArray.forEach((item) => {
       defaultQuantities[item.index] = 0
@@ -36,9 +37,10 @@ export default function Detailsofproduct() {
       ArticleId: id,
       PartyId: 197,
     }
+    console.log(data)
     try {
-    const res = await ArticleDetails(data)
-    console.log('dd', res.data)
+    const res = await editarticledetails(data)
+    console.log('edit', res.data)
     setArticlePhotos(res.data.photos)
     setArticleCategory(res.data.calculatedData[0].Category)
     setArticleRatio(res.data.calculatedData[0].ArticleRatio)
@@ -47,15 +49,23 @@ export default function Detailsofproduct() {
     setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
     setArticlenumber(res.data.calculatedData[0].ArticleNumber)
     setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
-
-      // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      const salesnopackstoArray = [1, 2, 3, 4]
-      setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
-      console.log(availableStock)
-    } catch (error) {
-      console.log(error)
-    }
+    // setQuantity(res.data.calculatedData[0].Quantity)
+    
+    // const quantityarray = res.data.calculatedData[0].Quantity.split(',').map((qty,index)=>({
+    //   index,
+    //   value : qty
+    // }))
+    // console.log(quantityarray)
+    // setQuantities(quantityarray)
+    // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+    const salesnopackstoArray = [1, 2, 3, 4]
+    setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
+    console.log(availableStock)
+  } catch (error) {
+    console.log(error)
   }
+}
+console.log(quantities)
   const colorwithindex = articleColorver.map((element, index) => ({
     ...element,
     index: index,
@@ -203,7 +213,7 @@ export default function Detailsofproduct() {
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            <span>{quantities[item.index]}</span>
+                            <span>{quantities[item.index] || 0}</span>
                           </div>
                         </div>
                         <div className="box">
@@ -253,5 +263,6 @@ export default function Detailsofproduct() {
         </div>
       </div>
     </div>
+   
   )
 }

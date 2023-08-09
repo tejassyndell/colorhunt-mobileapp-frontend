@@ -72,7 +72,11 @@ function OrderPlaced() {
   
   }
   const handleEditOrder = (article_id) => {
-    navigate('/editarticledetails')
+    const ArticalId = article_id
+    // const PartyId = 197
+    navigate(`/editarticledetails/${ArticalId}`)
+  
+    // navigate('/editarticledetails')
   }
   const totalItems = orderItems.length
   const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)

@@ -70,3 +70,14 @@ export const ArticleDetails = async (data) => {
     console.log(error, 'err in react api')
   }
 }
+
+export const editarticledetails = async(data) => {
+  console.log(data.ArticleId)
+  console.log(data.PartyId)
+
+  try{
+    return await axios.post(`${url}/getCartArticleDetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`)
+  } catch (error) {
+    console.log('err in react api',error)
+  }
+}

@@ -9,10 +9,8 @@ import axios from 'axios'
 
 export default function Detailsofproduct() {
   const navigate = useNavigate()
-
   const handleSizeClick = (size) => {}
   const { id } = useParams()
-
   useEffect(() => {
     ArticleDetailsData()
   }, [])
@@ -26,12 +24,10 @@ export default function Detailsofproduct() {
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
   const [salesnopacks, setSalesnopacks] = useState('')
+  const [nopacks, setNopacks] = useState(0)
+  const [combinedArray, setCombinedArray] = useState([])
+
   const ArticleDetailsData = async () => {
-    const defaultQuantities = {}
-    combinedArray.forEach((item) => {
-      defaultQuantities[item.index] = 0
-    })
-    setQuantities(defaultQuantities)
     let data = {
       ArticleId: id,
       PartyId: 197,
@@ -47,7 +43,8 @@ export default function Detailsofproduct() {
       setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
       setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
-
+      setNopacks(res.data.calculatedData[0].NoPacks)
+      console.log(nopacks)
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
       const salesnopackstoArray = [1, 2, 3, 4]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
@@ -56,22 +53,32 @@ export default function Detailsofproduct() {
       console.log(error)
     }
   }
-  const colorwithindex = articleColorver.map((element, index) => ({
-    ...element,
-    index: index,
-  }))
-  const stockswithindex = availableStock.map((element, index) => ({
-    value: element,
-    index: index,
-  }))
-  const combinedArray = colorwithindex.map((coloritem) => {
-    const stockitem = stockswithindex.find((stockitem) => stockitem.index === coloritem.index)
-    return {
-      ...coloritem,
-      available: stockitem ? stockitem.value : 0,
-      Rate: articleRate,
-    }
-  })
+
+  useEffect(() => {
+    const colorwithindex = articleColorver.map((element, index) => ({
+      ...element,
+      index: index,
+    }))
+    const stockswithindex = availableStock.map((element, index) => ({
+      value: element,
+      index: index,
+    }))
+    const combinedArray = colorwithindex.map((coloritem) => {
+      const stockitem = stockswithindex.find((stockitem) => stockitem.index === coloritem.index)
+      return {
+        ...coloritem,
+        available: stockitem ? stockitem.value : 0,
+        Rate: articleRate,
+      }
+    })
+    setCombinedArray(combinedArray)
+    const defaultQuantities = {}
+    combinedArray.forEach((item) => {
+      defaultQuantities[item.index] = 0
+    })
+    setQuantities(defaultQuantities)
+  }, [articleColorver, availableStock, articleRate])
+
   const addtocart = async (PartyId, ArticleId) => {
     if (!combinedArray) {
       console.log('undefined')
@@ -188,6 +195,7 @@ export default function Detailsofproduct() {
                 <div key={item.Id}>
                   <div className="row">
                     <div className="color-box">{item.Name}</div>
+                    {/* <div className="available-box">{nopacks}</div> */}
                     <div className="available-box">{item.available}</div>
                     <div className="qty-box">
                       <div className="top-row">
@@ -234,7 +242,7 @@ export default function Detailsofproduct() {
           <div className="article-rate-container">
             <div className="artical-rate-title">
               <span>Artical Rate</span>
-              <div className="article-rate-content">{articleRate}</div>
+              <div className="article-rate-content">{articleRate / 10}</div>
             </div>
           </div>
         </div>
