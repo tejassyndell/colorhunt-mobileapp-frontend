@@ -46,14 +46,14 @@ export default function Detailsofproduct() {
       setNopacks(res.data.calculatedData[0].NoPacks)
       console.log(nopacks)
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      const salesnopackstoArray = [1, 2, 3, 4]
+      // const salesnopackstoArray = [1, 2, 3, 4]
+      const salesnopackstoArray = [nopacks]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
     } catch (error) {
       console.log(error)
     }
   }
-
   useEffect(() => {
     const colorwithindex = articleColorver.map((element, index) => ({
       ...element,
@@ -105,7 +105,7 @@ export default function Detailsofproduct() {
   }
 
   const totalPrice = Object.keys(quantities).reduce(
-    (total, colorIndex) => total + quantities[colorIndex] * combinedArray[colorIndex].Rate,
+    (total, colorIndex) => total + quantities[colorIndex] * (combinedArray[colorIndex].Rate/10),
     0,
   )
   const formatPrice = (value) => {
@@ -120,7 +120,9 @@ export default function Detailsofproduct() {
     if (!combinedArray || !combinedArray[colorIndex]) {
       return
     }
-    if (quantities[colorIndex] < combinedArray[colorIndex].available) {
+    console.log(quantities[colorIndex])
+    console.log(combinedArray[colorIndex].available)
+    if (quantities[colorIndex] < nopacks) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [colorIndex]: prevQuantities[colorIndex] + 1,
@@ -142,20 +144,22 @@ export default function Detailsofproduct() {
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
-      <Swiper
-        spaceBetween={10}
-        slidesPerView={1}
-        loop={true}
-        pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        className=""
-      >
-        {imageElements.map((image, index) => (
-          <SwiperSlide key={index}>
-            <div className="image-container">{image}</div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    
+          <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          loop={true}
+          pagination={{ clickable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          className=""
+        >
+          {imageElements.map((image, index) => (
+            <SwiperSlide key={index}>
+              <div className="image-container">{image}</div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      
       <div className="artical-name">{articleNumber}</div>
       <div className="main-product-detail">
         <div className="product-detail">
@@ -195,8 +199,8 @@ export default function Detailsofproduct() {
                 <div key={item.Id}>
                   <div className="row">
                     <div className="color-box">{item.Name}</div>
-                    {/* <div className="available-box">{nopacks}</div> */}
-                    <div className="available-box">{item.available}</div>
+                    <div className="available-box">{nopacks}</div>
+                    {/* <div className="available-box">{item.available}</div> */}
                     <div className="qty-box">
                       <div className="top-row">
                         <div className="box">
@@ -211,14 +215,17 @@ export default function Detailsofproduct() {
                         </div>
                         <div className="box">
                           <div className="inner-box">
+                          
                             <span>{quantities[item.index]}</span>
                           </div>
                         </div>
                         <div className="box">
                           <div className="inner-box">
+                            {console.log(quantities[item.index])}
+                            {console.log(nopacks)}
                             <button
                               onClick={() => handleIncrease(item.index)}
-                              disabled={quantities[item.index] >= item.available}
+                              disabled={quantities[item.index] >= nopacks}
                             >
                               +
                             </button>

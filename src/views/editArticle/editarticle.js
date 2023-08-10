@@ -39,33 +39,33 @@ export default function Editarticledetails() {
     }
     console.log(data)
     try {
-    const res = await editarticledetails(data)
-    console.log('edit', res.data)
-    setArticlePhotos(res.data.photos)
-    setArticleCategory(res.data.calculatedData[0].Category)
-    setArticleRatio(res.data.calculatedData[0].ArticleRatio)
-    setArticleRate(res.data.calculatedData[0].ArticleRate)
-    setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
-    setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
-    setArticlenumber(res.data.calculatedData[0].ArticleNumber)
-    setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
-    // setQuantity(res.data.calculatedData[0].Quantity)
-    
-    // const quantityarray = res.data.calculatedData[0].Quantity.split(',').map((qty,index)=>({
-    //   index,
-    //   value : qty
-    // }))
-    // console.log(quantityarray)
-    // setQuantities(quantityarray)
-    // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-    const salesnopackstoArray = [1, 2, 3, 4]
-    setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
-    console.log(availableStock)
-  } catch (error) {
-    console.log(error)
+      const res = await editarticledetails(data)
+      console.log('edit', res.data)
+      setArticlePhotos(res.data.photos)
+      setArticleCategory(res.data.calculatedData[0].Category)
+      setArticleRatio(res.data.calculatedData[0].ArticleRatio)
+      setArticleRate(res.data.calculatedData[0].ArticleRate)
+      setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
+      setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
+      setArticlenumber(res.data.calculatedData[0].ArticleNumber)
+      // setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
+      // setQuantity(res.data.calculatedData[0].Quantity)
+
+      // const quantityarray = res.data.calculatedData[0].Quantity.split(',').map((qty,index)=>({
+      //   index,
+      //   value : qty
+      // }))
+      // console.log(quantityarray)
+      // setQuantities(quantityarray)
+      // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
+      const salesnopackstoArray = [1, 2, 3, 4]
+      setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
+      console.log(availableStock)
+    } catch (error) {
+      console.log(error)
+    }
   }
-}
-console.log(quantities)
+  console.log(quantities)
   const colorwithindex = articleColorver.map((element, index) => ({
     ...element,
     index: index,
@@ -263,6 +263,5 @@ console.log(quantities)
         </div>
       </div>
     </div>
-   
   )
 }

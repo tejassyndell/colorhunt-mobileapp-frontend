@@ -48,7 +48,7 @@ useEffect(() => {
         <img
           src={carticon}
           style={activeIcon === 'cart' ? iconStyle : {}}
-          onClick={() => { handleIconClick('cart'); Navigate('/cart') }}
+          onClick={() => { handleIconClick('cart'); Navigate('/cart_list') }}
         />
         <img
           src={alurticon}
