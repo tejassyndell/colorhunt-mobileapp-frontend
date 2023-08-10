@@ -2,17 +2,19 @@
 import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArticleDetails } from 'src/views/api/api'
-import './details-of-product.css'
+import { ArticleDetails, editarticledetails } from 'src/views/api/api'
+import './editarticle.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import axios from 'axios'
 
-export default function Detailsofproduct() {
+export default function Editarticledetails() {
   const navigate = useNavigate()
+
   const handleSizeClick = (size) => {}
   const { id } = useParams()
+
   useEffect(() => {
-    ArticleDetailsData()
+    editarticledetailsdata()
   }, [])
   const [availableStock, setAvailableStock] = useState([])
   const [quantities, setQuantities] = useState({})
@@ -23,18 +25,22 @@ export default function Detailsofproduct() {
   const [articleSizeData, setArticleSizeData] = useState()
   const [articleColorver, setArticleColorver] = useState([])
   const [articleNumber, setArticlenumber] = useState()
-  const [salesnopacks, setSalesnopacks] = useState('')
-  const [nopacks, setNopacks] = useState(0)
-  const [combinedArray, setCombinedArray] = useState([])
-
-  const ArticleDetailsData = async () => {
+  // const [salesnopacks, setSalesnopacks] = useState('')
+  // const [quantity, setQuantity] = useState({})
+  const editarticledetailsdata = async () => {
+    const defaultQuantities = {}
+    combinedArray.forEach((item) => {
+      defaultQuantities[item.index] = 0
+    })
+    setQuantities(defaultQuantities)
     let data = {
       ArticleId: id,
       PartyId: 197,
     }
+    console.log(data)
     try {
-      const res = await ArticleDetails(data)
-      console.log('dd', res.data)
+      const res = await editarticledetails(data)
+      console.log('edit', res.data)
       setArticlePhotos(res.data.photos)
       setArticleCategory(res.data.calculatedData[0].Category)
       setArticleRatio(res.data.calculatedData[0].ArticleRatio)
@@ -42,43 +48,40 @@ export default function Detailsofproduct() {
       setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
       setArticleColorver(JSON.parse(res.data.calculatedData[0].ArticleColor))
       setArticlenumber(res.data.calculatedData[0].ArticleNumber)
-      setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
-      setNopacks(res.data.calculatedData[0].NoPacks)
-      console.log(nopacks)
+      // setSalesnopacks(res.data.calculatedData[0].SalesNoPacks)
+      // setQuantity(res.data.calculatedData[0].Quantity)
+
+      // const quantityarray = res.data.calculatedData[0].Quantity.split(',').map((qty,index)=>({
+      //   index,
+      //   value : qty
+      // }))
+      // console.log(quantityarray)
+      // setQuantities(quantityarray)
       // const salesnopackstoArray = res.data.calculatedData[0].SalesNoPacks.split(",");
-      // const salesnopackstoArray = [1, 2, 3, 4]
-      const salesnopackstoArray = [nopacks]
+      const salesnopackstoArray = [1, 2, 3, 4]
       setAvailableStock(salesnopackstoArray.map((stock) => parseInt(stock)))
       console.log(availableStock)
     } catch (error) {
       console.log(error)
     }
   }
-  useEffect(() => {
-    const colorwithindex = articleColorver.map((element, index) => ({
-      ...element,
-      index: index,
-    }))
-    const stockswithindex = availableStock.map((element, index) => ({
-      value: element,
-      index: index,
-    }))
-    const combinedArray = colorwithindex.map((coloritem) => {
-      const stockitem = stockswithindex.find((stockitem) => stockitem.index === coloritem.index)
-      return {
-        ...coloritem,
-        available: stockitem ? stockitem.value : 0,
-        Rate: articleRate,
-      }
-    })
-    setCombinedArray(combinedArray)
-    const defaultQuantities = {}
-    combinedArray.forEach((item) => {
-      defaultQuantities[item.index] = 0
-    })
-    setQuantities(defaultQuantities)
-  }, [articleColorver, availableStock, articleRate])
-
+  console.log(quantities)
+  const colorwithindex = articleColorver.map((element, index) => ({
+    ...element,
+    index: index,
+  }))
+  const stockswithindex = availableStock.map((element, index) => ({
+    value: element,
+    index: index,
+  }))
+  const combinedArray = colorwithindex.map((coloritem) => {
+    const stockitem = stockswithindex.find((stockitem) => stockitem.index === coloritem.index)
+    return {
+      ...coloritem,
+      available: stockitem ? stockitem.value : 0,
+      Rate: articleRate,
+    }
+  })
   const addtocart = async (PartyId, ArticleId) => {
     if (!combinedArray) {
       console.log('undefined')
@@ -105,7 +108,7 @@ export default function Detailsofproduct() {
   }
 
   const totalPrice = Object.keys(quantities).reduce(
-    (total, colorIndex) => total + quantities[colorIndex] * (combinedArray[colorIndex].Rate/10),
+    (total, colorIndex) => total + quantities[colorIndex] * combinedArray[colorIndex].Rate,
     0,
   )
   const formatPrice = (value) => {
@@ -120,9 +123,7 @@ export default function Detailsofproduct() {
     if (!combinedArray || !combinedArray[colorIndex]) {
       return
     }
-    console.log(quantities[colorIndex])
-    console.log(combinedArray[colorIndex].available)
-    if (quantities[colorIndex] < nopacks) {
+    if (quantities[colorIndex] < combinedArray[colorIndex].available) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [colorIndex]: prevQuantities[colorIndex] + 1,
@@ -144,22 +145,20 @@ export default function Detailsofproduct() {
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
-    
-          <Swiper
-          spaceBetween={10}
-          slidesPerView={1}
-          loop={true}
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          className=""
-        >
-          {imageElements.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className="image-container">{image}</div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        loop={true}
+        pagination={{ clickable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        className=""
+      >
+        {imageElements.map((image, index) => (
+          <SwiperSlide key={index}>
+            <div className="image-container">{image}</div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
       <div className="artical-name">{articleNumber}</div>
       <div className="main-product-detail">
         <div className="product-detail">
@@ -199,8 +198,7 @@ export default function Detailsofproduct() {
                 <div key={item.Id}>
                   <div className="row">
                     <div className="color-box">{item.Name}</div>
-                    <div className="available-box">{nopacks}</div>
-                    {/* <div className="available-box">{item.available}</div> */}
+                    <div className="available-box">{item.available}</div>
                     <div className="qty-box">
                       <div className="top-row">
                         <div className="box">
@@ -215,17 +213,14 @@ export default function Detailsofproduct() {
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                          
-                            <span>{quantities[item.index]}</span>
+                            <span>{quantities[item.index] || 0}</span>
                           </div>
                         </div>
                         <div className="box">
                           <div className="inner-box">
-                            {console.log(quantities[item.index])}
-                            {console.log(nopacks)}
                             <button
                               onClick={() => handleIncrease(item.index)}
-                              disabled={quantities[item.index] >= nopacks}
+                              disabled={quantities[item.index] >= item.available}
                             >
                               +
                             </button>
@@ -249,7 +244,7 @@ export default function Detailsofproduct() {
           <div className="article-rate-container">
             <div className="artical-rate-title">
               <span>Artical Rate</span>
-              <div className="article-rate-content">{articleRate / 10}</div>
+              <div className="article-rate-content">{articleRate}</div>
             </div>
           </div>
         </div>
