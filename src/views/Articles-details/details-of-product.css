@@ -467,7 +467,9 @@
   .add-to-card-container button :hover {
     background: #121111;
   }
-
+  .add-to-card-container :disabled{
+    background-color: rgba(33, 33, 33, 0.5);
+  }
   .cart-icon {
     margin-right: 10%;
     margin-top: -5px;

@@ -138,13 +138,14 @@ export default function Detailsofproduct() {
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
+  const totalQuantity = Object.values(quantities).reduce((total, quantity) => total + quantity, 0);
+  console.log(totalQuantity)
   return (
     <div className="app-container">
       <div className="reactangle"></div>
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
-    
           <Swiper
           spaceBetween={10}
           slidesPerView={1}
@@ -261,7 +262,7 @@ export default function Detailsofproduct() {
             <span className="total-price-text">{formatPrice(totalPrice)}</span>
           </div>
           <div className="add-to-card-container">
-            <button className="add-to-cart-button" onClick={() => addtocart(197, id)}>
+            <button className="add-to-cart-button" onClick={() => addtocart(197, id)} disabled={totalQuantity === 0} >
               Add To Cart
             </button>
           </div>
