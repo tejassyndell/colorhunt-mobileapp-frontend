@@ -4,13 +4,17 @@ import React from 'react'
 import './Order.css'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import { useNavigate } from 'react-router-dom'
+import img from '../../assets/Colorhuntimg/image 122.png'
 function orders() {
   const navigate = useNavigate()
   return (
     <>
       <div className="mainContainer mx-2 " style={{ minHeight: '100vh', position: 'relative' }}>
-        <div className="TopContainer" style={{ display: 'flex', width: '100%' }}>
-          <img src={menubar} onClick={()=> navigate('/dashboard')}/>
+        <div
+          className="TopContainer d-flex align-items-center justify-content-center"
+          style={{ width: '100%', height: '90px', borderBottom: '1px solid black' }}
+        >
+          <img src={menubar} onClick={() => navigate('/dashboard')} />
           <div
             style={{
               fontSize: '25px',
@@ -36,7 +40,10 @@ function orders() {
             >
               Date
             </span>
-            <div className="details mt-1">
+            <div
+              className="mt-1 d-flex align-items-center"
+              style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
+            >
               <span
                 className="ms-1"
                 style={{
@@ -61,7 +68,10 @@ function orders() {
             >
               Destination
             </span>
-            <div className="details mt-1">
+            <div
+              className=" mt-1 d-flex align-items-center"
+              style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
+            >
               <span
                 className="ms-1"
                 style={{
@@ -86,7 +96,10 @@ function orders() {
             >
               Transportation
             </span>
-            <div className="details mt-1">
+            <div
+              className="mt-1 d-flex align-items-center"
+              style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
+            >
               <span
                 className="ms-1"
                 style={{
@@ -102,8 +115,17 @@ function orders() {
             </div>
           </div>
         </div>
-        <div className="articles mt-3 mx-2">
-          <div className="imagediv my-1 ms-1"></div>
+        <div
+          className="articles d-flex mt-3 mx-2"
+          style={{
+            height: '104px',
+            boxShadow:
+              'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;',
+          }}
+        >
+          <div className=" my-1 ms-1" style={{ width: '90px', height: '93px' }}>
+            <img src={img}></img>
+          </div>
           <div className="my-1 mx-1 ms-2">
             <div
               style={{
@@ -252,7 +274,6 @@ function orders() {
                 $2.7
               </span>
             </div>
-
             <div className="row mt-1">
               <p
                 style={{

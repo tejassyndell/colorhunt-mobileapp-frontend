@@ -4,31 +4,7 @@
 *{
     font-family: 'Glory', sans-serif;
 }
-.TopContainer{
-    height: 90px;
-    border-bottom: 1px solid black ;
-    display: flex;
-    align-items : center;
-    justify-content: center;
+.articles{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.details{
-    height: 45px; 
-    background-color:  #E4E7EA;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-}
-.articles{
-    height: 104px;
-    /* border: 1px solid; */
-    /* box-shadow: rgba(0, 0, 0, 0.0625); */
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    display: flex;
-}
-.imagediv{
-    width: 90px;
-    /* border: 1px solid; */
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    height: 93px;
-}
