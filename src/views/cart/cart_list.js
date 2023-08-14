@@ -54,7 +54,7 @@ function OrderPlaced() {
   }
 
   const handleProceedToCheckout = () => {
-    navigate('/orderpurchase') // Update the route path as per your routing setup
+    navigate('/orders') // Update the route path as per your routing setup
   }
 
   const handleDeleteOrder =  async (article_id) => {
