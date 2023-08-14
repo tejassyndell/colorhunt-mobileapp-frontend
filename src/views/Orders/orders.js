@@ -120,7 +120,7 @@ function orders() {
           style={{
             height: '104px',
             boxShadow:
-              'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;',
+              'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
           }}
         >
           <div className=" my-1 ms-1" style={{ width: '90px', height: '93px' }}>
@@ -168,7 +168,7 @@ function orders() {
         >
           <button
             type="button"
-            class="btn btn-dark"
+            className="btn btn-dark"
             style={{ width: '189px', height: '50px', backgroundColor: 'black', color: 'white' }}
           >
             Proceed To Order
@@ -268,7 +268,7 @@ function orders() {
                   fontWeight: '500',
                   fontSize: '14px',
                   lineHeight: '15.68px',
-                  borderBottom: '4px solid black',
+                  borderBottom: '2px solid black',
                 }}
               >
                 $2.7
@@ -316,7 +316,7 @@ function orders() {
                   fontSize: '14px',
                   lineHeight: '15.68px',
                   color: '#212121',
-                  borderBottom: '4px solid black',
+                  borderBottom: '2px solid black',
                 }}
               >
                 $28.04
