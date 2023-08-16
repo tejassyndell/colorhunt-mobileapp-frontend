@@ -6,6 +6,7 @@ import { ArticleDetails } from 'src/views/api/api'
 import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import axios from 'axios'
+import cart from '../../assets/images/icon.png'
 
 export default function Detailsofproduct() {
   const navigate = useNavigate()
@@ -77,6 +78,7 @@ export default function Detailsofproduct() {
       defaultQuantities[item.index] = 0
     })
     setQuantities(defaultQuantities)
+    
   }, [articleColorver, availableStock, articleRate])
 
   const addtocart = async (PartyId, ArticleId) => {
@@ -138,33 +140,34 @@ export default function Detailsofproduct() {
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
+  
   return (
+
     <div className="app-container">
-      <div className="reactangle"></div>
-      <div className="menu-bar">
+        <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
-    
+
           <Swiper
           spaceBetween={10}
           slidesPerView={1}
           loop={true}
           pagination={{ clickable: true }}
           onSwiper={(swiper) => console.log(swiper)}
-          className=""
         >
           {imageElements.map((image, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index}
+            className='main-slider'>
               <div className="image-container">{image}</div>
             </SwiperSlide>
           ))}
         </Swiper>
       
-      <div className="artical-name">{articleNumber}</div>
+      <div className="artical-name">Artical No:{articleNumber}</div>
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
-            <h6 className="size-label">Size</h6>
+            <div className="size-label">Size</div>
             <div className="size-container1">
               {articleSizeData &&
                 articleSizeData.map((item, index) => (
@@ -179,7 +182,7 @@ export default function Detailsofproduct() {
             </div>
           </div>
           <div className="product-detail-sec2">
-            <div className="size-label">Category</div>
+            <div className="size-label1">Category</div>
             <div className="size-container2">
               <div className="size-options">
                 <p>{articleCategory}</p>
@@ -188,39 +191,49 @@ export default function Detailsofproduct() {
           </div>
         </div>
         <div className="product-detail-sec3">
-          <div className="container">
-            <div className="header">
+          <div className="container-gid">
+            <div className="header-gid">
+            <div className='color-div'>
               <div className="color-title">Color</div>
-              <div className="available-title">Available in Stock</div>
+              </div>
+              <div className='available-div'>
+              <div className="available-title">Available in Stock</div></div>
+              <div className='qty-div'>
               <div className="qty-title">Add Qty.</div>
+              </div>
             </div>
-            <div className="body">
+            <div className="body-main-con">
               {combinedArray.map((item) => (
                 <div key={item.Id}>
                   <div className="row">
+                  <div className='color-box-div'>
                     <div className="color-box">{item.Name}</div>
+                    </div>
+                    <div className='available-box-div'>
                     <div className="available-box">{nopacks}</div>
+                    </div>
                     {/* <div className="available-box">{item.available}</div> */}
+                    <div className='qty-box-div'>
                     <div className="qty-box">
                       <div className="top-row">
-                        <div className="box">
-                          <div className="inner-box">
+                        <div className="box1">
+                          
                             <button
                               onClick={() => handleDecrease(item.index)}
                               disabled={quantities[item.index] <= 0}
                             >
                               -
                             </button>
-                          </div>
+                          
                         </div>
-                        <div className="box">
-                          <div className="inner-box">
+                        <div className="box2">
+                          
                           
                             <span>{quantities[item.index]}</span>
-                          </div>
+                          
                         </div>
-                        <div className="box">
-                          <div className="inner-box">
+                        <div className="box3">
+                         
                             {console.log(quantities[item.index])}
                             {console.log(nopacks)}
                             <button
@@ -229,10 +242,11 @@ export default function Detailsofproduct() {
                             >
                               +
                             </button>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
+                  </div>
                   </div>
                 </div>
               ))}
@@ -240,32 +254,34 @@ export default function Detailsofproduct() {
           </div>
         </div>
         <div className="article-ratio-Section">
+            
           <div className="article-ratio-container">
-            <div className="artical-ration-title">
-              <span>Artical Ratio</span>
-              <div className="article-rate-content">{articleRatio}</div>
-            </div>
+              <div className='articallabel'>Artical Ratio</div>
+              <div className="article-ratio-content">{articleRatio}</div>
+            
           </div>
           <div className="article-rate-container">
-            <div className="artical-rate-title">
-              <span>Artical Rate</span>
+            
+              <div className='articallabel1'>Artical Rate</div>
               <div className="article-rate-content">{articleRate / 10}</div>
-            </div>
+           
           </div>
         </div>
         <div className="total-price-container">
-          <div>
-            <span className="total-price-title">Total Price</span>
+          <div className='main-total-div'>
+            <span className="total-price-title">Total Price</span> <br/>
+            <span className="total-price-dig">{formatPrice(totalPrice)}</span>
           </div>
-          <div>
-            <span className="total-price-text">{formatPrice(totalPrice)}</span>
-          </div>
+          
+          
           <div className="add-to-card-container">
             <button className="add-to-cart-button" onClick={() => addtocart(197, id)}>
               Add To Cart
             </button>
           </div>
         </div>
+
+
       </div>
     </div>
   )
