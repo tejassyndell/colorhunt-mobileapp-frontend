@@ -171,7 +171,7 @@ function orders() {
             className="btn btn-dark"
             style={{ width: '189px', height: '50px', backgroundColor: 'black', color: 'white' }}
           >
-            Proceed To Order
+            Place Order
           </button>
           <span
             style={{
