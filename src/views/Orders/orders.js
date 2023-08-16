@@ -25,7 +25,7 @@ function orders() {
               textAlign: 'center',
             }}
           >
-            Purchase order
+            Sales order
           </div>
         </div>
         <div className="LowerContainer">

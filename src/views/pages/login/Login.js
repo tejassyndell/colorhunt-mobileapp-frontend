@@ -342,7 +342,7 @@ const Login = () => {
     
                   </small>
                 )}
-                <p className='login_otp_countdown'>You should recieve the OTP in &nbsp;&nbsp;&nbsp;<span style={{ color: 'rgba(169, 10, 18, 1)' }}>{timer} Second</span></p>
+                <p className='login_otp_countdown'>You should recieve the OTP in &nbsp;&nbsp;&nbsp;<span style={{ color: 'rgba(169, 10, 18, 1)' }}>{timer} Seconds</span></p>
              
                 <CRow className='otpbuttons'>
                 <button

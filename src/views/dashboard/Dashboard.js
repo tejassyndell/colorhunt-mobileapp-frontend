@@ -331,11 +331,13 @@ const Dashboard = (props) => {
                           ></i>
                         )}
                       </div>
-
-                      <img
+                      <div className="zoomDiv">
+                      <img className="zoom"
                         src={baseImageUrl + item.Photos}
                         onClick={() => getSingaleartical(item)}
                       />
+                      </div>
+                      
 
                       <div>
                         <p>
@@ -352,7 +354,9 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
+                    <div className="zoomDiv">
+                      <img className="zoom" src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
+                      </div>
                       <div>
                         <p>
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
