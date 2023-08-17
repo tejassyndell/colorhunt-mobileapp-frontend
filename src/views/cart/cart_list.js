@@ -9,7 +9,6 @@ import proceedicon from '../../assets/Colorhuntimg/proceed.svg'
 import './Cart.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
 const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
 
 function OrderPlaced() {

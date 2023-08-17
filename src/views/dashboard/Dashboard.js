@@ -23,7 +23,7 @@ import AppFooter from 'src/components/AppFooter'
 import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.png'
 import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
 import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
-
+import crossicon from 'src/assets/Colorhuntimg/sliderimages/crossicon.svg'
 const Dashboard = (props) => {
   const { UserData } = props
 
@@ -471,7 +471,8 @@ const Dashboard = (props) => {
           >
             <div className="categoriestagsection">
               <p>Categories</p>
-              <p onClick={() => setFilterstatus(false)}>X</p>
+              {/* <p onClick={() => setFilterstatus(false)}>X</p> */}
+              <img style={{height:"32x",width:"32px"}} src={crossicon} alt='' onClick={()=>setFilterstatus(false)}></img>
             </div>
             <div>
               <div className="selectcategories row">
