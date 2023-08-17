@@ -147,6 +147,7 @@ export default function Detailsofproduct() {
   return (
 
     <div className="app-container">
+<<<<<<< Updated upstream
         <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
@@ -175,6 +176,25 @@ export default function Detailsofproduct() {
       </div>
       
       <div className="artical-name">Artical No:{articleNumber}</div>
+=======
+      <div className="menu-bar">
+        <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
+      </div>
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        loop={true}
+        pagination={{ clickable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {imageElements.map((image, index) => (
+          <SwiperSlide key={index}>
+            <div className="image-container">{image}</div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="artical-name">{articleNumber}</div>
+>>>>>>> Stashed changes
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
