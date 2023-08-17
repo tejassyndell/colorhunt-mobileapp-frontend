@@ -7,6 +7,8 @@ import './details-of-product.css'
 import Menubar from 'src/assets/Colorhuntimg/menu bar (1).svg'
 import axios from 'axios'
 import cart from '../../assets/images/icon.png'
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function Detailsofproduct() {
   const navigate = useNavigate()
@@ -148,26 +150,34 @@ export default function Detailsofproduct() {
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
 
-          <Swiper
-          spaceBetween={10}
-          slidesPerView={1}
-          loop={true}
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
+      <div className="image-slider">
+        <Carousel
+          autoPlay={true}
+          interval={3000} // Interval between slides in milliseconds
+          infiniteLoop={true}
+          showThumbs={false}
+          showArrows={false}
+          showStatus={false}
+          stopOnHover={false}
+          dynamicHeight={false}
         >
-          {imageElements.map((image, index) => (
-            <SwiperSlide key={index}
-            className='main-slider'>
-              <div className="image-container">{image}</div>
-            </SwiperSlide>
+          {articlePhotos.map((fileName, index) => (
+            <div key={index}>
+              <img
+                src={baseImageUrl + fileName}
+                alt=""
+                className="image-slide"
+              />
+            </div>
           ))}
-        </Swiper>
+        </Carousel>
+      </div>
       
       <div className="artical-name">Artical No:{articleNumber}</div>
       <div className="main-product-detail">
         <div className="product-detail">
           <div className="product-detail-sec">
-            <div className="size-label">Size</div>
+            <div className="size-label">Size</div> 
             <div className="size-container1">
               {articleSizeData &&
                 articleSizeData.map((item, index) => (
@@ -259,7 +269,8 @@ export default function Detailsofproduct() {
               <div className='articallabel'>Artical Ratio</div>
               <div className="article-ratio-content">{articleRatio}</div>
             
-          </div>
+  </div> 
+
           <div className="article-rate-container">
             
               <div className='articallabel1'>Artical Rate</div>
@@ -276,7 +287,7 @@ export default function Detailsofproduct() {
           
           <div className="add-to-card-container">
             <button className="add-to-cart-button" onClick={() => addtocart(197, id)}>
-              Add To Cart
+              <img src={cart} alt='cart'/>  Add To Cart
             </button>
           </div>
         </div>
