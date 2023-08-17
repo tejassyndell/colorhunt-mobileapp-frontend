@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 body{
   padding: 0 !important;
   margin: 0 !important;
@@ -21,9 +22,43 @@ h1 {
   top: 35px;
   z-index: 10;
   
+=======
+/* Reset default margin and padding */
+body, h1, h2, h3, p, div {
+  margin: 0;
+  padding: 0;
 }
 
+/* Styling for the entire container */
+.app-container {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
 
+/* Styling for the auto-sliding swiper */
+.swiper {
+  position: relative;
+  width: 100%;
+  height: 448px;
+  padding-bottom: 60%; /* 16:9 aspect ratio for responsive scaling */
+  background: #f0f0f0; /* Fallback background color */
+  overflow: hidden;
+>>>>>>> Stashed changes
+}
+
+/* Styling for the menu bar icon */
+.menu-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+<<<<<<< Updated upstream
 .image-swiper {
   width: 100% !important;
    position: absolute; 
@@ -440,3 +475,28 @@ margin-bottom: 2%;
   padding-left: 0.8rem !important;
   padding: 0rem !important;}
 }
+=======
+/* Styling for the artical-name div */
+.artical-name {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 1.5rem;
+}
+
+/* Styling for the main product detail section */
+.main-product-detail {
+ z-index: -1;
+ top: -10px;
+}
+
+/* Styling for the transparent shadow below the swiper image */
+.app-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  top: -5px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  z-index: -1;
+}
+>>>>>>> Stashed changes
