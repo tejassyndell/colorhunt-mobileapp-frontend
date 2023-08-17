@@ -24,6 +24,7 @@ import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.
 import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
 import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
 import crossicon from 'src/assets/Colorhuntimg/sliderimages/crossicon.svg'
+import noimage from 'src/assets/Colorhuntimg/dashboard/noimage.png'
 const Dashboard = (props) => {
   const { UserData } = props
 
@@ -355,7 +356,9 @@ const Dashboard = (props) => {
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
                     <div className="zoomDiv">
-                      <img className="zoom" src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
+                      <img className="zoom" src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)}  onError={(e)=>{
+                        e.target.src= noimage
+                      }}/>
                       </div>
                       <div>
                         <p>
