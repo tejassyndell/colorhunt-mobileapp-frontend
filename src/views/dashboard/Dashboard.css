@@ -10,7 +10,13 @@ body {
 .zoom:hover {
     transform: scale(2); 
 }
-
+.multi-range-slider .bar-inner {
+  border: 5px solid black !important ;
+}
+.multi-range-slider .thumb::before{
+  height: 25px !important;
+  width: 25px !important;
+}
 .product-hed-sec {
   display: flex;
   justify-content: space-between;

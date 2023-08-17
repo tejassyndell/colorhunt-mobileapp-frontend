@@ -470,7 +470,7 @@ const Dashboard = (props) => {
             transition={{ duration: 0.5 }}
           >
             <div className="categoriestagsection">
-              <p>categories</p>
+              <p>Categories</p>
               <p onClick={() => setFilterstatus(false)}>X</p>
             </div>
             <div>
@@ -530,11 +530,11 @@ const Dashboard = (props) => {
                   ruler={false}
                   step={1}
                   style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                  barLeftColor="black"
-                  barInnerColor="black"
-                  barRightColor="black"
-                  thumbLeftColor="black"
-                  thumbRightColor="black"
+                  barLeftColor="lightgrey"
+                  barInnerColor="rgb(223 10 31)"
+                  barRightColor="lightgrey"
+                  thumbLeftColor="white"
+                  thumbRightColor="white"
                 />
               </div>
             </div>
