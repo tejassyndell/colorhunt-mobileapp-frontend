@@ -82,6 +82,11 @@ function OrderPlaced() {
   const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)
   const cartIsEmpty = orderItems.length === 0
 
+  const getSingaleartical = (item) => {
+    const ArticalId = item.article_id
+    console.log(ArticalId)
+    navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
+  }
   return (
     <>
       <header className="navbar">
@@ -113,7 +118,7 @@ function OrderPlaced() {
               {orderItems.map((item) => (
                 <div className="order" key={item.id}>
                   <div className="left-side">
-                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" />
+                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" onClick={() => getSingaleartical(item)}/>
                     <div className="order-details">
                       <h4>
                         <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}
