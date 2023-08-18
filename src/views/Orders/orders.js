@@ -100,18 +100,23 @@ function orders() {
               className="mt-1 d-flex align-items-center"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
-              <span
-                className="ms-1"
+              <select
+                className="form-select ms-1"
                 style={{
                   color: '#626262',
                   fontSize: '18px',
                   fontStyle: 'normal',
                   fontWeight: '500',
                   lineHeight: 'normal',
+                  border: 'none',
+                  backgroundColor: 'transparent',
                 }}
               >
-                Courier
-              </span>
+                <option value="courier">Courier</option>
+                <option value="other">Other Option 1</option>
+                <option value="other">Other Option 2</option>
+                <option value="other">Other Option 3</option>
+              </select>
             </div>
           </div>
         </div>
