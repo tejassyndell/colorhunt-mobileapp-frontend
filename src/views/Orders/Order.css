@@ -7,4 +7,26 @@
 .articles{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+.select:after {
+    content: '\25BC';
+    font-size: 15px;
+    background-color: 'rgb(228, 231, 234, 1)';
+    color: black;
+    padding: 11px 15px;
+    pointer-events: none;
+}
 
+#dropdown {
+	appearance: none;
+	padding: 5px;
+	background-color: rgb(228, 231, 234, 1);
+	color: #626262;
+	border: none;
+	font-family: inherit;
+	outline: none;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 90%;
+}

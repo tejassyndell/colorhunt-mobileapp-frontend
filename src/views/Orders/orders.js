@@ -45,7 +45,7 @@ function orders() {
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
               <span
-                className="ms-1"
+                className="ms-2"
                 style={{
                   color: '#626262',
                   fontSize: '18px',
@@ -73,7 +73,7 @@ function orders() {
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
               <span
-                className="ms-1"
+                className="ms-2"
                 style={{
                   color: '#626262',
                   fontSize: '18px',
@@ -97,25 +97,12 @@ function orders() {
               Transportation
             </span>
             <div
-              className="mt-1 d-flex align-items-center"
+              className="mt-1 d-flex align-items-center select"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
-              <select
-                className="form-select ms-1"
-                style={{
-                  color: '#626262',
-                  fontSize: '18px',
-                  fontStyle: 'normal',
-                  fontWeight: '500',
-                  lineHeight: 'normal',
-                  border: 'none',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <option value="courier">Courier</option>
-                <option value="other">Other Option 1</option>
-                <option value="other">Other Option 2</option>
-                <option value="other">Other Option 3</option>
+              <select id="dropdown">
+                <option value="2">Courier</option>
+                <option value="3">Option 2</option>
               </select>
             </div>
           </div>
@@ -128,7 +115,7 @@ function orders() {
               'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
           }}
         >
-          <div className=" my-1 ms-1" style={{ width: '90px', height: '93px' }}>
+          <div className=" my-2 ms-1" style={{ width: '90px', height: '93px' }}>
             <img src={img}></img>
           </div>
           <div className="my-1 mx-1 ms-2">
