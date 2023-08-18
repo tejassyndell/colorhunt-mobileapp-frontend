@@ -28,14 +28,13 @@ import noimage from 'src/assets/Colorhuntimg/dashboard/noimage.png'
 const Dashboard = (props) => {
   const { UserData } = props
 
-
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [activeFilterDiv, setActiveFilterDiv] = useState(true)
   const dispatch = useDispatch()
   const Min = 0
-  const Max = 500
+  const Max = 700
   const [values, setValues] = useState([Min, Max])
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const [ApplyStatushBack, setApplyStatushBack] = useState(true)
@@ -137,25 +136,6 @@ const Dashboard = (props) => {
     }
   }
 
-  // range Filters
-  // const handlerangechange = (value) => {
-  //   // console.log([value.minValue, value.maxValue])
-  //   setValues([value.minValue, value.maxValue])
-  //   console.log(values[0], values[1])
-  // }
-  // useEffect(() => {
-  //   const sdPrds = nameData.slice()
-
-  //   const fildata = sdPrds.filter(
-  //     (item) => item.ArticleRate >= values[0] && item.ArticleRate <= values[1],
-  //   )
-  //   setApplyStatushBack(false)
-  //   setApplyData(fildata)
-  //   console.log(applyData)
-  // }, [nameData, values[0], values[1]])
-
-  // image single Article data
-
   const getSingaleartical = (item) => {
     const ArticalId = item.Id
     console.log(ArticalId)
@@ -163,7 +143,6 @@ const Dashboard = (props) => {
   }
 
   // ------- add Article in wishlist end-------------
-  
 
   // search and filter functionality
   const handleChange = (e) => {
@@ -183,7 +162,7 @@ const Dashboard = (props) => {
       console.log(filterResult)
       setNameData(filterResult)
       setApplyData(filterResult)
-      console.log(filterResult);
+      console.log(filterResult)
     }
 
     setInput(value)
@@ -205,11 +184,11 @@ const Dashboard = (props) => {
         return selectedCategories.some((checkedCat) => category.includes(checkedCat))
       })
       console.log(sdPrds)
-      console.log(min,max)
-      if(min >= 0 && max <= 500){
-        sdPrds = sdPrds.filter(product => {
-          return product.ArticleRate >= min && product.ArticleRate <= max;
-        });
+      console.log(min, max)
+      if (min >= 0 && max <= 700) {
+        sdPrds = sdPrds.filter((product) => {
+          return product.ArticleRate >= min && product.ArticleRate <= max
+        })
         console.log(sdPrds)
       }
       setApplyData(sdPrds)
@@ -218,17 +197,16 @@ const Dashboard = (props) => {
     } else {
       setNameData(sdPrds)
     }
-    if(min >= 0 && max >= 500){
-      sdPrds = sdPrds.filter(product=>{
-        return product.ArticleRate >= min && product.ArticleRate <= max; 
+    if (min >= 0 && max >= 700) {
+      sdPrds = sdPrds.filter((product) => {
+        return product.ArticleRate >= min && product.ArticleRate <= max
       })
       console.log(sdPrds)
-      console.log(min,max)
+      console.log(min, max)
       setApplyData(sdPrds)
       setApplyStatushBack(false)
       setFilterstatus(false)
-    }
-    else{
+    } else {
       setNameData(sdPrds)
     }
   }
@@ -355,12 +333,12 @@ const Dashboard = (props) => {
                         )}
                       </div>
                       <div className="zoomDiv">
-                      <img className="zoom"
-                        src={baseImageUrl + item.Photos}
-                        onClick={() => getSingaleartical(item)}
-                      />
+                        <img
+                          className="zoom"
+                          src={baseImageUrl + item.Photos}
+                          onClick={() => getSingaleartical(item)}
+                        />
                       </div>
-                      
 
                       <div>
                         <p>
@@ -377,10 +355,15 @@ const Dashboard = (props) => {
               : applyData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                    <div className="zoomDiv">
-                      <img className="zoom" src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)}  onError={(e)=>{
-                        e.target.src= noimage
-                      }}/>
+                      <div className="zoomDiv">
+                        <img
+                          className="zoom"
+                          src={baseImageUrl + item.Photos}
+                          onClick={() => getSingaleartical(item)}
+                          onError={(e) => {
+                            e.target.src = noimage
+                          }}
+                        />
                       </div>
                       <div>
                         <p>
@@ -497,7 +480,12 @@ const Dashboard = (props) => {
             <div className="categoriestagsection">
               <p>Categories</p>
               {/* <p onClick={() => setFilterstatus(false)}>X</p> */}
-              <img style={{height:"32x",width:"32px"}} src={crossicon} alt='' onClick={()=>setFilterstatus(false)}></img>
+              <img
+                style={{ height: '32x', width: '32px' }}
+                src={crossicon}
+                alt=""
+                onClick={() => setFilterstatus(false)}
+              ></img>
             </div>
             <div>
               <div className="selectcategories row">
@@ -540,10 +528,8 @@ const Dashboard = (props) => {
               <div className="pricerange">
                 <div className="pricerangsection row">
                   <p>Price Range</p>
-                  {/* <p>max value : {values[0]}</p>
-                  <p>min value : {values[1]}</p> */}
-                  {/* <div className="tooltip left-tooltip">{values[0]}</div>
-                  <div className="tooltip right-tooltip">{values[1]}</div> */}
+                  <p>Min value : {values[0]}</p>
+                  <p>Max value : {values[1]}</p>
                 </div>
                 <MultiRangeSlider
                   valueLabelDisplay="auto"
