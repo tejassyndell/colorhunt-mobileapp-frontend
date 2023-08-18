@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
 import noImages from '../assets/image/noimage.png'
 import { AppSidebarNav } from './AppSidebarNav'
-import userimages from 'src/assets/Colorhuntimg/Sidebaricon/menu (1).svg'
+import userimages from 'src/assets/Colorhuntimg/sliderimages/download.svg'
 import closemanuicon from 'src/assets/Colorhuntimg/Sidebaricon/Frame 1171274903.svg'
 import smallLogo from 'src/assets/brand/small-logo.svg'
 import logouticon from 'src/assets/images/higrow/logout 1.svg'
@@ -52,9 +52,9 @@ const AppSidebar = (props) => {
     >
       <CSidebarBrand className="d-none d-md-flex" style={{ padding: '14px 8px' }} to="/">
         <div className="sidebar-idcontent">
-          <img
+          <img className='filter'
             src={userimages}
-            style={{ width: 25 }}
+            style={{ width: 25}}
             onClick={() => {
               sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : ''
             }}
