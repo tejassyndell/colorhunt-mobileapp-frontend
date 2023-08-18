@@ -39,7 +39,7 @@ const Dashboard = (props) => {
   const [values, setValues] = useState([Min, Max])
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const [ApplyStatushBack, setApplyStatushBack] = useState(true)
-  const [applyrData, setApplyData] = useState([])
+  const [applyData, setApplyData] = useState([])
   const [filterDataSearch, setFilterDataSearch] = useState([])
   const [Filterstatus, setFilterstatus] = useState(false)
   const [selectedprd, setSelectprd] = useState([])
@@ -138,21 +138,21 @@ const Dashboard = (props) => {
   }
 
   // range Filters
-  const handlerangechange = (value) => {
-    // console.log([value.minValue, value.maxValue])
-    setValues([value.minValue, value.maxValue])
-    console.log(values[0], values[1])
-  }
-  useEffect(() => {
-    const sdPrds = nameData.slice()
+  // const handlerangechange = (value) => {
+  //   // console.log([value.minValue, value.maxValue])
+  //   setValues([value.minValue, value.maxValue])
+  //   console.log(values[0], values[1])
+  // }
+  // useEffect(() => {
+  //   const sdPrds = nameData.slice()
 
-    const fildata = sdPrds.filter(
-      (item) => item.ArticleRate >= values[0] && item.ArticleRate <= values[1],
-    )
-    setApplyStatushBack(false)
-    setApplyData(fildata)
-    console.log(applyrData)
-  }, [nameData, values[0], values[1]])
+  //   const fildata = sdPrds.filter(
+  //     (item) => item.ArticleRate >= values[0] && item.ArticleRate <= values[1],
+  //   )
+  //   setApplyStatushBack(false)
+  //   setApplyData(fildata)
+  //   console.log(applyData)
+  // }, [nameData, values[0], values[1]])
 
   // image single Article data
 
@@ -197,16 +197,38 @@ const Dashboard = (props) => {
   }
   const catagoryselect = () => {
     let sdPrds = nameData.slice()
-
+    const min = parseFloat(values[0])
+    const max = parseFloat(values[1])
     if (selectedCategories.length > 0) {
       sdPrds = sdPrds.filter((product) => {
         const category = product.Category
         return selectedCategories.some((checkedCat) => category.includes(checkedCat))
       })
+      console.log(sdPrds)
+      console.log(min,max)
+      if(min >= 0 && max <= 500){
+        sdPrds = sdPrds.filter(product => {
+          return product.ArticleRate >= min && product.ArticleRate <= max;
+        });
+        console.log(sdPrds)
+      }
       setApplyData(sdPrds)
       setApplyStatushBack(false)
       setFilterstatus(false)
     } else {
+      setNameData(sdPrds)
+    }
+    if(min >= 0 && max >= 500){
+      sdPrds = sdPrds.filter(product=>{
+        return product.ArticleRate >= min && product.ArticleRate <= max; 
+      })
+      console.log(sdPrds)
+      console.log(min,max)
+      setApplyData(sdPrds)
+      setApplyStatushBack(false)
+      setFilterstatus(false)
+    }
+    else{
       setNameData(sdPrds)
     }
   }
@@ -352,7 +374,7 @@ const Dashboard = (props) => {
                     </div>
                   </SwiperSlide>
                 ))
-              : applyrData.map((item) => (
+              : applyData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
                     <div className="zoomDiv">

@@ -107,7 +107,7 @@ const AppSidebar = (props) => {
             className="imagescontentback"
             style={{ width: '50%', height: 200, right: 60, bottom: 8 }}
           />
-          <p>Designed by SYNDELL Inc.</p>
+         <p><a href='https://syndelltech.com/' style={{textDecoration:"none",color:"white"}}>Designed by SYNDELL Inc.</a></p> 
         </CSidebarNav>
       </CSidebarNav>
     </CSidebar>

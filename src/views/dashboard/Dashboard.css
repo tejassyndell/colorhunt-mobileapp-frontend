@@ -129,6 +129,7 @@ body {
 
 .selectcategories {
   width: 100%;
+  margin-left: -2px;
 }
 
 .innerfilter {
@@ -174,11 +175,11 @@ body {
   font-size: 20px;
   font-weight: 600;
   color: #1a1a1a;
+  margin: 0px;
+  padding: 12px 0px 0px 23px;
 }
 
-.selectcategories .col-6:nth-child(2) {
-  padding-right: 0px;
-}
+
 
 
 /* styles.css */
