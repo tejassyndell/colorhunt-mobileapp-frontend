@@ -18,6 +18,7 @@ import MultiRangeSlider from 'multi-range-slider-react'
 import AppFooter from 'src/components/AppFooter'
 import navbaricon from 'src/assets/Colorhuntimg/navbaricon/menu bar.svg'
 import profileimg from 'src/assets/Colorhuntimg/navbaricon/Group 8919.svg'
+import crossicon from 'src/assets/Colorhuntimg/sliderimages/crossicon.svg'
 import { Navigate } from 'react-router-dom'
 export default function CategoryArticles() {
     const navigate = useNavigate()
@@ -30,6 +31,14 @@ export default function CategoryArticles() {
     const [click1, setClick1] = useState(true)
     const [activeFilterDiv, setActiveFilterDiv] = useState(true)
     const [filterDataSearch, setFilterDataSearch] = useState([])
+    const [Filterstatus, setFilterstatus] = useState(false)
+    const Min = 0
+    const Max = 700
+    const [values, setValues] = useState([Min, Max])
+    const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
+    useEffect(() => {
+        getproductname();
+    }, [category]);
     const getproductname = async () => {
         try {
             const res = await getProductName();
@@ -44,12 +53,6 @@ export default function CategoryArticles() {
             console.log(error);
         }
     }
-    useEffect(() => {
-        getproductname();
-    }, [category]);
-    //filter all data by the category selected
-
-    const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
     const getWishlist = async () => {
         const data = {
             party_id: 197,
@@ -93,15 +96,10 @@ export default function CategoryArticles() {
             console.log(error)
         }
     }
-
-
     const handleChange = (e) => {
         const value = e.target.value;
-        console.log(e.target.value)
         if (e.target.value === '') {
-            console.log(filteredData,"if")
             setFiltereddata(filteredData)
-
         } else {
             const filterResult = filterDataSearch.filter((item) =>
                 item.ArticleNumber.toString().includes(value.toString()) ||
@@ -110,12 +108,22 @@ export default function CategoryArticles() {
                 item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
                 item.Subcategory.toLowerCase().includes(value.toLowerCase())
             );
-            console.log(filterResult,"result");
             setFiltereddata(filterResult)
         }
         setInput(value);
         setSerchtext(value);
     };
+    const handlerangefilter = () => {
+        const min = parseFloat(values[0])
+        const max = parseFloat(values[1])
+        console.log(min, max)
+        const sdPrds = filterDataSearch.slice()
+        const range = filterDataSearch.filter((item) => {
+            return item.ArticleRate >= min && item.ArticleRate <= max
+        })
+        console.log(range, "range")
+        setFiltereddata(range)
+    }
     return (
         <motion.div
             initial={{ translateY: '100%', padding: '0px 5px' }}
@@ -160,8 +168,7 @@ export default function CategoryArticles() {
                                 <img
                                     src={updateicon}
                                     style={{ cursor: 'pointer' }}
-                                // onClick={() => { click1 === true ? setActiveBox() : "" }}
-                                // onClick={() => setFilterstatus(true)}
+                                    onClick={() => setFilterstatus(true)}
                                 />
                             </div>
                         </div>
@@ -219,55 +226,50 @@ export default function CategoryArticles() {
                     </div>
                 </div>
             </div>
-            {/* <div>
+            {Filterstatus === true ? <div>
                 <motion.div initial={{ translateY: '100%', padding: '0px 5px' }}
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{ duration: 0.5 }} className='categories'>
-                    <div className='categoriestagsection'>
-                        <p>categories</p>
-                        <p onClick={() => setFilterstatus(false)}>X</p>
-                    </div>
                     <div>
-                        <div className='selectcategories row'>
-                        
-                        </div>
-
-
-                        <div className='pricerange'>
-                            <div className='pricerangsection row'>
-                                <p>Price Range</p>
+                        <div className="pricerange">
+                            <div className="pricerangsection row">
+                                <div className="d-flex justify-content-between">
+                                    <p>Price Range</p>
+                                    <img
+                                        className="mt-1"
+                                        style={{ height: '32x', width: '32px' }}
+                                        src={crossicon}
+                                        alt=""
+                                        onClick={() => setFilterstatus(false)}
+                                    ></img></div>
+                                <p>Min value : {values[0]}</p>
+                                <p>Max value : {values[1]}</p>
                             </div>
                             <MultiRangeSlider
                                 valueLabelDisplay="auto"
-                                // onChange={handlerangechange}
-                                // onInput={(e) => setValues([e.minValue, e.maxValue])}
-                                // minValue={values[0]}
-                                // maxValue={values[1]}
-                                // min={Min}
-                                // max={Max}
+                                onInput={(e) => setValues([e.minValue, e.maxValue])}
+                                minValue={values[0]}
+                                maxValue={values[1]}
+                                min={Min}
+                                max={Max}
                                 label={false}
                                 ruler={false}
                                 step={1}
                                 style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                                barLeftColor="black"
-                                barInnerColor="black"
-                                barRightColor="black"
-                                thumbLeftColor="black"
-                                thumbRightColor="black"
+                                barLeftColor="lightgrey"
+                                barInnerColor="rgb(223 10 31)"
+                                barRightColor="lightgrey"
+                                thumbLeftColor="white"
+                                thumbRightColor="white"
                             />
-                        
                         </div>
-
-
                     </div>
                     <div className='content-button'>
                         <button >Reset</button>
-                        <button >Apply</button>
+                        <button onClick={handlerangefilter} >Apply</button>
                     </div>
-
                 </motion.div>
-
-            </div>  */}
+            </div> : null}
             <div className="footer-section w-100">
                 <AppFooter />
             </div>

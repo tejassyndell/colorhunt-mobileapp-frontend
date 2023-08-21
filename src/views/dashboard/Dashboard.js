@@ -186,8 +186,6 @@ const Dashboard = (props) => {
         const category = product.Category
         return selectedCategories.some((checkedCat) => category.includes(checkedCat))
       })
-      console.log(sdPrds)
-      console.log(min, max)
       if (min >= 0 && max <= 700) {
         sdPrds = sdPrds.filter((product) => {
           return product.ArticleRate >= min && product.ArticleRate <= max
@@ -214,7 +212,7 @@ const Dashboard = (props) => {
     }
   }
 
-  useEffect(() => {}, [selectedCategories])
+  useEffect(() => { }, [selectedCategories])
 
   const catagoryHandler = (e) => {
     if (e.target.name !== undefined) {
@@ -232,7 +230,7 @@ const Dashboard = (props) => {
   const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font'
 
   const catwithphotos = async () => {
-    try{
+    try {
       const res = await getcategorywithphotos()
       setNewdata(res.data)
     } catch (error) {
@@ -323,10 +321,10 @@ const Dashboard = (props) => {
           >
             {ApplyStatushBack === true
               ? newdata.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <div className="sildercontentprice">
-                      <div id={item.id} className="producticones">
-                        {/* {selectedprd.some((i) => i.Id === item.Id) ? (
+                <SwiperSlide key={item.id}>
+                  <div className="sildercontentprice">
+                    <div id={item.id} className="producticones">
+                      {/* {selectedprd.some((i) => i.Id === item.Id) ? (
                           <i
                             className={`fa fa-heart ${isLoggedin === false ? 'disabled-icon' : ''}`}
                             onClick={() => {
@@ -343,55 +341,55 @@ const Dashboard = (props) => {
                             }}
                           ></i>
                         )} */}
-                      </div>
-                      <div className="zoomDiv">
-                        <img
-                          className="zoom"
-                          src={baseImageUrl + item.Photos}
-                          onClick={()=>getSingaleartical(item)}
-                          onError={(e) => {
-                            e.target.src = noimage
-                          }}
-                        />
-                      </div>
+                    </div>
+                    <div className="zoomDiv">
+                      <img
+                        className="zoom"
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        onError={(e) => {
+                          e.target.src = noimage
+                        }}
+                      />
+                    </div>
 
-                      <div>
-                        <p>
-                          {/* {` ${isLoggedin === false ? '' : item.ArticleNumber}`} */}
-                          <br />
-                          <span className={getFontSizeClass}>{item.Category}</span>
-                          <br />
-                          {/* {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`} */}
-                        </p>
-                      </div>
+                    <div>
+                      <p>
+                        {/* {` ${isLoggedin === false ? '' : item.ArticleNumber}`} */}
+                        <br />
+                        <span className={getFontSizeClass}>{item.Category}</span>
+                        <br />
+                        {/* {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`} */}
+                      </p>
                     </div>
-                  </SwiperSlide>
-                ))
+                  </div>
+                </SwiperSlide>
+              ))
               : applyData.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <div className="sildercontentprice">
-                      <div className="zoomDiv">
-                        <img
-                          className="zoom"
-                          src={baseImageUrl + item.Photos}
-                          onClick={() => getSingaleartical(item)}
-                          onError={(e) => {
-                            e.target.src = noimage
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <p>
-                          {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
-                          <br />
-                          <span>{item.Category}</span>
-                          <br />
-                          {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
-                        </p>
-                      </div>
+                <SwiperSlide key={item.id}>
+                  <div className="sildercontentprice">
+                    <div className="zoomDiv">
+                      <img
+                        className="zoom"
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        onError={(e) => {
+                          e.target.src = noimage
+                        }}
+                      />
                     </div>
-                  </SwiperSlide>
-                ))}
+                    <div>
+                      <p>
+                        {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
+                        <br />
+                        <span>{item.Category}</span>
+                        <br />
+                        {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
         <div className="allProduct-section mt-4">
@@ -507,9 +505,8 @@ const Dashboard = (props) => {
                 {categoriesData.map((category) => (
                   <div className="col-6" key={category.id} onClick={catagoryHandler}>
                     <div
-                      className={`innerfilter px-3 bg-light ${
-                        selectedCategories.includes(category.Category) ? 'selectedCategory' : ''
-                      }`}
+                      className={`innerfilter px-3 bg-light ${selectedCategories.includes(category.Category) ? 'selectedCategory' : ''
+                        }`}
                       name={category.Category}
                     >
                       <label
@@ -530,9 +527,8 @@ const Dashboard = (props) => {
                         checked={selectedCategories.includes(category.Category)}
                       />
                       <span
-                        className={`checkmark ${
-                          selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''
-                        }`}
+                        className={`checkmark ${selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''
+                          }`}
                       ></span>{' '}
                       {/* Custom checkbox style using CSS */}
                     </div>
