@@ -72,21 +72,23 @@ export const ArticleDetails = async (data) => {
   }
 }
 
-export const editarticledetails = async(data) => {
+export const editarticledetails = async (data) => {
   console.log(data.ArticleId)
   console.log(data.PartyId)
 
-  try{
-    return await axios.post(`${url}/getCartArticleDetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`)
+  try {
+    return await axios.post(
+      `${url}/getCartArticleDetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`,
+    )
   } catch (error) {
-    console.log('err in react api',error)
+    console.log('err in react api', error)
   }
 }
 
-export const getcategorywithphotos = async(data) => {
+export const getcategorywithphotos = async (data) => {
   try {
     return await axios.get(`${url}/getcategorywithphotos`)
-  } catch(error) {
+  } catch (error) {
     console.log('err in reACT api', error)
   }
 }

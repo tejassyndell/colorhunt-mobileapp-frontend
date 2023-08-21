@@ -1,4 +1,4 @@
-// / eslint-disable prettier/prettier /
+/* eslint-disable */
 
 import React, { useEffect, useState } from 'react'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
@@ -116,7 +116,11 @@ function OrderPlaced() {
               {orderItems.map((item) => (
                 <div className="order" key={item.id}>
                   <div className="left-side">
-                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" onClick={() => getSingaleartical(item)}/>
+                    <img
+                      src={baseImageUrl + item.Photos.split(',')[0]}
+                      alt="Order"
+                      onClick={() => getSingaleartical(item)}
+                    />
                     <div className="order-details">
                       <h4>
                         <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}
