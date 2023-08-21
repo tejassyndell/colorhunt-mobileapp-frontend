@@ -29,6 +29,7 @@ export default function CategoryArticles() {
     const [serchtext, setSerchtext] = useState();
     const [click1, setClick1] = useState(true)
     const [activeFilterDiv, setActiveFilterDiv] = useState(true)
+    const [filterDataSearch, setFilterDataSearch] = useState([])
     const getproductname = async () => {
         try {
             const res = await getProductName();
@@ -37,6 +38,7 @@ export default function CategoryArticles() {
                 const sdPrds = res.data.slice(); // Use the fetched data
                 const fildata = sdPrds.filter((item) => item.Category === category);
                 setFiltereddata(fildata);
+                setFilterDataSearch(fildata)
             }
         } catch (error) {
             console.log(error);
@@ -91,23 +93,26 @@ export default function CategoryArticles() {
             console.log(error)
         }
     }
+
+
     const handleChange = (e) => {
         const value = e.target.value;
+        console.log(e.target.value)
         if (e.target.value === '') {
+            console.log(filteredData,"if")
             setFiltereddata(filteredData)
 
         } else {
-            const filterResult = filteredData.filter((item) =>
+            const filterResult = filterDataSearch.filter((item) =>
                 item.ArticleNumber.toString().includes(value.toString()) ||
                 item.Category.toLowerCase().includes(value.toLowerCase()) ||
                 item.ArticleRate.toString().includes(value.toString()) ||
                 item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
                 item.Subcategory.toLowerCase().includes(value.toLowerCase())
             );
-            console.log(filterResult);
+            console.log(filterResult,"result");
             setFiltereddata(filterResult)
         }
-
         setInput(value);
         setSerchtext(value);
     };
