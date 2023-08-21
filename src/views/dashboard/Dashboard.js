@@ -23,21 +23,24 @@ import AppFooter from 'src/components/AppFooter'
 import tshartimg from 'src/assets/Colorhuntimg/sliderimages/33003-5-2-348x464 1.png'
 import tshartimg1 from 'src/assets/Colorhuntimg/sliderimages/image 111.png'
 import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1.png'
-
+import crossicon from 'src/assets/Colorhuntimg/sliderimages/crossicon.svg'
+import noimage from 'src/assets/Colorhuntimg/dashboard/noimage.png'
+import axios from 'axios'
+import { getcategorywithphotos } from '../api/api'
 const Dashboard = (props) => {
   const { UserData } = props
-
+  const [newdata, setNewdata] = useState([])
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [activeFilterDiv, setActiveFilterDiv] = useState(true)
   const dispatch = useDispatch()
   const Min = 0
-  const Max = 500
+  const Max = 700
   const [values, setValues] = useState([Min, Max])
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const [ApplyStatushBack, setApplyStatushBack] = useState(true)
-  const [applyrData, setApplyData] = useState([])
+  const [applyData, setApplyData] = useState([])
   const [filterDataSearch, setFilterDataSearch] = useState([])
   const [Filterstatus, setFilterstatus] = useState(false)
   const [selectedprd, setSelectprd] = useState([])
@@ -49,6 +52,7 @@ const Dashboard = (props) => {
     getproductname()
     getCategoriesname()
     getWishlist()
+    catwithphotos()
   }, [])
 
   // getAritical api
@@ -64,7 +68,6 @@ const Dashboard = (props) => {
   const getCategoriesname = async () => {
     const result = await getCategories().then((res) => {
       if (res.status === 200) {
-        console.log(res.data)
         setCategoriesData(res.data)
       }
     })
@@ -135,29 +138,11 @@ const Dashboard = (props) => {
     }
   }
 
-  // range Filters
-  const handlerangechange = (value) => {
-    // console.log([value.minValue, value.maxValue])
-    setValues([value.minValue, value.maxValue])
-    console.log(values[0], values[1])
-  }
-  useEffect(() => {
-    const sdPrds = nameData.slice()
-
-    const fildata = sdPrds.filter(
-      (item) => item.ArticleRate >= values[0] && item.ArticleRate <= values[1],
-    )
-    setApplyStatushBack(false)
-    setApplyData(fildata)
-    console.log(applyrData)
-  }, [nameData, values[0], values[1]])
-
-  // image single Article data
-
   const getSingaleartical = (item) => {
-    const ArticalId = item.Id
-    console.log(ArticalId)
-    navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
+    const Category = item.Category
+    console.log(Category)
+    navigate(`/categoryarticles/${Category}`)
+    // navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
 
   // ------- add Article in wishlist end-------------
@@ -194,12 +179,31 @@ const Dashboard = (props) => {
   }
   const catagoryselect = () => {
     let sdPrds = nameData.slice()
-
+    const min = parseFloat(values[0])
+    const max = parseFloat(values[1])
     if (selectedCategories.length > 0) {
       sdPrds = sdPrds.filter((product) => {
         const category = product.Category
         return selectedCategories.some((checkedCat) => category.includes(checkedCat))
       })
+      if (min >= 0 && max <= 700) {
+        sdPrds = sdPrds.filter((product) => {
+          return product.ArticleRate >= min && product.ArticleRate <= max
+        })
+        console.log(sdPrds)
+      }
+      setApplyData(sdPrds)
+      setApplyStatushBack(false)
+      setFilterstatus(false)
+    } else {
+      setNameData(sdPrds)
+    }
+    if (min >= 0 && max >= 700) {
+      sdPrds = sdPrds.filter((product) => {
+        return product.ArticleRate >= min && product.ArticleRate <= max
+      })
+      console.log(sdPrds)
+      console.log(min, max)
       setApplyData(sdPrds)
       setApplyStatushBack(false)
       setFilterstatus(false)
@@ -224,6 +228,15 @@ const Dashboard = (props) => {
   }
 
   const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font'
+
+  const catwithphotos = async () => {
+    try {
+      const res = await getcategorywithphotos()
+      setNewdata(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <motion.div
@@ -307,11 +320,11 @@ const Dashboard = (props) => {
             className="mySwiper"
           >
             {ApplyStatushBack === true
-              ? nameData.map((item) => (
+              ? newdata.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
                       <div id={item.id} className="producticones">
-                        {selectedprd.some((i) => i.Id === item.Id) ? (
+                        {/* {selectedprd.some((i) => i.Id === item.Id) ? (
                           <i
                             className={`fa fa-heart ${isLoggedin === false ? 'disabled-icon' : ''}`}
                             onClick={() => {
@@ -327,39 +340,49 @@ const Dashboard = (props) => {
                               addArticleWishlist(item)
                             }}
                           ></i>
-                        )}
+                        )} */}
                       </div>
-
-                      <img
-                        src={baseImageUrl + item.Photos}
-                        onClick={() => getSingaleartical(item)}
-                      />
+                      <div className="zoomDiv">
+                        <img
+                          className="zoom"
+                          src={baseImageUrl + item.Photos}
+                          onClick={() => getSingaleartical(item)}
+                          onError={(e) => {
+                            e.target.src = noimage
+                          }}
+                        />
+                      </div>
 
                       <div>
                         <p>
-                          {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
+                          {/* {` ${isLoggedin === false ? '' : item.ArticleNumber}`} */}
                           <br />
                           <span className={getFontSizeClass}>{item.Category}</span>
                           <br />
-                          {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
+                          {/* {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`} */}
                         </p>
                       </div>
                     </div>
                   </SwiperSlide>
                 ))
-              : applyrData.map((item) => (
+              : applyData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img
-                        src={baseImageUrl + item.Photos}
-                        onClick={() => getSingaleartical(item)}
-                        alt={`T-Shirt ${item.id}`}
-                      />
+                      <div className="zoomDiv">
+                        <img
+                          className="zoom"
+                          src={baseImageUrl + item.Photos}
+                          onClick={() => getSingaleartical(item)}
+                          onError={(e) => {
+                            e.target.src = noimage
+                          }}
+                        />
+                      </div>
                       <div>
-                        <p className="p-size-change">
+                        <p>
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
                           <br />
-                          <span className="span-size">{item.Category}</span>
+                          <span>{item.Category}</span>
                           <br />
                           {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
                         </p>
@@ -469,7 +492,13 @@ const Dashboard = (props) => {
           >
             <div className="categoriestagsection">
               <p>Categories</p>
-              <p onClick={() => setFilterstatus(false)}>X</p>
+              {/* <p onClick={() => setFilterstatus(false)}>X</p> */}
+              <img
+                style={{ height: '32x', width: '32px' }}
+                src={crossicon}
+                alt=""
+                onClick={() => setFilterstatus(false)}
+              ></img>
             </div>
             <div>
               <div className="selectcategories row">
@@ -512,10 +541,8 @@ const Dashboard = (props) => {
               <div className="pricerange">
                 <div className="pricerangsection row">
                   <p>Price Range</p>
-                  {/* <p>max value : {values[0]}</p>
-                  <p>min value : {values[1]}</p> */}
-                  {/* <div className="tooltip left-tooltip">{values[0]}</div>
-                  <div className="tooltip right-tooltip">{values[1]}</div> */}
+                  <p>Min value : {values[0]}</p>
+                  <p>Max value : {values[1]}</p>
                 </div>
                 <MultiRangeSlider
                   valueLabelDisplay="auto"
@@ -528,11 +555,11 @@ const Dashboard = (props) => {
                   ruler={false}
                   step={1}
                   style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                  barLeftColor="black"
-                  barInnerColor="black"
-                  barRightColor="black"
-                  thumbLeftColor="black"
-                  thumbRightColor="black"
+                  barLeftColor="lightgrey"
+                  barInnerColor="rgb(223 10 31)"
+                  barRightColor="lightgrey"
+                  thumbLeftColor="white"
+                  thumbRightColor="white"
                 />
               </div>
             </div>

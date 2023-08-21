@@ -9,7 +9,6 @@ import proceedicon from '../../assets/Colorhuntimg/proceed.svg'
 import './Cart.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
 const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
 
 function OrderPlaced() {
@@ -54,7 +53,7 @@ function OrderPlaced() {
   }
 
   const handleProceedToCheckout = () => {
-    navigate('/orderpurchase') // Update the route path as per your routing setup
+    navigate('/orders') // Update the route path as per your routing setup
   }
 
   const handleDeleteOrder = async (article_id) => {
@@ -81,6 +80,11 @@ function OrderPlaced() {
   const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)
   const cartIsEmpty = orderItems.length === 0
 
+  const getSingaleartical = (item) => {
+    const ArticalId = item.article_id
+    console.log(ArticalId)
+    navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
+  }
   return (
     <>
       <header className="navbar">
@@ -112,7 +116,7 @@ function OrderPlaced() {
               {orderItems.map((item) => (
                 <div className="order" key={item.id}>
                   <div className="left-side">
-                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" />
+                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" onClick={() => getSingaleartical(item)}/>
                     <div className="order-details">
                       <h4>
                         <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}

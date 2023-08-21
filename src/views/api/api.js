@@ -1,6 +1,7 @@
 /* eslint-disable */
 import axios from 'axios'
 const url = 'http://localhost:4000'
+// const url = 'https://colorhunt-mobile-backend.sincprojects.com'
 // const url = 'https://garment-backend.sincprojects.com'
 
 export const loginAuth = async (user) => {
@@ -79,5 +80,13 @@ export const editarticledetails = async(data) => {
     return await axios.post(`${url}/getCartArticleDetails?ArticleId=${data.ArticleId}&PartyId=${data.PartyId}`)
   } catch (error) {
     console.log('err in react api',error)
+  }
+}
+
+export const getcategorywithphotos = async(data) => {
+  try {
+    return await axios.get(`${url}/getcategorywithphotos`)
+  } catch(error) {
+    console.log('err in reACT api', error)
   }
 }

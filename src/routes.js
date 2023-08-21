@@ -18,6 +18,7 @@ const Sliderimg = React.lazy(() => import('./views/sliderscreen/sliderscreen'))
 const AllArticles = React.lazy(() => import('./views/dashboard/allarticles'))
 const DetailsOfArticles = React.lazy(() => import('./views/Articles-details/details-of-Articles'))
 const editarticle = React.lazy(()=> import ('./views/editArticle/editarticle'))
+const CategoryArticles = React.lazy(()=> import('./views/CategorywiseArticles/CategoryArticles'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -37,7 +38,8 @@ const routes = [
   { path: '/cart_list', name: 'Cart list', element: cart_list },
   { path: '/sliderscreen', name: 'Cart list', element: Sliderimg },
   { path: '/Articles-details/:id', name: 'Details Articles', element: DetailsOfArticles },
-  { path: '/editarticledetails/:id', name:'Edit Article', element:editarticle}
+  { path: '/editarticledetails/:id', name:'Edit Article', element:editarticle},
+  { path: '/categoryarticles/:category', name:'CategoryArticle', element:CategoryArticles}
 ]
 
 export default routes

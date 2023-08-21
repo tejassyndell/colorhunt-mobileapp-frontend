@@ -98,14 +98,6 @@ function profile(props) {
         >
           Upload Image
         </b>
-        <div className="rectangle-group" id="groupContainer3">
-          <div className="group-item"></div>
-          <div className="download-1-1-parent">
-            <b className="Save-data" onClick={handlesave}>
-              Save
-            </b>
-          </div>
-        </div>
 
         {profiledata.map((item) => (
           <div key={item.Id}>
