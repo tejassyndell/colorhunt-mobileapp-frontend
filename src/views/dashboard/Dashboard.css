@@ -4,13 +4,11 @@ body {
   font-family: 'Glory' !important;
 }
 
-
 .product-hed-sec {
   display: flex;
   justify-content: space-between;
   padding: 0px 4px;
   height: 17px;
-
 }
 
 .header {
@@ -39,11 +37,11 @@ body {
   font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
+  /* Center slide text vertically  */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 15px !important;
+  margin-right: 6px !important;
   width: 40% !important;
 }
 
@@ -55,21 +53,22 @@ body {
   object-fit: cover;
   border-radius: 10px;
   margin: 7px 0px;
+  box-shadow: 0px 0px 9px -5px;
 }
 
 .swiper-pagination {
   display: none;
 }
 
-.sildercontentprice p {
-  font-size: 14px;
+.p-size-change .span-size {
+  font-size: 18px;
   font-weight: 700;
   text-align: center;
 }
 
 .sildercontentprice span {
-  font-size: 12px;
-  /* line-height: 10px; */
+  font-size: 14px;
+  /* / line-height: 10px; / */
 }
 
 .icon-section {
@@ -141,7 +140,7 @@ body {
 .example {
   scrollbar-width: none;
   overflow: -moz-scrollbars-none;
-  /* Firefox */
+  /* / Firefox / */
 }
 
 .innerfilter label {
@@ -167,16 +166,15 @@ body {
   padding-right: 0px;
 }
 
-
-/* styles.css */
-/* Hide the default checkbox appearance */
+/* / styles.css / */
+/* / Hide the default checkbox appearance / */
 input[type='checkbox'] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-/* Create a circular checkbox appearance using pseudo-element */
+/* / Create a circular checkbox appearance using pseudo-element / */
 .checkmark {
   position: relative;
   display: grid;
@@ -188,14 +186,14 @@ input[type='checkbox'] {
   align-items: center;
 }
 
-/* Customize the appearance when the checkbox is checked */
+/* / Customize the appearance when the checkbox is checked / */
 .selectedCheckmark {
   border: 1px solid #ffffff;
   background-color: #000000;
-  /* Change to your desired color */
+  /* / Change to your desired color / */
 }
 
-/* Add the inner circle for the checked state */
+/* / Add the inner circle for the checked state / */
 .selectedCheckmark::before {
   content: '';
   position: relative;
@@ -207,7 +205,6 @@ input[type='checkbox'] {
 
 .selectedCategory {
   background-color: black !important;
-
 }
 
 .selectedCategoryLable {
@@ -283,7 +280,6 @@ input[type='checkbox'] {
   width: 93%;
   height: 23vh;
   padding: 10px;
-
 }
 
 .haddersilder {
@@ -311,7 +307,7 @@ input[type='checkbox'] {
 .heartss {
   width: 100px;
   height: 100px;
-  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background: url('https://cssanimation.rocks/images/posts/steps/heart.png') no-repeat;
   background-position: 0 0;
   cursor: pointer;
   transition: background-position 1s steps(28);
@@ -330,6 +326,14 @@ input[type='checkbox'] {
   position: relative;
   top: 32px;
 }
+.swiper-img-size p {
+  font-size: 14px;
+  font-weight: bolder;
+  color: black;
+}
+.swiper-img-size .span-size span {
+  font-size: 6px;
+}
 
 .producticones i {
   cursor: pointer;
@@ -342,19 +346,18 @@ input[type='checkbox'] {
   margin-top: -8px;
   margin-bottom: 11px;
 }
-.multi-range-slider{
+.multi-range-slider {
   margin-top: 10px;
 }
 
-.multi-range-slider .bar-right{
+.multi-range-slider .bar-right {
   padding: 0px 0px !important;
 }
-.multi-range-slider .bar-left{
+.multi-range-slider .bar-left {
   padding: 0px 0px !important;
 }
 
 .tooltip {
-
   color: black;
   text-align: center;
   border-radius: 4px;
@@ -371,7 +374,7 @@ input[type='checkbox'] {
   right: 0;
 }
 
-/* Styles for tooltip before and after the thumbs */
+/* / Styles for tooltip before and after the thumbs / */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -411,8 +414,6 @@ input[type='checkbox'] {
   margin: 10px;
 }
 
-
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .swiper-slide {
     width: 20% !important;
@@ -443,13 +444,13 @@ input[type='checkbox'] {
     width: 85% !important;
     height: 15px;
   }
-  .box-items img{
+  .box-items img {
     height: 20vh;
   }
-  .content-box{
+  .content-box {
     height: 73vh;
   }
-  .maincontentsection{
+  .maincontentsection {
     height: 92vh;
   }
 }
@@ -457,8 +458,8 @@ input[type='checkbox'] {
   font-size: 12px !important;
 }
 .disabled-icon {
-  pointer-events: none; /* This prevents clicks on the icon */
-  opacity: 0.8; /* You can adjust the opacity to make it look disabled */
+  pointer-events: none;
+  opacity: 0.8;
 }
 .large-font {
   font-size: 20px !important;
@@ -466,8 +467,8 @@ input[type='checkbox'] {
 
 @media (max-width: 768px) {
   .mySwiper {
-    /* Change the slidesPerView value for tablets */
-    /* You can adjust this value based on your preference */
-    --tablet-slides-per-view: 2.0;
+    /* / Change the slidesPerView value for tablets /
+      / You can adjust this value based on your preference / */
+    --tablet-slides-per-view: 2;
   }
 }

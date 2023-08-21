@@ -27,7 +27,6 @@ import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1
 const Dashboard = (props) => {
   const { UserData } = props
 
-
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -162,7 +161,6 @@ const Dashboard = (props) => {
   }
 
   // ------- add Article in wishlist end-------------
-  
 
   // search and filter functionality
   const handleChange = (e) => {
@@ -182,7 +180,7 @@ const Dashboard = (props) => {
       console.log(filterResult)
       setNameData(filterResult)
       setApplyData(filterResult)
-      console.log(filterResult);
+      console.log(filterResult)
     }
 
     setInput(value)
@@ -352,12 +350,16 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
+                      <img
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        alt={`T-Shirt ${item.id}`}
+                      />
                       <div>
-                        <p>
+                        <p className="p-size-change">
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
                           <br />
-                          <span>{item.Category}</span>
+                          <span className="span-size">{item.Category}</span>
                           <br />
                           {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
                         </p>
@@ -386,11 +388,11 @@ const Dashboard = (props) => {
               <SwiperSlide>
                 <div className="sildercontentprice">
                   <img src={tshartimg} />
-                  <div>
+                  <div className="Swiper-img-size">
                     <p>
                       33178-9
                       <br />
-                      <span>T-Shirt</span>
+                      <span className="span-size">T-Shirt</span>
                       <br />
                       ₹195.00
                     </p>
@@ -466,7 +468,7 @@ const Dashboard = (props) => {
             transition={{ duration: 0.5 }}
           >
             <div className="categoriestagsection">
-              <p>categories</p>
+              <p>Categories</p>
               <p onClick={() => setFilterstatus(false)}>X</p>
             </div>
             <div>

@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+// / eslint-disable prettier/prettier /
 
 import React, { useEffect, useState } from 'react'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
@@ -104,7 +104,7 @@ function OrderPlaced() {
       <div className="below-header-container">
         {cartIsEmpty ? (
           <div className="empty-cart-message">
-            <p>Your Cart is Empty</p>
+            <p>No Artical Found</p>
           </div>
         ) : (
           <>
