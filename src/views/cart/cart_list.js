@@ -56,25 +56,24 @@ function OrderPlaced() {
     navigate('/orders') // Update the route path as per your routing setup
   }
 
-  const handleDeleteOrder =  async (article_id) => {
+  const handleDeleteOrder = async (article_id) => {
     const data = {
-      party_id : 197,
-      article_id : article_id
+      party_id: 197,
+      article_id: article_id,
     }
     try {
-      await axios.post('http://localhost:4000/deletecartitem',data)
-      const updatedcartitems = orderItems.filter((item)=> item.article_id !== article_id)
+      await axios.post('http://localhost:4000/deletecartitem', data)
+      const updatedcartitems = orderItems.filter((item) => item.article_id !== article_id)
       setOrderItems(updatedcartitems)
     } catch (error) {
-        console.log("Erro deleting article:",error)
+      console.log('Erro deleting article:', error)
     }
-  
   }
   const handleEditOrder = (article_id) => {
     const ArticalId = article_id
     // const PartyId = 197
     navigate(`/editarticledetails/${ArticalId}`)
-  
+
     // navigate('/editarticledetails')
   }
   const totalItems = orderItems.length
@@ -130,7 +129,11 @@ function OrderPlaced() {
                     </div>
                   </div>
                   <div className="right-side">
-                    <img src={editicon} alt="Edit" onClick={()=> handleEditOrder(item.article_id)}/>
+                    <img
+                      src={editicon}
+                      alt="Edit"
+                      onClick={() => handleEditOrder(item.article_id)}
+                    />
                     <img
                       src={deleteicon}
                       alt="Delete"
