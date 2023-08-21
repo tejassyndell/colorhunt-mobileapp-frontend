@@ -82,3 +82,11 @@ export const editarticledetails = async(data) => {
     console.log('err in react api',error)
   }
 }
+
+export const getcategorywithphotos = async(data) => {
+  try {
+    return await axios.get(`${url}/getcategorywithphotos`)
+  } catch(error) {
+    console.log('err in reACT api', error)
+  }
+}
