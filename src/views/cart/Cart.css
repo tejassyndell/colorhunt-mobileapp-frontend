@@ -33,11 +33,7 @@ body {
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5) !important;
   border-radius: 15px 15px 15px 15px !important;
   margin-top: 12px !important;
-<<<<<<< Updated upstream
- }
-=======
 }
->>>>>>> Stashed changes
 
 .order img {
   max-height: 100%;
@@ -234,11 +230,7 @@ body {
   margin-top: 15rem;
 }
 @media (max-width: 767px) {
-<<<<<<< Updated upstream
   /* Adjust styles for smaller screens like phones */
-=======
-  /* / Adjust styles for smaller screens like phones / */
->>>>>>> Stashed changes
 
   .navbar-container {
     flex-direction: column !important; /* Stack items vertically */
@@ -246,21 +238,12 @@ body {
     height: auto !important; /* Allow content to determine height */
   }
 
-<<<<<<< Updated upstream
   /* Adjust other phone styles */
 }
 
 /* Responsive Styles for Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Adjust styles for tablet screens */
-=======
-  /* / Adjust other phone styles / */
-}
-
-/* / Responsive Styles for Tablets / */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* / Adjust styles for tablet screens / */
->>>>>>> Stashed changes
 
   .navbar-container {
     justify-content: space-between !important; /* Revert to original horizontal layout */
@@ -268,10 +251,5 @@ body {
     height: 69px !important; /* Restore fixed height */
   }
 
-<<<<<<< Updated upstream
   /* Adjust other tablet styles */
 }
-=======
-  /* / Adjust other tablet styles / */
-}
->>>>>>> Stashed changes
