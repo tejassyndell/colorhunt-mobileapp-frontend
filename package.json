@@ -88,8 +88,7 @@
     "redux": "4.2.1",
     "sheetjs-style": "^0.15.8",
     "simplebar-react": "^2.4.3",
-    "swiper": "^10.2.0",
-    "swiper-react": "^1.0.0",
+    "swiper": "^10.1.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

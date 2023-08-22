@@ -1,4 +1,4 @@
-/* / / Header Styles / / */
+/* / Header Styles / */
 body {
   padding: 0 !important;
   margin: 0 !important;
@@ -33,7 +33,7 @@ body {
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5) !important;
   border-radius: 15px 15px 15px 15px !important;
   margin-top: 12px !important;
-}
+ }
 
 .order img {
   max-height: 100%;

@@ -11,6 +11,15 @@ import ContactUs from './assets/Colorhuntimg/Sidebaricon/Group 1000005828.svg';
 const _nav = [
   {
     component: CNavItem,
+    name: 'Wishlist',
+    to: '/wishlist',
+    icon: <img src={Wishlist} height={15} style={{ width: 45 }} />,
+    onClick: () => {
+      localStorage.setItem('isLoggedin', false);
+    },
+  },
+  {
+    component: CNavItem,
     name: 'About us',
     to: '/About-us',
     icon: <img src={Aboutus} height={15} style={{ width: 45 }} />,

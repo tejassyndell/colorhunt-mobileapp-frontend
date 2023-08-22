@@ -142,8 +142,7 @@ export default function Detailsofproduct() {
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
-  const totalQuantity = Object.values(quantities).reduce((total, quantity) => total + quantity, 0);
-  console.log(totalQuantity)
+
   return (
     <div className="app-container">
       <div className="menu-bar">

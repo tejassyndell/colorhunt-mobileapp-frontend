@@ -19,10 +19,14 @@ function App() {
     <BrowserRouter>
       <Suspense>
         <Routes>
+
+
           <Route exact path="/" name="Login Page" element={<Login />} />
+
           <Route path="/*" name="Home" element={<DefaultLayout />} />
         </Routes>
       </Suspense>
+ 
     </BrowserRouter>
 
   )

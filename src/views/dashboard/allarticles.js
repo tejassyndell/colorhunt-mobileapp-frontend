@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 import "./DroupDown.css";
 import "../../css/ipad.css";
+import { useDispatch, useSelector } from 'react-redux'
 import { motion } from "framer-motion"
 import "./serachbar.css"
 import MultiRangeSlider from 'multi-range-slider-react'
@@ -165,6 +166,11 @@ const Dashboard = (props) => {
         }
     }, [serchtext])
 
+    const handleFilter = async (e) => {
+
+        // }
+
+    }
     //---------------------new change 28-----------------------
     const loadProductData = async () => {
         try {
@@ -181,6 +187,20 @@ const Dashboard = (props) => {
             console.log(err, "error in getProductData");
         }
     };
+
+    // useEffect(() => {
+    //   // loadProductData()
+    //   setLoading(true)
+    // }, [])
+
+
+    
+
+   
+
+
+
+  
 
     // ------- add product in wishlist start-------------
     const [selectedprd, setSelectprd] = useState([]);
