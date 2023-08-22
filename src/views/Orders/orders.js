@@ -1,12 +1,22 @@
 /* eslint-disable */
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Order.css'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import { useNavigate } from 'react-router-dom'
 import img from '../../assets/Colorhuntimg/image 122.png'
+import axios from 'axios'
 function orders() {
   const navigate = useNavigate()
+  const [Transportation,setTransportation] = useState([])
+
+  useEffect(()=>{
+    const res = axios.get('http://localhost:4000/gettransportation')
+    .then((response)=>{
+        setTransportation(response.data)
+        console.log(response.data)
+    })
+  },[])
   return (
     <>
       <div className="mainContainer mx-2 " style={{ minHeight: '100vh', position: 'relative' }}>
@@ -100,9 +110,10 @@ function orders() {
               className="my-1 d-flex align-items-center select"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
-              <select id="dropdown">
-                <option value="2">Courier</option>
-                <option value="3">Option 2</option>
+              <select id="dropdown" style={{border:"none"}}>
+                {Transportation.map((item)=>(
+                  <option key={item.Id} value={item.Name}>{item.Name}</option>
+                ))}
               </select>
             </div>
           </div>

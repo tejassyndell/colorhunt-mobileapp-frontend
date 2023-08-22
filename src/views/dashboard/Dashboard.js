@@ -142,10 +142,7 @@ const Dashboard = (props) => {
     const Category = item.Category
     console.log(Category)
     navigate(`/categoryarticles/${Category}`)
-    // navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
-
-  // ------- add Article in wishlist end-------------
 
   // search and filter functionality
   const handleChange = (e) => {

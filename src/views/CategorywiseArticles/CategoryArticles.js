@@ -19,6 +19,7 @@ import AppFooter from 'src/components/AppFooter'
 import navbaricon from 'src/assets/Colorhuntimg/navbaricon/menu bar.svg'
 import profileimg from 'src/assets/Colorhuntimg/navbaricon/Group 8919.svg'
 import crossicon from 'src/assets/Colorhuntimg/sliderimages/crossicon.svg'
+import noimage from 'src/assets/Colorhuntimg/dashboard/noimage.png'
 import { Navigate } from 'react-router-dom'
 export default function CategoryArticles() {
     const navigate = useNavigate()
@@ -124,7 +125,7 @@ export default function CategoryArticles() {
         })
         console.log(range, 'range')
         setFiltereddata(range)
-    }
+    } 
     const articleRates = filteredData
         .map((item) => parseFloat(item.ArticleRate))
         .filter((rate) => !isNaN(rate))
@@ -219,6 +220,10 @@ export default function CategoryArticles() {
                                     src={baseImageUrl + item.Photos}
                                     style={{ padding: 2 }}
                                     alt={`T-Shirt ${item.id}`}
+                                    onClick={() => { navigate(`/Articles-details/${item.Id}`) }}
+                                    onError={(e) => {
+                                        e.target.src = noimage
+                                    }}
                                 />
                                 <div className="sildercontentprice">
                                     <p>
