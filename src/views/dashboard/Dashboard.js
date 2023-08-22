@@ -237,6 +237,12 @@ const Dashboard = (props) => {
       console.log(error)
     }
   }
+  const articlerates = nameData.map((item) => parseFloat(item.ArticleRate)).filter((rate) => !isNaN(rate))
+  const minRate = Math.min(...articlerates)
+  const maxRate = Math.max(...articlerates)
+
+  console.log("minrate", minRate)
+  console.log("maxrate", maxRate)
 
   return (
     <motion.div
@@ -539,25 +545,20 @@ const Dashboard = (props) => {
               <div className="pricerange">
                 <div className="pricerangsection row">
                   <p>Price Range</p>
-                  <p>Min value : {values[0]}</p>
-                  <p>Max value : {values[1]}</p>
                 </div>
                 <MultiRangeSlider
-                  valueLabelDisplay="auto"
+                  baseClassName="multi-range-slider-black"
+                  ruler="none"
+                  barInnerColor="black"
+                  barLeftColor="lightgrey"
+                  barRightColor="lightgrey"
                   onInput={(e) => setValues([e.minValue, e.maxValue])}
                   minValue={values[0]}
                   maxValue={values[1]}
                   min={Min}
                   max={Max}
-                  label={false}
-                  ruler={false}
-                  step={1}
-                  style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                  barLeftColor="lightgrey"
-                  barInnerColor="rgb(223 10 31)"
-                  barRightColor="lightgrey"
-                  thumbLeftColor="white"
-                  thumbRightColor="white"
+                  stepOnly={true}
+                  step={50}
                 />
               </div>
             </div>

@@ -41,7 +41,7 @@ function orders() {
               Date
             </span>
             <div
-              className="mt-1 d-flex align-items-center"
+              className="my-1 d-flex align-items-center"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
               <span
@@ -69,7 +69,7 @@ function orders() {
               Destination
             </span>
             <div
-              className=" mt-1 d-flex align-items-center"
+              className=" my-1 d-flex align-items-center"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
               <span
@@ -97,7 +97,7 @@ function orders() {
               Transportation
             </span>
             <div
-              className="mt-1 d-flex align-items-center select"
+              className="my-1 d-flex align-items-center select"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
               <select id="dropdown">

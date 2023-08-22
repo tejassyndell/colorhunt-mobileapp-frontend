@@ -23,11 +23,11 @@ import { Navigate } from 'react-router-dom'
 export default function CategoryArticles() {
     const navigate = useNavigate()
     const { category } = useParams()
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState('')
     const [allData, setAlldata] = useState([])
     const [selectedprd, setSelectprd] = useState([])
     const [filteredData, setFiltereddata] = useState([])
-    const [serchtext, setSerchtext] = useState();
+    const [serchtext, setSerchtext] = useState()
     const [click1, setClick1] = useState(true)
     const [activeFilterDiv, setActiveFilterDiv] = useState(true)
     const [filterDataSearch, setFilterDataSearch] = useState([])
@@ -37,20 +37,20 @@ export default function CategoryArticles() {
     const [values, setValues] = useState([Min, Max])
     const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
     useEffect(() => {
-        getproductname();
-    }, [category]);
+        getproductname()
+    }, [category])
     const getproductname = async () => {
         try {
-            const res = await getProductName();
+            const res = await getProductName()
             if (res.status === 200) {
-                setAlldata(res.data);
-                const sdPrds = res.data.slice(); // Use the fetched data
-                const fildata = sdPrds.filter((item) => item.Category === category);
-                setFiltereddata(fildata);
+                setAlldata(res.data)
+                const sdPrds = res.data.slice() // Use the fetched data
+                const fildata = sdPrds.filter((item) => item.Category === category)
+                setFiltereddata(fildata)
                 setFilterDataSearch(fildata)
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
     const getWishlist = async () => {
@@ -97,22 +97,23 @@ export default function CategoryArticles() {
         }
     }
     const handleChange = (e) => {
-        const value = e.target.value;
+        const value = e.target.value
         if (e.target.value === '') {
             setFiltereddata(filteredData)
         } else {
-            const filterResult = filterDataSearch.filter((item) =>
-                item.ArticleNumber.toString().includes(value.toString()) ||
-                item.Category.toLowerCase().includes(value.toLowerCase()) ||
-                item.ArticleRate.toString().includes(value.toString()) ||
-                item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
-                item.Subcategory.toLowerCase().includes(value.toLowerCase())
-            );
+            const filterResult = filterDataSearch.filter(
+                (item) =>
+                    item.ArticleNumber.toString().includes(value.toString()) ||
+                    item.Category.toLowerCase().includes(value.toLowerCase()) ||
+                    item.ArticleRate.toString().includes(value.toString()) ||
+                    item.StyleDescription.toLowerCase().includes(value.toLowerCase()) ||
+                    item.Subcategory.toLowerCase().includes(value.toLowerCase()),
+            )
             setFiltereddata(filterResult)
         }
-        setInput(value);
-        setSerchtext(value);
-    };
+        setInput(value)
+        setSerchtext(value)
+    }
     const handlerangefilter = () => {
         const min = parseFloat(values[0])
         const max = parseFloat(values[1])
@@ -121,9 +122,15 @@ export default function CategoryArticles() {
         const range = filterDataSearch.filter((item) => {
             return item.ArticleRate >= min && item.ArticleRate <= max
         })
-        console.log(range, "range")
+        console.log(range, 'range')
         setFiltereddata(range)
     }
+    const articleRates = filteredData
+        .map((item) => parseFloat(item.ArticleRate))
+        .filter((rate) => !isNaN(rate))
+    const minRate = Math.min(...articleRates)
+    const maxRate = Math.max(...articleRates)
+
     return (
         <motion.div
             initial={{ translateY: '100%', padding: '0px 5px' }}
@@ -226,50 +233,53 @@ export default function CategoryArticles() {
                     </div>
                 </div>
             </div>
-            {Filterstatus === true ? <div>
-                <motion.div initial={{ translateY: '100%', padding: '0px 5px' }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ duration: 0.5 }} className='categories'>
-                    <div>
-                        <div className="pricerange">
-                            <div className="pricerangsection row">
-                                <div className="d-flex justify-content-between">
-                                    <p>Price Range</p>
-                                    <img
-                                        className="mt-1"
-                                        style={{ height: '32x', width: '32px' }}
-                                        src={crossicon}
-                                        alt=""
-                                        onClick={() => setFilterstatus(false)}
-                                    ></img></div>
-                                <p>Min value : {values[0]}</p>
-                                <p>Max value : {values[1]}</p>
+            {Filterstatus === true ? (
+                <div>
+                    <motion.div
+                        initial={{ translateY: '100%', padding: '0px 5px' }}
+                        animate={{ opacity: 1, translateY: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="categories"
+                    >
+                        <div>
+                            <div className="pricerange">
+                                <div className="pricerangsection row">
+                                    <div className="d-flex justify-content-between">
+                                        <p>Price Range</p>
+                                        <img
+                                            className="mt-1"
+                                            style={{ height: '32x', width: '32px' }}
+                                            src={crossicon}
+                                            alt=""
+                                            onClick={() => setFilterstatus(false)}
+                                        ></img>
+                                    </div>
+                                    <p>Min value : {values[0]}</p>
+                                    <p>Max value : {values[1]}</p>
+                                </div>
+                                <MultiRangeSlider
+                                    baseClassName="multi-range-slider-black"
+                                    ruler="none"
+                                    barInnerColor="black"
+                                    barLeftColor="lightgrey"
+                                    barRightColor="lightgrey"
+                                    onInput={(e) => setValues([e.minValue, e.maxValue])}
+                                    minValue={values[0]}
+                                    maxValue={values[1]}
+                                    min={Min}
+                                    max={Max}
+                                    stepOnly={true}
+                                    step={50}
+                                />
                             </div>
-                            <MultiRangeSlider
-                                valueLabelDisplay="auto"
-                                onInput={(e) => setValues([e.minValue, e.maxValue])}
-                                minValue={values[0]}
-                                maxValue={values[1]}
-                                min={Min}
-                                max={Max}
-                                label={false}
-                                ruler={false}
-                                step={1}
-                                style={{ border: 'none', boxShadow: 'none', padding: '15px 20px 15px 10px' }}
-                                barLeftColor="lightgrey"
-                                barInnerColor="rgb(223 10 31)"
-                                barRightColor="lightgrey"
-                                thumbLeftColor="white"
-                                thumbRightColor="white"
-                            />
                         </div>
-                    </div>
-                    <div className='content-button'>
-                        <button >Reset</button>
-                        <button onClick={handlerangefilter} >Apply</button>
-                    </div>
-                </motion.div>
-            </div> : null}
+                        <div className="content-button">
+                            <button>Reset</button>
+                            <button onClick={handlerangefilter}>Apply</button>
+                        </div>
+                    </motion.div>
+                </div>
+            ) : null}
             <div className="footer-section w-100">
                 <AppFooter />
             </div>
