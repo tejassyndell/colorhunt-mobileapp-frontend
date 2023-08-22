@@ -27,7 +27,6 @@ import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1
 const Dashboard = (props) => {
   const { UserData } = props
 
-
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -162,7 +161,6 @@ const Dashboard = (props) => {
   }
 
   // ------- add Article in wishlist end-------------
-  
 
   // search and filter functionality
   const handleChange = (e) => {
@@ -182,7 +180,7 @@ const Dashboard = (props) => {
       console.log(filterResult)
       setNameData(filterResult)
       setApplyData(filterResult)
-      console.log(filterResult);
+      console.log(filterResult)
     }
 
     setInput(value)
@@ -284,7 +282,7 @@ const Dashboard = (props) => {
 
       <div className="allProduct-section maincontentsection">
         <div className="product-hed-sec">
-          <p>All</p>
+          <p>Men's</p>
           {isLoggedin === false ? (
             <p>View All</p>
           ) : (
@@ -352,7 +350,11 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                      <img src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
+                      <img
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        alt={`T-Shirt ${item.id}`}
+                      />
                       <div>
                         <p>
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
