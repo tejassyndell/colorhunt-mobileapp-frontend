@@ -247,9 +247,6 @@ const Dashboard = (props) => {
   const minRate = Math.min(...articlerates)
   const maxRate = Math.max(...articlerates)
 
-  console.log("minrate", minRate)
-  console.log("maxrate", maxRate)
-
   return (
     <motion.div
       initial={{ translateX: '100%', padding: '0px 5px' }}
