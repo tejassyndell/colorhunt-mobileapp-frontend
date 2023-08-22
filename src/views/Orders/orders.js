@@ -9,7 +9,8 @@ import axios from 'axios'
 function orders() {
   const navigate = useNavigate()
   const [Transportation,setTransportation] = useState([])
-
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
   useEffect(()=>{
     const res = axios.get('http://localhost:4000/gettransportation')
     .then((response)=>{
@@ -64,7 +65,7 @@ function orders() {
                   lineHeight: 'normal',
                 }}
               >
-                02/12/23
+              {formattedDate}
               </span>
             </div>
             <span

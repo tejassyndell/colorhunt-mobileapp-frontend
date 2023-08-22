@@ -47,6 +47,15 @@ const Dashboard = (props) => {
   const [input, setInput] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
+  const [isHolding, setIsHolding] = useState(false);
+
+  const handleTouchStart = () => {
+    setIsHolding(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsHolding(false);
+  };
   const isLoggedin = location.state?.isLoggedin
   useEffect(() => {
     getproductname()
@@ -347,7 +356,9 @@ const Dashboard = (props) => {
                     </div>
                     <div className="zoomDiv">
                       <img
-                        className="zoom"
+                        className={`zoom-on-hold ${isHolding ? "holding" : ""}`}
+                        onMouseDown={handleTouchStart}
+                        onMouseUp={handleTouchEnd}
                         src={baseImageUrl + item.Photos}
                         onClick={() => getSingaleartical(item)}
                         onError={(e) => {
