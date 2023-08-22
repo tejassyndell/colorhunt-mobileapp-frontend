@@ -432,8 +432,6 @@ function orders(props) {
     //               </label>
     //               <br />
 
-
-
     //               <label className="OrderFilter_radio_input">
     //                 <input
     //                   type="radio"
@@ -479,9 +477,7 @@ function orders(props) {
       <div className="tagnames tagname_ord_details">
         <h5>Order Detail</h5>
       </div>
-    <div className='screenview-panding'>
-      Coming Soon
-    </div>
+      <div className="screenview-panding">Coming Soon</div>
     </div>
   )
 }

@@ -160,8 +160,6 @@ const Dashboard = (props) => {
     navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
 
-  // ------- add Article in wishlist end-------------
-
   // search and filter functionality
   const handleChange = (e) => {
     const value = e.target.value
@@ -517,8 +515,13 @@ const Dashboard = (props) => {
                   {/* <div className="tooltip left-tooltip">{values[0]}</div>
                   <div className="tooltip right-tooltip">{values[1]}</div> */}
                 </div>
+
                 <MultiRangeSlider
-                  valueLabelDisplay="auto"
+                  baseClassName="multi-range-slider-black"
+                  ruler="none"
+                  barInnerColor="black"
+                  barLeftColor="lightgrey"
+                  barRightColor="lightgrey"
                   onInput={(e) => setValues([e.minValue, e.maxValue])}
                   minValue={values[0]}
                   maxValue={values[1]}
