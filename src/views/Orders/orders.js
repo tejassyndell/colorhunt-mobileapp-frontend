@@ -26,7 +26,7 @@ function orders() {
         console.error('Error fetching transportation data:', error)
       })
   }, [])
-  const totalrate = ParsedData[0].reduce((total, item) => total + parseInt(item.articleRate), 0)
+  const totalrate = ParsedData[0].reduce((total, item) => total + parseInt(item.rate), 0)
   return (
     <>
       <div className="mainContainer mx-2 " style={{ minHeight: '100vh', position: 'relative' }}>
@@ -189,7 +189,7 @@ function orders() {
                     alignItems: 'end',
                   }}
                 >
-                  ₹ {item.articleRate}
+                  ₹ {item.rate}
                 </div>
               </div>
             </div>
