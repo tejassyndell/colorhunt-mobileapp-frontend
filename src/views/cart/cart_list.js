@@ -16,6 +16,7 @@ function OrderPlaced() {
   const navigate = useNavigate()
   const [promoCode, setPromoCode] = useState('')
   const [orderItems, setOrderItems] = useState([])
+  const [dataLoaded, setDataLoaded] = useState(false)
 
   useEffect(() => {
     axios
@@ -27,6 +28,7 @@ function OrderPlaced() {
           Quantity: JSON.parse(item.Quantity), // Parse the Quantity string into an array
         }))
         setOrderItems(parsedOrderItems)
+        setDataLoaded(true)
       })
       .catch((error) => {
         console.log('Error fetching data:', error)
@@ -54,28 +56,27 @@ function OrderPlaced() {
   }
 
   const handleProceedToCheckout = () => {
-    navigate('/orders') // Update the route path as per your routing setup
+    navigate('/orderpurchase') // Update the route path as per your routing setup
   }
 
-  const handleDeleteOrder =  async (article_id) => {
+  const handleDeleteOrder = async (article_id) => {
     const data = {
-      party_id : 197,
-      article_id : article_id
+      party_id: 197,
+      article_id: article_id,
     }
     try {
-      await axios.post('http://localhost:4000/deletecartitem',data)
-      const updatedcartitems = orderItems.filter((item)=> item.article_id !== article_id)
+      await axios.post('http://localhost:4000/deletecartitem', data)
+      const updatedcartitems = orderItems.filter((item) => item.article_id !== article_id)
       setOrderItems(updatedcartitems)
     } catch (error) {
-        console.log("Erro deleting article:",error)
+      console.log('Erro deleting article:', error)
     }
-  
   }
   const handleEditOrder = (article_id) => {
     const ArticalId = article_id
     // const PartyId = 197
     navigate(`/editarticledetails/${ArticalId}`)
-  
+
     // navigate('/editarticledetails')
   }
   const totalItems = orderItems.length
@@ -103,69 +104,79 @@ function OrderPlaced() {
         </div>
       </header>
       <div className="below-header-container">
-        {cartIsEmpty ? (
-          <div className="empty-cart-message">
-            <p>Your Cart is Empty</p>
-          </div>
-        ) : (
-          <>
-            <div className="order-container">
-              {orderItems.map((item) => (
-                <div className="order" key={item.id}>
-                  <div className="left-side">
-                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" />
-                    <div className="order-details">
-                      <h4>
-                        <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}
-                        {item.StyleDescription}
-                      </h4>
-                      <h4>
-                        Rate: <br />
-                        <span className="left-order-span">₹{item.rate}</span>
-                      </h4>
+        {dataLoaded ? (
+          cartIsEmpty ? (
+            <>
+              <div className="empty-cart-message">
+                <p>Your Cart is Empty</p>
+              </div>
+              <div className="proceed-to-createOrder">
+                <button onClick={handleAddMoreItems}>Create Order</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="order-container">
+                {orderItems.map((item) => (
+                  <div className="order" key={item.id}>
+                    <div className="left-side">
+                      <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" />
+                      <div className="order-details">
+                        <h4>
+                          <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}
+                          {item.StyleDescription}
+                        </h4>
+                        <h4>
+                          Rate: <br />
+                          <span className="left-order-span">₹{item.rate}</span>
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="right-side">
+                      <img
+                        src={editicon}
+                        alt="Edit"
+                        onClick={() => handleEditOrder(item.article_id)}
+                      />
+                      <img
+                        src={deleteicon}
+                        alt="Delete"
+                        onClick={() => handleDeleteOrder(item.article_id)}
+                      />
                     </div>
                   </div>
-                  <div className="right-side">
-                    <img src={editicon} alt="Edit" onClick={()=> handleEditOrder(item.article_id)}/>
-                    <img
-                      src={deleteicon}
-                      alt="Delete"
-                      onClick={() => handleDeleteOrder(item.article_id)}
-                    />
-                  </div>
+                ))}
+              </div>
+              <div className="promo-code-container">
+                <div className="promo-code-input">
+                  <input
+                    type="text"
+                    value={promoCode}
+                    onChange={handlePromoCodeChange}
+                    placeholder="Promo Code"
+                  />
                 </div>
-              ))}
-            </div>
-            <div className="promo-code-container">
-              <div className="promo-code-input">
-                <input
-                  type="text"
-                  value={promoCode}
-                  onChange={handlePromoCodeChange}
-                  placeholder="Promo Code"
-                />
+                <button onClick={handleApplyPromoCode}>Apply</button>
               </div>
-              <button onClick={handleApplyPromoCode}>Apply</button>
-            </div>
-            <div className="add-more-container">
-              <button onClick={handleAddMoreItems}>Add More</button>
-            </div>
-            <div className="total-container">
-              <div className="total-items">Total ({totalItems} item) :</div>
+              <div className="add-more-container">
+                <button onClick={handleAddMoreItems}>Add More</button>
+              </div>
+              <div className="total-container">
+                <div className="total-items">Total ({totalItems} item) :</div>
 
-              <div className="total-price">
-                {' '}
-                Total price {''} <br /> <span className="total-item"> ₹ {totalPrice} </span>
+                <div className="total-price">
+                  Total price <br /> <span className="total-item"> ₹ {totalPrice} </span>
+                </div>
               </div>
-            </div>
-          </>
+            </>
+          )
+        ) : (
+          <div className="empty-cart-message"></div>
         )}
       </div>
       <div className="proceed-to-checkout-container">
         {cartIsEmpty ? (
-          <div className="proceed-to-createOrder">
-            <button onClick={handleAddMoreItems}>Create Order</button>
-          </div>
+          <div></div>
         ) : (
           <>
             <div className="proceed-to-check">

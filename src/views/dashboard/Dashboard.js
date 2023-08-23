@@ -27,7 +27,6 @@ import tshartimg2 from 'src/assets/Colorhuntimg/sliderimages/33004-2-2-348x464 1
 const Dashboard = (props) => {
   const { UserData } = props
 
-
   const [nameData, setNameData] = useState([])
   const [categoriesData, setCategoriesData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -161,9 +160,6 @@ const Dashboard = (props) => {
     navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
 
-  // ------- add Article in wishlist end-------------
-  
-
   // search and filter functionality
   const handleChange = (e) => {
     const value = e.target.value
@@ -182,7 +178,7 @@ const Dashboard = (props) => {
       console.log(filterResult)
       setNameData(filterResult)
       setApplyData(filterResult)
-      console.log(filterResult);
+      console.log(filterResult)
     }
 
     setInput(value)
@@ -284,7 +280,7 @@ const Dashboard = (props) => {
 
       <div className="allProduct-section maincontentsection">
         <div className="product-hed-sec">
-          <p>All</p>
+          <p>Men's</p>
           {isLoggedin === false ? (
             <p>View All</p>
           ) : (
@@ -331,13 +327,11 @@ const Dashboard = (props) => {
                           ></i>
                         )}
                       </div>
-                      <div className="zoomDiv">
-                      <img className="zoom"
+
+                      <img
                         src={baseImageUrl + item.Photos}
                         onClick={() => getSingaleartical(item)}
                       />
-                      </div>
-                      
 
                       <div>
                         <p>
@@ -354,9 +348,11 @@ const Dashboard = (props) => {
               : applyrData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div className="sildercontentprice">
-                    <div className="zoomDiv">
-                      <img className="zoom" src={baseImageUrl + item.Photos} onClick={() => getSingaleartical(item)} alt={`T-Shirt ${item.id}`} />
-                      </div>
+                      <img
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        alt={`T-Shirt ${item.id}`}
+                      />
                       <div>
                         <p>
                           {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
@@ -519,8 +515,13 @@ const Dashboard = (props) => {
                   {/* <div className="tooltip left-tooltip">{values[0]}</div>
                   <div className="tooltip right-tooltip">{values[1]}</div> */}
                 </div>
+
                 <MultiRangeSlider
-                  valueLabelDisplay="auto"
+                  baseClassName="multi-range-slider-black"
+                  ruler="none"
+                  barInnerColor="black"
+                  barLeftColor="lightgrey"
+                  barRightColor="lightgrey"
                   onInput={(e) => setValues([e.minValue, e.maxValue])}
                   minValue={values[0]}
                   maxValue={values[1]}

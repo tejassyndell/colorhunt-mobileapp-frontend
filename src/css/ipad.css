@@ -1,230 +1,221 @@
-
-
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : portrait) {
-
-/* .login-background{
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* .login-background{
        
     background-image:url('../assets/image/loginPage.png');
 
     
 } */
-.px-3 {
+  .px-3 {
     padding-right: 0.8rem !important;
     padding-left: 0.8rem !important;
-}
-.garmentcontentrow{
+  }
+  .garmentcontentrow {
     margin-left: 0px;
-}
-/* .haddersearchcontenar img {
+  }
+  /* .haddersearchcontenar img {
    
     padding: 11px;
 } */
-.autodiv{
+  .autodiv {
     width: 92%;
-}
-.dashboard_card {
+  }
+  .dashboard_card {
     width: 25% !important;
     padding: 7px 0px 0px 0px;
-}
-.haddersearchcontenar{
+  }
+  .haddersearchcontenar {
     width: 97%;
     margin: 0px auto;
     display: flex;
     padding: 3px 2px 7px 3px !important;
     top: 90px;
     justify-content: space-between;
-    
-}
+  }
 
-.haddercontent{
+  .haddercontent {
     padding: 0px 14px;
     top: 63px;
-}
-.aboutbox{
+  }
+  .aboutbox {
     width: 47%;
     height: 178px;
-}
-.aboutbox img{
+  }
+  .aboutbox img {
     width: 70px;
     height: 70px;
-}
-.sidebar.sidebar-fixed {
+  }
+  .sidebar.sidebar-fixed {
     position: fixed;
     top: 0;
     bottom: 0;
     z-index: 1030;
     padding-top: 1rem !important;
-}
+  }
   .aboutaddress {
     text-align: left !important;
-}
-.tagdiv {
+  }
+  .tagdiv {
     /* margin-top:25px !important; */
-}
-.profileApp p {
+  }
+  .profileApp p {
     font-size: 15px;
+  }
 }
 
+.AppHeaderPadding_div {
+  width: 100%;
+  background: #fff;
+  height: 26px;
+  position: fixed;
+  z-index: 30;
 }
-
-.AppHeaderPadding_div{
-    width: 100%;
-    background: #fff;
-    height: 26px;
-    position: fixed;
-    z-index: 30;
-}
-.ipad_scroll{
-    margin-top: 96px !important;
+.ipad_scroll {
+  margin-top: 96px !important;
 }
 .cover_container {
-    margin-top: 58px !important;
+  margin-top: 58px !important;
 }
 .order_title_header {
-    margin-top: 94px !important;
+  margin-top: 94px !important;
 }
 .header.header-sticky {
-    background: #FFFFFF !important;
-    border: none;
-    z-index: 20 !important;
-    margin-bottom: 0% !important;
-    padding: 0px;
+  background: #ffffff !important;
+  border: none;
+  z-index: 20 !important;
+  margin-bottom: 0% !important;
+  padding: 0px;
 }
 .header.header-sticky {
-    /* position: sticky; */
-    top: 0;
-    /* z-index: 1029; */
+  /* position: sticky; */
+  top: 0;
+  /* z-index: 1029; */
 }
 .haddercontent {
-    position: sticky;
-    top: 43px;
-    z-index: 10;
-    background: #fff;
+  position: sticky;
+  top: 43px;
+  z-index: 10;
+  background: #fff;
 }
 .haddersearchcontenar {
-    padding: 3px 10px 6px 8px !important;
+  padding: 3px 10px 6px 8px !important;
 }
 .haddersearchcontenar {
-    padding: 3px 25px 7px 3px;
-    position: sticky;
-    top: 105px;
-    z-index: 10;
+  padding: 3px 25px 7px 3px;
+  position: sticky;
+  top: 105px;
+  z-index: 10;
+  background: #fff;
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header_padding {
+    /* margin: 25px 0px 0px 0px !important; */
+  }
+  .header-toggler:not(:disabled) {
+    cursor: pointer;
+    padding: 2px 5px 2px 4px;
+  }
+  .tagdiv {
+    /* margin-top:25px !important; */
+  }
+  .ipad_mt_aboutus {
+    margin-top: 62px !important;
+  }
+
+  .tagdiv_order {
+    margin-top: 20px !important;
+  }
+  .contact-BOX {
+    margin-top: 55px !important;
+  }
+  .searchbar_text_container {
+    position: fixed;
+    width: 100%;
+    top: 58px;
+    /* margin: 8px; */
+    left: 0px;
+    /* z-index: 20; */
     background: #fff;
+    padding: 0px 4px;
+  }
 }
-@media screen and (min-width:320px) and (max-width:767px) {
-    .header_padding{
-        /* margin: 25px 0px 0px 0px !important; */
-    }
-    .header-toggler:not(:disabled) {
-        cursor: pointer;
-        padding: 2px 5px 2px 4px;
-    }
-    .tagdiv {
-        /* margin-top:25px !important; */
-    }
-    .ipad_mt_aboutus {
-        margin-top: 62px !important;
-    }
-   
-    
-    .tagdiv_order {
-        margin-top: 20px !important; 
-    }
-    .contact-BOX {
-        margin-top: 55px !important;
-    }
-    .searchbar_text_container {
-        position: fixed;
-        width: 100%;
-        top: 50px;
-        /* margin: 8px; */
-        left: 0px;
-        /* z-index: 20; */
-        background: #fff;
-        padding: 0px 4px;
-    }
-}
-@media screen and (min-width:768px) and (max-width:1024px) {
-    .header_padding{
-        /* margin: 25px 0px 0px 0px !important; */
-    }
-    .haddersearchcontenar{
-        width: 98%;
-    }
-    .ipad_mt_aboutus {
-        margin-top: 94px;
-    }
-    .tagdiv i {
-        margin-left: 10px;
-    }
-    .wishlist_container {
-        margin-top: 74px !important;
-        /* margin-left: 16px; */
-    }
-    .contact-BOX {
-        margin-top: 90px !important;
-    }
-    .ipad_left_margin{
-        margin-left: 24px !important;
-    }
-    .profile_contan_space {
-        margin-top: 104px !important;
-    }
-    .header.header-sticky {
-        margin: 0px;
-        position: fixed;
-        width: 100%;
-        /* display: none; */
-        left: 0px;
-    }
-    .searchbar_text_container {
-        position: fixed;
-        top: 50px;
-        left: 0px;
-        width: 98.4%;
-        /* z-index: 10; */
-        background: #fff;
-        margin: 6px;
-    }
-    .haddercontent{
-        padding: 0px 18px;
-    }
-    .header-toggler:not(:disabled) {
-        padding: 2px 7px;
-    }
-    .header-nav .nav-link {
-        padding-right: 15px !important;
-    }
-    .container-fluid {
-        margin: 0px 18px !important;
-    }
-    .haddercontent {
-        top: 50px ;
-    }
-    .haddersearchcontenar {
-        top: 89px;
-    }
-    .garmentcontentrow {
-        padding: 5px 0px 5px 5px !important;
-        /* margin: 0px !important; */
-    }
-    .OrderFilter_Filter_icon {
-        margin-right: 10px;
-    }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .header_padding {
+    /* margin: 25px 0px 0px 0px !important; */
+  }
+  .haddersearchcontenar {
+    width: 98%;
+  }
+  .ipad_mt_aboutus {
+    margin-top: 94px;
+  }
+  .tagdiv i {
+    margin-left: 10px;
+  }
+  .wishlist_container {
+    margin-top: 74px !important;
+    /* margin-left: 16px; */
+  }
+  .contact-BOX {
+    margin-top: 90px !important;
+  }
+  .ipad_left_margin {
+    margin-left: 24px !important;
+  }
+  .profile_contan_space {
+    margin-top: 104px !important;
+  }
+  .header.header-sticky {
+    margin: 0px;
+    position: fixed;
+    width: 100%;
+    /* display: none; */
+    left: 0px;
+  }
+  .searchbar_text_container {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 98.4%;
+    /* z-index: 10; */
+    background: #fff;
+    margin: 6px;
+  }
+  .haddercontent {
+    padding: 0px 18px;
+  }
+  .header-toggler:not(:disabled) {
+    padding: 2px 7px;
+  }
+  .header-nav .nav-link {
+    padding-right: 15px !important;
+  }
+  .container-fluid {
+    margin: 0px 18px !important;
+  }
+  .haddercontent {
+    top: 50px;
+  }
+  .haddersearchcontenar {
+    top: 89px;
+  }
+  .garmentcontentrow {
+    padding: 5px 0px 5px 5px !important;
+    /* margin: 0px !important; */
+  }
+  .OrderFilter_Filter_icon {
+    margin-right: 10px;
+  }
 }
 
-@media only screen and (max-width: 767px){
-.header.header-sticky {
+@media only screen and (max-width: 767px) {
+  .header.header-sticky {
     /* margin: 25px 0px 0px 0px; */
     position: fixed;
     width: 100%;
     /* display: none; */
     left: 0px;
-}
-.header-brand {
+  }
+  .header-brand {
     display: none;
-}
+  }
 }

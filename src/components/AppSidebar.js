@@ -12,7 +12,6 @@ import logouticon from 'src/assets/images/higrow/logout 1.svg'
 import sidebottummenu from 'src/assets/Colorhuntimg/loginimg/sliderscreen/image 99.svg'
 import sidebarlogo from 'src/assets/images/avatars/image_102-removebg-preview (1) 1.png'
 import SimpleBar from 'simplebar-react'
-
 import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
@@ -107,7 +106,7 @@ const AppSidebar = (props) => {
             className="imagescontentback"
             style={{ width: '50%', height: 200, right: 60, bottom: 8 }}
           />
-          <p>Designed by SYNDELL Inc.</p>
+          <p>Designed By SYNDELL Inc.</p>
         </CSidebarNav>
       </CSidebarNav>
     </CSidebar>

@@ -1,18 +1,15 @@
-<<<<<<< Updated upstream
-body{
+body {
   padding: 0 !important;
   margin: 0 !important;
-  
-
 }
 
 h1 {
   font-size: 18px;
 }
-.app-container{
+.app-container {
   width: 100% !important;
   float: left;
-  height: 100vh;
+  height: 100vh !important;
 }
 .menu-bar {
   position: absolute;
@@ -21,69 +18,31 @@ h1 {
   left: 20px;
   top: 35px;
   z-index: 10;
-  
-=======
-/* Reset default margin and padding */
-body, h1, h2, h3, p, div {
-  margin: 0;
-  padding: 0;
 }
 
-/* Styling for the entire container */
-.app-container {
-  width: 100%;
-  position: relative;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensure content doesn't overflow */
-}
-
-/* Styling for the auto-sliding swiper */
-.swiper {
-  position: relative;
-  width: 100%;
-  height: 448px;
-  padding-bottom: 60%; /* 16:9 aspect ratio for responsive scaling */
-  background: #f0f0f0; /* Fallback background color */
-  overflow: hidden;
->>>>>>> Stashed changes
-}
-
-/* Styling for the menu bar icon */
-.menu-bar {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-<<<<<<< Updated upstream
 .image-swiper {
   width: 100% !important;
-   position: absolute; 
+  position: absolute;
   z-index: 0;
 }
 
 .swiper-slide img {
   width: 100% !important;
-   object-fit: cover; 
+  object-fit: cover;
 }
-
 
 h1 {
   font-size: 24px;
 }
 
-
 .artical-name {
-  width: 100%;
+  width: 100% !important;
   box-sizing: border-box;
   border: 1px solid black;
   background-color: rgba(255, 255, 255, 0.753);
   border: none;
-  box-shadow: 20px -10px 40px 20px rgba(255, 255, 255, 0.765) ;
-   height: 42px;
+  box-shadow: 20px -10px 40px 20px rgba(255, 255, 255, 0.765);
+  height: 42px;
   top: -200px;
   text-align: center;
   font-family: 'Glory';
@@ -95,12 +54,11 @@ h1 {
   position: relative;
 }
 
-
-
 .main-product-detail {
+  padding: 1px 0px 0px 5px !important;
   position: relative;
   height: 50vh;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 30px 30px 0px 0px;
   z-index: 999;
   top: -200px;
@@ -113,18 +71,14 @@ h1 {
   margin: auto;
   padding-top: 3%;
 }
-.product-detail-sec{
-margin-right: 5%;
-width: 50%;
-overflow: auto;
-
+.product-detail-sec {
+  margin-right: 5%;
+  width: 50% !important;
+  overflow: auto;
 }
-.product-detail-sec2{
-  width: 50%;
+.product-detail-sec2 {
+  width: 50% !important;
 }
-
-
-
 
 .size-container1 {
   display: flex;
@@ -132,49 +86,48 @@ overflow: auto;
   border: 1px solid #ded6d6;
   text-align: center;
   border-radius: 12px;
-  background: #F4F4F4;
-  padding: 6px;
+  background: #f4f4f4;
+  padding: 6px 11px 4px 0px;
   justify-content: center;
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #0000004d;
+  margin-left: 1%;
 }
 
-.size-label{
+.size-label {
   font-size: 15px;
   font-weight: bolder;
   color: black;
+  margin-left: 2%;
 }
 
-.size-label1{
+.size-label1 {
   font-size: 15px;
-  font-weight:bolder;
+  font-weight: bolder;
   color: black;
+  margin-left: 2%;
 }
-
-
 
 .size-container2 {
- height: 53px;
+  height: 53px;
   border: 1px solid #ded6d6;
   border-radius: 12px;
-  background: #F4F4F4;
- padding: 12px;
- display: flex;   
- justify-content: center;
-
+  background: #f4f4f4;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  width: 98% !important;
+  box-shadow: 0px 0px 4px 0px #0000004d;
 }
-
-
 
 .size-options {
   display: flex;
   font-size: 18px;
   font-weight: 500;
-  
-  
 }
 
 .size {
   display: flex;
-
 }
 
 .size a {
@@ -192,290 +145,277 @@ overflow: auto;
   padding: 4px;
 }
 
-.product-detail-sec3{
-width: 95% !important;
-margin: auto;
-margin-top: 4%;
+.product-detail-sec3 {
+  width: 95% !important;
+  margin: auto;
+  margin-top: 4%;
 }
-.head-gid{
-width: 100%;
-
-}
-
-.container-gid{
+.head-gid {
   width: 100%;
 }
 
-.color-div{
-
-width: 31%;
-
-float: left;
-
-
-}
-.color-title{
-width: 100%;
-font-size: 15px;
-font-weight: bolder;
-color: black;
-
-
-
-}
-.available-div{
-width: 37%;
-float: left;
-
+.container-gid {
+  width: 100%;
 }
 
-.available-title{
-width: 100%;
-font-size: 15px;
-font-weight: bolder;
-color: black;
-margin-left: 12px;
+.color-div {
+  width: 31% !important;
 
+  float: left;
+}
+.color-title {
+  width: 100%;
+  font-size: 15px;
+  font-weight: bolder;
+  color: black;
+}
+.available-div {
+  width: 37% !important;
+  float: left;
 }
 
-.qty-div{
-width: 31%;
-float: left;
-
-
+.available-title {
+  width: 100%;
+  font-size: 15px;
+  font-weight: bolder;
+  color: black;
+  margin-left: 12px;
 }
 
-.qty-title{
-width: 100%;
-font-size: 15px;
-font-weight: bolder;
-color: black;
-margin-left:20px ;
+.qty-div {
+  width: 31% !important;
+  float: left;
 }
 
-.body-main-con{
-justify-content: space-between;
-
+.qty-title {
+  width: 100%;
+  font-size: 15px;
+  font-weight: bolder;
+  color: black;
+  margin-left: 20px;
 }
 
-.color-box-div{
-width: 31%;
+.body-main-con {
+  justify-content: space-between;
 }
 
-.color-box{
-width: 100%;
-box-sizing: border-box;
-border: 1px solid #ded6d6;
-background-color:white;
-border-radius: 10px;
-height: 40px;
-text-align: center;
-padding: 7px 0px;
+.color-box-div {
+  width: 31% !important;
 }
 
-.available-box-div{
-width: 37%;
-
-}
-.available-box{
-width: 100%;
-height: 40px;
-text-align: center;
-padding: 7px 0px;
-box-sizing: border-box;
-border: 1px solid #ded6d6;
-background-color: white;
-border-radius: 10px;
+.color-box {
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #00000017;
+  box-sizing: border-box;
+  border: 1px solid #ded6d6;
+  background-color: white;
+  border-radius: 10px;
+  height: 40px;
+  text-align: center;
+  padding: 7px 0px;
 }
 
-.qty-box-div{
-width: 31%;
-display: flex;
+.available-box-div {
+  width: 37% !important;
 }
-.qty-box{
-width: 100%;
-height: 40px;
-text-align: center;
-display: flex;
-padding: 7px 0px;
-box-sizing: border-box;
-border: 1px solid #ded6d6;
-background-color: white;
-border-radius: 10px;
+.available-box {
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #00000017;
+  height: 40px;
+  text-align: center;
+  padding: 7px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ded6d6;
+  background-color: white;
+  border-radius: 10px;
 }
-.top-row{
-width: 100%;
-}
-.box1{
-width: 33%;
 
-
-
-
+.qty-box-div {
+  width: 31% !important ;
+  display: flex;
 }
-.box1 button{
-float: left;
-border-radius: 10px;
-padding: 3px 10px;
-margin: -8px 0px 0px 0px;
-height: 40px;
-background-color: white;
+.qty-box {
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #00000017;
+  height: 40px;
+  text-align: center;
+  display: flex;
+  padding: 7px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ded6d6;
+  background-color: white;
+  border-radius: 10px;
+}
+.top-row {
+  width: 100%;
+}
 
+.box1 {
+  width: 33% !important;
 }
-.box2{
-width: 33%;
+
+.box1 button {
+  float: left;
+  border-radius: 10px;
+  margin: -8px -1px 5px -1px !important;
+  padding: 0px 10px !important;
+  background-color: white;
+  font-size: 25px;
+  border: none;
+  box-sizing: border-box;
+  border: 1px solid #0000004d;
 }
-.box button{
-justify-content: center;
+.box2 {
+  width: 33% !important;
+}
+.box2 button {
+  font: 16px;
+  font-weight: 600;
+}
+.box button {
+  justify-content: center;
 }
 
 .box3 {
-width: 33%;
-margin-left: 5px;
-
+  width: 33% !important;
+  margin-left: 5px;
 }
-.box3 button{
-float: right;
-border-radius:10px ;
-margin: -7px 0px 5px 0px;
-padding: 5px 9px;
-background-color: white;
+.box3 button {
+  border: none;
+  box-sizing: border-box;
+  border: 1px solid #0000004d;
+  float: right;
+  border-radius: 10px;
+  margin: -8px -1px 5px 0px !important;
+  padding: 0px 9px !important;
+  background-color: white;
+  font-size: 25px;
 }
-.top-row{
-display: flex;
-
+.top-row {
+  display: flex;
 }
 
-
-
-.article-ratio-Section{
-width: 95% !important;
-display: flex;
-margin: auto;
-text-align: center;
-margin-top: 5%;
-
+.article-ratio-Section {
+  width: 95% !important;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  margin-top: 5%;
 }
-.articallabel{
-  text-align: left;
-  font-weight:bolder ;
-}
-.articallabel1{
+.articallabel {
   text-align: left;
   font-weight: bolder;
+  margin-left: 3%;
+}
+.articallabel1 {
+  text-align: left;
+  font-weight: 15px;
+  margin-left: 5%;
 }
 
-.article-ratio-label{
-font-size: 12px;
-font-weight: 600;
-float: left;
-width: 50%;
+.article-ratio-label {
+  font-size: 12px;
+  font-weight: 600;
+  float: left;
+  width: 50%;
 }
 
-.article-ratio-label1{
-font-size: 12px;
-display: flex;
-top: 10%;
-width: 50%;
-font-weight: 600;
-float: right;
-position: absolute;
-left: 30%;
+.article-ratio-label1 {
+  font-size: 12px;
+  display: flex;
+  top: 10%;
+  font-weight: 600;
+  float: right;
 }
-.article-ratio-container{
-width: 131px;
+.article-ratio-container {
+  width: 45%;
 }
-.article-ratio-content{
-width: 100%;
-font-size: 18px;
-font-weight: 500;
-box-sizing: border-box;
-border: 1px solid #ded6d6;
-background-color: #F4F4F4;
-border-radius: 10px;
-float: left;
-height: 53px;
-padding: 10px 0px;
+.article-ratio-content {
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #0000004d;
+  font-size: 18px;
+  font-weight: 500;
+  box-sizing: border-box;
+  border: 1px solid #ded6d6;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  float: left;
+  height: 53px;
+  padding: 10px 0px;
 }
 
-
-
-.article-rate-container{
-width: 30%;
-float: left;
-margin-left: 25%;
+.article-rate-container {
+  width: 40% !important;
+  float: left;
+  margin-left: 13%;
 }
-.article-rate-content{
-width: 100%;
-font-size: 18px;
-font-weight: 500;
-box-sizing: border-box;
-border: 1px solid #ded6d6;
-background-color: #F4F4F4;
-border-radius: 10px;
-float: right;
-height: 53px;
-float: right;
-padding: 10px 0px;
-
+.article-rate-content {
+  width: 98%;
+  box-shadow: 0px 0px 4px 0px #0000004d;
+  font-size: 18px;
+  font-weight: 500;
+  box-sizing: border-box;
+  border: 1px solid #ded6d6;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  float: right;
+  height: 53px;
+  float: right;
+  padding: 10px 0px;
 }
 
-.total-price-container{
-width: 95% !important;
-display: flex;
-margin: auto;
-margin-top: 10%;
-position: relative;
-top: 123px;
+.total-price-container {
+  width: 95% !important;
+  display: flex;
+  margin: auto;
+  margin-top: 10%;
+  position: relative;
+  top: 123px;
 }
-.total-price-title{
-justify-content: center;
-font-size: 10px;
-font-weight: 400;
+.total-price-title {
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 400;
 }
-.main-total-div{
-width: 30%;
+.main-total-div {
+  width: 30% !important;
 }
-.add-to-card-container{
-margin-left: 31%;
-width: 50%;
+.add-to-card-container {
+  margin-left: 31% !important;
+  width: 50%;
 }
-.total-price-dig{
-font-size: 18px;
-font-weight: bolder;
-color: black;
-
-}
-
-.add-to-card-container button{
-float: right;
-background-color: #212121;
-color: white;
-width: 208px;
-height: 50px;
-border-radius: 12px;
-
-
-}
-.add-to-cart-button img{
-margin-right: 5%;
-margin-bottom: 2%;
+.total-price-dig {
+  font-size: 16px;
+  font-weight: bolder;
+  color: black;
 }
 
-
-
-@media only screen and (max-width: 767px){
-.px-3 {
-  padding-right: 1px !important;
-  padding-left: 0px !important;}
+.add-to-card-container button {
+  float: right;
+  background-color: #212121;
+  color: white;
+  width: 208px;
+  height: 50px;
+  border-radius: 12px;
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
-.px-3 {
-  padding-right: 0.8rem !important; 
-  padding-left: 0.8rem !important;
-  padding: 0rem !important;}
+.add-to-cart-button img {
+  margin-right: 5%;
+  margin-bottom: 2%;
 }
-=======
+
+@media only screen and (max-width: 767px) {
+  .px-3 {
+    padding-right: 1px !important;
+    padding-left: 0px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .px-3 {
+    padding-right: 0.8rem !important;
+    padding-left: 0.8rem !important;
+    padding: 0rem !important;
+  }
+}
 /* Styling for the artical-name div */
 .artical-name {
   text-align: center;
@@ -499,4 +439,3 @@ margin-bottom: 2%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
   z-index: -1;
 }
->>>>>>> Stashed changes

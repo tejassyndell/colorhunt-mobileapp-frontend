@@ -4,19 +4,11 @@ body {
   font-family: 'Glory' !important;
 }
 
-.zoomDiv{
-  box-shadow: 1px 2px 7px -1px;
-}
-.zoom:hover {
-    transform: scale(2); 
-}
-
 .product-hed-sec {
   display: flex;
   justify-content: space-between;
   padding: 0px 4px;
   height: 17px;
-
 }
 
 .header {
@@ -59,9 +51,9 @@ body {
   padding: 5px;
   height: 180px;
   object-fit: cover;
-  box-shadow: 1px 2px 7px -1px;
   border-radius: 10px;
   margin: 7px 0px;
+  box-shadow: 0px 0px 5px 0px;
 }
 
 .swiper-pagination {
@@ -174,7 +166,6 @@ body {
   padding-right: 0px;
 }
 
-
 /* styles.css */
 /* Hide the default checkbox appearance */
 input[type='checkbox'] {
@@ -214,7 +205,6 @@ input[type='checkbox'] {
 
 .selectedCategory {
   background-color: black !important;
-
 }
 
 .selectedCategoryLable {
@@ -290,7 +280,6 @@ input[type='checkbox'] {
   width: 93%;
   height: 23vh;
   padding: 10px;
-
 }
 
 .haddersilder {
@@ -318,7 +307,7 @@ input[type='checkbox'] {
 .heartss {
   width: 100px;
   height: 100px;
-  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background: url('https://cssanimation.rocks/images/posts/steps/heart.png') no-repeat;
   background-position: 0 0;
   cursor: pointer;
   transition: background-position 1s steps(28);
@@ -349,19 +338,18 @@ input[type='checkbox'] {
   margin-top: -8px;
   margin-bottom: 11px;
 }
-.multi-range-slider{
+.multi-range-slider {
   margin-top: 10px;
 }
 
-.multi-range-slider .bar-right{
+.multi-range-slider .bar-right {
   padding: 0px 0px !important;
 }
-.multi-range-slider .bar-left{
+.multi-range-slider .bar-left {
   padding: 0px 0px !important;
 }
 
 .tooltip {
-
   color: black;
   text-align: center;
   border-radius: 4px;
@@ -418,8 +406,6 @@ input[type='checkbox'] {
   margin: 10px;
 }
 
-
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .swiper-slide {
     width: 20% !important;
@@ -450,13 +436,13 @@ input[type='checkbox'] {
     width: 85% !important;
     height: 15px;
   }
-  .box-items img{
+  .box-items img {
     height: 20vh;
   }
-  .content-box{
+  .content-box {
     height: 73vh;
   }
-  .maincontentsection{
+  .maincontentsection {
     height: 92vh;
   }
 }
@@ -475,6 +461,6 @@ input[type='checkbox'] {
   .mySwiper {
     /* Change the slidesPerView value for tablets */
     /* You can adjust this value based on your preference */
-    --tablet-slides-per-view: 2.0;
+    --tablet-slides-per-view: 2;
   }
 }
