@@ -14,7 +14,7 @@ import {
   CDropdownToggle,
 } from '@coreui/react'
 import cilMenu from 'src/assets/Colorhuntimg/Sidebaricon/menu.svg'
-import noImages from 'src/assets/Colorhuntimg/navbaricon/Group 8919.svg'
+import noImages from 'src/assets/Colorhuntimg/navbaricon/Group 8919.png'
 import { useState } from 'react'
 import '../css/ipad.css'
 // // import ProfileIcon from 'src/assets/images/cart.png'
@@ -48,7 +48,7 @@ const AppHeader = (props) => {
             <CNavLink></CNavLink>
           </CNavItem>
         </CHeaderNav>
-        <CHeaderNav className="ms-3">
+        <CHeaderNav className="me-2">
           <CDropdown variant="nav-item">
             <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
               <img
@@ -57,7 +57,7 @@ const AppHeader = (props) => {
                   e.target.src = noImages
                 }}
                 style={{ position: 'relative', left: '14px' }}
-                width={75}
+                width={35}
                 onClick={() => {
                   routerChangeProfile()
                 }}
