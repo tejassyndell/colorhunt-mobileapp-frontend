@@ -1,47 +1,47 @@
 /* eslint-disable */
 
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import './profile.css'
-import axios from 'axios'
-import menubar from '../../assets/Colorhuntimg/navbaricon/menubar.svg'
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import "./profile.css";
+import axios from "axios";
+import menubar from "../../assets/Colorhuntimg/navbaricon/menu bar.svg";
 
 function profile(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const routeChange = () => {
-    navigate('/dashboard')
-    console.log('CLicked')
-  }
+    navigate("/dashboard");
+    console.log("CLicked");
+  };
   const profileeditform = () => {
-    navigate('/profileedit')
-  }
+    navigate("/profileedit");
+  };
 
-  const [profiledata, setProfiledata] = useState([])
-  const [file, setFile] = useState('')
+  const [profiledata, setProfiledata] = useState([]);
+  const [file, setFile] = useState("");
 
   const handleImageChange = (event) => {
-    setFile(event.target.files[0])
+    setFile(event.target.files[0]);
     // console.log(event.target.files[0])
-    console.log(file)
-  }
+    console.log(file);
+  };
   const handlesave = () => {
-    const format = new FormData()
-    format.append('image', file)
+    const format = new FormData();
+    format.append("image", file);
     const config = {
       headers: {
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
-    }
-    const res = axios.post('http://localhost:4000/uploadimage', format, config)
-    console.log(res.data)
-  }
+    };
+    const res = axios.post("http://localhost:4000/uploadimage", format, config);
+    console.log(res.data);
+  };
 
   useEffect(() => {
-    axios.get('http://localhost:4000/getParty').then((response) => {
-      setProfiledata(response.data)
-      console.log(response.data)
-    })
-  }, [])
+    axios.get("http://localhost:4000/getParty").then((response) => {
+      setProfiledata(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <>
@@ -53,18 +53,27 @@ function profile(props) {
       />
       <div className="profile">
         <div className="profile-child"></div>
-        <img className="menu-bar-icon" alt="" src={menubar} onClick={routeChange} />
+        <img
+          className="menu-bar-icon"
+          alt=""
+          src={menubar}
+          onClick={routeChange}
+        />
 
         <div className="frame-parent">
           <div className="rectangle-wrapper">
             {profiledata.map((item) =>
               file ? (
                 <div key={item.Id}>
-                  <img className="frame-child" alt="" src={`/uploads/${item.profile_img}`} />
+                  <img
+                    className="frame-child"
+                    alt=""
+                    src={`/uploads/${item.profile_img}`}
+                  />
                 </div>
               ) : (
                 <img className="frame-child" alt="" src="/profile.png" />
-              ),
+              )
             )}
           </div>
           <div className="rectangle-parent">
@@ -85,7 +94,7 @@ function profile(props) {
               <input
                 type="file"
                 accept="image/*"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 onChange={handleImageChange}
                 name="image"
               />
@@ -141,7 +150,7 @@ function profile(props) {
         ))}
       </div>
     </>
-  )
+  );
 }
 
-export default profile
+export default profile;

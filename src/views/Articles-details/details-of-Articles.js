@@ -30,6 +30,7 @@ export default function Detailsofproduct() {
   const [salesnopacks, setSalesnopacks] = useState('')
   const [nopacks, setNopacks] = useState(0)
   const [combinedArray, setCombinedArray] = useState([])
+  const [subcategory, setSubcategory] = useState()
 
   const ArticleDetailsData = async () => {
     let data = {
@@ -41,6 +42,7 @@ export default function Detailsofproduct() {
       console.log('dd', res.data)
       setArticlePhotos(res.data.photos)
       setArticleCategory(res.data.calculatedData[0].Category)
+      setSubcategory(res.data.calculatedData[0].subcategory)
       setArticleRatio(res.data.calculatedData[0].ArticleRatio)
       setArticleRate(res.data.calculatedData[0].ArticleRate)
       setArticleSizeData(JSON.parse(res.data.calculatedData[0].ArticleSize))
@@ -142,7 +144,8 @@ export default function Detailsofproduct() {
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
-
+  const totalQuantity = Object.values(quantities).reduce((total, quantity) => total + quantity, 0);
+  console.log(totalQuantity)
   return (
     <div className="app-container">
       <div className="menu-bar">
@@ -187,10 +190,11 @@ export default function Detailsofproduct() {
             </div>
           </div>
           <div className="product-detail-sec2">
-            <div className="size-label1">Style description</div>
+            <div className="size-label1">Category</div>
             <div className="size-container2">
               <div className="size-options">
-                <p>{articleCategory}</p>
+                {/* <p>{articleCategory}</p> */}
+                <p>{subcategory}</p>
               </div>
             </div>
           </div>

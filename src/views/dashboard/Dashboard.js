@@ -47,15 +47,15 @@ const Dashboard = (props) => {
   const [input, setInput] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
-  const [isHolding, setIsHolding] = useState(false)
+  const [isHolding, setIsHolding] = useState(false);
 
   const handleTouchStart = () => {
-    setIsHolding(true)
-  }
+    setIsHolding(true);
+  };
 
   const handleTouchEnd = () => {
-    setIsHolding(false)
-  }
+    setIsHolding(false);
+  };
   const isLoggedin = location.state?.isLoggedin
   useEffect(() => {
     getproductname()
@@ -218,7 +218,7 @@ const Dashboard = (props) => {
     }
   }
 
-  useEffect(() => {}, [selectedCategories])
+  useEffect(() => { }, [selectedCategories])
 
   const catagoryHandler = (e) => {
     if (e.target.name !== undefined) {
@@ -243,9 +243,7 @@ const Dashboard = (props) => {
       console.log(error)
     }
   }
-  const articlerates = nameData
-    .map((item) => parseFloat(item.ArticleRate))
-    .filter((rate) => !isNaN(rate))
+  const articlerates = nameData.map((item) => parseFloat(item.ArticleRate)).filter((rate) => !isNaN(rate))
   const minRate = Math.min(...articlerates)
   const maxRate = Math.max(...articlerates)
 
@@ -332,10 +330,10 @@ const Dashboard = (props) => {
           >
             {ApplyStatushBack === true
               ? newdata.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <div className="sildercontentprice">
-                      <div id={item.id} className="producticones">
-                        {/* {selectedprd.some((i) => i.Id === item.Id) ? (
+                <SwiperSlide key={item.id}>
+                  <div className="sildercontentprice">
+                    <div id={item.id} className="producticones">
+                      {/* {selectedprd.some((i) => i.Id === item.Id) ? (
                           <i
                             className={`fa fa-heart ${isLoggedin === false ? 'disabled-icon' : ''}`}
                             onClick={() => {
@@ -352,57 +350,57 @@ const Dashboard = (props) => {
                             }}
                           ></i>
                         )} */}
-                      </div>
-                      <div className="zoomDiv">
-                        <img
-                          className={`zoom-on-hold ${isHolding ? 'holding' : ''}`}
-                          onMouseDown={handleTouchStart}
-                          onMouseUp={handleTouchEnd}
-                          src={baseImageUrl + item.Photos}
-                          onClick={() => getSingaleartical(item)}
-                          onError={(e) => {
-                            e.target.src = noimage
-                          }}
-                        />
-                      </div>
+                    </div>
+                    <div className="zoomDiv">
+                      <img
+                        className={`zoom-on-hold ${isHolding ? "holding" : ""}`}
+                        onMouseDown={handleTouchStart}
+                        onMouseUp={handleTouchEnd}
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        onError={(e) => {
+                          e.target.src = noimage
+                        }}
+                      />
+                    </div>
 
-                      <div>
-                        <p>
-                          {/* {` ${isLoggedin === false ? '' : item.ArticleNumber}`} */}
-                          <br />
-                          <span className={getFontSizeClass}>{item.Category}</span>
-                          <br />
-                          {/* {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`} */}
-                        </p>
-                      </div>
+                    <div>
+                      <p>
+                        {/* {` ${isLoggedin === false ? '' : item.ArticleNumber}`} */}
+                        <br />
+                        <span className={getFontSizeClass}>{item.Category}</span>
+                        <br />
+                        {/* {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`} */}
+                      </p>
                     </div>
-                  </SwiperSlide>
-                ))
+                  </div>
+                </SwiperSlide>
+              ))
               : applyData.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <div className="sildercontentprice">
-                      <div className="zoomDiv">
-                        <img
-                          className="zoom"
-                          src={baseImageUrl + item.Photos}
-                          onClick={() => getSingaleartical(item)}
-                          onError={(e) => {
-                            e.target.src = noimage
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <p>
-                          {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
-                          <br />
-                          <span>{item.Category}</span>
-                          <br />
-                          {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
-                        </p>
-                      </div>
+                <SwiperSlide key={item.id}>
+                  <div className="sildercontentprice">
+                    <div className="zoomDiv">
+                      <img
+                        className="zoom"
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        onError={(e) => {
+                          e.target.src = noimage
+                        }}
+                      />
                     </div>
-                  </SwiperSlide>
-                ))}
+                    <div>
+                      <p>
+                        {` ${isLoggedin === false ? '' : item.ArticleNumber}`}
+                        <br />
+                        <span>{item.Category}</span>
+                        <br />
+                        {` ${isLoggedin === false ? '' : '₹' + item.ArticleRate}`}
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
         <div className="allProduct-section mt-4">
@@ -518,9 +516,8 @@ const Dashboard = (props) => {
                 {categoriesData.map((category) => (
                   <div className="col-6" key={category.id} onClick={catagoryHandler}>
                     <div
-                      className={`innerfilter px-3 bg-light ${
-                        selectedCategories.includes(category.Category) ? 'selectedCategory' : ''
-                      }`}
+                      className={`innerfilter px-3 bg-light ${selectedCategories.includes(category.Category) ? 'selectedCategory' : ''
+                        }`}
                       name={category.Category}
                     >
                       <label
@@ -541,9 +538,8 @@ const Dashboard = (props) => {
                         checked={selectedCategories.includes(category.Category)}
                       />
                       <span
-                        className={`checkmark ${
-                          selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''
-                        }`}
+                        className={`checkmark ${selectedCategories.includes(category.Category) ? 'selectedCheckmark' : ''
+                          }`}
                       ></span>{' '}
                       {/* Custom checkbox style using CSS */}
                     </div>

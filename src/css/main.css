@@ -2,9 +2,10 @@
 
 body {
   font-family: 'Glory' !important;
+  font-size: 1rem !important;
 }
-body{
-    font-size: 1rem !important;
+.filter{
+    filter:invert(100%) sepia(100%) saturate(0%) hue-rotate(138deg) brightness(106%) contrast(104%);
 }
 .login-form .form-input:focus{
     background: rgba(255, 255, 255, 0.3);

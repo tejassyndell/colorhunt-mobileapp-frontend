@@ -15,7 +15,7 @@ export default function Editarticledetails() {
 
   useEffect(() => {
     editarticledetailsdata()
-  })
+  }, [])
   const [availableStock, setAvailableStock] = useState([])
   const [quantities, setQuantities] = useState({})
   const [articlePhotos, setArticlePhotos] = useState([])
@@ -139,7 +139,6 @@ export default function Editarticledetails() {
       [colorIndex]: Math.max(prevQuantities[colorIndex] - 1, 0),
     }))
   }
-  ArticleDetails()
   return (
     <div className="app-container">
       <div className="reactangle"></div>

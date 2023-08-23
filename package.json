@@ -60,6 +60,7 @@
     "mysql": "^2.18.1",
     "pdfmake": "^0.2.7",
     "prop-types": "^15.8.1",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-axios": "^2.0.6",
@@ -72,7 +73,6 @@
     "react-html-table-to-excel": "^2.0.0",
     "react-image-magnify": "^2.7.4",
     "react-json-to-table": "^0.1.7",
-    "react-loader-spinner": "^5.3.4",
     "react-native": "^0.71.8",
     "react-qty-picker": "^1.0.6",
     "react-redux": "^8.0.5",
@@ -89,7 +89,8 @@
     "redux": "4.2.1",
     "sheetjs-style": "^0.15.8",
     "simplebar-react": "^2.4.3",
-    "swiper": "^10.1.0",
+    "swiper": "^10.2.0",
+    "swiper-react": "^1.0.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
@@ -107,5 +108,17 @@
   "engines": {
     "node": ">=10",
     "npm": ">=6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
