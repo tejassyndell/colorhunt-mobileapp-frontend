@@ -146,6 +146,7 @@ function orders() {
                   'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
                 marginTop: index === 0 ? '0' : '10px',
                 marginBottom: index === ParsedData[0].length - 1 ? '0' : '10px',
+                borderRadius:"12px"
               }}
               key={item.article_id}
             >
