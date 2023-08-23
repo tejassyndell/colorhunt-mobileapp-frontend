@@ -7,6 +7,14 @@
 .articles{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+.articles-container::-webkit-scrollbar {
+    width: 0; /* For Chrome, Safari, and Opera */
+}
+
+.articles-container {
+    scrollbar-width: none; /* For Firefox */
+}
+
 .select:after {
     content: '\25BC';
     font-size: 15px;
