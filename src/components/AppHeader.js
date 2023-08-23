@@ -39,7 +39,7 @@ const AppHeader = (props) => {
     <CHeader position="sticky" className="mb-4 header_padding">
       <CContainer fluid>
         <CHeaderToggler onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}>
-          {sidebarShow === true ? null : <img src={cilMenu} width={30} alt="Logo" />}
+          <img src={cilMenu} width={30} alt="Logo" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/"></CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto"></CHeaderNav>
