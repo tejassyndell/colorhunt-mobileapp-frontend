@@ -187,7 +187,7 @@ export default function Detailsofproduct() {
             </div>
           </div>
           <div className="product-detail-sec2">
-            <div className="size-label1">Category</div>
+            <div className="size-label1">Style description</div>
             <div className="size-container2">
               <div className="size-options">
                 <p>{articleCategory}</p>
