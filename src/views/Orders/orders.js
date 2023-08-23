@@ -4,20 +4,29 @@ import React, { useEffect, useState } from 'react'
 import './Order.css'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import { useNavigate } from 'react-router-dom'
-import img from '../../assets/Colorhuntimg/image 122.png'
 import axios from 'axios'
+
 function orders() {
   const navigate = useNavigate()
-  const [Transportation,setTransportation] = useState([])
-  const currentDate = new Date();
-  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-  useEffect(()=>{
-    const res = axios.get('http://localhost:4000/gettransportation')
-    .then((response)=>{
+  const baseImageUrl = 'https://colorhunt.in/colorHuntApi/public/uploads/'
+  const [Transportation, setTransportation] = useState([])
+  const currentDate = new Date()
+  const formattedDate = `${
+    currentDate.getMonth() + 1
+  }/${currentDate.getDate()}/${currentDate.getFullYear()}`
+  const Storagedata = localStorage.getItem('Orderlist')
+  const ParsedData = JSON.parse(Storagedata)
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/gettransportation')
+      .then((response) => {
         setTransportation(response.data)
-        console.log(response.data)
-    })
-  },[])
+      })
+      .catch((error) => {
+        console.error('Error fetching transportation data:', error)
+      })
+  }, [])
+  const totalrate = ParsedData[0].reduce((total, item) => total + parseInt(item.articleRate), 0)
   return (
     <>
       <div className="mainContainer mx-2 " style={{ minHeight: '100vh', position: 'relative' }}>
@@ -40,7 +49,7 @@ function orders() {
           </div>
         </div>
         <div className="LowerContainer">
-          <div className=" mx-2 mt-3" style={{ height: '220px' }}>
+          <div className=" mx-2 my-3" style={{ height: '230px' }}>
             <span
               style={{
                 fontSize: '18px',
@@ -65,7 +74,7 @@ function orders() {
                   lineHeight: 'normal',
                 }}
               >
-              {formattedDate}
+                {formattedDate}
               </span>
             </div>
             <span
@@ -83,18 +92,24 @@ function orders() {
               className=" my-1 d-flex align-items-center"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
-              <span
+              <input
+                type="text"
                 className="ms-2"
+                placeholder="Enter Location"
                 style={{
+                  width: '100%',
+                  height: '45px',
+                  backgroundColor: '#E4E7EA',
+                  borderRadius: '6px',
                   color: '#626262',
                   fontSize: '18px',
                   fontStyle: 'normal',
                   fontWeight: '500',
                   lineHeight: 'normal',
+                  outline: 'none',
+                  border: 'none',
                 }}
-              >
-                Gujarat
-              </span>
+              ></input>
             </div>
             <span
               className="mt-2"
@@ -111,60 +126,73 @@ function orders() {
               className="my-1 d-flex align-items-center select"
               style={{ height: '45px', backgroundColor: '#E4E7EA', borderRadius: '6px' }}
             >
-              <select id="dropdown" style={{border:"none"}}>
-                {Transportation.map((item)=>(
-                  <option key={item.Id} value={item.Name}>{item.Name}</option>
+              <select id="dropdown" style={{ border: 'none' }}>
+                {Transportation.map((item) => (
+                  <option key={item.Id} value={item.Name}>
+                    {item.Name}
+                  </option>
                 ))}
               </select>
             </div>
           </div>
         </div>
-        <div
-          className="articles d-flex mt-3 mx-2"
-          style={{
-            height: '104px',
-            boxShadow:
-              'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-          }}
-        >
-          <div className=" my-2 ms-1" style={{ width: '90px', height: '93px' }}>
-            <img src={img}></img>
-          </div>
-          <div className="my-1 mx-1 ms-2">
+        <div className="articles-container" style={{ maxHeight: '285px', overflow: 'auto' }}>
+          {ParsedData[0].map((item, index) => (
             <div
+              className="articles d-flex  mx-2 mb-1"
               style={{
-                fontSize: '18px',
-                fontStyle: 'normal',
-                fontWeight: '700',
-                lineHeight: 'normal',
+                height: '104px',
+                boxShadow:
+                  'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+                marginTop: index === 0 ? '0' : '10px',
+                marginBottom: index === ParsedData[0].length - 1 ? '0' : '10px',
               }}
+              key={item.article_id}
             >
-              33216
+              <div className=" my-2 ms-1">
+                <img
+                  src={baseImageUrl + item.Photos}
+                  alt="Order"
+                  style={{ width: '90px', height: '93px' }}
+                />
+              </div>
+              <div className="my-1 mx-1 ms-2">
+                <div
+                  style={{
+                    fontSize: '18px',
+                    fontStyle: 'normal',
+                    fontWeight: '700',
+                    lineHeight: 'normal',
+                  }}
+                >
+                  {item.ArticleNumber}
+                </div>
+                <div
+                  style={{
+                    fontSize: '14px',
+                    fontStyle: 'normal',
+                    fontWeight: '400',
+                    lineHeight: 'normal',
+                  }}
+                >
+                  {item.StyleDescription}
+                </div>
+                <div
+                  style={{
+                    fontSize: '17px',
+                    fontStyle: 'normal',
+                    fontWeight: '700',
+                    lineHeight: 'normal',
+                    height: '56px',
+                    display: 'grid',
+                    alignItems: 'end',
+                  }}
+                >
+                  ₹ {item.articleRate}
+                </div>
+              </div>
             </div>
-            <div
-              style={{
-                fontSize: '14px',
-                fontStyle: 'normal',
-                fontWeight: '400',
-                lineHeight: 'normal',
-              }}
-            >
-              Collar Tress
-            </div>
-            <div
-              style={{
-                fontSize: '17px',
-                fontStyle: 'normal',
-                fontWeight: '700',
-                lineHeight: 'normal',
-                height: '56px',
-                display: 'grid',
-                alignItems: 'end',
-              }}
-            >
-              $275.00
-            </div>
-          </div>
+          ))}
         </div>
         <div
           className="bottomContainer d-flex justify-content-between align-items-center mx-2 mb-2"
@@ -195,7 +223,7 @@ function orders() {
               }}
             >
               {' '}
-              $257.00
+              ₹ 257.00
             </span>
           </span>
         </div>
@@ -225,7 +253,7 @@ function orders() {
                   lineHeight: '15.68px',
                 }}
               >
-                $275.00
+                ₹ {totalrate}
               </span>{' '}
             </div>
             <div className="row">
@@ -250,7 +278,7 @@ function orders() {
                 }}
               >
                 {' '}
-                $2.7
+                ₹ 2.7
               </span>
             </div>
             <div className="row">
@@ -275,7 +303,7 @@ function orders() {
                   borderBottom: '2px solid black',
                 }}
               >
-                $2.7
+                ₹ 2.7
               </span>
             </div>
             <div className="row mt-1">
@@ -290,14 +318,14 @@ function orders() {
               ></p>
               <span
                 style={{
-                  width: '50px',
+                  width: '74px',
                   textAlign: 'end',
                   fontWeight: '700',
                   fontSize: '14px',
                   lineHeight: '15.68px',
                 }}
               >
-                $280.40
+                ₹ 280.40
               </span>
             </div>
             <div className="row mt-1">
@@ -323,7 +351,7 @@ function orders() {
                   borderBottom: '2px solid black',
                 }}
               >
-                $28.04
+                ₹ 28.04
               </span>
             </div>
           </div>

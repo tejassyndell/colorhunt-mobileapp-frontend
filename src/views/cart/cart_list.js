@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-
 import React, { useEffect, useState } from 'react'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import bagicon from '../../assets/Colorhuntimg/bagicon.svg'
@@ -18,12 +17,12 @@ function OrderPlaced() {
 
   useEffect(() => {
     axios
-      .post('http://localhost:4000/cartdetails', { party_id: 197 }) // Sending the party_id as data
+      .post('http://localhost:4000/cartdetails', { party_id: 197 })
       .then((response) => {
         console.log('Api response :', response.data)
         const parsedOrderItems = response.data.map((item) => ({
           ...item,
-          Quantity: JSON.parse(item.Quantity), // Parse the Quantity string into an array
+          Quantity: JSON.parse(item.Quantity),
         }))
         setOrderItems(parsedOrderItems)
       })
@@ -53,7 +52,9 @@ function OrderPlaced() {
   }
 
   const handleProceedToCheckout = () => {
-    navigate('/orders') // Update the route path as per your routing setup
+    const datatopass = [orderItems]
+    localStorage.setItem('Orderlist', JSON.stringify(datatopass))
+    navigate(`/orders`) // Update the route path as per your routing setup
   }
 
   const handleDeleteOrder = async (article_id) => {
@@ -85,6 +86,7 @@ function OrderPlaced() {
     console.log(ArticalId)
     navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
   }
+
   return (
     <>
       <header className="navbar">
@@ -116,7 +118,11 @@ function OrderPlaced() {
               {orderItems.map((item) => (
                 <div className="order" key={item.id}>
                   <div className="left-side">
-                    <img src={baseImageUrl + item.Photos.split(',')[0]} alt="Order" onClick={() => getSingaleartical(item)}/>
+                    <img
+                      src={baseImageUrl + item.Photos.split(',')[0]}
+                      alt="Order"
+                      onClick={() => getSingaleartical(item)}
+                    />
                     <div className="order-details">
                       <h4>
                         <span className="left-order-span">{item.ArticleNumber}</span> <br />{' '}
