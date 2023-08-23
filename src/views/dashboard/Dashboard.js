@@ -44,6 +44,15 @@ const Dashboard = (props) => {
   const [input, setInput] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
+  const [isHolding, setIsHolding] = useState(false);
+
+  const handleTouchStart = () => {
+    setIsHolding(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsHolding(false);
+  };
   const isLoggedin = location.state?.isLoggedin
   useEffect(() => {
     getproductname()
@@ -223,6 +232,18 @@ const Dashboard = (props) => {
 
   const getFontSizeClass = isLoggedin === false ? 'large-font' : 'small-font'
 
+  const catwithphotos = async () => {
+    try {
+      const res = await getcategorywithphotos()
+      setNewdata(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const articlerates = nameData.map((item) => parseFloat(item.ArticleRate)).filter((rate) => !isNaN(rate))
+  const minRate = Math.min(...articlerates)
+  const maxRate = Math.max(...articlerates)
+
   return (
     <motion.div
       initial={{ translateX: '100%', padding: '0px 5px' }}
@@ -325,8 +346,20 @@ const Dashboard = (props) => {
                               addArticleWishlist(item)
                             }}
                           ></i>
-                        )}
-                      </div>
+                        )} 
+                    </div>
+                    <div className="zoomDiv">
+                      <img
+                        className={`zoom-on-hold ${isHolding ? "holding" : ""}`}
+                        onMouseDown={handleTouchStart}
+                        onMouseUp={handleTouchEnd}
+                        src={baseImageUrl + item.Photos}
+                        onClick={() => getSingaleartical(item)}
+                        onError={(e) => {
+                          e.target.src = noimage
+                        }}
+                      />
+                    </div>
 
                       <img
                         src={baseImageUrl + item.Photos}

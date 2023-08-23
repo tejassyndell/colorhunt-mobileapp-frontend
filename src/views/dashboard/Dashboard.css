@@ -3,7 +3,70 @@
 body {
   font-family: 'Glory' !important;
 }
+.zoom-on-hold {
+  width: 200px;
+  height: 200px;
+  transition: transform 0.3s;
+}
 
+.zoom-on-hold.holding {
+  transform: scale(1.1);
+}
+
+.multi-range-slider-black {
+  border: none !important;
+  background-color: white !important;
+  padding: 30px 10px 4px 10px !important;
+  margin-top: 0px !important;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.multi-range-slider-black .thumb::before{
+    width: 0px !important;
+    height: 33px !important;
+    background: transparent !important;
+    margin: -4px -12px !important;
+    border-left: 9px solid !important;
+    border-right: 9px solid !important;
+    border-bottom: 18px solid black !important;
+    margin: -5px -12px !important;
+    color: transparent !important;
+    border-top: none !important;
+    box-shadow: none !important; 
+    
+}
+.multi-range-slider-black .label {
+  font-size: 17px !important;
+  color: black;
+}
+.multi-range-slider-black .labels{
+  margin-bottom: -5px !important;
+}
+.multi-range-slider-black .thumb .caption *{
+  background-color: white !important;
+  color : black !important;
+  box-shadow: none  !important;
+  font-family: Glory;
+  font-size: 17px !important;
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: 150% !important; /* 25.5px */
+  top: 61px !important;
+    left: -21px !important;
+}
+.zoomDiv{
+  box-shadow: 1px 2px 7px -1px;
+}
+.zoom:hover {
+    transform: scale(2); 
+}
+.multi-range-slider .bar-inner {
+  border: 5px solid black !important ;
+}
+.multi-range-slider .thumb::before{
+  height: 25px !important;
+  width: 25px !important;
+}
 .product-hed-sec {
   display: flex;
   justify-content: space-between;

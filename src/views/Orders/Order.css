@@ -6,22 +6,24 @@
     left: 0%;
     width: 100%;
 }
-.OrderFilter_main_div{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    background: #fff;
-    height: 242px;
-    border-radius: 10px;
-    padding: 10px !important;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 40%);
+.articles{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-.footer-section{
-    position: sticky;
-    bottom: 1vh;
-    z-index: 10;
+.articles-container::-webkit-scrollbar {
+    width: 0; /* For Chrome, Safari, and Opera */
+}
+
+.articles-container {
+    scrollbar-width: none; /* For Firefox */
+}
+
+.select:after {
+    content: '\25BC';
+    font-size: 15px;
+    background-color: 'rgb(228, 231, 234, 1)';
+    color: black;
+    padding: 11px 15px;
+    pointer-events: none;
 }
 
 .OrderFilter_date_text_span{

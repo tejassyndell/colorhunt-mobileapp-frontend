@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-
 import React, { useEffect, useState } from 'react'
 import menubar from '../../assets/Colorhuntimg/menu bar (1).svg'
 import bagicon from '../../assets/Colorhuntimg/bagicon.svg'
@@ -20,12 +19,12 @@ function OrderPlaced() {
 
   useEffect(() => {
     axios
-      .post('http://localhost:4000/cartdetails', { party_id: 197 }) // Sending the party_id as data
+      .post('http://localhost:4000/cartdetails', { party_id: 197 })
       .then((response) => {
         console.log('Api response :', response.data)
         const parsedOrderItems = response.data.map((item) => ({
           ...item,
-          Quantity: JSON.parse(item.Quantity), // Parse the Quantity string into an array
+          Quantity: JSON.parse(item.Quantity),
         }))
         setOrderItems(parsedOrderItems)
         setDataLoaded(true)
@@ -56,7 +55,9 @@ function OrderPlaced() {
   }
 
   const handleProceedToCheckout = () => {
-    navigate('/orderpurchase') // Update the route path as per your routing setup
+    const datatopass = [orderItems]
+    localStorage.setItem('Orderlist', JSON.stringify(datatopass))
+    navigate(`/orders`) // Update the route path as per your routing setup
   }
 
   const handleDeleteOrder = async (article_id) => {
@@ -82,6 +83,12 @@ function OrderPlaced() {
   const totalItems = orderItems.length
   const totalPrice = orderItems.reduce((total, item) => total + item.rate, 0)
   const cartIsEmpty = orderItems.length === 0
+
+  const getSingaleartical = (item) => {
+    const ArticalId = item.article_id
+    console.log(ArticalId)
+    navigate(`/Articles-details/${ArticalId}`) // Pass the ArticalId as a URL parameter to /Articles-details screen
+  }
 
   return (
     <>
