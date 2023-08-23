@@ -191,7 +191,9 @@ export default function CategoryArticles() {
                     <div className="haddingproduct">
                         <p>Men's {category}</p>
                     </div>
-                    <div className="content-box">
+                    {filteredData.length == 0 ? ( <div className="no-articles-found">
+                    No articles found.
+                </div>):(<div className="content-box">
                         {filteredData.map((item) => (
                             <div className="box-items" key={item.Id}>
                                 {/* {console.log(item.Id)} */}
@@ -235,7 +237,8 @@ export default function CategoryArticles() {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div>)}
+                    
                 </div>
             </div>
             {Filterstatus === true ? (
