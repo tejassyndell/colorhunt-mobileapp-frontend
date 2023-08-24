@@ -1,0 +1,50 @@
+.carousel-indicators button{
+    border-radius: 50px !important;
+    width: 5px;
+    height: 15px;
+    margin: 0px 3px;
+    background-color: transparent;
+}
+.px-3{
+    padding: 0px !important;
+}
+.carousel-caption {
+    position: absolute;
+    left: 1px;
+    display: block !important;
+    width: 142px;
+    height: auto;
+    bottom: 25px;
+}
+.bestpack{
+    color: rgba(0, 0, 0, 1);
+    font-size: 18px;
+    text-align: center;
+    font-weight: 400;
+}
+.discounts3{
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+    font-size: 23px;
+    text-align: center;
+}
+.sliderbutton2{
+    width: 110px;
+    height: 49px;
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    border: none;
+}
+.active{
+    background-color: black !important;
+}
+.carousel-caption1{
+    position: absolute;
+    display: block !important;
+    right: 29px;
+    height: auto;
+    top: 13px;
+    width: 32%;
+    text-align: center;
+}

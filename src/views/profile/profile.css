@@ -1,0 +1,261 @@
+.profile-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-100);
+  width: 430px;
+  height: 284px;
+}
+.menu-bar-icon {
+  position: absolute;
+  height: 3.76%;
+  width: 8.14%;
+  top: 5.36%;
+  right: 87.21%;
+  bottom: 90.88%;
+  left: 4.65%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.frame-child {
+  position: absolute;
+  top: calc(50% - 45.8px);
+  left: calc(50% - 29.8px);
+  width: 57px;
+  height: 89px;
+  object-fit: cover;
+}
+.rectangle-wrapper {
+  position: absolute;
+  top: -0.8px;
+  left: calc(50% - 55.3px);
+  border-radius: 12px;
+  background-color: #ffe500;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border: 0.8px solid var(--gray-4);
+  box-sizing: border-box;
+  width: 101.6px;
+  height: 101.6px;
+  overflow: hidden;
+}
+.group-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  background-color: var(--color-white);
+  width: 30px;
+  height: 30px;
+}
+
+.vector-icon {
+  position: absolute;
+  height: 36.67%;
+  width: 36.67%;
+  top: 30%;
+  right: 33.33%;
+  bottom: 33.33%;
+  left: 30%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.rectangle-parent {
+  position: absolute;
+  top: 79px;
+  left: 79px;
+  width: 30px;
+  height: 30px;
+}
+.frame-parent {
+  position: absolute;
+  top: 105px;
+  left: calc(50% - 50px);
+  width: 109px;
+  height: 109px;
+}
+.upload-image {
+  position: absolute;
+  top: 224px;
+  left: calc(50% - 49px);
+  color: var(--color-white);
+}
+.group-item {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 187px);
+  border-radius: 10px;
+  background-color: var(--color-gray-100);
+  box-shadow: 0-2px 7px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(30px);
+  width: 376px;
+}
+.download-1-1 {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 0;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+.download-1-1-parent,
+.log-out {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 25px;
+}
+.download-1-1-parent {
+  left: 154px;
+  width: 82px;
+  height: 20px;
+}
+.nirav-sir,
+.rectangle-group {
+  position: absolute;
+  left: calc(50% - 195px);
+}
+.rectangle-group {
+  height: 5.36%;
+  top: 93.56%;
+  bottom: 1.07%;
+  width: 390px;
+  cursor: pointer;
+  color: var(--color-white);
+}
+.nirav-sir {
+  top: 0;
+  font-weight: 600;
+}
+.group-inner {
+  position: absolute;
+  top: 24.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 355px;
+  height: 1px;
+}
+.group-inner2 {
+  position: absolute;
+  top: 45.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 355px;
+  height: 1px;
+}
+.nirav-sir-parent,
+.parent {
+  position: absolute;
+  top: 314px;
+  left: calc(50% - 195px);
+  width: 390px;
+  height: 25px;
+}
+.parent {
+  top: 444px;
+}
+.ahmedabad {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 90.5px);
+  font-weight: 600;
+}
+.group-child1 {
+  position: absolute;
+  top: 24.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 144px;
+  height: 1px;
+}
+.group-child2 {
+  position: absolute;
+  top: 24.5px;
+  left: -0.5px;
+  border-top: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 182px;
+  height: 1px;
+}
+.ahmedabad-parent,
+.group,
+.gujarat-parent,
+.india-parent {
+  position: absolute;
+  top: 499px;
+  left: calc(50% - 195px);
+  width: 181px;
+  height: 25px;
+}
+.group,
+.gujarat-parent,
+.india-parent {
+  left: calc(50% + 14px);
+}
+.group,
+.india-parent {
+  top: 554px;
+  left: calc(50% - 195px);
+}
+.group {
+  left: calc(50% + 14px);
+}
+.lorem-ipsum-dolor {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 195px);
+  font-weight: 600;
+  display: inline-block;
+  width: 345px;
+}
+.group-icon {
+  position: absolute;
+  top: 38.5px;
+  left: 0;
+  width: 390px;
+  height: 6.5px;
+}
+.lorem-ipsum-dolor-sit-amet-co-parent {
+  position: absolute;
+  top: 369px;
+  left: calc(50% - 195px);
+  width: 390px;
+  height: 45px;
+}
+.save {
+  position: absolute;
+  top: 57px;
+  left: 339px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+.profile {
+  background-color: var(--color-white);
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-200);
+  font-family: var(--font-glory);
+}
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  --font-glory: Glory;
+
+  --font-size-lg: 18px;
+
+  --color-white: #fff;
+  --color-gray-100: #212121;
+  --color-gray-200: rgba(0, 0, 0, 0.5);
+  --color-black: #000;
+  --gray-4: #bdbdbd;
+}
