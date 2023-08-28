@@ -33,7 +33,7 @@ export default function Detailsofproduct() {
   const [nopacks, setNopacks] = useState(0)
   const [combinedArray, setCombinedArray] = useState([])
   const [subcategory, setSubcategory] = useState()
-  const [isZoomed, setIsZoomed] = useState(true); 
+  const [isZoomed, setIsZoomed] = useState(true);
   const ArticleDetailsData = async () => {
     let data = {
       ArticleId: id,
@@ -149,8 +149,10 @@ export default function Detailsofproduct() {
   const totalQuantity = Object.values(quantities).reduce((total, quantity) => total + quantity, 0);
   console.log(totalQuantity)
 
+  const [magnifyStatus, setMagnifyStatus] = useState(false);
+  const [prdImage,setPrdImage]=useState();
 
-  return (
+   return (
     <div className="app-container">
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
@@ -159,41 +161,42 @@ export default function Detailsofproduct() {
       <div className="image-slider" >
         <Carousel
           autoPlay={true}
-          interval={8000}
+          interval={3000}
           infiniteLoop={true}
           showThumbs={false}
           showArrows={false}
           showStatus={false}
           stopOnHover={true}  
           swipeable={true}
-          preventMovementUntilSwipeScrollTolerance={true}
           dynamicHeight={false}
         >
           {articlePhotos.map((fileName, index) => (
-            <div key={index}>
-              {/* <img src={baseImageUrl + fileName} alt="" className="image-slide" /> */}
-              <div id="imageMagnifyer">
-                <ReactImageMagnify  {...{
-                  smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    isFluidWidth: true,
-                    src: baseImageUrl + fileName
-                  },
-                  largeImage: {
-                    src: baseImageUrl + fileName,
-                    width: 1200,
-                    height: 1210
-                  },
-                  isHintEnabled: true,
-                  isActivatedOnTouch: true,
-                  shouldHideHintAfterFirstActivation: false,
-                  enlargedImagePosition: 'over',
-                  enlargedImageContainerStyle: { zIndex: 9999 },
-                  imageClassName: "borer_ra",
-                  enlargedImageContainerClassName: "borer_ra",
-                  hintTextMouse: 'Long-touch to zoom',
-                }} />
-              </div>
+            <div key={index} onClick={()=>{setPrdImage(baseImageUrl+fileName);setMagnifyStatus(true)}}>
+              <img src={baseImageUrl + fileName} alt="" className="image-slide" />
+              {/* <div id="imageMagnifyer">
+              <ReactImageMagnify
+                smallImage={{
+                  alt: 'Wristwatch by Ted Baker London',
+                  isFluidWidth: true,
+                  src: baseImageUrl + fileName,
+                }}
+                largeImage={{
+                  src: baseImageUrl + fileName,
+                  width: 1200,
+                  height: 1210,
+                }}
+                isHintEnabled={true}
+                isActivatedOnTouch={true}
+                shouldHideHintAfterFirstActivation={false}
+                enlargedImagePosition="over"
+                enlargedImageContainerStyle={{ zIndex: 9999 }}
+                imageClassName="borer_ra"
+                enlargedImageContainerClassName="borer_ra"
+                hintTextMouse="Long-touch to zoom"
+                onActivation={handleImageMagnifyActivation}
+                onDeactivation={handleImageMagnifyDeactivation}
+              />
+              </div> */}
 
             </div>
           ))}
@@ -309,6 +312,36 @@ export default function Detailsofproduct() {
           </div>
         </div>
       </div>
+      {magnifyStatus?<div className='OrderFilter_exteranal_div' onClick={()=>{setMagnifyStatus(false)}}>
+        <div className='OrderFilter_main_div'>
+                <div className='content'>
+                <div id="imageMagnifyer">
+                <ReactImageMagnify {...{
+                  
+                  smallImage: {
+                    alt: 'Wristwatch by Ted Baker London',
+                    isFluidWidth: true,
+                    src:prdImage
+                  },
+                  largeImage: {
+                    src: prdImage,
+                    width: 1200,
+                    height: 1210
+                  },
+                  isHintEnabled: true,
+                  isActivatedOnTouch: true,
+                  shouldHideHintAfterFirstActivation: false,
+                  enlargedImagePosition: 'over',
+                  enlargedImageContainerStyle: { zIndex: 9999 },
+                  imageClassName: "borer_ra",
+                  enlargedImageContainerClassName: "borer_ra",
+                  hintTextMouse: 'Long-touch to zoom',
+                }} />
+              </div>
+                </div>
+        </div>
+
+      </div>:""}
     </div>
   )
 }

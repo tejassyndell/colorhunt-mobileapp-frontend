@@ -2,15 +2,39 @@ body {
   padding: 0 !important;
   margin: 0 !important;
 }
+.OrderFilter_exteranal_div{
+  position: fixed;
+  top: 0%;
+  height: 100vh;
+  background: #ffffff7a;
+  left: 0%;
+  width: 100%;
+  z-index: 999;
+}
+.OrderFilter_main_div{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  background: #fff;
+  height: max-content;
+  border-radius: 10px;
+  padding: 10px !important;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 40%);
+  z-index: 9999;
+}
 
 h1 {
   font-size: 18px;
 }
+
 .app-container {
   width: 100% !important;
   float: left;
   height: 100vh !important;
 }
+
 .menu-bar {
   position: absolute;
   width: 35px;
@@ -71,11 +95,13 @@ h1 {
   margin: auto;
   padding-top: 3%;
 }
+
 .product-detail-sec {
   margin-right: 5%;
   width: 50% !important;
   overflow: auto;
 }
+
 .product-detail-sec2 {
   width: 50% !important;
 }
@@ -150,6 +176,7 @@ h1 {
   margin: auto;
   margin-top: 4%;
 }
+
 .head-gid {
   width: 100%;
 }
@@ -163,12 +190,14 @@ h1 {
 
   float: left;
 }
+
 .color-title {
   width: 100%;
   font-size: 15px;
   font-weight: bolder;
   color: black;
 }
+
 .available-div {
   width: 37% !important;
   float: left;
@@ -218,6 +247,7 @@ h1 {
 .available-box-div {
   width: 37% !important;
 }
+
 .available-box {
   width: 98%;
   box-shadow: 0px 0px 4px 0px #00000017;
@@ -231,9 +261,10 @@ h1 {
 }
 
 .qty-box-div {
-  width: 31% !important ;
+  width: 31% !important;
   display: flex;
 }
+
 .qty-box {
   width: 98%;
   box-shadow: 0px 0px 4px 0px #00000017;
@@ -246,6 +277,7 @@ h1 {
   background-color: white;
   border-radius: 10px;
 }
+
 .top-row {
   width: 100%;
 }
@@ -265,13 +297,16 @@ h1 {
   box-sizing: border-box;
   border: 1px solid #0000004d;
 }
+
 .box2 {
   width: 33% !important;
 }
+
 .box2 button {
   font: 16px;
   font-weight: 600;
 }
+
 .box button {
   justify-content: center;
 }
@@ -280,6 +315,7 @@ h1 {
   width: 33% !important;
   margin-left: 5px;
 }
+
 .box3 button {
   border: none;
   box-sizing: border-box;
@@ -291,6 +327,7 @@ h1 {
   background-color: white;
   font-size: 25px;
 }
+
 .top-row {
   display: flex;
 }
@@ -302,11 +339,13 @@ h1 {
   text-align: center;
   margin-top: 5%;
 }
+
 .articallabel {
   text-align: left;
   font-weight: bolder;
   margin-left: 3%;
 }
+
 .articallabel1 {
   text-align: left;
   font-weight: 15px;
@@ -327,9 +366,11 @@ h1 {
   font-weight: 600;
   float: right;
 }
+
 .article-ratio-container {
   width: 45%;
 }
+
 .article-ratio-content {
   width: 98%;
   box-shadow: 0px 0px 4px 0px #0000004d;
@@ -349,6 +390,7 @@ h1 {
   float: left;
   margin-left: 13%;
 }
+
 .article-rate-content {
   width: 98%;
   box-shadow: 0px 0px 4px 0px #0000004d;
@@ -372,18 +414,22 @@ h1 {
   position: relative;
   top: 123px;
 }
+
 .total-price-title {
   justify-content: center;
   font-size: 10px;
   font-weight: 400;
 }
+
 .main-total-div {
   width: 30% !important;
 }
+
 .add-to-card-container {
   margin-left: 31% !important;
   width: 50%;
 }
+
 .total-price-dig {
   font-size: 16px;
   font-weight: bolder;
@@ -398,6 +444,7 @@ h1 {
   height: 50px;
   border-radius: 12px;
 }
+
 .add-to-cart-button img {
   margin-right: 5%;
   margin-bottom: 2%;
@@ -409,6 +456,7 @@ h1 {
     padding-left: 0px !important;
   }
 }
+
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .px-3 {
     padding-right: 0.8rem !important;
