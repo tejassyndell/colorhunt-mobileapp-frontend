@@ -90,3 +90,13 @@ export const getcategorywithphotos = async(data) => {
     console.log('err in reACT api', error)
   }
 }
+
+
+export const SendMail = async (data) => {
+  try {
+    return await axios.post(`${url}/SendMail`, data)
+  } catch (err) {
+   
+    console.log(err, 'err in react api')
+  }
+}

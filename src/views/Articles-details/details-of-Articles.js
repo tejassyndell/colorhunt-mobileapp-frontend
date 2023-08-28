@@ -10,10 +10,12 @@ import axios from 'axios'
 import cart from '../../assets/images/icon.png'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import ReactImageMagnify from 'react-image-magnify'
+
 
 export default function Detailsofproduct() {
   const navigate = useNavigate()
-  const handleSizeClick = (size) => {}
+  const handleSizeClick = (size) => { }
   const { id } = useParams()
   useEffect(() => {
     ArticleDetailsData()
@@ -31,7 +33,7 @@ export default function Detailsofproduct() {
   const [nopacks, setNopacks] = useState(0)
   const [combinedArray, setCombinedArray] = useState([])
   const [subcategory, setSubcategory] = useState()
-
+  const [isZoomed, setIsZoomed] = useState(true);
   const ArticleDetailsData = async () => {
     let data = {
       ArticleId: id,
@@ -146,26 +148,56 @@ export default function Detailsofproduct() {
   }
   const totalQuantity = Object.values(quantities).reduce((total, quantity) => total + quantity, 0);
   console.log(totalQuantity)
-  return (
+
+  const [magnifyStatus, setMagnifyStatus] = useState(false);
+  const [prdImage,setPrdImage]=useState();
+
+   return (
     <div className="app-container">
       <div className="menu-bar">
         <img src={Menubar} alt="" onClick={() => navigate('/dashboard')} />
       </div>
 
-      <div className="image-slider">
+      <div className="image-slider" >
         <Carousel
           autoPlay={true}
-          interval={3000} // Interval between slides in milliseconds
+          interval={3000}
           infiniteLoop={true}
           showThumbs={false}
           showArrows={false}
           showStatus={false}
-          stopOnHover={false}
+          stopOnHover={true}  
+          swipeable={true}
           dynamicHeight={false}
         >
           {articlePhotos.map((fileName, index) => (
-            <div key={index}>
+            <div key={index} onClick={()=>{setPrdImage(baseImageUrl+fileName);setMagnifyStatus(true)}}>
               <img src={baseImageUrl + fileName} alt="" className="image-slide" />
+              {/* <div id="imageMagnifyer">
+              <ReactImageMagnify
+                smallImage={{
+                  alt: 'Wristwatch by Ted Baker London',
+                  isFluidWidth: true,
+                  src: baseImageUrl + fileName,
+                }}
+                largeImage={{
+                  src: baseImageUrl + fileName,
+                  width: 1200,
+                  height: 1210,
+                }}
+                isHintEnabled={true}
+                isActivatedOnTouch={true}
+                shouldHideHintAfterFirstActivation={false}
+                enlargedImagePosition="over"
+                enlargedImageContainerStyle={{ zIndex: 9999 }}
+                imageClassName="borer_ra"
+                enlargedImageContainerClassName="borer_ra"
+                hintTextMouse="Long-touch to zoom"
+                onActivation={handleImageMagnifyActivation}
+                onDeactivation={handleImageMagnifyDeactivation}
+              />
+              </div> */}
+
             </div>
           ))}
         </Carousel>
@@ -261,7 +293,7 @@ export default function Detailsofproduct() {
             <div className="articallabel">Artical Ratio</div>
             <div className="article-ratio-content">{articleRatio}</div>
           </div>
-           
+
           <div className="article-rate-container">
             <div className="articallabel1">Artical Rate</div>
             <div className="article-rate-content">{articleRate / 10}</div>
@@ -280,6 +312,36 @@ export default function Detailsofproduct() {
           </div>
         </div>
       </div>
+      {magnifyStatus?<div className='OrderFilter_exteranal_div' onClick={()=>{setMagnifyStatus(false)}}>
+        <div className='OrderFilter_main_div'>
+                <div className='content'>
+                <div id="imageMagnifyer">
+                <ReactImageMagnify {...{
+                  
+                  smallImage: {
+                    alt: 'Wristwatch by Ted Baker London',
+                    isFluidWidth: true,
+                    src:prdImage
+                  },
+                  largeImage: {
+                    src: prdImage,
+                    width: 1200,
+                    height: 1210
+                  },
+                  isHintEnabled: true,
+                  isActivatedOnTouch: true,
+                  shouldHideHintAfterFirstActivation: false,
+                  enlargedImagePosition: 'over',
+                  enlargedImageContainerStyle: { zIndex: 9999 },
+                  imageClassName: "borer_ra",
+                  enlargedImageContainerClassName: "borer_ra",
+                  hintTextMouse: 'Long-touch to zoom',
+                }} />
+              </div>
+                </div>
+        </div>
+
+      </div>:""}
     </div>
   )
 }

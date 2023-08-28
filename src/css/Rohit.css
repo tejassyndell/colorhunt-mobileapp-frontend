@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans&display=swap');
 
+.filed_empty {
+    position: absolute;
+    top: 46.5px;
+    color: red;
+}
+
 body {
     font-family: 'Encode Sans' !important;
     font-size: 1.6rem
 }
-.net_icone{
+
+.net_icone {
     width: 42px;
 }
-.message_text{
+
+.message_text {
     padding: 6px;
     font-size: 21px;
 }
+
 .cover_container {
     margin-top: 58px;
     margin-bottom: 50px;
@@ -109,10 +118,10 @@ body {
 }
 
 .searchicon {
-        margin-left: 4px;
-        color: rgba(135, 135, 135, 1);
-        z-index: 10;
-        font-size: 16px;
+    margin-left: 4px;
+    color: rgba(135, 135, 135, 1);
+    z-index: 10;
+    font-size: 16px;
 }
 
 .haddersearchcontenar {
@@ -283,12 +292,12 @@ body {
 }
 
 .tagnames h5 {
-    font-weight: 600;
-    color: #000000;
-    font-size: 20px;
-    margin: 0%;
-    padding-right: 1vh;
-
+    color: var(--color-ui-2, #1B2028);
+    font-family: Glory;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .sidebarimages p {
@@ -324,9 +333,8 @@ body {
     right: 19px;
     z-index: 1;
 }
-.sidebarlogoconte img{
-    
-}
+
+.sidebarlogoconte img {}
 
 .aboutscontenet {
     width: 36%;
@@ -419,7 +427,7 @@ body {
 }
 
 .aboutaddress h3 {
-    aboutaddresmargin: 0px;
+    margin: 0px;
     border-bottom: 2px solid;
     width: 116px;
     line-height: 34px;
@@ -429,12 +437,17 @@ body {
 }
 
 .contecyussubmit {
-    padding: 8px 27px;
-    border-radius: 13px;
-    background: #fff;
-    border: 2px solid #000000;
-    color: #000000;
-    font-weight: 500;
+    width: 153px;
+    height: 46.974px;
+    flex-shrink: 0;
+    border-radius: 6.711px;
+    background: #212121;
+    color: #FFF;
+    font-family: Glory;
+    font-size: 25.711px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 /* //hartcss */
@@ -524,7 +537,7 @@ body {
 
 /* contect us */
 .contectimages {
-    margin: auto;
+    margin: 70px auto auto auto;
     width: 100%;
     display: grid;
     justify-items: center;
@@ -533,9 +546,22 @@ body {
 
 /* contect-form */
 .contect-form {
-    border: 1px solid #D1A967;
-    border-radius: 6px !important;
+    width: 100%;
+    margin-bottom: 6px;
+    border: 1px solid #212121;
+    border-radius: 4px;
+    padding: 11.555px 0px 12.445px 20px;
+    color: #212121;
+    /* Body/Medium/Regular */
+    font-family: Encode Sans;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    /* 21px */
 }
+
+
 
 .contact_us .invalid-feedback {
     text-align: left;
@@ -544,7 +570,7 @@ body {
 }
 
 .contect-form:focus {
-    border: 2px solid #f29a0d !important;
+    border: 2px solid #212121 !important;
     box-shadow: none;
     transition: height 0.4s, width 0.8s 0.5s;
 
@@ -1171,6 +1197,7 @@ editproductimgeditproductimg
     .header-nav .nav-link {
         padding-right: 6px !important;
     }
+
     .nunimg {
         width: 237px !important;
         height: 238px;
@@ -1189,7 +1216,7 @@ editproductimgeditproductimg
         margin: 0px 26px;
     }
 
-    
+
 
     .ipad_ciontainer {
         display: block;
@@ -1248,9 +1275,10 @@ editproductimgeditproductimg
     }
 
 
-    .ipad_producticones{
+    .ipad_producticones {
         right: 25px !important;
     }
+
     .header-toggler:not(:disabled) {
         padding: 2px 3px;
     }
@@ -1396,7 +1424,7 @@ editproductimgeditproductimg
 
     .contact-BOX {
         margin-top: 84px;
-        margin-bottom: 30px;
+        margin-bottom: 52px;
     }
 
     .iph_hd {
@@ -1631,8 +1659,7 @@ editproductimgeditproductimg
 
     .contectimages img {
         width: auto;
-        height: 188px;
-    
+        height: 250px;
     }
 
     .contectimages {

@@ -14,6 +14,7 @@ import '../dashboard/DroupDown.css'
 import '../../css/ipad.css'
 import { motion } from 'framer-motion'
 import '../dashboard/serachbar.css'
+import ReactImageMagnify from 'react-image-magnify'
 import MultiRangeSlider from 'multi-range-slider-react'
 import AppFooter from 'src/components/AppFooter'
 import navbaricon from 'src/assets/Colorhuntimg/navbaricon/menu bar.svg'
@@ -125,7 +126,7 @@ export default function CategoryArticles() {
         })
         console.log(range, 'range')
         setFiltereddata(range)
-    } 
+    }
     const articleRates = filteredData
         .map((item) => parseFloat(item.ArticleRate))
         .filter((rate) => !isNaN(rate))
@@ -191,11 +192,11 @@ export default function CategoryArticles() {
                     <div className="haddingproduct">
                         <p>Men's {category}</p>
                     </div>
-                    {filteredData.length == 0 ? ( <div className="no-articles-found">
-                    No articles found.
-                </div>):(<div className="content-box">
+                    {filteredData.length == 0 ? (<div className="no-articles-found">
+                        No articles found.
+                    </div>) : (<div className="content-box">
                         {filteredData.map((item) => (
-                            <div className="box-items" key={item.Id}>
+                            <div className="box-items" key={item.Id}  onClick={() => { navigate(`/Articles-details/${item.Id}`) }}>
                                 {/* {console.log(item.Id)} */}
                                 <div
                                     id={item.id}
@@ -218,15 +219,37 @@ export default function CategoryArticles() {
                                         ></i>
                                     )}
                                 </div>
-                                <img
+                                {/* <img
                                     src={baseImageUrl + item.Photos}
                                     style={{ padding: 2 }}
                                     alt={`T-Shirt ${item.id}`}
-                                    onClick={() => { navigate(`/Articles-details/${item.Id}`) }}
+                                   
                                     onError={(e) => {
                                         e.target.src = noimage
                                     }}
-                                />
+                                /> */}
+                                <div id="imageMagnifyer">
+                                    <ReactImageMagnify {...{
+                                        smallImage: {
+                                            alt: 'Wristwatch by Ted Baker London',
+                                            isFluidWidth: true,
+                                            src: baseImageUrl + item.Photos
+                                        },
+                                        largeImage: {
+                                            src: baseImageUrl + item.Photos,
+                                            width: 1200,
+                                            height: 1210
+                                        },
+                                        isHintEnabled: false,
+                                        isActivatedOnTouch: true,
+                                        shouldHideHintAfterFirstActivation: false,
+                                        enlargedImagePosition: 'over',
+                                        enlargedImageContainerStyle: { zIndex: 9999 },
+                                        imageClassName: "borer_ra",
+                                        enlargedImageContainerClassName: "borer_ra",
+                                       
+                                    }} />
+                                </div>
                                 <div className="sildercontentprice">
                                     <p>
                                         {item.ArticleNumber}
@@ -238,7 +261,7 @@ export default function CategoryArticles() {
                             </div>
                         ))}
                     </div>)}
-                    
+
                 </div>
             </div>
             {Filterstatus === true ? (
