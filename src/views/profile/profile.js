@@ -5,8 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import './profile.css'
 import axios from 'axios'
 
-
-
 function profile(props) {
   const navigate = useNavigate()
   const routeChange = () => {
@@ -36,9 +34,12 @@ function profile(props) {
     const  res = axios.post('http://localhost:4000/uploadimage',format,config);
     console.log(res.data)
   }
-
+  
+  const loginID = localStorage.getItem("Login ID")
+  console.log(loginID[1])
+  const party_id = loginID[1]
   useEffect(() => {
-    axios.get('http://localhost:4000/getParty').then((response) => {
+    axios.post('http://localhost:4000/getParty',{party_id : party_id}).then((response) => {
       setProfiledata(response.data)
       console.log(response.data)
     })
@@ -89,8 +90,6 @@ function profile(props) {
           </div>
         </div>
         <b className="upload-image" onClick={() => document.querySelector('input[type="file"]').click()}>Upload Image</b>
-       
-
         {profiledata.map((item) => (
           <div key={item.Id}>
             <div className="nirav-sir-parent mx-3">

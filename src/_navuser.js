@@ -14,9 +14,6 @@ const _navuser = [
     name: 'Wishlist',
     to: '/wishlist',
     icon: <img src={Wishlist} height={15} style={{ width: 45 }} />,
-    onClick: () => {
-      localStorage.setItem('isLoggedin', true)
-    },
   },
   {
     component: CNavItem,

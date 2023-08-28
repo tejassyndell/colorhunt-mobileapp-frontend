@@ -13,7 +13,6 @@ export const AppSidebarNav = ({ items, UserData }) => {
       <>
         {icon && icon}
         {name && name}
-       
       </>
     )
   }

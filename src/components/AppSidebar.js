@@ -26,20 +26,29 @@ const AppSidebar = (props) => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const location = useLocation()
-  const isLoggedin = location.state?.isLoggedin
-
-  //Get RoleId
-
-  //LogOut Functionality
+  // const isLoggedin = location.state?.isLoggedin
+  const [isLoggedin, setIsLoggedin] = useState(false); 
+  const [loggedInName, setLoggedInName] = useState('');
+  useEffect(() => {
+    // Check if 'id' is present in localStorage to determine login status
+    const userId = localStorage.getItem('Login ID');
+    if(userId){
+      const userdata =JSON.parse(userId)
+      setLoggedInName(userdata[1])
+      setIsLoggedin(true)
+    } else{
+      setIsLoggedin(false); // Update isLoggedin state based on userId
+      setLoggedInName('')
+    }
+    
+  }, []);
 
   const Navigate = useNavigate()
 
   const testFunc = () => {
-    console.log('clicked')
     localStorage.removeItem('userId')
     Navigate('/')
   }
-  console.log(sidebarShow)
   return (
     <CSidebar
       position="fixed"
@@ -58,14 +67,14 @@ const AppSidebar = (props) => {
             onClick={() => {
               sidebarShow === true ? dispatch({ type: 'set', sidebarShow: !sidebarShow }) : ''
             }}
-          />
-          {isLoggedin === false ? null : <span style={{ marginLeft: '-49px' }}>NIRAV SIR</span>}
+          />{console.log(isLoggedin)}
+          {isLoggedin === false ? null : <span style={{ marginLeft: '-49px' }}>{loggedInName}</span>}
           {isLoggedin === false ? null : <img src={closemanuicon} style={{ width: 45 }} />}
         </div>
       </CSidebarBrand>
 
       <CSidebarNav>
-        <SimpleBar>
+        {/* <SimpleBar>
           {isLoggedin === false ? (
             <li className="nav-item">
               <a
@@ -99,7 +108,8 @@ const AppSidebar = (props) => {
               </a>
             </li>
           )}
-        </SimpleBar>
+        </SimpleBar> */}
+        <AppSidebarNav items={navigationUser} UserData={UserData} />
         <CSidebarNav className="slidenavbar">
           <div className="sidebarlogoconte"></div>
           <img
@@ -107,7 +117,7 @@ const AppSidebar = (props) => {
             className="imagescontentback"
             style={{ width: '50%', height: 200, right: 60, bottom: 8 }}
           />
-         <p><a href='https://syndelltech.com/' style={{textDecoration:"none",color:"white"}}>Designed by SYNDELL Inc.</a></p> 
+        <p><a href='https://syndelltech.com/' style={{textDecoration:"none",color:"white"}}>Designed by SYNDELL Inc.</a></p> 
         </CSidebarNav>
       </CSidebarNav>
     </CSidebar>
