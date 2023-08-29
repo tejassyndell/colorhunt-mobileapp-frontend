@@ -268,7 +268,7 @@ const Login = () => {
                  <motion.div style={{ width:'100%' }} initial={{ translateX : '100%' }}
       animate={{opacity:1, translateX : 0}}
       transition={{ duration: 0.5 }}>
-          <div>
+          <div style={{width:'105% '}}>
               <img src={loginbackgrounimg} className='backgroundimgloginotp'/>
               <div className='otpsection'>
               <div className='loginhaddingcontent'>

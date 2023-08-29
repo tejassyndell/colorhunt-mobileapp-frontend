@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 import "./DroupDown.css";
 import "../../css/ipad.css";
-import { useDispatch, useSelector } from 'react-redux'
 import { motion } from "framer-motion"
 import "./serachbar.css"
 import MultiRangeSlider from 'multi-range-slider-react'
